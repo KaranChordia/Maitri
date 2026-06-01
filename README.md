@@ -21,3 +21,18 @@ The project currently focuses on brand repositioning, character universe develop
 ## Current Strategic Direction
 
 Maitri should launch first as a character and storytelling universe, then convert that community into waitlist interest, beta readers, school pilots, and eventually preorder demand.
+
+## Website Demo
+
+The pre-launch website lives in `09_demos/website`.
+
+To run it locally:
+
+```bash
+cd 09_demos/website
+npm run dev
+```
+
+Then open `http://localhost:4173`.
+
+The repository includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml` that publishes this folder to GitHub Pages. In GitHub, enable Pages for the repository and set the build source to **GitHub Actions**.
