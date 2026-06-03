@@ -2,7 +2,7 @@
 
 Maitri Dolls is a story-first companion doll universe inspired by remarkable women from India's history and present day.
 
-The project currently focuses on brand repositioning, character universe development, pre-launch community building, content strategy, AI workflows, school/workshop concepts, waitlist strategy, preorder readiness, and demand validation before heavy inventory investment.
+The project currently focuses on the accepted foundation retainer: website interest capture, Manu's character universe, and Instagram + YouTube presence before heavier school, preorder, product launch, or AI workflow expansion.
 
 ## Project Structure
 
@@ -22,6 +22,16 @@ The project currently focuses on brand repositioning, character universe develop
 
 Maitri should launch first as a character and storytelling universe, then convert that community into waitlist interest, beta readers, school pilots, and eventually preorder demand.
 
+## Foundation Retainer Source Files
+
+- 90-day operating plan: `00_project_admin/monthly_retainer_foundation_plan.md`
+- Manu character bible v1: `02_character_universe/manu/manu_character_bible_v1.md`
+- Manu story content set: `02_character_universe/manu/manu_story_content_set_v1.md`
+- Month-one Instagram + YouTube calendar: `03_content/social_media/month_1_instagram_youtube_calendar.md`
+- Letters from Maitri drafts: `03_content/story_newsletters/letters_from_maitri_month_1.md`
+- Live interest capture plan: `05_waitlist_preorder/live_interest_capture_plan.md`
+- Monthly signal report template: `06_demand_validation/monthly_signal_report_template.md`
+
 ## Website Demo
 
 The pre-launch website lives in `09_demos/website`.
@@ -36,3 +46,5 @@ npm run dev
 Then open `http://localhost:4173`.
 
 The repository includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml` that publishes this folder to GitHub Pages. In GitHub, enable Pages for the repository and set the build source to **GitHub Actions**.
+
+The Sites-ready version lives in `09_demos/maitri-sites` and includes the D1-backed live interest capture flow for deployment through Sites.

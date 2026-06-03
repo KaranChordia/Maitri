@@ -214,8 +214,8 @@
             <p class="section-label light">Founder access</p>
             <h2 id="waitlistTitle">Be the first to join the Maitri Circle.</h2>
             <p>
-              Join for early story letters, beta reader invitations, school pilot updates, and first access
-              when founder reservations open.
+              Join for early story letters, beta reader invitations, school pilot updates, and founder
+              preorder updates. Maitri will use these signals to decide what to build next.
             </p>
             <div class="promise-list" aria-label="Waitlist benefits">
               <span>Early access to stories</span>
@@ -224,6 +224,10 @@
             </div>
             <img class="peacock-panel" src="assets/peacock-panel.png" alt="" aria-hidden="true" />
             <div class="waitlist-state" id="waitlistState" aria-live="polite"></div>
+            <div class="report-actions" aria-label="Local signal report tools">
+              <button class="button pale report-button" type="button" id="refreshReport">Refresh signal report</button>
+              <button class="button pale report-button" type="button" id="downloadReport">Download CSV</button>
+            </div>
           </div>
 
           <form class="waitlist-form reveal" id="maitriWaitlistForm">
@@ -260,6 +264,48 @@
                 </select>
               </label>
             </div>
+            <div class="form-row">
+              <label>
+                Story preference
+                <select name="storyPreference" required>
+                  <option value="">Select one</option>
+                  <option>Brave adventure</option>
+                  <option>Friendship and kindness</option>
+                  <option>History made personal</option>
+                  <option>Parent-child activities</option>
+                </select>
+              </label>
+              <label>
+                Beta-reader interest
+                <select name="betaReaderInterest" required>
+                  <option value="">Select one</option>
+                  <option>Yes, I would like to beta read</option>
+                  <option>Maybe, tell me more</option>
+                  <option>Not right now</option>
+                </select>
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                School / educator interest
+                <select name="schoolInterest" required>
+                  <option value="">Select one</option>
+                  <option>Yes, for a school or group</option>
+                  <option>Maybe, if the story fit is right</option>
+                  <option>Not applicable</option>
+                </select>
+              </label>
+              <label>
+                Founder preorder signal
+                <select name="preorderSignal" required>
+                  <option value="">Select one</option>
+                  <option>Curious and want updates</option>
+                  <option>Likely if price and safety work</option>
+                  <option>Need more product details first</option>
+                  <option>Only interested in stories for now</option>
+                </select>
+              </label>
+            </div>
             <fieldset>
               <legend>What are you most interested in?</legend>
               <label><input type="checkbox" name="interest" value="Story newsletters" /> Story newsletters</label>
@@ -267,8 +313,12 @@
               <label><input type="checkbox" name="interest" value="School workshops" /> School workshops</label>
               <label><input type="checkbox" name="interest" value="Founder preorder" /> Founder preorder</label>
             </fieldset>
+            <label>
+              Biggest question or objection
+              <textarea name="objection" rows="4" placeholder="For example: price, safety, age fit, story fit, or preorder timing"></textarea>
+            </label>
             <button class="button gold" type="submit">Join the Waitlist</button>
-            <p class="privacy-note">Demo form: saved locally in this browser for now. No external service is connected yet.</p>
+            <p class="privacy-note">Static demo: saved locally in this browser. Use the Sites version for durable live capture.</p>
           </form>
         </section>
       </main>

@@ -19,6 +19,8 @@ const css = await readFile('src/styles.css', 'utf8');
 const checks = [
   ['hero headline', html.includes('A brave friend for every child.')],
   ['waitlist form', html.includes('maitriWaitlistForm')],
+  ['survey fields', html.includes('storyPreference') && html.includes('preorderSignal')],
+  ['local report tools', html.includes('downloadReport') && js.includes('buildSignalReport')],
   ['interactive state', js.includes('localStorage') && js.includes('renderWaitlistState')],
   ['responsive rules', css.includes('@media (max-width: 760px)')],
   ['reduced motion', css.includes('prefers-reduced-motion')],
