@@ -18,6 +18,9 @@ const types = new Map([
 function resolvePath(url) {
   const parsed = new URL(url, `http://localhost:${port}`);
   const safePath = normalize(decodeURIComponent(parsed.pathname)).replace(/^\.\.(\/|\\|$)/, '');
+  if (safePath === '/characters' || safePath === '/characters/') {
+    return join(root, 'characters.html');
+  }
   return join(root, safePath === '/' ? 'index.html' : safePath);
 }
 

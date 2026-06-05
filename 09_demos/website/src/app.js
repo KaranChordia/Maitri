@@ -1,4 +1,9 @@
+import { characterLabData } from './character-data.js';
+
 const waitlistKey = 'maitri.waitlist.entries.v1';
+
+let activeCharacterId = 'manu';
+let activePromptId = 'story';
 
 function getEntries() {
   try {
@@ -179,7 +184,109 @@ function setupNavigation() {
   });
 }
 
+function setupCharacterLab() {
+  const rail = document.querySelector('.character-rail');
+  const nameEl = document.querySelector('#characterName');
+  const badgeEl = document.querySelector('#characterBadge');
+  const taglineEl = document.querySelector('#characterTagline');
+  const worldPillEl = document.querySelector('#characterWorldPill');
+  const originEl = document.querySelector('#characterOrigin');
+  const questionEl = document.querySelector('#characterQuestion');
+  const signatureEl = document.querySelector('#characterSignature');
+  const takeawayEl = document.querySelector('#characterTakeaway');
+  const traitsEl = document.querySelector('#characterTraits');
+  const promptsEl = document.querySelector('#characterPrompts');
+  const responseTitleEl = document.querySelector('#characterResponseTitle');
+  const responseTextEl = document.querySelector('#characterResponseText');
+  const parentPromptEl = document.querySelector('#characterParentPrompt');
+  const worldEl = document.querySelector('#characterWorld');
+  const whyEl = document.querySelector('#characterWhy');
+  const futureEl = document.querySelector('#characterFuture');
+
+  if (
+    !rail ||
+    !nameEl ||
+    !badgeEl ||
+    !taglineEl ||
+    !worldPillEl ||
+    !originEl ||
+    !questionEl ||
+    !signatureEl ||
+    !takeawayEl ||
+    !traitsEl ||
+    !promptsEl ||
+    !responseTitleEl ||
+    !responseTextEl ||
+    !parentPromptEl ||
+    !worldEl ||
+    !whyEl ||
+    !futureEl
+  ) {
+    return;
+  }
+
+  const cards = Array.from(rail.querySelectorAll('[data-character]'));
+
+  function renderCharacter(characterId, promptId = 'story') {
+    const character = characterLabData[characterId] || characterLabData.manu;
+    const prompt = character.prompts.find((item) => item.id === promptId) || character.prompts[0];
+
+    activeCharacterId = characterId;
+    activePromptId = prompt.id;
+
+    nameEl.textContent = character.name;
+    badgeEl.textContent = character.badge;
+    taglineEl.textContent = character.tagline;
+    worldPillEl.textContent = character.worldPill;
+    originEl.textContent = character.origin;
+    questionEl.textContent = character.question;
+    signatureEl.textContent = character.signature;
+    takeawayEl.textContent = character.takeaway;
+    responseTitleEl.textContent = prompt.title;
+    responseTextEl.textContent = prompt.text;
+    parentPromptEl.textContent = character.parentPrompt;
+    worldEl.textContent = character.world;
+    whyEl.textContent = character.why;
+    futureEl.textContent = character.future;
+
+    traitsEl.innerHTML = '';
+    character.traits.forEach((trait) => {
+      const span = document.createElement('span');
+      span.textContent = trait;
+      traitsEl.appendChild(span);
+    });
+
+    promptsEl.innerHTML = '';
+    character.prompts.forEach((item) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `prompt-chip${item.id === prompt.id ? ' is-active' : ''}`;
+      button.dataset.prompt = item.id;
+      button.textContent = item.label;
+      button.setAttribute('aria-pressed', String(item.id === prompt.id));
+      button.addEventListener('click', () => renderCharacter(characterId, item.id));
+      promptsEl.appendChild(button);
+    });
+
+    cards.forEach((card) => {
+      const isActive = card.getAttribute('data-character') === characterId;
+      card.classList.toggle('is-active', isActive);
+      card.setAttribute('aria-pressed', String(isActive));
+    });
+  }
+
+  cards.forEach((card) => {
+    card.setAttribute('aria-pressed', 'false');
+    card.addEventListener('click', () => {
+      renderCharacter(card.getAttribute('data-character') || 'manu', activePromptId);
+    });
+  });
+
+  renderCharacter(activeCharacterId, activePromptId);
+}
+
 setupNavigation();
+setupCharacterLab();
 setupWaitlistForm();
 setupReportActions();
 setupReveal();

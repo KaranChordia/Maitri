@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en" class="characters-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Maitri Characters is a standalone interactive studio for selecting characters, exploring their worlds, and previewing mock story outputs."
+    />
+    <title>Maitri Characters | Interactive story studio</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body class="characters-page">
+    <div class="characters-page-shell">
+      <header class="characters-topbar">
+        <a class="brand-mark" href="index.html" aria-label="Back to Maitri homepage">
+          <span class="brand-symbol" aria-hidden="true">M</span>
+          <span>
+            <strong>Maitri</strong>
+            <small>Stories that stay</small>
+          </span>
+        </a>
+
+        <div class="characters-topbar-copy">
+          <span>Characters</span>
+          <p>Interactive studio for story selection, mock outputs, and future AI-ready character flows.</p>
+        </div>
+
+        <a class="button secondary" href="index.html">Back to homepage <span aria-hidden="true"></span></a>
+      </header>
+
+      <main class="characters-studio">
+        <aside class="characters-sidebar" aria-label="Character selector">
+          <div class="sidebar-heading">
+            <p class="section-label">Character library</p>
+            <h1>Select a character.</h1>
+            <p>
+              This page is a standalone studio. Each character has its own prompt set, story output, parent prompt,
+              and visual world notes.
+            </p>
+          </div>
+
+          <div class="character-stack" id="characterStack"></div>
+
+          <div class="sidebar-note">
+            <span>Foundation</span>
+            <strong>Manu is the anchor character. The others expand the world without changing the core system.</strong>
+          </div>
+        </aside>
+
+        <section class="characters-center" aria-live="polite">
+          <article class="character-hero">
+            <div class="character-hero-head">
+              <div>
+                <p class="panel-label" id="characterBadge">Anchor character</p>
+                <h2 id="characterName">Manu</h2>
+                <p id="characterTagline">
+                  A curious girl near the Ganga who asks why, learns boldly, and chooses kindness.
+                </p>
+              </div>
+              <div class="character-world-pill" id="characterWorldPill">Bithoor and the river banks</div>
+            </div>
+
+            <div class="character-hero-grid">
+              <div class="character-portrait">
+                <div class="portrait-orbit">
+                  <span>Curiosity</span>
+                  <span>Courage</span>
+                  <span>Tenderness</span>
+                </div>
+                <div class="portrait-core">
+                  <span id="characterInitial">M</span>
+                  <strong>Interactive studio</strong>
+                  <p id="characterOrigin">Rani Laxmibai of Jhansi</p>
+                </div>
+              </div>
+
+              <div class="character-meta-panel">
+                <div class="meta-grid">
+                  <article>
+                    <span>Inner question</span>
+                    <strong id="characterQuestion">What does it mean to do what is right when it is hard?</strong>
+                  </article>
+                  <article>
+                    <span>Signature object</span>
+                    <strong id="characterSignature">Wooden sword, Badal the horse, gold bangle</strong>
+                  </article>
+                  <article>
+                    <span>Child takeaway</span>
+                    <strong id="characterTakeaway">Courage can begin before you feel ready.</strong>
+                  </article>
+                  <article>
+                    <span>World notes</span>
+                    <strong id="characterWorld">Bithoor on the Ganga, palace courtyards, stables, and dawn light.</strong>
+                  </article>
+                </div>
+
+                <div class="trait-row" id="characterTraits" aria-label="Character traits"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="character-workbench">
+            <div class="workbench-header">
+              <div>
+                <p class="section-label">Interactive process</p>
+                <h3>Choose a mode and shape the output.</h3>
+              </div>
+              <div class="mode-switch" role="tablist" aria-label="Character modes">
+                <button type="button" class="mode-pill is-active" data-tab="profile">Profile</button>
+                <button type="button" class="mode-pill" data-tab="studio">Studio</button>
+                <button type="button" class="mode-pill" data-tab="voice">Voice</button>
+                <button type="button" class="mode-pill" data-tab="world">World</button>
+                <button type="button" class="mode-pill" data-tab="notes">Notes</button>
+              </div>
+            </div>
+
+            <div class="workbench-grid">
+              <div class="prompt-column">
+                <div class="prompt-panel">
+                  <p class="panel-label" id="tabTitle">Character profile</p>
+                  <h4 id="tabLeadTitle">Manu is built around courage with tenderness.</h4>
+                  <p id="tabLeadText">
+                    The character system should feel like a live studio: each character has a structured profile,
+                    a story lane, and child-safe mock interactions.
+                  </p>
+                </div>
+
+                <div class="prompt-panel">
+                  <div class="panel-row">
+                    <span class="panel-label">Prompt queue</span>
+                    <p>Tap a prompt to change the mock AI output.</p>
+                  </div>
+                  <div class="prompt-row" id="characterPrompts"></div>
+                </div>
+              </div>
+
+              <div class="response-column">
+                <section class="response-shell large">
+                  <p class="response-label">Mock AI output</p>
+                  <h4 id="characterResponseTitle">Story beat</h4>
+                  <p id="characterResponseText">
+                    Manu hears the challenge, breathes once, and takes the first step forward.
+                  </p>
+                </section>
+
+                <section class="insight-grid" aria-label="Generated outputs">
+                  <article>
+                    <span>Story draft</span>
+                    <strong id="storyDraft">Manu hears the challenge, breathes once, and takes the first step forward.</strong>
+                  </article>
+                  <article>
+                    <span>Parent prompt</span>
+                    <strong id="parentPrompt">Where did your child show courage today: in words, action, patience, or kindness?</strong>
+                  </article>
+                  <article>
+                    <span>World notes</span>
+                    <strong id="worldNotes">Bithoor on the Ganga, palace courtyards, stables, and dawn light.</strong>
+                  </article>
+                  <article>
+                    <span>Social snippet</span>
+                    <strong id="socialSnippet">Before she was a queen, she was a girl who asked why.</strong>
+                  </article>
+                </section>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <aside class="characters-inspector" aria-label="Character process inspector">
+          <div class="inspector-card">
+            <p class="section-label">Character health</p>
+            <div class="health-stack" id="healthStack"></div>
+          </div>
+
+          <div class="inspector-card">
+            <p class="section-label">Process modules</p>
+            <div class="module-stack" id="moduleStack"></div>
+          </div>
+
+          <div class="inspector-card">
+            <p class="section-label">Product lane</p>
+            <strong id="characterFuture">A selector, story generator, prompt engine, and parent-friendly play space.</strong>
+            <p>
+              This can grow into character pages, chat-style interactions, story modules, and parent-friendly
+              AI mock outputs.
+            </p>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script type="module" src="src/characters-page.js"></script>
+  </body>
+</html>
