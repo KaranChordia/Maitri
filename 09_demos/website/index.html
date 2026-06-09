@@ -10,6 +10,14 @@
     <title>Maitri Dolls | Story-first Indian companion dolls</title>
     <link rel="preload" as="image" href="assets/hero-doll-arch.png" />
     <link rel="stylesheet" href="src/styles.css" />
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme') || 'light';
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark-theme');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div class="site-shell">
@@ -35,6 +43,10 @@
           <a href="#circle">Circle</a>
           <a href="#workshops">Workshops</a>
           <a class="nav-cta" href="#waitlist">Join the Maitri Circle</a>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
+            <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
         </nav>
       </header>
 
@@ -42,7 +54,7 @@
         <section class="hero section-grid" aria-labelledby="heroTitle">
           <div class="hero-copy reveal">
             <h1 id="heroTitle">A brave friend for every child.</h1>
-            <p>
+            <p class="drop-cap">
               Maitri is a story-first companion doll universe inspired by remarkable women from India.
               Each character helps children discover courage, curiosity, kindness, and belonging through
               stories they can grow up with.
@@ -60,6 +72,9 @@
           <div class="hero-visual reveal" aria-label="Maitri doll portrait and story landscape">
             <div class="arch-frame">
               <img src="assets/hero-doll-arch.png" alt="Maitri doll in a gold jharokha arch with Indian textile details" />
+              <svg class="jharokha-overlay" viewBox="0 0 100 110" preserveAspectRatio="none" fill-rule="evenodd">
+                <path d="M0,0 L100,0 L100,110 L0,110 Z M10,105 L10,48 C10,25 35,15 50,5 C65,15 90,25 90,48 L90,105 Z" fill="var(--paper)" stroke="var(--gold)" stroke-width="1.5"/>
+              </svg>
             </div>
             <div class="story-scroll" aria-hidden="true">
               <span>Courage</span>

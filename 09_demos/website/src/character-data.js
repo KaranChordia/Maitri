@@ -1,300 +1,247 @@
 export const characterLabData = {
   manu: {
     name: 'Manu',
-    badge: 'Anchor character',
-    tagline: 'A curious girl near the Ganga who asks why, learns boldly, and chooses kindness.',
-    worldPill: 'Bithoor and the river banks',
+    badge: 'Active',
+    tagline: 'A curious-hearted girl who sees the world with wonder and leads with kindness.',
+    worldPill: 'Bithoor and the Ganga banks',
     origin: 'Rani Laxmibai of Jhansi',
-    question: 'What does it mean to do what is right when it is hard?',
-    signature: 'Wooden sword, Badal the horse, gold bangle',
-    takeaway: 'Courage can begin before you feel ready.',
-    world: 'Bithoor on the Ganga, palace courtyards, stables, and dawn light.',
-    why: 'This character gives children a brave friend they can ask questions to.',
-    future: 'A selector, story generator, prompt engine, and parent-friendly play space.',
-    traits: ['Courage', 'Curiosity', 'Tenderness'],
-    parentPrompt: 'Where did your child show courage today: in words, action, patience, or kindness?',
+    description: 'A curious-hearted girl who sees the world with wonder and leads with kindness. Manu believes small acts of courage can create big change.',
+    avatar: 'assets/manu_avatar.png',
+    backdrop: 'assets/manu_bg.png',
+    values: [
+      { label: 'Courage', text: 'She stands up for what is right.', color: '#063f47', icon: 'shield' },
+      { label: 'Care', text: 'She looks out for people and nature.', color: '#aa432f', icon: 'heart' },
+      { label: 'Curiosity', text: 'She asks questions and loves to learn.', color: '#c9952f', icon: 'lightbulb' }
+    ],
+    traits: ['Empathetic', 'Brave', 'Inquisitive', 'Thoughtful', 'Resilient', 'Playful', 'Nature-loving', 'Community-minded'],
+    meta: {
+      age: '8-10 years',
+      world: 'A small town in India',
+      loves: 'Stories, kites, rivers, & animals',
+      inspiredBy: 'Everyday people doing good'
+    },
+    prompts: [
+      {
+        id: 'story',
+        label: 'Write a short story where Manu helps her friend.',
+        title: 'Story Draft',
+        text: 'Manu saw her friend Meera sitting alone under the neem tree. She walked over, sat beside her, and asked, "Want to fly kites together?" Meera smiled. They ran to the field, their kites dancing like birds in the sky.'
+      },
+      {
+        id: 'unfair',
+        label: 'Manu notices something unfair. What does she do?',
+        title: 'Standing Up',
+        text: 'Manu saw the older boys blocking the path to the swing. She walked up, looked them in the eye, and said, "Everyone gets a turn to play." Her steady voice made them step aside.'
+      },
+      {
+        id: 'monsoon',
+        label: 'A day in Manu\'s village during the monsoon.',
+        title: 'Village Monsoon',
+        text: 'Rain poured over the tiled roofs of Bithoor. Manu ran out to help her father cover the grain sacks with tarpaulin, laughing as the cool drops washed over her face.'
+      },
+      {
+        id: 'nature',
+        label: 'Manu learns something new from nature.',
+        title: 'River Lesson',
+        text: 'By the Ganga ghats, Manu watched a tiny sparrow build a nest twig by twig. "It takes many small efforts to build something strong," she whispered.'
+      }
+    ],
     health: {
       storyDepth: 92,
-      voiceConsistency: 89,
-      worldRichness: 91,
+      voiceConsistency: 88,
+      worldRichness: 90
     },
-    modules: {
-      storyDraft: 'Manu hears the challenge, breathes once, and takes the first step forward.',
-      parentPrompt: 'Where did your child show courage today: in words, action, patience, or kindness?',
-      worldNotes: 'Bithoor on the Ganga, palace courtyards, stables, and dawn light.',
-      socialSnippet: 'Before she was a queen, she was a girl who asked why.',
+    modules: [
+      { label: 'Story Draft', desc: 'Generate and refine stories for Manu.', status: 'Ready' },
+      { label: 'Parent Prompt', desc: 'Questions to spark meaningful conversations.', status: 'Ready' },
+      { label: 'World Notes', desc: 'Context, locations, people and cultural details.', status: 'In Progress' },
+      { label: 'Social Snippet', desc: 'Short, shareable content from Manu\'s world.', status: 'Ready' }
+    ],
+    tabs: {
+      profile: {
+        title: 'Profile',
+        lead: 'Manu is built around courage with tenderness: a girl who asks, tries, and keeps moving.'
+      },
+      studio: {
+        title: 'Story Studio',
+        lead: 'Generate story beats, parent prompts, and classroom-ready moments from one character.'
+      },
+      voice: {
+        title: 'Voice & Tone',
+        lead: 'Warm, brave, child-friendly, and specific. Never flat, preachy, or generic.'
+      },
+      world: {
+        title: 'Visual World',
+        lead: 'Bithoor, river light, palace textures, horses, wood, brass, and warm dawn color.'
+      },
+      notes: {
+        title: 'Notes',
+        lead: 'Inspired by history, but written as a child-safe story universe with clear fictionalized moments.'
+      }
+    }
+  },
+  kalpana: {
+    name: 'Kalpana',
+    badge: 'Active',
+    tagline: 'A determined dreamer who looked at the stars and flew beyond the clouds.',
+    worldPill: 'Outer space and Karnal skies',
+    origin: 'Kalpana Chawla, the astronaut',
+    description: 'A curious mind from Haryana who dreamed of flying among the stars. Kalpana showed the world that no dream is too big if you have the courage to follow it.',
+    avatar: 'assets/kalpana_avatar.png',
+    backdrop: 'assets/kalpana_bg.png',
+    values: [
+      { label: 'Science', text: 'She explores the mysteries of space.', color: '#063f47', icon: 'rocket' },
+      { label: 'Adventure', text: 'She flies beyond known horizons.', color: '#aa432f', icon: 'compass' },
+      { label: 'Wonder', text: 'She sees the beauty of the cosmos.', color: '#c9952f', icon: 'stars' }
+    ],
+    traits: ['Dreamer', 'Persistent', 'Scientific', 'Adventurous', 'Humble', 'Curious', 'Detail-oriented', 'Pioneering'],
+    meta: {
+      age: '10-12 years',
+      world: 'Karnal to Space Shuttle Columbia',
+      loves: 'Aerodynamics, stars, music, & flying',
+      inspiredBy: 'Pioneers of aviation and space'
     },
     prompts: [
       {
         id: 'story',
-        label: 'Story beat',
-        title: 'Story beat',
-        text: 'Manu hears the challenge, breathes once, and takes the first step forward.',
+        label: 'Write a short story about Kalpana looking at the night sky.',
+        title: 'Starry Dream',
+        text: 'Sitting on the terrace in Karnal, Kalpana drew maps of constellations. "One day," she whispered to her brother, "I will touch those stars myself." She never let go of that promise.'
       },
       {
-        id: 'voice',
-        label: 'Voice note',
-        title: 'Voice note',
-        text: 'I can be afraid and still try. That is how bravery begins.',
+        id: 'weightless',
+        label: 'Kalpana experiences weightlessness for the first time.',
+        title: 'Zero Gravity',
+        text: 'Floating in the cabin of the space shuttle, Kalpana watched a drop of water float like a perfect glass marble. She smiled, feeling completely free.'
       },
       {
-        id: 'object',
-        label: 'Object reveal',
-        title: 'Object reveal',
-        text: 'The wooden sword and Badal are not just props. They are symbols of practice, trust, and movement.',
+        id: 'earthView',
+        label: 'Kalpana shares what Earth looks like from space.',
+        title: 'The Blue Planet',
+        text: 'Looking through the shuttle window, Kalpana saw Earth as a glowing blue jewel set against deep black ink. "No borders," she wrote, "just one beautiful home."'
       },
       {
-        id: 'circle',
-        label: 'Circle question',
-        title: 'Circle question',
-        text: 'What is one brave thing Manu would ask another child to try this week?',
-      },
+        id: 'hardWork',
+        label: 'A moment of hard study in Kalpana\'s journey.',
+        title: 'Persistent Flight',
+        text: 'Late at night, surrounded by thick books on aerospace design, Kalpana worked out the equations. She knew that wings are built with hard work before they fly.'
+      }
     ],
-    tabs: {
-      profile: {
-        title: 'Character profile',
-        lead: 'Manu is built around courage with tenderness: a girl who asks, tries, and keeps moving.',
-      },
-      studio: {
-        title: 'Story studio',
-        lead: 'The system can generate story beats, parent prompts, and classroom-ready moments from one character.',
-      },
-      voice: {
-        title: 'Voice and tone',
-        lead: 'Warm, brave, child-friendly, and specific. Never flat, preachy, or generic.',
-      },
-      world: {
-        title: 'Visual world',
-        lead: 'Bithoor, river light, palace textures, horses, wood, brass, and warm dawn color.',
-      },
-      notes: {
-        title: 'Historical notes',
-        lead: 'Inspired by history, but written as a child-safe story universe with clear fictionalized moments.',
-      },
-    },
-  },
-  savitribai: {
-    name: 'Savitribai',
-    badge: 'Learning lane',
-    tagline: 'A brave teacher who opens doors, makes room for girls, and turns learning into power.',
-    worldPill: 'Pune classrooms and chalk dust',
-    origin: 'Savitribai Phule',
-    question: 'Who gets to learn, and who gets left out?',
-    signature: 'Chalk, notebooks, and a school doorway',
-    takeaway: 'Learning can be a brave act.',
-    world: 'Early morning walks, school benches, chalk boards, and the quiet courage of showing up.',
-    why: 'She turns education into a visible act of care, justice, and possibility.',
-    future: 'A school-story path with activities, reading prompts, and classroom links.',
-    traits: ['Learning', 'Justice', 'Voice'],
-    parentPrompt: 'What is one thing your child wishes they could learn more about?',
     health: {
-      storyDepth: 88,
-      voiceConsistency: 84,
-      worldRichness: 82,
+      storyDepth: 94,
+      voiceConsistency: 91,
+      worldRichness: 89
     },
-    modules: {
-      storyDraft: 'Savitribai opens the school door even when the world outside says not to.',
-      parentPrompt: 'What is one thing your child wishes they could learn more about?',
-      worldNotes: 'Pune lanes, school benches, chalk boards, and the rhythm of learning in public.',
-      socialSnippet: 'Learning can be a brave act.',
+    modules: [
+      { label: 'Story Draft', desc: 'Generate and refine space missions for Kalpana.', status: 'Ready' },
+      { label: 'Parent Prompt', desc: 'Questions to inspire kids about big ambitions.', status: 'Ready' },
+      { label: 'World Notes', desc: 'Details on space cabin, earth orbit, and Karnal childhood.', status: 'Ready' },
+      { label: 'Social Snippet', desc: 'Cosmic thoughts and quotes on following dreams.', status: 'In Progress' }
+    ],
+    tabs: {
+      profile: {
+        title: 'Profile',
+        lead: 'Kalpana\'s profile details her journey from a small town in India to space.'
+      },
+      studio: {
+        title: 'Story Studio',
+        lead: 'Design space adventures and science puzzles for children.'
+      },
+      voice: {
+        title: 'Voice & Tone',
+        lead: 'Inspiring, clear, scientific, and dream-focused.'
+      },
+      world: {
+        title: 'Visual World',
+        lead: 'Cosmic blue, spaceship details, starry skies, and Haryana fields.'
+      },
+      notes: {
+        title: 'Notes',
+        lead: 'Historical background: First Indian-born woman in space.'
+      }
+    }
+  },
+  mary_kom: {
+    name: 'Mary Kom',
+    badge: 'Active',
+    tagline: 'A relentless fighter who boxed her way to victory and never gave up.',
+    worldPill: 'Manipur ring and training fields',
+    origin: 'MC Mary Kom, world champion boxer',
+    description: 'A farmer\'s daughter from Manipur who fought against all odds to become a world boxing champion. Mary teaches children that strength is built through grit and passion.',
+    avatar: 'assets/mary_kom_avatar.png',
+    backdrop: 'assets/mary_kom_bg.png',
+    values: [
+      { label: 'Grit', text: 'She trains hard and never backs down.', color: '#aa432f', icon: 'fist' },
+      { label: 'Passion', text: 'She loves the sport and boxing ring.', color: '#c9952f', icon: 'fire' },
+      { label: 'Discipline', text: 'She stays focused on her goals.', color: '#063f47', icon: 'trophy' }
+    ],
+    traits: ['Relentless', 'Resilient', 'Disciplined', 'Strong-willed', 'Athletic', 'Caring', 'Determined', 'Pioneering'],
+    meta: {
+      age: '9-11 years',
+      world: 'A green village in Manipur',
+      loves: 'Boxing, running, family, & spicy food',
+      inspiredBy: 'Her community and local boxing heroes'
     },
     prompts: [
       {
         id: 'story',
-        label: 'Classroom beat',
-        title: 'Classroom beat',
-        text: 'Savitribai opens the school door even when the world outside says not to.',
+        label: 'Write a short story about Mary Kom\'s first practice.',
+        title: 'First Punch',
+        text: 'Mary stood before the heavy punching bag, wrapping her hands. She took a breath and struck. It stung her knuckles, but she smiled. She knew she was right where she belonged.'
       },
       {
-        id: 'voice',
-        label: 'Voice note',
-        title: 'Voice note',
-        text: 'If a child is kept from learning, the whole world becomes smaller. I want to make it wider.',
+        id: 'comeback',
+        label: 'Mary trains early in the morning in the hills.',
+        title: 'Morning Run',
+        text: 'Before the sun rose over the Manipur hills, Mary was already running. The cool mist filled her lungs as her feet beat a steady rhythm on the mud track.'
       },
       {
-        id: 'object',
-        label: 'Object reveal',
-        title: 'Object reveal',
-        text: 'The chalk and notebook become tools of courage because they let a child think, ask, and grow.',
+        id: 'champion',
+        label: 'Mary wins a match and celebrates with her kids.',
+        title: 'Gold Medal',
+        text: 'With the gold medal shining around her neck, Mary hugged her twin boys. "This isn\'t just my medal," she told them, "it belongs to everyone who stood by us."'
       },
       {
-        id: 'circle',
-        label: 'Circle question',
-        title: 'Circle question',
-        text: 'What would change if every child was given a place to learn with dignity?',
-      },
+        id: 'village',
+        label: 'Mary helps young kids learn boxing in her village.',
+        title: 'Giving Back',
+        text: 'Mary held the pads for a young girl in her academy. "Keep your eyes on the target," she coached gently. "Your strength comes from your heart, not just your arms."'
+      }
     ],
-    tabs: {
-      profile: {
-        title: 'Character profile',
-        lead: 'Savitribai is the learning character: direct, brave, and built around access and dignity.',
-      },
-      studio: {
-        title: 'Story studio',
-        lead: 'This lane can become school content, read-alouds, and parent prompts about learning.',
-      },
-      voice: {
-        title: 'Voice and tone',
-        lead: 'Clear, steady, and reform-minded without sounding like a lecture.',
-      },
-      world: {
-        title: 'Visual world',
-        lead: 'Chalk, ink, dust, school paths, and the visual rhythm of a classroom opening early.',
-      },
-      notes: {
-        title: 'Historical notes',
-        lead: 'Keep claims tight. Emphasize education, access, and social reform.',
-      },
-    },
-  },
-  ahilyabai: {
-    name: 'Ahilyabai',
-    badge: 'Leadership lane',
-    tagline: 'A ruler who leads with steadiness, care, and service instead of show.',
-    worldPill: 'Maheshwar and the river fort',
-    origin: 'Ahilyabai Holkar',
-    question: 'How do you lead with care?',
-    signature: 'A low wooden throne, temple bells, and a lamp',
-    takeaway: 'Good leadership looks like service.',
-    world: 'Riverbanks, temples, public audiences, and the steady work of making places better.',
-    why: 'She shows children that leadership can be calm, just, and deeply rooted in community.',
-    future: 'A governance-and-grace lane with community stories and place-based heritage notes.',
-    traits: ['Leadership', 'Service', 'Steadiness'],
-    parentPrompt: 'Where has your child shown leadership through kindness or responsibility?',
     health: {
       storyDepth: 90,
-      voiceConsistency: 86,
-      worldRichness: 88,
+      voiceConsistency: 87,
+      worldRichness: 88
     },
-    modules: {
-      storyDraft: 'Ahilyabai listens first, then makes a decision that helps the people around her.',
-      parentPrompt: 'Where has your child shown leadership through kindness or responsibility?',
-      worldNotes: 'Riverbanks, temple courtyards, public audiences, and a careful, people-first rhythm.',
-      socialSnippet: 'Good leadership looks like service.',
-    },
-    prompts: [
-      {
-        id: 'story',
-        label: 'State beat',
-        title: 'State beat',
-        text: 'Ahilyabai listens first, then makes a decision that helps the people around her.',
-      },
-      {
-        id: 'voice',
-        label: 'Voice note',
-        title: 'Voice note',
-        text: 'A good ruler is not the loudest person in the room. A good ruler is the one who serves well.',
-      },
-      {
-        id: 'object',
-        label: 'Object reveal',
-        title: 'Object reveal',
-        text: 'The lamp and the low throne signal care, order, and attention to the people who come seeking help.',
-      },
-      {
-        id: 'circle',
-        label: 'Circle question',
-        title: 'Circle question',
-        text: 'What does a leader do when everyone is watching and everyone needs help?',
-      },
+    modules: [
+      { label: 'Story Draft', desc: 'Generate and refine boxing ring story beats.', status: 'Ready' },
+      { label: 'Parent Prompt', desc: 'Prompts to discuss resilience and hard work.', status: 'Ready' },
+      { label: 'World Notes', desc: 'Details on Manipuri village, boxing ring, and running tracks.', status: 'In Progress' },
+      { label: 'Social Snippet', desc: 'Powerful boxing quotes and motivation snippets.', status: 'Ready' }
     ],
     tabs: {
       profile: {
-        title: 'Character profile',
-        lead: 'Ahilyabai makes leadership feel human: service, steadiness, and public responsibility.',
+        title: 'Profile',
+        lead: 'Mary\'s profile outlines her rise from Manipur to world boxing podiums.'
       },
       studio: {
-        title: 'Story studio',
-        lead: 'This lane can become governance stories, place-based heritage notes, and service-led prompts.',
+        title: 'Story Studio',
+        lead: 'Design athletic challenges and training day storyboards.'
       },
       voice: {
-        title: 'Voice and tone',
-        lead: 'Calm, trustworthy, and wise. Leadership without performance.',
+        title: 'Voice & Tone',
+        lead: 'Relentless, punchy, honest, and deeply encouraging.'
       },
       world: {
-        title: 'Visual world',
-        lead: 'Stone, river edges, lamps, temple sound, and deliberate stillness.',
+        title: 'Visual World',
+        lead: 'Boxing ring textures, green hills, mist, wraps, and gold highlights.'
       },
       notes: {
-        title: 'Historical notes',
-        lead: 'Keep the focus on public service, not spectacle.',
-      },
-    },
-  },
-  anandibai: {
-    name: 'Anandibai',
-    badge: 'Curiosity lane',
-    tagline: 'A girl who keeps asking, keeps studying, and follows a difficult path into medicine.',
-    worldPill: 'Study desks, letters, and long-distance travel',
-    origin: 'Anandibai Joshi',
-    question: 'What if I keep learning even when the path looks impossible?',
-    signature: 'A travel trunk, a notebook, and medical pages',
-    takeaway: 'Big dreams begin with persistent questions.',
-    world: 'Study rooms, letters, sea travel, and the difficult but hopeful journey toward medical learning.',
-    why: 'She brings science, resilience, and ambition into the Maitri universe.',
-    future: 'A science-minded lane for kids who love questions, experiments, and big dreams.',
-    traits: ['Curiosity', 'Medicine', 'Persistence'],
-    parentPrompt: 'What big question is your child asking right now?',
-    health: {
-      storyDepth: 86,
-      voiceConsistency: 83,
-      worldRichness: 84,
-    },
-    modules: {
-      storyDraft: 'Anandibai keeps studying, even when the road is long and the answer is far away.',
-      parentPrompt: 'What big question is your child asking right now?',
-      worldNotes: 'Study rooms, letters, sea travel, and the difficult but hopeful journey toward medical learning.',
-      socialSnippet: 'Big dreams begin with persistent questions.',
-    },
-    prompts: [
-      {
-        id: 'story',
-        label: 'Study beat',
-        title: 'Study beat',
-        text: 'Anandibai keeps studying, even when the road is long and the answer is far away.',
-      },
-      {
-        id: 'voice',
-        label: 'Voice note',
-        title: 'Voice note',
-        text: 'A difficult path is still a path. I can learn one step at a time.',
-      },
-      {
-        id: 'object',
-        label: 'Object reveal',
-        title: 'Object reveal',
-        text: 'The notebook and travel trunk hold the feeling of a mind that refuses to stop growing.',
-      },
-      {
-        id: 'circle',
-        label: 'Circle question',
-        title: 'Circle question',
-        text: 'What would you study if you knew the answer would take time but still mattered?',
-      },
-    ],
-    tabs: {
-      profile: {
-        title: 'Character profile',
-        lead: 'Anandibai turns curiosity into persistence and brings medicine into the universe.',
-      },
-      studio: {
-        title: 'Story studio',
-        lead: 'This lane is built for questions, experiments, and long-term learning journeys.',
-      },
-      voice: {
-        title: 'Voice and tone',
-        lead: 'Hopeful, determined, and disciplined. A voice that keeps moving.',
-      },
-      world: {
-        title: 'Visual world',
-        lead: 'Paper, trunks, letters, travel, and the feeling of long-distance aspiration.',
-      },
-      notes: {
-        title: 'Historical notes',
-        lead: 'Keep the science path clear and age-appropriate.',
-      },
-    },
-  },
+        title: 'Notes',
+        lead: 'Historical background: Six-time World Amateur Boxing Champion.'
+      }
+    }
+  }
 };
 
-export const characterOrder = ['manu', 'savitribai', 'ahilyabai', 'anandibai'];
+export const characterOrder = ['manu', 'kalpana', 'mary_kom'];

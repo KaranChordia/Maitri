@@ -291,3 +291,13 @@ setupWaitlistForm();
 setupReportActions();
 setupReveal();
 renderWaitlistState();
+
+// Theme Toggle Logic
+const themeToggle = document.querySelector('#themeToggle');
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark-theme');
+    const isDark = document.documentElement.classList.contains('dark-theme');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+}
