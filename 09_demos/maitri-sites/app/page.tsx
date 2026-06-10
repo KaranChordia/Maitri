@@ -23,9 +23,22 @@ export default function Home() {
             <span className="brand-symbol" aria-hidden="true">M</span>
             <span><strong>Maitri</strong><small>Stories that stay</small></span>
           </a>
-          <button className="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav">
-            <span></span><span></span><span></span><span className="sr-only">Open navigation</span>
-          </button>
+          <div className="nav-actions">
+            <button
+              className="theme-toggle"
+              type="button"
+              id="themeToggle"
+              aria-pressed="false"
+              aria-label="Switch color theme"
+            >
+              <span className="theme-toggle-track">
+                <span className="theme-toggle-thumb"></span>
+              </span>
+            </button>
+            <button className="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav">
+              <span></span><span></span><span></span><span className="sr-only">Open navigation</span>
+            </button>
+          </div>
           <nav className="site-nav" id="siteNav">
             <div className="nav-item">
               <a href="#stories">Universe</a>
@@ -48,17 +61,6 @@ export default function Home() {
                 <a href="#waitlist">Pilot interest</a>
               </div>
             </div>
-            <button
-              className="theme-toggle"
-              type="button"
-              id="themeToggle"
-              aria-pressed="false"
-              aria-label="Switch color theme"
-            >
-              <span className="theme-toggle-track">
-                <span className="theme-toggle-thumb"></span>
-              </span>
-            </button>
             <a className="nav-cta" href="#waitlist">Join the Maitri Circle</a>
           </nav>
         </div>
