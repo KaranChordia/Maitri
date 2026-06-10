@@ -20,9 +20,9 @@ const checks = [
   ['hero headline', html.includes('A brave friend for every child.')],
   ['waitlist form', html.includes('maitriWaitlistForm')],
   ['survey fields', html.includes('storyPreference') && html.includes('preorderSignal')],
-  ['local report tools', html.includes('downloadReport') && js.includes('buildSignalReport')],
+  ['local report tools', html.includes('downloadReport') && js.includes('buildLocalReport')],
   ['interactive state', js.includes('localStorage') && js.includes('renderWaitlistState')],
-  ['responsive rules', css.includes('@media (max-width: 760px)')],
+  ['responsive rules', css.includes('@media (max-width: 900px)')],
   ['reduced motion', css.includes('prefers-reduced-motion')],
 ];
 
