@@ -17,26 +17,56 @@ const circleCards = [
 export default function Home() {
   return (
     <div className="site-shell">
-      <header className="site-header" aria-label="Main navigation">
-        <a className="brand-mark" href="#top" aria-label="Maitri home">
-          <span className="brand-symbol" aria-hidden="true">M</span>
-          <span><strong>Maitri</strong><small>Stories that stay</small></span>
-        </a>
-        <button className="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav">
-          <span></span><span></span><span></span><span className="sr-only">Open navigation</span>
-        </button>
-        <nav className="site-nav" id="siteNav">
-          <a href="#stories">Stories</a>
-          <a href="#manu">Manu</a>
-          <a href="#circle">Circle</a>
-          <a href="#workshops">Workshops</a>
-          <a className="nav-cta" href="#waitlist">Join the Maitri Circle</a>
-        </nav>
+      <header className="floating-nav-wrap" aria-label="Main navigation">
+        <div className="floating-nav">
+          <a className="brand-mark" href="#top" aria-label="Maitri home">
+            <span className="brand-symbol" aria-hidden="true">M</span>
+            <span><strong>Maitri</strong><small>Stories that stay</small></span>
+          </a>
+          <button className="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav">
+            <span></span><span></span><span></span><span className="sr-only">Open navigation</span>
+          </button>
+          <nav className="site-nav" id="siteNav">
+            <div className="nav-item">
+              <a href="#stories">Universe</a>
+              <div className="nav-panel">
+                <a href="#stories">Story-first worldbuilding</a>
+                <a href="#manu">Character-led reveals</a>
+              </div>
+            </div>
+            <div className="nav-item">
+              <a href="#circle">Circle</a>
+              <div className="nav-panel">
+                <a href="#circle">Community access</a>
+                <a href="#waitlist">Founder updates</a>
+              </div>
+            </div>
+            <div className="nav-item">
+              <a href="#workshops">Schools</a>
+              <div className="nav-panel">
+                <a href="#workshops">Workshop format</a>
+                <a href="#waitlist">Pilot interest</a>
+              </div>
+            </div>
+            <button
+              className="theme-toggle"
+              type="button"
+              id="themeToggle"
+              aria-pressed="false"
+              aria-label="Switch color theme"
+            >
+              <span className="theme-toggle-track">
+                <span className="theme-toggle-thumb"></span>
+              </span>
+            </button>
+            <a className="nav-cta" href="#waitlist">Join the Maitri Circle</a>
+          </nav>
+        </div>
       </header>
 
       <main id="top">
-        <section className="hero section-grid" aria-labelledby="heroTitle">
-          <div className="hero-copy reveal">
+        <section className="hero section-grid section-flow" aria-labelledby="heroTitle">
+          <div className="hero-copy reveal section-card">
             <h1 id="heroTitle">A brave friend for every child.</h1>
             <p>
               Maitri is a story-first companion doll universe inspired by remarkable women from India.
@@ -60,21 +90,21 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="universe" id="stories" aria-labelledby="storiesTitle">
+        <section className="universe section-flow" id="stories" aria-labelledby="storiesTitle">
           <div className="section-heading reveal">
             <p className="section-label">The story universe</p>
             <h2 id="storiesTitle">A universe of stories, values, and imagination.</h2>
             <p>Maitri begins with story attachment: children meet the character, learn her choices, and begin asking, &quot;What would she do?&quot; before the doll is ever launched.</p>
           </div>
           <div className="universe-layout">
-            <article className="storybook-panel reveal">
+            <article className="storybook-panel reveal section-card">
               <img className="story-art" src="/assets/story-landscape.png" alt="Illustrated girl looking toward an Indian palace landscape" />
               <h3>History made personal</h3>
               <p>Stories are written from childhood moments, not distant textbook summaries. A heroine becomes someone a child can understand, question, and befriend.</p>
             </article>
             <div className="value-grid" aria-label="Maitri product pillars">
               {valueCards.map(([icon, title, text]) => (
-                <article className="value-card reveal" key={title}>
+                <article className="value-card reveal section-card" key={title}>
                   <span className={`value-icon ${icon}`} aria-hidden="true"></span>
                   <h3>{title}</h3>
                   <p>{text}</p>
@@ -84,8 +114,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="manu-band" id="manu" aria-labelledby="manuTitle">
-          <div className="manu-copy reveal">
+        <section className="manu-band section-flow" id="manu" aria-labelledby="manuTitle">
+          <div className="manu-copy reveal section-card">
             <p className="section-label light">First character reveal</p>
             <h2 id="manuTitle">Before she was a queen, she was a girl who asked why.</h2>
             <p>Manu is curious, fearless, and kind. She questions injustice, stands up for what is right, and believes every child has a voice. Her story is just the beginning.</p>
@@ -96,8 +126,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="circle" id="circle" aria-labelledby="circleTitle">
-          <div className="circle-copy reveal">
+        <section className="circle section-flow" id="circle" aria-labelledby="circleTitle">
+          <div className="circle-copy reveal section-card">
             <p className="section-label">Maitri Circle</p>
             <h2 id="circleTitle">A community for dreamers, parents, educators, and story lovers.</h2>
             <p>Join the circle for first looks, beta reads, parent-child prompts, classroom pilots, and character reveals before the dolls arrive.</p>
@@ -106,7 +136,7 @@ export default function Home() {
           <div className="circle-story reveal">
             <div className="circle-cards" aria-label="Community benefits">
               {circleCards.map(([number, title, text]) => (
-                <article className="circle-card reveal" key={number}>
+                <article className="circle-card reveal section-card" key={number}>
                   <span>{number}</span><h3>{title}</h3><p>{text}</p>
                 </article>
               ))}
@@ -117,11 +147,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="workshops" id="workshops" aria-labelledby="workshopsTitle">
+        <section className="workshops section-flow" id="workshops" aria-labelledby="workshopsTitle">
           <div className="workshop-scene reveal">
             <img src="/assets/workshop-classroom.png" alt="Illustrated classroom workshop with children learning values from a teacher" />
           </div>
-          <div className="workshop-copy reveal">
+          <div className="workshop-copy reveal section-card">
             <p className="section-label">Schools and workshops</p>
             <h2 id="workshopsTitle">Workshops for schools.</h2>
             <p>Maitri workshops can turn one character story into a 45-60 minute session for children, with read-alouds, value discussions, worksheets, and take-home prompts.</p>
@@ -130,7 +160,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="validation" aria-labelledby="validationTitle">
+        <section className="validation section-flow" aria-labelledby="validationTitle">
           <div className="section-heading reveal">
             <p className="section-label light">Demand validation</p>
             <h2 id="validationTitle">A pre-launch engine before heavy inventory.</h2>
@@ -141,8 +171,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="waitlist" id="waitlist" aria-labelledby="waitlistTitle">
-          <div className="waitlist-copy reveal">
+        <section className="waitlist section-flow" id="waitlist" aria-labelledby="waitlistTitle">
+          <div className="waitlist-copy reveal section-card">
             <p className="section-label light">Founder access</p>
             <h2 id="waitlistTitle">Be the first to join the Maitri Circle.</h2>
             <p>Join for early story letters, beta reader invitations, school pilot updates, and founder preorder updates. Maitri will use these signals to decide what to build next.</p>
@@ -155,7 +185,7 @@ export default function Home() {
             </div>
           </div>
 
-          <form className="waitlist-form reveal" id="maitriWaitlistForm">
+          <form className="waitlist-form reveal section-card" id="maitriWaitlistForm">
             <div className="form-row">
               <label>Parent / guardian name<input name="name" type="text" autoComplete="name" required /></label>
               <label>Email address<input name="email" type="email" autoComplete="email" required /></label>

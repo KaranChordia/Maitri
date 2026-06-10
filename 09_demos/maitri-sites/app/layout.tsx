@@ -17,8 +17,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (() => {
+                const stored = window.localStorage.getItem("maitri.theme");
+                const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.documentElement.dataset.theme = stored || (systemDark ? "dark" : "light");
+              })();
+            `,
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

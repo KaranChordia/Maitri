@@ -176,7 +176,20 @@ export function MaitriInteractions() {
     const form = document.querySelector<HTMLFormElement>("#maitriWaitlistForm");
     const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
     const nav = document.querySelector<HTMLElement>("#siteNav");
+    const themeToggle = document.querySelector<HTMLButtonElement>("#themeToggle");
     const revealItems = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
+
+    const applyTheme = (theme: "light" | "dark") => {
+      document.documentElement.dataset.theme = theme;
+      localStorage.setItem("maitri.theme", theme);
+      themeToggle?.setAttribute("aria-pressed", String(theme === "dark"));
+      themeToggle?.setAttribute(
+        "aria-label",
+        theme === "dark" ? "Switch to light theme" : "Switch to dark theme",
+      );
+    };
+
+    applyTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
 
     const onToggleClick = () => {
       if (!toggle || !nav) return;
@@ -190,6 +203,10 @@ export function MaitriInteractions() {
         toggle.setAttribute("aria-expanded", "false");
         nav.classList.remove("is-open");
       }
+    };
+
+    const onThemeToggle = () => {
+      applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
     };
 
     const onFormSubmit = async (event: SubmitEvent) => {
@@ -274,6 +291,7 @@ export function MaitriInteractions() {
 
     toggle?.addEventListener("click", onToggleClick);
     nav?.addEventListener("click", onNavClick);
+    themeToggle?.addEventListener("click", onThemeToggle);
     form?.addEventListener("submit", onFormSubmit);
     document.querySelector("#refreshReport")?.addEventListener("click", onRefreshReport);
     document.querySelector("#downloadReport")?.addEventListener("click", onDownloadReport);
@@ -282,6 +300,7 @@ export function MaitriInteractions() {
     return () => {
       toggle?.removeEventListener("click", onToggleClick);
       nav?.removeEventListener("click", onNavClick);
+      themeToggle?.removeEventListener("click", onThemeToggle);
       form?.removeEventListener("submit", onFormSubmit);
       document.querySelector("#refreshReport")?.removeEventListener("click", onRefreshReport);
       document.querySelector("#downloadReport")?.removeEventListener("click", onDownloadReport);
