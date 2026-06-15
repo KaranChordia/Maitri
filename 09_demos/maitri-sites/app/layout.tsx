@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Maitri Dolls | Story-first Indian companion dolls",
+  title: "Maitri | Story-first Indian companion dolls for children",
   description:
-    "Maitri is a story-first companion doll universe inspired by remarkable women from India. Join the Maitri Circle for stories, beta reads, workshops, and founder updates.",
+    "Maitri is a story-first companion doll universe for children ages 5-12, inspired by brave Indian heroines, friendship, imagination, and parent-trusted values.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

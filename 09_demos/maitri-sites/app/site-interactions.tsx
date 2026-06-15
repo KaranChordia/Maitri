@@ -20,16 +20,6 @@ type WaitlistEntry = {
 
 type SignalReport = {
   total: number;
-  bySegment: Record<string, number>;
-  byChildAge: Record<string, number>;
-  byStoryPreference: Record<string, number>;
-  betaReaderOptIns: number;
-  schoolInterest: number;
-  likelyPreorder: number;
-  latest?: {
-    segment?: string;
-    interests?: string;
-  } | null;
 };
 
 function getEntries() {
@@ -50,69 +40,22 @@ function saveEntry(entry: WaitlistEntry) {
   localStorage.setItem(waitlistKey, JSON.stringify(entries.slice(0, 250)));
 }
 
-function countBy(entries: WaitlistEntry[], key: keyof WaitlistEntry) {
-  return entries.reduce<Record<string, number>>((counts, entry) => {
-    const value = String(entry[key] || "Unspecified");
-    counts[value] = (counts[value] || 0) + 1;
-    return counts;
-  }, {});
-}
-
-function formatCounts(label: string, counts: Record<string, number>) {
-  const rows = Object.entries(counts)
-    .sort(([, a], [, b]) => b - a)
-    .map(([name, count]) => `${name}: ${count}`);
-  return rows.length ? `${label}: ${rows.join(" | ")}` : `${label}: none yet`;
-}
-
 function buildLocalReport(entries: WaitlistEntry[]) {
   return {
     total: entries.length,
-    bySegment: countBy(entries, "segment"),
-    byChildAge: countBy(entries, "childAge"),
-    byStoryPreference: countBy(entries, "storyPreference"),
-    betaReaderOptIns: entries.filter((entry) =>
-      entry.betaReaderInterest?.startsWith("Yes"),
-    ).length,
-    schoolInterest: entries.filter((entry) =>
-      entry.schoolInterest?.startsWith("Yes"),
-    ).length,
-    likelyPreorder: entries.filter((entry) =>
-      entry.preorderSignal?.includes("Likely"),
-    ).length,
-    latest: entries[0]
-      ? {
-          segment: entries[0].segment,
-          interests: entries[0].interests.join(", "),
-        }
-      : null,
   };
 }
 
-function renderReport(report: SignalReport, source: string) {
+function renderReport(report: SignalReport) {
   const state = document.querySelector("#waitlistState");
   if (!state) return;
 
   if (!report.total) {
-    state.textContent = `${source}: ready to collect founder interest.`;
+    state.textContent = "Join the circle for early stories and launch updates.";
     return;
   }
 
-  const latestInterests =
-    typeof report.latest?.interests === "string" && report.latest.interests.length
-      ? report.latest.interests
-      : "general updates";
-
-  state.textContent = [
-    `${source}: ${report.total} signup${report.total === 1 ? "" : "s"} captured`,
-    formatCounts("Segments", report.bySegment),
-    formatCounts("Child ages", report.byChildAge),
-    formatCounts("Story preference", report.byStoryPreference),
-    `Beta-reader opt-ins: ${report.betaReaderOptIns}`,
-    `School interest: ${report.schoolInterest}`,
-    `Likely preorder signal: ${report.likelyPreorder}`,
-    `Latest: ${report.latest?.segment || "Unspecified"}, interested in ${latestInterests}.`,
-  ].join("\n");
+  state.textContent = "Thank you. You are in the Maitri Circle.";
 }
 
 async function renderWaitlistState() {
@@ -123,7 +66,7 @@ async function renderWaitlistState() {
     try {
       const response = await fetch("/api/interest");
       if (response.ok) {
-        renderReport((await response.json()) as SignalReport, "Live signal report");
+        renderReport((await response.json()) as SignalReport);
         return;
       }
     } catch {
@@ -132,43 +75,7 @@ async function renderWaitlistState() {
   }
 
   const entries = getEntries();
-  renderReport(buildLocalReport(entries), "Local development report");
-}
-
-function csvEscape(value: unknown) {
-  return `"${String(value || "").replaceAll('"', '""')}"`;
-}
-
-function downloadEntriesCsv() {
-  const entries = getEntries();
-  const headers: (keyof WaitlistEntry)[] = [
-    "createdAt",
-    "name",
-    "email",
-    "childAge",
-    "segment",
-    "interests",
-    "storyPreference",
-    "betaReaderInterest",
-    "schoolInterest",
-    "preorderSignal",
-    "objection",
-  ];
-  const rows = entries.map((entry) =>
-    headers
-      .map((header) =>
-        csvEscape(Array.isArray(entry[header]) ? entry[header].join("; ") : entry[header]),
-      )
-      .join(","),
-  );
-  const csv = [headers.join(","), ...rows].join("\n");
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "maitri-local-interest-signals.csv";
-  link.click();
-  URL.revokeObjectURL(url);
+  renderReport(buildLocalReport(entries));
 }
 
 export function MaitriInteractions() {
@@ -259,14 +166,6 @@ export function MaitriInteractions() {
       }
     };
 
-    const onRefreshReport = () => {
-      void renderWaitlistState();
-    };
-
-    const onDownloadReport = () => {
-      downloadEntriesCsv();
-    };
-
     let observer: IntersectionObserver | null = null;
     if ("IntersectionObserver" in window) {
       observer = new IntersectionObserver(
@@ -293,8 +192,6 @@ export function MaitriInteractions() {
     nav?.addEventListener("click", onNavClick);
     themeToggle?.addEventListener("click", onThemeToggle);
     form?.addEventListener("submit", onFormSubmit);
-    document.querySelector("#refreshReport")?.addEventListener("click", onRefreshReport);
-    document.querySelector("#downloadReport")?.addEventListener("click", onDownloadReport);
     void renderWaitlistState();
 
     return () => {
@@ -302,8 +199,6 @@ export function MaitriInteractions() {
       nav?.removeEventListener("click", onNavClick);
       themeToggle?.removeEventListener("click", onThemeToggle);
       form?.removeEventListener("submit", onFormSubmit);
-      document.querySelector("#refreshReport")?.removeEventListener("click", onRefreshReport);
-      document.querySelector("#downloadReport")?.removeEventListener("click", onDownloadReport);
       observer?.disconnect();
     };
   }, []);
