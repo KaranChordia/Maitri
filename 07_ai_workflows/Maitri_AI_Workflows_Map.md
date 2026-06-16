@@ -11,6 +11,16 @@ AI should help Maitri move faster while preserving four non-negotiables:
 - Brand warmth and cultural sensitivity.
 - Human approval before publication.
 
+## ChatGPT Business Setup
+
+The practical ChatGPT Business setup plan lives in:
+
+- `07_ai_workflows/chatgpt_business_setup/Maitri_ChatGPT_Business_Setup_Plan.md`
+- `07_ai_workflows/chatgpt_business_setup/project_instructions.md`
+- `07_ai_workflows/chatgpt_business_setup/agent_blueprints.md`
+
+Use those files when creating shared ChatGPT Projects, project instructions, GPTs, or workspace agents for Maitri.
+
 ## Workflow 1 - Character Universe Builder
 
 ### Purpose
