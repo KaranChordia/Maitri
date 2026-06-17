@@ -36,9 +36,9 @@ const generatedAssets = {
 };
 
 const navItems = [
-  ["Our Story", "#story"],
-  ["Universe", "#universe"],
+  ["Story Universe", "#universe"],
   ["Meet Manu", "#manu"],
+  ["Characters", "/characters.html"],
   ["For Parents", "#circle"],
   ["For Schools", "#schools"],
   ["Maitri Circle", "#waitlist"],
@@ -86,6 +86,223 @@ const schoolBenefits = [
   ["Teacher training & resources", ChalkboardTeacher, "blue"],
   ["Social-emotional learning focus", Plant, "green"],
 ];
+
+const characterModes = [
+  ["profile", "Profile", UsersThree],
+  ["studio", "Story Studio", BookOpenText],
+  ["voice", "Voice & Tone", Heart],
+  ["world", "Visual World", Compass],
+  ["notes", "Notes", NotePencil],
+];
+
+const characterLibrary = {
+  manu: {
+    name: "Manu",
+    initials: "M",
+    role: "Anchor character",
+    image: generatedAssets.manu,
+    tone: "rose",
+    tagline: "A curious girl near the Ganga who asks why, learns boldly, and chooses kindness.",
+    worldPill: "Bithoor and the Ganga banks",
+    origin: "Inspired by Rani Laxmibai of Jhansi",
+    question: "What does it mean to do what is right when it is hard?",
+    signature: "Badal the horse, a wooden sword, river stones, and a brave question.",
+    takeaway: "Courage can begin before you feel ready.",
+    world: "Bithoor on the Ganga, palace courtyards, stables, mango trees, and warm dawn light.",
+    values: [
+      ["Courage", "She takes one step forward even when she feels afraid.", ShieldCheck, "teal"],
+      ["Care", "She notices feelings others miss and chooses patience first.", Heart, "rose"],
+      ["Curiosity", "She asks why and learns through trying.", Lightbulb, "amber"],
+    ],
+    traits: ["Brave", "Patient", "Curious", "Kind", "Resilient", "Observant"],
+    meta: [
+      ["Age in story", "8-10 years"],
+      ["Core book", "The Horse Nobody Could Ride"],
+      ["In-box role", "First 32-page storybook anchor"],
+    ],
+    prompts: [
+      {
+        id: "horse",
+        label: "Manu meets the horse nobody could ride.",
+        title: "Story beat",
+        text: "Manu stood outside the stable and watched the horse stamp once, then lower his head. Everyone called him difficult. Manu saw something different: he was scared. She stepped closer slowly and waited until he looked back.",
+      },
+      {
+        id: "unfair",
+        label: "Someone says girls cannot learn this.",
+        title: "Brave question",
+        text: "When the courtyard grew quiet, Manu asked the question sitting inside her chest: 'Why not?' She did not shout. She did not run away. She stood still, waiting for an answer that made sense.",
+      },
+      {
+        id: "letter",
+        label: "A letter from Manu to a child.",
+        title: "Friend letter",
+        text: "Dear Friend, sometimes courage is not a loud thing. Sometimes it is one small step, one honest question, or one kind hand held out to someone who is afraid.",
+      },
+    ],
+    outputs: {
+      parent: "Ask your child: when did you try something even though it felt hard?",
+      social: "Before she was a queen, she was a girl who asked why.",
+      activity: "Design a courage crest using one symbol for patience and one for bravery.",
+    },
+    health: [
+      ["Story depth", 94],
+      ["Parent trust", 88],
+      ["Play potential", 91],
+    ],
+    modules: [
+      ["Story draft", "Ready", "Book 1 arc is clear enough for page-by-page drafting."],
+      ["Parent prompt", "Ready", "Courage, patience, and fairness prompts are strong."],
+      ["Activity page", "In progress", "Needs page format and illustration direction."],
+      ["Sticker logic", "In progress", "Decide in-box stickers versus later packs."],
+    ],
+    tabs: {
+      profile: ["Character profile", "Manu is the first Maitri anchor: child-relatable, brave, tender, and story-led."],
+      studio: ["Story Studio", "Build short beats, letters, activity prompts, and box-ready story moments from Manu's arc."],
+      voice: ["Voice & Tone", "Warm, direct, brave, and simple. Manu should feel like a friend speaking to the child."],
+      world: ["Visual World", "River light, stables, marigold, terracotta, cloth, horse textures, and childhood movement."],
+      notes: ["Notes", "Keep Book 1 before she becomes queen. Separate history-inspired scenes from verified claims."],
+    },
+  },
+  kalpana: {
+    name: "Kalpana",
+    initials: "KC",
+    role: "Future STEM friend",
+    image: null,
+    tone: "teal",
+    tagline: "A determined dreamer who looked at the sky and wanted to understand how far courage could travel.",
+    worldPill: "Karnal skies and space journeys",
+    origin: "Inspired by Kalpana Chawla",
+    question: "What happens when a small dream keeps growing?",
+    signature: "A notebook of flight sketches, stars, and a paper plane.",
+    takeaway: "Big dreams become real through practice, questions, and persistence.",
+    world: "Rooftops, classrooms, aircraft sketches, night skies, mission rooms, and a view of Earth.",
+    values: [
+      ["Wonder", "She notices the sky and keeps asking how things fly.", Sparkle, "violet"],
+      ["Science", "She tests ideas and keeps learning.", Lightbulb, "teal"],
+      ["Persistence", "She keeps working when the dream feels far away.", SealCheck, "amber"],
+    ],
+    traits: ["Dreamer", "Scientific", "Persistent", "Humble", "Adventurous"],
+    meta: [
+      ["Age in story", "9-12 years"],
+      ["Core book", "The Girl Who Looked Up"],
+      ["Product lane", "STEM story and activity kit"],
+    ],
+    prompts: [
+      {
+        id: "stars",
+        label: "Kalpana maps the night sky from a rooftop.",
+        title: "Story beat",
+        text: "Kalpana lay on the terrace with a notebook beside her. The stars did not feel far away tonight. They felt like questions waiting for someone patient enough to answer them.",
+      },
+      {
+        id: "practice",
+        label: "Kalpana keeps working on a difficult idea.",
+        title: "Persistence",
+        text: "The drawing did not look right the first time. Or the second. Kalpana sharpened her pencil, turned the page, and tried the wing shape again.",
+      },
+      {
+        id: "earth",
+        label: "Kalpana describes Earth from far away.",
+        title: "Wonder note",
+        text: "From high above, Earth looked like one glowing home. Kalpana pressed her hand near the window and remembered every child who had ever looked up.",
+      },
+    ],
+    outputs: {
+      parent: "Ask your child: what is one question you want to keep exploring?",
+      social: "A dream can begin on a rooftop and still reach the stars.",
+      activity: "Draw a mission patch for a journey you want to take.",
+    },
+    health: [
+      ["Story depth", 78],
+      ["Parent trust", 82],
+      ["Play potential", 74],
+    ],
+    modules: [
+      ["Story draft", "Planned", "Needs a focused childhood period before expanding."],
+      ["Parent prompt", "Ready", "Strong fit for curiosity and persistence."],
+      ["Activity page", "Planned", "Could become STEM/art extension."],
+      ["Sticker logic", "Later", "Stars, aircraft, notebooks, and mission patch symbols."],
+    ],
+    tabs: {
+      profile: ["Character profile", "Kalpana can expand Maitri into curiosity, science, and ambition after Manu is stable."],
+      studio: ["Story Studio", "Shape wonder-led STEM scenes without making the content feel like a school test."],
+      voice: ["Voice & Tone", "Clear, curious, hopeful, precise, and grounded in effort."],
+      world: ["Visual World", "Sky blues, notebooks, rooftops, stars, flight diagrams, and warm classroom detail."],
+      notes: ["Notes", "Treat as a later character. Do not distract from the Manu first-box launch."],
+    },
+  },
+  mary: {
+    name: "Mary Kom",
+    initials: "MK",
+    role: "Future grit friend",
+    image: null,
+    tone: "amber",
+    tagline: "A disciplined athlete who shows children that strength is built one practice at a time.",
+    worldPill: "Manipur training fields",
+    origin: "Inspired by Mary Kom",
+    question: "How do I keep going when something is difficult?",
+    signature: "Training wraps, a medal ribbon, running paths, and family support.",
+    takeaway: "Strength grows through practice, focus, and the people who believe in you.",
+    world: "Green hills, morning runs, training spaces, family homes, and the sound of steady practice.",
+    values: [
+      ["Grit", "She keeps practicing even when it is hard.", SealCheck, "green"],
+      ["Discipline", "She returns to the work every day.", ShieldCheck, "amber"],
+      ["Heart", "She carries family and community with her.", Heart, "rose"],
+    ],
+    traits: ["Disciplined", "Focused", "Resilient", "Energetic", "Caring"],
+    meta: [
+      ["Age in story", "9-11 years"],
+      ["Core book", "The Practice Before The Prize"],
+      ["Product lane", "Movement and resilience play"],
+    ],
+    prompts: [
+      {
+        id: "practice",
+        label: "Mary starts her first serious practice.",
+        title: "Story beat",
+        text: "Mary wrapped her hands carefully. The room was quiet except for her breath. She did not need to be perfect today. She only needed to begin.",
+      },
+      {
+        id: "morning",
+        label: "Mary trains before the sun comes up.",
+        title: "Training morning",
+        text: "Before the village had fully woken, Mary was already running. The mist touched her cheeks, and each step reminded her that strength is built slowly.",
+      },
+      {
+        id: "kind",
+        label: "Mary encourages a younger child.",
+        title: "Leadership",
+        text: "The little girl missed the target and looked down. Mary smiled and held the pads steady. 'Again,' she said softly. 'This time, trust your feet.'",
+      },
+    ],
+    outputs: {
+      parent: "Ask your child: what is one thing that gets better with practice?",
+      social: "Before the medal, there was practice. Before practice, there was belief.",
+      activity: "Create a seven-day practice tracker for one small skill.",
+    },
+    health: [
+      ["Story depth", 72],
+      ["Parent trust", 80],
+      ["Play potential", 77],
+    ],
+    modules: [
+      ["Story draft", "Planned", "Needs age-safe framing around sport and resilience."],
+      ["Parent prompt", "Ready", "Strong fit for practice and perseverance."],
+      ["Activity page", "Planned", "Movement tracker or focus challenge could work well."],
+      ["Sticker logic", "Later", "Medals, wraps, shoes, hills, and practice stars."],
+    ],
+    tabs: {
+      profile: ["Character profile", "Mary Kom can extend Maitri into discipline, movement, courage, and community pride."],
+      studio: ["Story Studio", "Create practice-led scenes that celebrate effort without glorifying winning alone."],
+      voice: ["Voice & Tone", "Strong, warm, direct, encouraging, and never harsh."],
+      world: ["Visual World", "Training textures, green hills, morning mist, medals, wraps, and family detail."],
+      notes: ["Notes", "Keep the child lesson on effort, resilience, and care instead of conflict or aggression."],
+    },
+  },
+};
+
+const characterOrder = ["manu", "kalpana", "mary"];
 
 function GeneratedArt({ src, className = "", alt = "" }) {
   return (
@@ -405,6 +622,311 @@ function Waitlist() {
   );
 }
 
+function CharacterLabHeader() {
+  return (
+    <header className="site-header character-page-header">
+      <Brand />
+      <nav className="character-mini-nav" aria-label="Character page">
+        <a href="/">Home</a>
+        <a href="/#manu">Meet Manu</a>
+        <a href="/#waitlist">Join Circle</a>
+      </nav>
+    </header>
+  );
+}
+
+function CharacterVisual({ character, compact = false }) {
+  if (character.image) {
+    return (
+      <img
+        className={`character-visual-img ${compact ? "compact" : ""}`}
+        src={character.image}
+        alt={`${character.name} portrait`}
+      />
+    );
+  }
+
+  return (
+    <span className={`character-initial ${character.tone} ${compact ? "compact" : ""}`} aria-hidden="true">
+      {character.initials}
+    </span>
+  );
+}
+
+function CharacterPage() {
+  const [selectedId, setSelectedId] = useState("manu");
+  const [mode, setMode] = useState("profile");
+  const [promptId, setPromptId] = useState("horse");
+  const [pulse, setPulse] = useState(false);
+
+  const character = characterLibrary[selectedId];
+  const activePrompt = character.prompts.find((item) => item.id === promptId) || character.prompts[0];
+  const activeMode = character.tabs[mode] || character.tabs.profile;
+
+  const selectCharacter = (id) => {
+    const next = characterLibrary[id];
+    setSelectedId(id);
+    setMode("profile");
+    setPromptId(next.prompts[0].id);
+  };
+
+  const selectMode = (nextMode) => {
+    setMode(nextMode);
+    const preferredPrompt = {
+      profile: character.prompts[0],
+      studio: character.prompts[0],
+      voice: character.prompts[1] || character.prompts[0],
+      world: character.prompts[2] || character.prompts[0],
+      notes: character.prompts[2] || character.prompts[0],
+    }[nextMode];
+    setPromptId(preferredPrompt.id);
+  };
+
+  const regenerate = () => {
+    setPulse(true);
+    window.setTimeout(() => setPulse(false), 420);
+  };
+
+  return (
+    <main className="maitri-page character-lab-page">
+      <section className="character-lab-shell section-shell" id="top">
+        <CharacterLabHeader />
+
+        <div className="character-lab-hero">
+          <div>
+            <span className="section-label violet-label">Character Lab</span>
+            <h1>Shape every Maitri friend with story, values, and play in one place.</h1>
+            <p>
+              An interactive story studio for exploring each character's values,
+              child-safe prompts, parent conversation hooks, and product readiness.
+            </p>
+          </div>
+          <div className="lab-principle-strip" aria-label="Character lab principles">
+            <span>
+              <strong>Story</strong>
+              <small>first</small>
+            </span>
+            <span>
+              <strong>Parent</strong>
+              <small>trusted</small>
+            </span>
+            <span>
+              <strong>Child</strong>
+              <small>loved</small>
+            </span>
+          </div>
+        </div>
+
+        <div className="character-lab-grid">
+          <aside className="character-library-panel" aria-label="Character selector">
+            <div className="panel-kicker">
+              <span>Character library</span>
+              <strong>{characterOrder.length}</strong>
+            </div>
+            <div className="character-selector-stack">
+              {characterOrder.map((id) => {
+                const item = characterLibrary[id];
+                const active = id === selectedId;
+                return (
+                  <button
+                    className={`character-selector-card ${active ? "active" : ""}`}
+                    type="button"
+                    data-character-selector={id}
+                    aria-pressed={active}
+                    key={id}
+                    onClick={() => selectCharacter(id)}
+                  >
+                    <CharacterVisual character={item} compact />
+                    <span>
+                      <strong>{item.name}</strong>
+                      <small>{item.role}</small>
+                    </span>
+                    <ArrowRight size={18} weight="bold" />
+                  </button>
+                );
+              })}
+            </div>
+            <div className="library-note">
+              <strong>Foundation rule</strong>
+              <p>Manu remains the first launch anchor. Other friends stay as future universe previews.</p>
+            </div>
+          </aside>
+
+          <section className="character-workspace" aria-live="polite">
+            <article className={`character-feature ${character.tone}`}>
+              <div className="character-feature-copy">
+                <span>{character.role}</span>
+                <h2>{character.name}</h2>
+                <p>{character.tagline}</p>
+                <div className="character-feature-metrics" aria-label={`${character.name} story facts`}>
+                  {character.meta.map(([label, value]) => (
+                    <div key={label}>
+                      <small>{label}</small>
+                      <strong>{value}</strong>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="character-feature-art">
+                <CharacterVisual character={character} />
+                <div className="character-world-pill">{character.worldPill}</div>
+              </div>
+            </article>
+
+            <div className="character-mode-bar" role="tablist" aria-label="Character modes">
+              {characterModes.map(([id, label, Icon]) => (
+                <button
+                  className={mode === id ? "active" : ""}
+                  type="button"
+                  role="tab"
+                  aria-selected={mode === id}
+                  key={id}
+                  onClick={() => selectMode(id)}
+                >
+                  <Icon size={18} weight="duotone" />
+                  <span>{label}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="character-detail-grid">
+              <article className="character-story-panel">
+                <span className="panel-label">{activeMode[0]}</span>
+                <h3>{activeMode[1]}</h3>
+                <div className="character-meta-grid">
+                  <div>
+                    <span>Inner question</span>
+                    <strong>{character.question}</strong>
+                  </div>
+                  <div>
+                    <span>Signature objects</span>
+                    <strong>{character.signature}</strong>
+                  </div>
+                  <div>
+                    <span>Child takeaway</span>
+                    <strong>{character.takeaway}</strong>
+                  </div>
+                  <div>
+                    <span>World notes</span>
+                    <strong>{character.world}</strong>
+                  </div>
+                </div>
+                <div className="trait-cloud" aria-label={`${character.name} traits`}>
+                  {character.traits.map((trait) => (
+                    <span key={trait}>{trait}</span>
+                  ))}
+                </div>
+              </article>
+
+              <article className="prompt-studio-panel">
+                <div className="prompt-panel-head">
+                  <span className="panel-label">Prompt queue</span>
+                  <p>Tap a prompt to change the preview output.</p>
+                </div>
+                <div className="prompt-choice-list">
+                  {character.prompts.map((prompt) => (
+                    <button
+                      className={activePrompt.id === prompt.id ? "active" : ""}
+                      type="button"
+                      aria-pressed={activePrompt.id === prompt.id}
+                      key={prompt.id}
+                      onClick={() => setPromptId(prompt.id)}
+                    >
+                      <BookOpenText size={18} weight="duotone" />
+                      <span>{prompt.label}</span>
+                    </button>
+                  ))}
+                </div>
+                <div className={`mock-output ${pulse ? "pulse" : ""}`}>
+                  <div>
+                    <span>Mock story output</span>
+                    <button type="button" onClick={regenerate}>
+                      Regenerate
+                    </button>
+                  </div>
+                  <h4>{activePrompt.title}</h4>
+                  <p>{activePrompt.text}</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <aside className="character-readiness-panel" aria-label="Character readiness">
+            <article className="character-insight-panel">
+              <div className="insight-section">
+                <span className="panel-label">Values</span>
+                <div className="lab-value-stack">
+                  {character.values.map(([label, text, Icon, tone]) => (
+                    <div className={`lab-value ${tone}`} key={label}>
+                      <Icon size={24} weight="duotone" />
+                      <span>
+                        <strong>{label}</strong>
+                        <small>{text}</small>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="insight-section">
+                <span className="panel-label">Readiness</span>
+                <div className="health-list">
+                  {character.health.map(([label, value]) => (
+                    <div className="health-item" key={label}>
+                      <div>
+                        <span>{label}</span>
+                        <strong>{value}%</strong>
+                      </div>
+                      <i>
+                        <b style={{ width: `${value}%` }} />
+                      </i>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="insight-section">
+                <span className="panel-label">Outputs</span>
+                <div className="output-stack">
+                  <p>
+                    <strong>Parent prompt</strong>
+                    {character.outputs.parent}
+                  </p>
+                  <p>
+                    <strong>Social snippet</strong>
+                    {character.outputs.social}
+                  </p>
+                  <p>
+                    <strong>Activity idea</strong>
+                    {character.outputs.activity}
+                  </p>
+                </div>
+              </div>
+
+              <div className="insight-section">
+                <span className="panel-label">Process modules</span>
+                <div className="module-list">
+                  {character.modules.map(([label, status, text]) => (
+                    <div key={label}>
+                      <span className={status.toLowerCase().replaceAll(" ", "-")}>{status}</span>
+                      <strong>{label}</strong>
+                      <p>{text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+          </aside>
+        </div>
+      </section>
+      <a className="floating-compass" href="#top" aria-label="Back to top">
+        <Compass size={22} weight="duotone" />
+        <Sparkle size={11} weight="fill" />
+      </a>
+    </main>
+  );
+}
+
 function Footer() {
   return (
     <footer className="site-footer">
@@ -435,6 +957,13 @@ function Footer() {
 }
 
 export function App() {
+  const path = window.location.pathname.replace(/\/$/, "");
+  const isCharacterPage = path === "/characters" || path.endsWith("/characters.html");
+
+  if (isCharacterPage) {
+    return <CharacterPage />;
+  }
+
   return (
     <main className="maitri-page">
       <Hero />

@@ -1,11 +1,11 @@
-name: Deploy Maitri website to GitHub Pages
+name: Deploy Maitri Circle to GitHub Pages
 
 on:
   push:
     branches:
       - main
     paths:
-      - "09_demos/website/**"
+      - "09_demos/maitri-circle/**"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -20,11 +20,11 @@ concurrency:
 
 jobs:
   validate:
-    name: Validate website
+    name: Validate Maitri Circle
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: 09_demos/website
+        working-directory: 09_demos/maitri-circle
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,8 +34,11 @@ jobs:
         with:
           node-version: 22
 
-      - name: Run website checks
-        run: npm run check
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Maitri Circle
+        run: npm run build
 
   deploy:
     name: Deploy to Pages
@@ -48,13 +51,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload website
+      - name: Build Maitri Circle
+        run: |
+          cd 09_demos/maitri-circle
+          npm ci
+          npm run build
+
+      - name: Upload Maitri Circle
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 09_demos/website
+          path: 09_demos/maitri-circle/dist
 
       - name: Deploy website
         id: deployment

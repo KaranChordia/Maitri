@@ -37,28 +37,32 @@ Maitri should not scale the full ecosystem on day one. The next foundation layer
 - Add-on revenue roadmap: `11_product_development/add_on_revenue/accessory_roadmap.md`
 - ChatGPT Business setup plan: `07_ai_workflows/chatgpt_business_setup/Maitri_ChatGPT_Business_Setup_Plan.md`
 
-## Website Demo
+## Default Website
 
-The first polished pre-launch website demo has been created at `09_demos/website/`.
+The default pre-launch website is now `09_demos/maitri-circle/`.
 
 Purpose:
 
 - Introduce Maitri as a story-first companion doll universe.
 - Introduce Manu as the first character anchor.
 - Invite families into the Maitri Circle.
+- Provide the Character Lab at `characters.html`.
 - Capture local demo waitlist interest.
 - Capture parent survey signals for audience segment, story preference, beta-reader interest, school interest, preorder interest, and objections.
 - Support future beta reader, school workshop, newsletter, and preorder integrations.
 
+The earlier static website demo and old Sites-ready clone have been removed. Maitri Circle and the Character Lab are the default website direction.
+
 Run locally:
 
 ```bash
-cd /Users/karanchordia/Documents/GitHub/Maitri/09_demos/website
-node server.js
+cd /Users/karanchordia/Documents/GitHub/Maitri/09_demos/maitri-circle
+npm run dev -- --port 5174
 ```
 
 Then open:
 
 ```text
-http://localhost:4173
+http://127.0.0.1:5174/
+http://127.0.0.1:5174/characters.html
 ```

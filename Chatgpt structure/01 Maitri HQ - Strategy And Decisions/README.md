@@ -43,19 +43,29 @@ The first product should stay focused: make parents feel the doll is educational
 - Add-on revenue roadmap: `11_product_development/add_on_revenue/accessory_roadmap.md`
 - ChatGPT Business setup plan: `07_ai_workflows/chatgpt_business_setup/Maitri_ChatGPT_Business_Setup_Plan.md`
 
-## Website Demo
+## Default Website
 
-The pre-launch website lives in `09_demos/website`.
+The default pre-launch website is Maitri Circle and lives in `09_demos/maitri-circle`.
+
+It includes:
+
+- Main Maitri Circle website: `index.html`
+- Character Lab page: `characters.html`
 
 To run it locally:
 
 ```bash
-cd 09_demos/website
+cd 09_demos/maitri-circle
 npm run dev
 ```
 
-Then open `http://localhost:4173`.
+Then open:
 
-The repository includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml` that publishes this folder to GitHub Pages. In GitHub, enable Pages for the repository and set the build source to **GitHub Actions**.
+```text
+http://127.0.0.1:5174/
+http://127.0.0.1:5174/characters.html
+```
 
-The Sites-ready version lives in `09_demos/maitri-sites` and includes the D1-backed live interest capture flow for deployment through Sites.
+The repository includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml` that publishes Maitri Circle to GitHub Pages. In GitHub, enable Pages for the repository and set the build source to **GitHub Actions**.
+
+The earlier website demo and old Sites-ready clone have been removed so Maitri Circle remains the single default website direction.
