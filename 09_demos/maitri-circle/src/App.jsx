@@ -35,22 +35,25 @@ import {
   YoutubeLogo,
 } from "@phosphor-icons/react";
 
+const siteBase = import.meta.env.PROD ? import.meta.env.BASE_URL : "/";
+const publicPath = (path = "") => `${siteBase}${path.replace(/^\/+/, "")}`;
+
 const generatedAssets = {
-  hero: "/assets/generated/optimized/hero-scene.jpg",
-  universe: "/assets/generated/optimized/universe-map.jpg",
-  manu: "/assets/generated/optimized/manu-portrait.jpg",
-  circle: "/assets/generated/optimized/circle-gathering.jpg",
-  schools: "/assets/generated/optimized/schools-workshop.jpg",
-  portal: "/assets/generated/optimized/waitlist-portal.jpg",
+  hero: publicPath("assets/generated/hero-scene.png"),
+  universe: publicPath("assets/generated/universe-map.png"),
+  manu: publicPath("assets/generated/manu-portrait.png"),
+  circle: publicPath("assets/generated/circle-gathering.png"),
+  schools: publicPath("assets/generated/schools-workshop.png"),
+  portal: publicPath("assets/generated/waitlist-portal.png"),
 };
 
 const navItems = [
-  ["Story Universe", "#universe"],
-  ["Meet Manu", "#manu"],
-  ["Characters", "/characters.html"],
-  ["For Parents", "#circle"],
-  ["For Schools", "#schools"],
-  ["Maitri Circle", "#waitlist"],
+  ["Story Universe", publicPath("#universe")],
+  ["Meet Manu", publicPath("#manu")],
+  ["Characters", publicPath("characters.html")],
+  ["For Parents", publicPath("#circle")],
+  ["For Schools", publicPath("#schools")],
+  ["Maitri Circle", publicPath("#waitlist")],
 ];
 
 const heroProof = [
@@ -474,7 +477,7 @@ function GeneratedArt({ src, className = "", alt = "" }) {
 
 function Brand() {
   return (
-    <a className="brand" href="#top" aria-label="Maitri Circle home">
+    <a className="brand" href={publicPath("#top")} aria-label="Maitri Circle home">
       <span>Maitri</span>
       <i aria-hidden="true">Circle</i>
     </a>
@@ -789,9 +792,9 @@ function CharacterLabHeader() {
     <header className="site-header character-page-header">
       <Brand />
       <nav className="character-mini-nav" aria-label="Character page">
-        <a href="/">Home</a>
-        <a href="/#manu">Meet Manu</a>
-        <a href="/#waitlist">Join Circle</a>
+        <a href={publicPath("")}>Home</a>
+        <a href={publicPath("#manu")}>Meet Manu</a>
+        <a href={publicPath("#waitlist")}>Join Circle</a>
       </nav>
     </header>
   );
