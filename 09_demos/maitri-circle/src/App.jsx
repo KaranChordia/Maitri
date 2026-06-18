@@ -35,7 +35,7 @@ import {
   YoutubeLogo,
 } from "@phosphor-icons/react";
 
-const siteBase = import.meta.env.PROD ? import.meta.env.BASE_URL : "/";
+const siteBase = import.meta.env.BASE_URL || "/";
 const publicPath = (path = "") => `${siteBase}${path.replace(/^\/+/, "")}`;
 
 const generatedAssets = {
