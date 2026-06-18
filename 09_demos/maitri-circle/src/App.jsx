@@ -6,7 +6,9 @@ import {
   BookOpenText,
   CalendarDots,
   ChalkboardTeacher,
+  CheckCircle,
   Compass,
+  Crown,
   FacebookLogo,
   FlowerLotus,
   Gift,
@@ -16,11 +18,18 @@ import {
   Lightbulb,
   List,
   LockKey,
+  Minus,
   NotePencil,
+  Package,
+  PaintBrush,
   Plant,
+  Plus,
   SealCheck,
   ShieldCheck,
   Sparkle,
+  Star,
+  Tag,
+  TShirt,
   UsersThree,
   X,
   YoutubeLogo,
@@ -94,6 +103,159 @@ const characterModes = [
   ["world", "Visual World", Compass],
   ["notes", "Notes", NotePencil],
 ];
+
+const accessoryAtelier = {
+  manu: {
+    title: "Manu's Courage Kit",
+    subtitle: "Accessories that extend the horse story into play, dressing, and parent-led reflection.",
+    bundleLabel: "First adventure bundle",
+    bundlePrice: 1699,
+    bundle: ["badal", "crest", "cape"],
+    note: "Best paired with the Book 1 box: The Horse Nobody Could Ride.",
+    accessories: [
+      {
+        id: "badal",
+        name: "Badal Companion Horse",
+        price: 1299,
+        category: "Play figure",
+        icon: Package,
+        tone: "teal",
+        story: "A small Badal figure with saddle detail for recreating Manu's stable scene.",
+        includes: ["Badal figure", "Soft saddle", "Grooming brush"],
+      },
+      {
+        id: "crest",
+        name: "Warrior Crest Sticker Pack",
+        price: 349,
+        category: "Creative add-on",
+        icon: PaintBrush,
+        tone: "rose",
+        story: "Reusable symbols for courage promises, activity pages, and journal covers.",
+        includes: ["Crests", "Lotus marks", "Courage words"],
+      },
+      {
+        id: "cape",
+        name: "Marigold Cape & Sash",
+        price: 799,
+        category: "Dress set",
+        icon: TShirt,
+        tone: "amber",
+        story: "A festive cape and sash designed for ceremony, storytelling, and gentle role play.",
+        includes: ["Cape", "Sash", "Keepsake card"],
+      },
+      {
+        id: "journal",
+        name: "Brave Promise Journal",
+        price: 499,
+        category: "Reflection",
+        icon: NotePencil,
+        tone: "violet",
+        story: "A guided mini journal for children to record brave moments and questions.",
+        includes: ["7 prompts", "Doodle pages", "Parent note"],
+      },
+    ],
+  },
+  kalpana: {
+    title: "Kalpana's Sky Lab",
+    subtitle: "STEM-friendly accessories that keep wonder playful, tactile, and parent-approved.",
+    bundleLabel: "Rooftop dreamer bundle",
+    bundlePrice: 1499,
+    bundle: ["patch", "stars", "notebook"],
+    note: "Designed as a later character extension after Manu's first box is validated.",
+    accessories: [
+      {
+        id: "patch",
+        name: "Mission Patch Maker",
+        price: 599,
+        category: "Creative STEM",
+        icon: Star,
+        tone: "violet",
+        story: "Children design a mission patch that turns a dream into a visible goal.",
+        includes: ["Patch base", "Space stickers", "Design prompts"],
+      },
+      {
+        id: "stars",
+        name: "Rooftop Star Cards",
+        price: 449,
+        category: "Flash cards",
+        icon: Sparkle,
+        tone: "teal",
+        story: "A compact card set for sky words, questions, and bedtime conversation.",
+        includes: ["24 cards", "Parent guide", "Question ring"],
+      },
+      {
+        id: "notebook",
+        name: "Flight Sketch Notebook",
+        price: 549,
+        category: "Journal",
+        icon: NotePencil,
+        tone: "amber",
+        story: "A sketchbook for paper planes, moon maps, and ideas worth trying twice.",
+        includes: ["Idea pages", "Wing templates", "Sticker strip"],
+      },
+      {
+        id: "jacket",
+        name: "Explorer Jacket Set",
+        price: 899,
+        category: "Dress set",
+        icon: TShirt,
+        tone: "green",
+        story: "A soft explorer jacket and star scarf for future space-story play.",
+        includes: ["Jacket", "Star scarf", "Mission card"],
+      },
+    ],
+  },
+  mary: {
+    title: "Mary's Practice Pack",
+    subtitle: "Movement-led accessories that celebrate effort, care, rhythm, and resilience.",
+    bundleLabel: "Seven-day practice bundle",
+    bundlePrice: 1399,
+    bundle: ["wraps", "tracker", "medal"],
+    note: "Keeps the lesson on practice and heart rather than competition alone.",
+    accessories: [
+      {
+        id: "wraps",
+        name: "Practice Wraps & Bag",
+        price: 699,
+        category: "Dress set",
+        icon: Backpack,
+        tone: "amber",
+        story: "Soft wraps and a tiny gear bag for practice scenes and responsibility play.",
+        includes: ["Soft wraps", "Mini bag", "Care card"],
+      },
+      {
+        id: "tracker",
+        name: "Seven-Day Practice Tracker",
+        price: 399,
+        category: "Activity",
+        icon: CalendarDots,
+        tone: "green",
+        story: "A small tracker that rewards showing up, trying again, and encouraging others.",
+        includes: ["Tracker pad", "Effort stickers", "Parent prompts"],
+      },
+      {
+        id: "medal",
+        name: "Heart Medal Set",
+        price: 549,
+        category: "Keepsake",
+        icon: Crown,
+        tone: "rose",
+        story: "A symbolic medal set for effort, kindness, and focus after a practice challenge.",
+        includes: ["3 medals", "Ribbon cards", "Promise card"],
+      },
+      {
+        id: "field",
+        name: "Morning Run Play Mat",
+        price: 999,
+        category: "Play set",
+        icon: Package,
+        tone: "teal",
+        story: "A foldable mini scene for warm-up paths, home support, and daily rhythm.",
+        includes: ["Foldable mat", "Path tokens", "Story starter"],
+      },
+    ],
+  },
+};
 
 const characterLibrary = {
   manu: {
@@ -653,15 +815,173 @@ function CharacterVisual({ character, compact = false }) {
   );
 }
 
+function formatRupees(value) {
+  return new Intl.NumberFormat("en-IN", {
+    maximumFractionDigits: 0,
+    style: "currency",
+    currency: "INR",
+  }).format(value);
+}
+
+function AccessoryAtelier({
+  atelier,
+  character,
+  cart,
+  selectedAccessoryId,
+  checkoutState,
+  onSelect,
+  onAdd,
+  onRemove,
+  onBundle,
+  onCheckout,
+}) {
+  const activeAccessory =
+    atelier.accessories.find((item) => item.id === selectedAccessoryId) || atelier.accessories[0];
+  const selectedItems = atelier.accessories.filter((item) => cart[item.id]);
+  const itemCount = selectedItems.reduce((sum, item) => sum + cart[item.id], 0);
+  const total = selectedItems.reduce((sum, item) => sum + item.price * cart[item.id], 0);
+  const savings = Math.max(0, total - atelier.bundlePrice);
+  const ActiveIcon = activeAccessory.icon;
+
+  return (
+    <article className={`accessory-atelier ${character.tone}`} aria-label={`${character.name} accessories prototype`}>
+      <div className="atelier-head">
+        <div>
+          <span className="panel-label">Accessory Atelier</span>
+          <h3>{atelier.title}</h3>
+          <p>{atelier.subtitle}</p>
+        </div>
+        <button className="bundle-button" type="button" onClick={onBundle}>
+          <Sparkle size={17} weight="fill" />
+          <span>{atelier.bundleLabel}</span>
+          <strong>{formatRupees(atelier.bundlePrice)}</strong>
+        </button>
+      </div>
+
+      <div className="atelier-grid">
+        <section className="accessory-preview" aria-live="polite">
+          <div className={`accessory-orbit ${activeAccessory.tone}`}>
+            <CharacterVisual character={character} compact />
+            <span>
+              <ActiveIcon size={38} weight="duotone" />
+            </span>
+          </div>
+          <div className="accessory-preview-copy">
+            <span>{activeAccessory.category}</span>
+            <h4>{activeAccessory.name}</h4>
+            <p>{activeAccessory.story}</p>
+            <div className="accessory-includes">
+              {activeAccessory.includes.map((item) => (
+                <small key={item}>{item}</small>
+              ))}
+            </div>
+            <button className="add-accessory-button" type="button" onClick={() => onAdd(activeAccessory.id)}>
+              <Plus size={16} weight="bold" />
+              <span>Add to mock cart</span>
+              <strong>{formatRupees(activeAccessory.price)}</strong>
+            </button>
+          </div>
+        </section>
+
+        <section className="accessory-shelf" aria-label={`${character.name} accessory shelf`}>
+          {atelier.accessories.map((item) => {
+            const Icon = item.icon;
+            const active = item.id === activeAccessory.id;
+            const quantity = cart[item.id] || 0;
+            return (
+              <button
+                className={`accessory-card ${item.tone} ${active ? "active" : ""}`}
+                type="button"
+                key={item.id}
+                onClick={() => onSelect(item.id)}
+              >
+                <span className="accessory-card-icon">
+                  <Icon size={24} weight="duotone" />
+                </span>
+                <span className="accessory-card-copy">
+                  <strong>{item.name}</strong>
+                  <small>{item.category}</small>
+                </span>
+                <span className="accessory-price">{formatRupees(item.price)}</span>
+                {quantity > 0 && <span className="accessory-count">{quantity}</span>}
+              </button>
+            );
+          })}
+        </section>
+
+        <aside className="accessory-cart" aria-label="Accessory cart prototype">
+          <div className="cart-head">
+            <span>
+              <Tag size={18} weight="duotone" />
+              Prototype cart
+            </span>
+            <strong>{itemCount} items</strong>
+          </div>
+
+          <div className="cart-lines">
+            {selectedItems.length === 0 ? (
+              <p className="empty-cart">Choose accessories to build a mock order for {character.name}.</p>
+            ) : (
+              selectedItems.map((item) => (
+                <div className="cart-line" key={item.id}>
+                  <span>
+                    <strong>{item.name}</strong>
+                    <small>
+                      {cart[item.id]} x {formatRupees(item.price)}
+                    </small>
+                  </span>
+                  <div className="cart-stepper" aria-label={`${item.name} quantity`}>
+                    <button type="button" onClick={() => onRemove(item.id)} aria-label={`Remove ${item.name}`}>
+                      <Minus size={14} weight="bold" />
+                    </button>
+                    <b>{cart[item.id]}</b>
+                    <button type="button" onClick={() => onAdd(item.id)} aria-label={`Add ${item.name}`}>
+                      <Plus size={14} weight="bold" />
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          <div className="cart-total">
+            <span>Estimated total</span>
+            <strong>{formatRupees(total)}</strong>
+            {savings > 0 && <small>Bundle could save {formatRupees(savings)}</small>}
+          </div>
+
+          <button className={`mock-checkout ${checkoutState}`} type="button" disabled={!itemCount} onClick={onCheckout}>
+            {checkoutState === "reserved" ? <CheckCircle size={18} weight="fill" /> : <Gift size={18} weight="duotone" />}
+            <span>{checkoutState === "reserved" ? "Mock order saved" : "Preview purchase"}</span>
+          </button>
+
+          <p className="atelier-note">{atelier.note}</p>
+        </aside>
+      </div>
+    </article>
+  );
+}
+
 function CharacterPage() {
   const [selectedId, setSelectedId] = useState("manu");
   const [mode, setMode] = useState("profile");
   const [promptId, setPromptId] = useState("horse");
   const [pulse, setPulse] = useState(false);
+  const [selectedAccessoryByCharacter, setSelectedAccessoryByCharacter] = useState({
+    manu: "badal",
+    kalpana: "patch",
+    mary: "wraps",
+  });
+  const [accessoryCart, setAccessoryCart] = useState({});
+  const [checkoutByCharacter, setCheckoutByCharacter] = useState({});
 
   const character = characterLibrary[selectedId];
+  const atelier = accessoryAtelier[selectedId];
   const activePrompt = character.prompts.find((item) => item.id === promptId) || character.prompts[0];
   const activeMode = character.tabs[mode] || character.tabs.profile;
+  const selectedAccessoryId = selectedAccessoryByCharacter[selectedId] || atelier.accessories[0].id;
+  const currentCart = accessoryCart[selectedId] || {};
+  const checkoutState = checkoutByCharacter[selectedId] || "idle";
 
   const selectCharacter = (id) => {
     const next = characterLibrary[id];
@@ -685,6 +1005,82 @@ function CharacterPage() {
   const regenerate = () => {
     setPulse(true);
     window.setTimeout(() => setPulse(false), 420);
+  };
+
+  const selectAccessory = (id) => {
+    setSelectedAccessoryByCharacter((current) => ({
+      ...current,
+      [selectedId]: id,
+    }));
+  };
+
+  const markCartChanged = () => {
+    setCheckoutByCharacter((current) => ({
+      ...current,
+      [selectedId]: "idle",
+    }));
+  };
+
+  const addAccessory = (id) => {
+    setAccessoryCart((current) => {
+      const characterCart = current[selectedId] || {};
+      return {
+        ...current,
+        [selectedId]: {
+          ...characterCart,
+          [id]: (characterCart[id] || 0) + 1,
+        },
+      };
+    });
+    setSelectedAccessoryByCharacter((current) => ({
+      ...current,
+      [selectedId]: id,
+    }));
+    markCartChanged();
+  };
+
+  const removeAccessory = (id) => {
+    setAccessoryCart((current) => {
+      const characterCart = current[selectedId] || {};
+      const nextQuantity = (characterCart[id] || 0) - 1;
+      const nextCart = { ...characterCart };
+      if (nextQuantity > 0) {
+        nextCart[id] = nextQuantity;
+      } else {
+        delete nextCart[id];
+      }
+      return {
+        ...current,
+        [selectedId]: nextCart,
+      };
+    });
+    markCartChanged();
+  };
+
+  const addBundle = () => {
+    setAccessoryCart((current) => {
+      const characterCart = current[selectedId] || {};
+      const nextCart = { ...characterCart };
+      atelier.bundle.forEach((id) => {
+        nextCart[id] = Math.max(nextCart[id] || 0, 1);
+      });
+      return {
+        ...current,
+        [selectedId]: nextCart,
+      };
+    });
+    setSelectedAccessoryByCharacter((current) => ({
+      ...current,
+      [selectedId]: atelier.bundle[0],
+    }));
+    markCartChanged();
+  };
+
+  const previewCheckout = () => {
+    setCheckoutByCharacter((current) => ({
+      ...current,
+      [selectedId]: "reserved",
+    }));
   };
 
   return (
@@ -849,6 +1245,7 @@ function CharacterPage() {
                 </div>
               </article>
             </div>
+
           </section>
 
           <aside className="character-readiness-panel" aria-label="Character readiness">
@@ -917,6 +1314,19 @@ function CharacterPage() {
               </div>
             </article>
           </aside>
+
+          <AccessoryAtelier
+            atelier={atelier}
+            character={character}
+            cart={currentCart}
+            selectedAccessoryId={selectedAccessoryId}
+            checkoutState={checkoutState}
+            onSelect={selectAccessory}
+            onAdd={addAccessory}
+            onRemove={removeAccessory}
+            onBundle={addBundle}
+            onCheckout={previewCheckout}
+          />
         </div>
       </section>
       <a className="floating-compass" href="#top" aria-label="Back to top">
