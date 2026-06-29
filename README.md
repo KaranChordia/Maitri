@@ -42,6 +42,7 @@ The first product should stay focused: make parents feel the doll is educational
 - Manu 32-page storybook blueprint: `11_product_development/first_doll_box/manu_32_page_storybook_blueprint.md`
 - Add-on revenue roadmap: `11_product_development/add_on_revenue/accessory_roadmap.md`
 - ChatGPT Business setup plan: `07_ai_workflows/chatgpt_business_setup/Maitri_ChatGPT_Business_Setup_Plan.md`
+- Shwetika shared Manu doll package: `10_source_context/shwetika_shared/2026-06-29_manu_doll/`
 
 ## Default Website
 

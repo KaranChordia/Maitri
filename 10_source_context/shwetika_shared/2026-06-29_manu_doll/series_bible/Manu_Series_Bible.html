@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manu — Series Bible</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #C8590A;
+    --deep-red: #7D1A1A;
+    --gold: #C4922A;
+    --gold-light: #E8C97A;
+    --cream: #FDF4E3;
+    --parchment: #F5E6C8;
+    --dark: #2C1500;
+    --mid: #5C3D1E;
+    --maroon: #5C0F1E;
+    --sage: #4A5E3A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  /* ── HERO ─────────────────────────────── */
+  .hero {
+    background: var(--deep-red);
+    background-image:
+      radial-gradient(ellipse at 20% 50%, #9B2A2A 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, #4A0A0A 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    color: var(--cream);
+    text-align: center;
+    padding: 80px 40px 70px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 72px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 16px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 40px;
+  }
+
+  .hero-tagline {
+    display: inline-block;
+    background: rgba(196,146,42,0.2);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    padding: 10px 28px;
+    border-radius: 2px;
+  }
+
+  /* ── MAIN LAYOUT ─────────────────────── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ── SECTION HEADERS ─────────────────── */
+  .section {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid rgba(196,146,42,0.2);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--deep-red);
+    margin-bottom: 28px;
+    line-height: 1.2;
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: var(--mid);
+  }
+
+  /* ── SERIES PHILOSOPHY ───────────────── */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .philosophy-card {
+    background: var(--parchment);
+    border-left: 3px solid var(--gold);
+    padding: 24px 20px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .philosophy-card .icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .philosophy-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--deep-red);
+    margin-bottom: 8px;
+  }
+
+  .philosophy-card p {
+    font-size: 15px;
+    margin: 0;
+    color: var(--mid);
+  }
+
+  /* ── BOOK CARDS ──────────────────────── */
+  .books-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 32px;
+  }
+
+  .book-card {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 28px;
+    background: white;
+    border: 1px solid rgba(196,146,42,0.25);
+    border-radius: 6px;
+    padding: 28px 32px;
+    position: relative;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s;
+  }
+
+  .book-card:hover {
+    box-shadow: 0 6px 32px rgba(0,0,0,0.12);
+  }
+
+  .book-card.book-1 { border-left: 4px solid var(--saffron); }
+  .book-card.book-2 { border-left: 4px solid #B8860B; }
+  .book-card.book-3 { border-left: 4px solid var(--sage); }
+  .book-card.book-4 { border-left: 4px solid var(--maroon); }
+  .book-card.book-5 { border-left: 4px solid #4A6B8A; }
+  .book-card.book-6 { border-left: 4px solid var(--deep-red); }
+
+  .book-number {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 4px;
+  }
+
+  .book-num-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .book-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--parchment);
+    -webkit-text-stroke: 1.5px var(--gold);
+  }
+
+  .book-body {}
+
+  .book-tag {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .book-card.book-1 .book-tag { background: #FEF0E6; color: var(--saffron); }
+  .book-card.book-2 .book-tag { background: #FEF9E7; color: #B8860B; }
+  .book-card.book-3 .book-tag { background: #EEF3EA; color: var(--sage); }
+  .book-card.book-4 .book-tag { background: #F9EEF0; color: var(--maroon); }
+  .book-card.book-5 .book-tag { background: #EAF0F6; color: #4A6B8A; }
+  .book-card.book-6 .book-tag { background: #F5E6E6; color: var(--deep-red); }
+
+  .book-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--deep-red);
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .book-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .book-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .book-meta-item {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    text-transform: uppercase;
+  }
+
+  .book-meta-item span {
+    color: var(--saffron);
+    font-weight: 700;
+  }
+
+  .book-description {
+    font-size: 15.5px;
+    color: var(--mid);
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+
+  .book-courage {
+    background: var(--parchment);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+  }
+
+  .book-courage-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .book-courage-text {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--deep-red);
+    margin: 0;
+  }
+
+  .book-chapters {
+    margin-top: 12px;
+  }
+
+  .book-chapters-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .chapter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .chapter-item {
+    font-size: 14px;
+    color: var(--mid);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .chapter-item::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 10px;
+    top: 3px;
+  }
+
+  /* ── RECURRING ELEMENTS ──────────────── */
+  .recurring-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 28px;
+  }
+
+  .recurring-item {
+    text-align: center;
+    padding: 24px 16px;
+    background: white;
+    border: 1px solid rgba(196,146,42,0.2);
+    border-radius: 6px;
+  }
+
+  .recurring-item .icon { font-size: 28px; margin-bottom: 10px; display: block; }
+
+  .recurring-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--deep-red);
+    margin-bottom: 6px;
+  }
+
+  .recurring-item p {
+    font-size: 13.5px;
+    margin: 0;
+    color: var(--mid);
+  }
+
+  /* ── COURAGE ARC ─────────────────────── */
+  .arc-container {
+    display: flex;
+    gap: 0;
+    margin-top: 32px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(196,146,42,0.2);
+  }
+
+  .arc-step {
+    flex: 1;
+    padding: 20px 16px;
+    text-align: center;
+    position: relative;
+  }
+
+  .arc-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 18px;
+    z-index: 2;
+  }
+
+  .arc-step:nth-child(1) { background: #FEF0E6; }
+  .arc-step:nth-child(2) { background: #FEF9E7; }
+  .arc-step:nth-child(3) { background: #EEF3EA; }
+  .arc-step:nth-child(4) { background: #F9EEF0; }
+  .arc-step:nth-child(5) { background: #EAF0F6; }
+  .arc-step:nth-child(6) { background: #F5E6E6; }
+
+  .arc-book {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .arc-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--deep-red);
+    line-height: 1.2;
+  }
+
+  /* ── QUOTE ───────────────────────────── */
+  .quote-block {
+    background: var(--deep-red);
+    color: white;
+    padding: 48px 48px;
+    margin: 48px 0;
+    border-radius: 4px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-block::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    color: rgba(255,255,255,0.05);
+    line-height: 1;
+  }
+
+  .quote-hindi {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+  }
+
+  .quote-english {
+    font-size: 18px;
+    font-style: italic;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 16px;
+  }
+
+  .quote-attr {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* ── PUBLISHING NOTES ─────────────────── */
+  .notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 28px;
+  }
+
+  .note-item {
+    padding: 20px;
+    background: white;
+    border: 1px solid rgba(196,146,42,0.2);
+    border-radius: 4px;
+  }
+
+  .note-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--deep-red);
+    margin-bottom: 8px;
+  }
+
+  .note-item p {
+    font-size: 14px;
+    margin: 0;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    .book-card { grid-template-columns: 1fr; }
+    .book-number { flex-direction: row; gap: 12px; align-items: center; }
+    .arc-container { flex-direction: column; }
+    .arc-step::after { display: none; }
+    .notes-grid { grid-template-columns: 1fr; }
+    .hero { padding: 48px 20px; }
+    .container { padding: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Series Bible · Children's Historical Fiction</div>
+  <h1 class="hero-title">Manu — <em>The Girl Who Would Be Queen</em></h1>
+  <p class="hero-subtitle">A 6-Book Series on the Life of Rani Laxmibai of Jhansi</p>
+  <div class="hero-tagline">For Every Girl Who Knows She Is Strong</div>
+</div>
+
+<div class="container">
+
+  <!-- SERIES VISION -->
+  <div class="section">
+    <div class="section-label">Series Vision</div>
+    <h2 class="section-title">What This Series Is</h2>
+    <p>This is the story of one of history's most extraordinary women — told not as a legend, but as a life. Beginning when Manu is a seven-year-old girl asking questions no one wants to answer, and ending with her legacy alive in the hearts of little girls today, this series walks alongside her through every stage of growing up.</p>
+    <p>Like American Girl, each book pairs with the Manu doll — a companion a child can hold while she reads. But unlike any doll series that has come before, this one is rooted in real Indian history, real Indian courage, and a kind of heroism that is not imported or borrowed. It is ours.</p>
+    <p>Each book is written for ages 6–8, with short chapters, warm illustration notes, a historical note, and activities children can do with their doll. Each book ends with a courage practice — something the child can carry into her own life.</p>
+
+    <div class="philosophy-grid">
+      <div class="philosophy-card">
+        <span class="icon">🌱</span>
+        <h4>Courage grows in stages</h4>
+        <p>Each book introduces one dimension of courage — physical, emotional, moral, quiet, collective, and legacy. Together they build a complete picture.</p>
+      </div>
+      <div class="philosophy-card">
+        <span class="icon">🪞</span>
+        <h4>History as a mirror</h4>
+        <p>Manu's life is presented so that every girl can see herself in it — regardless of whether she is bold or quiet, Indian or not, seven or eighty.</p>
+      </div>
+      <div class="philosophy-card">
+        <span class="icon">🤲</span>
+        <h4>Feelings are never skipped</h4>
+        <p>Manu fears, grieves, doubts, laughs, and loves. Children learn that courage doesn't mean having no feelings — it means moving through them.</p>
+      </div>
+      <div class="philosophy-card">
+        <span class="icon">📜</span>
+        <h4>Historically grounded</h4>
+        <p>Real names, real places, real events — handled with care for the age group. Every book includes a "What Really Happened" note for parents and educators.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COURAGE ARC -->
+  <div class="section">
+    <div class="section-label">The Series Arc</div>
+    <h2 class="section-title">Six Books. One Complete Life.</h2>
+    <p>Each book is anchored to a distinct theme of courage. Together they form a complete emotional and historical arc — from a fearless little girl to an immortal legend.</p>
+
+    <div class="arc-container">
+      <div class="arc-step">
+        <div class="arc-book">Book 1</div>
+        <div class="arc-word">The Courage to Begin</div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-book">Book 2</div>
+        <div class="arc-word">The Courage to Belong</div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-book">Book 3</div>
+        <div class="arc-word">The Courage to Love</div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-book">Book 4</div>
+        <div class="arc-word">The Courage to Stand</div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-book">Book 5</div>
+        <div class="arc-word">The Courage to Fight</div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-book">Book 6</div>
+        <div class="arc-word">The Courage to Last</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE BOOKS -->
+  <div class="section">
+    <div class="section-label">The Books</div>
+    <h2 class="section-title">Full Series Outline</h2>
+
+    <div class="books-grid">
+
+      <!-- BOOK 1 -->
+      <div class="book-card book-1">
+        <div class="book-number">
+          <div class="book-num-label">Book</div>
+          <div class="book-num">1</div>
+        </div>
+        <div class="book-body">
+          <div class="book-tag">✦ Available Now</div>
+          <div class="book-title">Manu's Big, Brave Heart</div>
+          <div class="book-subtitle">The Story of Little Laxmibai</div>
+          <div class="book-meta">
+            <div class="book-meta-item">Manu's Age <span>7–10</span></div>
+            <div class="book-meta-item">Setting <span>Bithoor, 1835–1840</span></div>
+            <div class="book-meta-item">Theme <span>The Courage to Begin</span></div>
+          </div>
+          <div class="book-description">Manu is seven years old, endlessly curious, and absolutely convinced that girls should be allowed to do everything boys can do. We meet her at the stables, at the river, in the training courtyard, and at her mother's bedside. This is the book that shows who she was before the world tried to make her smaller — and how she refused.</div>
+          <div class="book-courage">
+            <div class="book-courage-label">Courage Lesson</div>
+            <p class="book-courage-text">"Being brave doesn't mean you are not scared. It means you take a deep breath and do it anyway."</p>
+          </div>
+          <div class="book-chapters">
+            <div class="book-chapters-label">Chapters</div>
+            <div class="chapter-list">
+              <div class="chapter-item">The Girl Who Asked Why</div>
+              <div class="chapter-item">The Boy Who Laughed</div>
+              <div class="chapter-item">The Test (The Palace Riding Race)</div>
+              <div class="chapter-item">The Hard Day (Her Mother's Illness)</div>
+              <div class="chapter-item">What Manu Knew (By the River)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOK 2 -->
+      <div class="book-card book-2">
+        <div class="book-number">
+          <div class="book-num-label">Book</div>
+          <div class="book-num">2</div>
+        </div>
+        <div class="book-body">
+          <div class="book-tag">Coming Next</div>
+          <div class="book-title">Manu and the Court of Kings</div>
+          <div class="book-subtitle">Finding Her Place in a Big World</div>
+          <div class="book-meta">
+            <div class="book-meta-item">Manu's Age <span>10–13</span></div>
+            <div class="book-meta-item">Setting <span>Bithoor & Peshwa's Court, 1840–45</span></div>
+            <div class="book-meta-item">Theme <span>The Courage to Belong</span></div>
+          </div>
+          <div class="book-description">Manu is older now — and the world is more complicated. At the Peshwa's court she is surrounded by politics, class, and rules she didn't make. She learns to watch and listen, to find allies in unexpected places, and to be herself in rooms that weren't built for her. Her friendships with Nana Sahib and Tatya Tope deepen into something like a chosen family. And she begins to understand — for the first time — that the world beyond Bithoor is in trouble.</div>
+          <div class="book-courage">
+            <div class="book-courage-label">Courage Lesson</div>
+            <p class="book-courage-text">"You don't have to shrink yourself to fit a room. You can quietly, steadily, change the shape of the room."</p>
+          </div>
+          <div class="book-chapters">
+            <div class="book-chapters-label">Chapters</div>
+            <div class="chapter-list">
+              <div class="chapter-item">The Court and Its Whispers</div>
+              <div class="chapter-item">The Girl Who Didn't Belong (And Did)</div>
+              <div class="chapter-item">Tatya's Secret Plan</div>
+              <div class="chapter-item">The Night of the Diwali Debate</div>
+              <div class="chapter-item">What the River Carries Away</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOK 3 -->
+      <div class="book-card book-3">
+        <div class="book-number">
+          <div class="book-num-label">Book</div>
+          <div class="book-num">3</div>
+        </div>
+        <div class="book-body">
+          <div class="book-tag">Coming Soon</div>
+          <div class="book-title">Manu Becomes Laxmibai</div>
+          <div class="book-subtitle">The Year Everything Changed</div>
+          <div class="book-meta">
+            <div class="book-meta-item">Manu's Age <span>13–14</span></div>
+            <div class="book-meta-item">Setting <span>Bithoor & Jhansi, 1842</span></div>
+            <div class="book-meta-item">Theme <span>The Courage to Love</span></div>
+          </div>
+          <div class="book-description">Manu is fourteen when she is betrothed to the Maharaja of Jhansi — Gangadhar Rao. For a girl who has always known her own mind, this is both frightening and full of possibility. This book follows her journey from Bithoor to Jhansi — saying goodbye to everything she knows, arriving in a new city, and discovering that being a queen is nothing like she imagined. It is also a love story: not a fairy tale, but a real one, between two people who genuinely see each other.</div>
+          <div class="book-courage">
+            <div class="book-courage-label">Courage Lesson</div>
+            <p class="book-courage-text">"Loving someone bravely means staying honest with them — even when it's easier to be quiet."</p>
+          </div>
+          <div class="book-chapters">
+            <div class="book-chapters-label">Chapters</div>
+            <div class="chapter-list">
+              <div class="chapter-item">The Letter That Changed Everything</div>
+              <div class="chapter-item">Saying Goodbye to the River</div>
+              <div class="chapter-item">Jhansi — The City of Forts</div>
+              <div class="chapter-item">The Maharaja Who Listened</div>
+              <div class="chapter-item">Laxmibai — Her New Name, Her New Self</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOK 4 -->
+      <div class="book-card book-4">
+        <div class="book-number">
+          <div class="book-num-label">Book</div>
+          <div class="book-num">4</div>
+        </div>
+        <div class="book-body">
+          <div class="book-tag">Coming Soon</div>
+          <div class="book-title">The Rani Who Said No</div>
+          <div class="book-subtitle">When Jhansi Was Taken — And She Refused</div>
+          <div class="book-meta">
+            <div class="book-meta-item">Laxmibai's Age <span>~25</span></div>
+            <div class="book-meta-item">Setting <span>Jhansi, 1853–1857</span></div>
+            <div class="book-meta-item">Theme <span>The Courage to Stand</span></div>
+          </div>
+          <div class="book-description">This is the book where history tightens its grip. The Maharaja has died. Laxmibai's adopted son Damodar is a baby. The British East India Company invokes the Doctrine of Lapse and declares Jhansi absorbed into their territory. Laxmibai is told to leave the fort that is her home, her kingdom, her people's world. She refuses. Carefully, for a 6–8 audience, this book handles injustice, grief, and the quiet power of saying "No" — and meaning it.</div>
+          <div class="book-courage">
+            <div class="book-courage-label">Courage Lesson</div>
+            <p class="book-courage-text">"Sometimes the bravest word in any language is a simple, steady no."</p>
+          </div>
+          <div class="book-chapters">
+            <div class="book-chapters-label">Chapters</div>
+            <div class="chapter-list">
+              <div class="chapter-item">The Night Damodar Was Born</div>
+              <div class="chapter-item">The Maharaja's Last Wish</div>
+              <div class="chapter-item">The Company's Letter</div>
+              <div class="chapter-item">Meri Jhansi Nahi Dungi</div>
+              <div class="chapter-item">The Rani Who Stayed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOK 5 -->
+      <div class="book-card book-5">
+        <div class="book-number">
+          <div class="book-num-label">Book</div>
+          <div class="book-num">5</div>
+        </div>
+        <div class="book-body">
+          <div class="book-tag">Coming Soon</div>
+          <div class="book-title">Laxmibai Rides</div>
+          <div class="book-subtitle">The Battle for Jhansi</div>
+          <div class="book-meta">
+            <div class="book-meta-item">Laxmibai's Age <span>~29</span></div>
+            <div class="book-meta-item">Setting <span>Jhansi & Gwalior, 1857–1858</span></div>
+            <div class="book-meta-item">Theme <span>The Courage to Fight</span></div>
+          </div>
+          <div class="book-description">The battle arrives. Laxmibai puts on armour — her son Damodar tied to her back — and leads her army. This book handles battle with age-appropriate honesty: it is not glamourised, but it is not softened beyond recognition either. Children learn that fighting for what is right can be terrifying and still necessary. The famous leap from the fort walls on horseback is rendered as an act of pure, breathtaking determination. Nana Sahib and Tatya Tope ride beside her. She is never alone.</div>
+          <div class="book-courage">
+            <div class="book-courage-label">Courage Lesson</div>
+            <p class="book-courage-text">"Courage is not the absence of fear. It is deciding that something matters more."</p>
+          </div>
+          <div class="book-chapters">
+            <div class="book-chapters-label">Chapters</div>
+            <div class="chapter-list">
+              <div class="chapter-item">The Armour Fits</div>
+              <div class="chapter-item">The Night Before</div>
+              <div class="chapter-item">The Battle of Jhansi</div>
+              <div class="chapter-item">The Leap (The Fort Walls)</div>
+              <div class="chapter-item">Gwalior — The Last Stand</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOK 6 -->
+      <div class="book-card book-6">
+        <div class="book-number">
+          <div class="book-num-label">Book</div>
+          <div class="book-num">6</div>
+        </div>
+        <div class="book-body">
+          <div class="book-tag">Series Finale</div>
+          <div class="book-title">Manu Lives Forever</div>
+          <div class="book-subtitle">Her Story Is Your Story</div>
+          <div class="book-meta">
+            <div class="book-meta-item">Structure <span>Then & Now</span></div>
+            <div class="book-meta-item">Setting <span>1858 & Today</span></div>
+            <div class="book-meta-item">Theme <span>The Courage to Last</span></div>
+          </div>
+          <div class="book-description">The final book does something different. It braids two timelines: Laxmibai's last days in 1858, handled with gentleness and enormous dignity — and a little girl today, in modern India, who finds a Manu doll in her grandmother's house and begins to read her story. The book closes not on a death, but on a living flame. On the idea that every girl who asks "why," who gets back on the horse, who stays kind when it is hard — is carrying Manu forward. An open ending, full of possibility, addressed directly to the reader.</div>
+          <div class="book-courage">
+            <div class="book-courage-label">Courage Lesson</div>
+            <p class="book-courage-text">"A story doesn't end when it's over. It ends when no one remembers it anymore. And that — that will never happen."</p>
+          </div>
+          <div class="book-chapters">
+            <div class="book-chapters-label">Chapters</div>
+            <div class="chapter-list">
+              <div class="chapter-item">The Last Morning (1858)</div>
+              <div class="chapter-item">The Doll in the Trunk (Today)</div>
+              <div class="chapter-item">What Dadi Said</div>
+              <div class="chapter-item">The Girl Who Found Manu</div>
+              <div class="chapter-item">Manu Speaks (A letter to every girl who reads this)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RECURRING SERIES ELEMENTS -->
+  <div class="section">
+    <div class="section-label">Series DNA</div>
+    <h2 class="section-title">What Every Book Contains</h2>
+    <p>These recurring elements give the series its identity — and give children and parents something to look for, rely on, and share across every book.</p>
+
+    <div class="recurring-grid">
+      <div class="recurring-item">
+        <span class="icon">🎨</span>
+        <h4>Illustration Notes</h4>
+        <p>Every scene has a detailed illustration brief. Warm, Indian, non-stereotyped. Always showing Manu's full emotional range.</p>
+      </div>
+      <div class="recurring-item">
+        <span class="icon">📜</span>
+        <h4>What Really Happened</h4>
+        <p>A child-friendly historical note at the end of each book. Real people, real places. Age-appropriate honesty.</p>
+      </div>
+      <div class="recurring-item">
+        <span class="icon">🌸</span>
+        <h4>Brave Heart Activities</h4>
+        <p>5 activities per book for child + doll. Reflective, creative, and grounded in the book's courage theme.</p>
+      </div>
+      <div class="recurring-item">
+        <span class="icon">🗣️</span>
+        <h4>Manu's Words</h4>
+        <p>A real or imagined quote from Manu closes each book — in Hindi and English. Illustrated as a keepsake page.</p>
+      </div>
+      <div class="recurring-item">
+        <span class="icon">🗺️</span>
+        <h4>Where Were We?</h4>
+        <p>A simple, illustrated map at the start of each book shows where the story takes place. Grounds children in real Indian geography.</p>
+      </div>
+      <div class="recurring-item">
+        <span class="icon">💌</span>
+        <h4>Dear Manu Letter</h4>
+        <p>A blank page at the end for the child to write or draw a letter to Manu — or to herself, as Manu would have.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-block">
+    <p class="quote-hindi">"Meri Jhansi nahi dungi."</p>
+    <p class="quote-english">"I will not give up my Jhansi."</p>
+    <div class="quote-attr">— Rani Laxmibai of Jhansi · The words that changed history</div>
+  </div>
+
+  <!-- PUBLISHING NOTES -->
+  <div class="section">
+    <div class="section-label">Publishing Notes</div>
+    <h2 class="section-title">For Creators & Publishers</h2>
+
+    <div class="notes-grid">
+      <div class="note-item">
+        <h4>Target Reader</h4>
+        <p>Girls ages 6–8 as the primary reader. Parents and grandparents reading aloud. Educators using the series in social studies or moral education. The doll creates a secondary engagement layer for ages 4–10.</p>
+      </div>
+      <div class="note-item">
+        <h4>Illustration Style</h4>
+        <p>Warm, painterly, richly detailed Indian illustration — think Karadi Tales or Tara Books aesthetic. Manu should look like a real Indian child: dark hair, dark eyes, expressive face. Never prettified beyond recognition.</p>
+      </div>
+      <div class="note-item">
+        <h4>The Doll Tie-In</h4>
+        <p>Each book introduces at least one outfit or accessory that corresponds to a doll item — riding clothes, a golden bangle, armour. The books are written to work alone, but reward doll owners with extra resonance.</p>
+      </div>
+      <div class="note-item">
+        <h4>Tone Across the Series</h4>
+        <p>Books 1–3: warm, golden, adventurous. Book 4: quieter, heavier, but never hopeless. Books 5–6: the full emotional range — grief, pride, love, and ultimately transcendence. Always child-appropriate. Always honest.</p>
+      </div>
+      <div class="note-item">
+        <h4>Handling Death & Battle</h4>
+        <p>Books 5 and 6 address battle and death. The approach: never graphic, always purposeful. Model: how Charlotte's Web handles death, or The Lion the Witch and the Wardrobe handles sacrifice. Real, but held with enormous gentleness.</p>
+      </div>
+      <div class="note-item">
+        <h4>Historical Accuracy</h4>
+        <p>All key facts are grounded in documented history. Fictional scenes (dialogue, interior feelings) are clearly marked as storytelling. The "What Really Happened" section in each book maintains full transparency with parents.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="text-align:center; padding: 48px 0 64px; color: var(--gold); font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px;">
+    MANU — THE GIRL WHO WOULD BE QUEEN &nbsp;✦&nbsp; A 6-BOOK SERIES &nbsp;✦&nbsp; SERIES BIBLE V1.0
+  </div>
+
+</div>
+</body>
+</html>

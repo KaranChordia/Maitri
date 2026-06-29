@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import {
   ArrowRight,
   Backpack,
@@ -35,6 +35,10 @@ import {
   YoutubeLogo,
 } from "@phosphor-icons/react";
 
+const StoryUniversePage = lazy(() =>
+  import("./StoryUniverse.jsx").then((module) => ({ default: module.StoryUniversePage })),
+);
+
 const siteBase = import.meta.env.BASE_URL || "/";
 const publicPath = (path = "") => `${siteBase}${path.replace(/^\/+/, "")}`;
 
@@ -47,8 +51,16 @@ const generatedAssets = {
   portal: publicPath("assets/generated/waitlist-portal.png"),
 };
 
+const shwetikaAssets = {
+  manuDoll: publicPath("assets/shwetika/manu/manu-doll-sample.png"),
+  manuOnHorse: publicPath("assets/shwetika/manu/manu-on-horse.png"),
+  manuWithFather: publicPath("assets/shwetika/manu/manu-riding-with-father.png"),
+  horseRace: publicPath("assets/shwetika/manu/horse-race.png"),
+  manuAtGhats: publicPath("assets/shwetika/manu/manu-at-ghats.png"),
+};
+
 const navItems = [
-  ["Story Universe", publicPath("#universe")],
+  ["Story Universe", publicPath("story-universe.html")],
   ["Meet Manu", publicPath("#manu")],
   ["Characters", publicPath("characters.html")],
   ["For Parents", publicPath("#circle")],
@@ -99,191 +111,30 @@ const schoolBenefits = [
   ["Social-emotional learning focus", Plant, "green"],
 ];
 
-const characterModes = [
-  ["profile", "Profile", UsersThree],
-  ["studio", "Story Studio", BookOpenText],
-  ["voice", "Voice & Tone", Heart],
-  ["world", "Visual World", Compass],
-  ["notes", "Notes", NotePencil],
-];
-
-const accessoryAtelier = {
-  manu: {
-    title: "Manu's Courage Kit",
-    subtitle: "Accessories that extend the horse story into play, dressing, and parent-led reflection.",
-    bundleLabel: "First adventure bundle",
-    bundlePrice: 1699,
-    bundle: ["badal", "crest", "cape"],
-    note: "Best paired with the Book 1 box: The Horse Nobody Could Ride.",
-    accessories: [
-      {
-        id: "badal",
-        name: "Badal Companion Horse",
-        price: 1299,
-        category: "Play figure",
-        icon: Package,
-        tone: "teal",
-        story: "A small Badal figure with saddle detail for recreating Manu's stable scene.",
-        includes: ["Badal figure", "Soft saddle", "Grooming brush"],
-      },
-      {
-        id: "crest",
-        name: "Warrior Crest Sticker Pack",
-        price: 349,
-        category: "Creative add-on",
-        icon: PaintBrush,
-        tone: "rose",
-        story: "Reusable symbols for courage promises, activity pages, and journal covers.",
-        includes: ["Crests", "Lotus marks", "Courage words"],
-      },
-      {
-        id: "cape",
-        name: "Marigold Cape & Sash",
-        price: 799,
-        category: "Dress set",
-        icon: TShirt,
-        tone: "amber",
-        story: "A festive cape and sash designed for ceremony, storytelling, and gentle role play.",
-        includes: ["Cape", "Sash", "Keepsake card"],
-      },
-      {
-        id: "journal",
-        name: "Brave Promise Journal",
-        price: 499,
-        category: "Reflection",
-        icon: NotePencil,
-        tone: "violet",
-        story: "A guided mini journal for children to record brave moments and questions.",
-        includes: ["7 prompts", "Doodle pages", "Parent note"],
-      },
-    ],
-  },
-  kalpana: {
-    title: "Kalpana's Sky Lab",
-    subtitle: "STEM-friendly accessories that keep wonder playful, tactile, and parent-approved.",
-    bundleLabel: "Rooftop dreamer bundle",
-    bundlePrice: 1499,
-    bundle: ["patch", "stars", "notebook"],
-    note: "Designed as a later character extension after Manu's first box is validated.",
-    accessories: [
-      {
-        id: "patch",
-        name: "Mission Patch Maker",
-        price: 599,
-        category: "Creative STEM",
-        icon: Star,
-        tone: "violet",
-        story: "Children design a mission patch that turns a dream into a visible goal.",
-        includes: ["Patch base", "Space stickers", "Design prompts"],
-      },
-      {
-        id: "stars",
-        name: "Rooftop Star Cards",
-        price: 449,
-        category: "Flash cards",
-        icon: Sparkle,
-        tone: "teal",
-        story: "A compact card set for sky words, questions, and bedtime conversation.",
-        includes: ["24 cards", "Parent guide", "Question ring"],
-      },
-      {
-        id: "notebook",
-        name: "Flight Sketch Notebook",
-        price: 549,
-        category: "Journal",
-        icon: NotePencil,
-        tone: "amber",
-        story: "A sketchbook for paper planes, moon maps, and ideas worth trying twice.",
-        includes: ["Idea pages", "Wing templates", "Sticker strip"],
-      },
-      {
-        id: "jacket",
-        name: "Explorer Jacket Set",
-        price: 899,
-        category: "Dress set",
-        icon: TShirt,
-        tone: "green",
-        story: "A soft explorer jacket and star scarf for future space-story play.",
-        includes: ["Jacket", "Star scarf", "Mission card"],
-      },
-    ],
-  },
-  mary: {
-    title: "Mary's Practice Pack",
-    subtitle: "Movement-led accessories that celebrate effort, care, rhythm, and resilience.",
-    bundleLabel: "Seven-day practice bundle",
-    bundlePrice: 1399,
-    bundle: ["wraps", "tracker", "medal"],
-    note: "Keeps the lesson on practice and heart rather than competition alone.",
-    accessories: [
-      {
-        id: "wraps",
-        name: "Practice Wraps & Bag",
-        price: 699,
-        category: "Dress set",
-        icon: Backpack,
-        tone: "amber",
-        story: "Soft wraps and a tiny gear bag for practice scenes and responsibility play.",
-        includes: ["Soft wraps", "Mini bag", "Care card"],
-      },
-      {
-        id: "tracker",
-        name: "Seven-Day Practice Tracker",
-        price: 399,
-        category: "Activity",
-        icon: CalendarDots,
-        tone: "green",
-        story: "A small tracker that rewards showing up, trying again, and encouraging others.",
-        includes: ["Tracker pad", "Effort stickers", "Parent prompts"],
-      },
-      {
-        id: "medal",
-        name: "Heart Medal Set",
-        price: 549,
-        category: "Keepsake",
-        icon: Crown,
-        tone: "rose",
-        story: "A symbolic medal set for effort, kindness, and focus after a practice challenge.",
-        includes: ["3 medals", "Ribbon cards", "Promise card"],
-      },
-      {
-        id: "field",
-        name: "Morning Run Play Mat",
-        price: 999,
-        category: "Play set",
-        icon: Package,
-        tone: "teal",
-        story: "A foldable mini scene for warm-up paths, home support, and daily rhythm.",
-        includes: ["Foldable mat", "Path tokens", "Story starter"],
-      },
-    ],
-  },
-};
-
 const characterLibrary = {
   manu: {
     name: "Manu",
     initials: "M",
-    role: "Anchor character",
-    image: generatedAssets.manu,
+    role: "Master character pattern",
+    image: shwetikaAssets.manuDoll,
     tone: "rose",
-    tagline: "A curious girl near the Ganga who asks why, learns boldly, and chooses kindness.",
+    tagline: "The girl who asked why, learned to belong, and kept courage alive as she grew into Lakshmibai.",
     worldPill: "Bithoor and the Ganga banks",
-    origin: "Inspired by Rani Laxmibai of Jhansi",
-    question: "What does it mean to do what is right when it is hard?",
-    signature: "Badal the horse, a wooden sword, river stones, and a brave question.",
-    takeaway: "Courage can begin before you feel ready.",
-    world: "Bithoor on the Ganga, palace courtyards, stables, mango trees, and warm dawn light.",
+    origin: "Inspired by Manikarnika Tambe, later remembered as Rani Laxmibai",
+    question: "How does courage grow as a child grows?",
+    signature: "Badal, a wooden sword, the Ganga ghats, the Peshwa's court, Jhansi Fort, and one brave question.",
+    takeaway: "Courage does not wait until you are grown up.",
+    world: "Bithoor on the Ganga, palace courtyards, stables, mango groves, Diwali lamps, and the road to Jhansi.",
     values: [
-      ["Courage", "She takes one step forward even when she feels afraid.", ShieldCheck, "teal"],
-      ["Care", "She notices feelings others miss and chooses patience first.", Heart, "rose"],
-      ["Curiosity", "She asks why and learns through trying.", Lightbulb, "amber"],
+      ["Asking courage", "She asks why when something feels unfair.", Lightbulb, "amber"],
+      ["Trying courage", "She begins before she feels fully ready.", ShieldCheck, "teal"],
+      ["Kindness courage", "She chooses care before proving herself.", Heart, "rose"],
     ],
-    traits: ["Brave", "Patient", "Curious", "Kind", "Resilient", "Observant"],
+    traits: ["Curious", "Patient", "Kind", "Fair", "Steady", "Observant"],
     meta: [
-      ["Age in story", "8-10 years"],
-      ["Core book", "The Horse Nobody Could Ride"],
-      ["In-box role", "First 32-page storybook anchor"],
+      ["Age range", "Manu from age 7 through Lakshmibai"],
+      ["Series frame", "The Girl Who Would Be Queen"],
+      ["Canon status", "Internal planning, review before publication"],
     ],
     prompts: [
       {
@@ -305,29 +156,6 @@ const characterLibrary = {
         text: "Dear Friend, sometimes courage is not a loud thing. Sometimes it is one small step, one honest question, or one kind hand held out to someone who is afraid.",
       },
     ],
-    outputs: {
-      parent: "Ask your child: when did you try something even though it felt hard?",
-      social: "Before she was a queen, she was a girl who asked why.",
-      activity: "Design a courage crest using one symbol for patience and one for bravery.",
-    },
-    health: [
-      ["Story depth", 94],
-      ["Parent trust", 88],
-      ["Play potential", 91],
-    ],
-    modules: [
-      ["Story draft", "Ready", "Book 1 arc is clear enough for page-by-page drafting."],
-      ["Parent prompt", "Ready", "Courage, patience, and fairness prompts are strong."],
-      ["Activity page", "In progress", "Needs page format and illustration direction."],
-      ["Sticker logic", "In progress", "Decide in-box stickers versus later packs."],
-    ],
-    tabs: {
-      profile: ["Character profile", "Manu is the first Maitri anchor: child-relatable, brave, tender, and story-led."],
-      studio: ["Story Studio", "Build short beats, letters, activity prompts, and box-ready story moments from Manu's arc."],
-      voice: ["Voice & Tone", "Warm, direct, brave, and simple. Manu should feel like a friend speaking to the child."],
-      world: ["Visual World", "River light, stables, marigold, terracotta, cloth, horse textures, and childhood movement."],
-      notes: ["Notes", "Keep Book 1 before she becomes queen. Separate history-inspired scenes from verified claims."],
-    },
   },
   kalpana: {
     name: "Kalpana",
@@ -373,29 +201,6 @@ const characterLibrary = {
         text: "From high above, Earth looked like one glowing home. Kalpana pressed her hand near the window and remembered every child who had ever looked up.",
       },
     ],
-    outputs: {
-      parent: "Ask your child: what is one question you want to keep exploring?",
-      social: "A dream can begin on a rooftop and still reach the stars.",
-      activity: "Draw a mission patch for a journey you want to take.",
-    },
-    health: [
-      ["Story depth", 78],
-      ["Parent trust", 82],
-      ["Play potential", 74],
-    ],
-    modules: [
-      ["Story draft", "Planned", "Needs a focused childhood period before expanding."],
-      ["Parent prompt", "Ready", "Strong fit for curiosity and persistence."],
-      ["Activity page", "Planned", "Could become STEM/art extension."],
-      ["Sticker logic", "Later", "Stars, aircraft, notebooks, and mission patch symbols."],
-    ],
-    tabs: {
-      profile: ["Character profile", "Kalpana can expand Maitri into curiosity, science, and ambition after Manu is stable."],
-      studio: ["Story Studio", "Shape wonder-led STEM scenes without making the content feel like a school test."],
-      voice: ["Voice & Tone", "Clear, curious, hopeful, precise, and grounded in effort."],
-      world: ["Visual World", "Sky blues, notebooks, rooftops, stars, flight diagrams, and warm classroom detail."],
-      notes: ["Notes", "Treat as a later character. Do not distract from the Manu first-box launch."],
-    },
   },
   mary: {
     name: "Mary Kom",
@@ -441,33 +246,171 @@ const characterLibrary = {
         text: "The little girl missed the target and looked down. Mary smiled and held the pads steady. 'Again,' she said softly. 'This time, trust your feet.'",
       },
     ],
-    outputs: {
-      parent: "Ask your child: what is one thing that gets better with practice?",
-      social: "Before the medal, there was practice. Before practice, there was belief.",
-      activity: "Create a seven-day practice tracker for one small skill.",
-    },
-    health: [
-      ["Story depth", 72],
-      ["Parent trust", 80],
-      ["Play potential", 77],
-    ],
-    modules: [
-      ["Story draft", "Planned", "Needs age-safe framing around sport and resilience."],
-      ["Parent prompt", "Ready", "Strong fit for practice and perseverance."],
-      ["Activity page", "Planned", "Movement tracker or focus challenge could work well."],
-      ["Sticker logic", "Later", "Medals, wraps, shoes, hills, and practice stars."],
-    ],
-    tabs: {
-      profile: ["Character profile", "Mary Kom can extend Maitri into discipline, movement, courage, and community pride."],
-      studio: ["Story Studio", "Create practice-led scenes that celebrate effort without glorifying winning alone."],
-      voice: ["Voice & Tone", "Strong, warm, direct, encouraging, and never harsh."],
-      world: ["Visual World", "Training textures, green hills, morning mist, medals, wraps, and family detail."],
-      notes: ["Notes", "Keep the child lesson on effort, resilience, and care instead of conflict or aggression."],
-    },
   },
 };
 
 const characterOrder = ["manu", "kalpana", "mary"];
+
+const characterWorldModes = [
+  ["story", "Story", BookOpenText],
+  ["play", "Play", Compass],
+  ["learn", "Four Courages", Lightbulb],
+  ["create", "Create", PaintBrush],
+  ["parents", "Parents", UsersThree],
+];
+
+const manuStoryActs = [
+  {
+    title: "Book 1: The Courage to Begin",
+    pages: "Manu's Big, Brave Heart",
+    text: "Seven-year-old Manu asks why girls cannot learn everything boys learn, rides Badal, races through Bithoor, and learns that courage starts now.",
+    value: "Ask the brave question",
+    image: shwetikaAssets.manuWithFather,
+    imageAlt: "Manu learning to ride with her father beside her",
+  },
+  {
+    title: "Book 2: The Courage to Belong",
+    pages: "Manu and the Court of Kings",
+    text: "Ten-year-old Manu enters the Peshwa's court, learns its hidden rules, keeps her own voice, and discovers she does not have to shrink to fit a room.",
+    value: "Belong without disappearing",
+    image: shwetikaAssets.manuAtGhats,
+    imageAlt: "Manu at the Ganga ghats in warm storybook light",
+  },
+  {
+    title: "Book 3: The Courage to Love",
+    pages: "Manu Becomes Lakshmibai",
+    text: "Manu leaves Bithoor, travels to Jhansi, receives a new name, and learns that growing up can expand who she is without erasing who she was.",
+    value: "Take the next step",
+    image: shwetikaAssets.manuOnHorse,
+    imageAlt: "Young Manu riding a horse in storybook artwork",
+  },
+  {
+    title: "Books 4-6: The Legacy Arc",
+    pages: "Stand, Fight, Last",
+    text: "The planned arc carries Manu into moral, collective, and legacy courage, with history handled through age-appropriate notes and activities.",
+    value: "Let courage last",
+    image: shwetikaAssets.horseRace,
+    imageAlt: "Manu racing on horseback as a symbol of the later legacy arc",
+  },
+];
+
+const manuAdventureStops = [
+  {
+    id: "meet",
+    label: "Meet Manu",
+    title: "Before she was a queen, she was a girl who asked why.",
+    scene:
+      "Start beside the Ganga at sunrise. Manu is watching the training yard, holding one big question in her heart.",
+    play: "Choose the first brave thing Manu should do.",
+    choices: ["Ask why", "Listen closely", "Try once"],
+    lesson: "Courage begins with noticing what feels unfair and asking with honesty.",
+    reward: "Brave Question Badge",
+    icon: BookOpenText,
+    tone: "rose",
+  },
+  {
+    id: "badal",
+    label: "Meet Badal",
+    title: "The horse nobody could ride is not angry. He is scared.",
+    scene:
+      "Badal stamps once and lowers his head. Manu watches quietly before stepping closer.",
+    play: "Pick how Manu should approach Badal.",
+    choices: ["Walk slowly", "Speak softly", "Wait patiently"],
+    lesson: "Patience can be braver than showing off.",
+    reward: "Kind Courage Badge",
+    icon: Heart,
+    tone: "teal",
+  },
+  {
+    id: "choice",
+    label: "What Would Manu Do?",
+    title: "Someone says, 'Girls cannot learn this.'",
+    scene:
+      "The courtyard goes quiet. Manu can walk away, argue loudly, or ask a brave question.",
+    play: "Help Manu choose a response.",
+    choices: ["Why not?", "Teach me once", "Let me try"],
+    lesson: "A brave question can open a new path.",
+    reward: "Fairness Badge",
+    icon: ShieldCheck,
+    tone: "amber",
+  },
+  {
+    id: "tracker",
+    label: "Courage Tracker",
+    title: "Small brave actions count too.",
+    scene:
+      "Manu's courage grows one try at a time. Mark a day when you tried, asked, helped, or waited.",
+    play: "Tap days to build a seven-day courage trail.",
+    choices: ["Try", "Ask", "Help"],
+    lesson: "Everyday courage is something children can practice.",
+    reward: "Seven Steps Badge",
+    icon: CalendarDots,
+    tone: "violet",
+  },
+  {
+    id: "maze",
+    label: "Reach Badal",
+    title: "Find the gentle path through the stable.",
+    scene:
+      "A playful maze moment helps Manu reach Badal without rushing or frightening him.",
+    play: "Collect the path markers in order.",
+    choices: ["River stone", "Marigold", "Stable door"],
+    lesson: "Problem solving works best when we slow down and look carefully.",
+    reward: "Pathfinder Badge",
+    icon: Compass,
+    tone: "green",
+  },
+  {
+    id: "promise",
+    label: "Brave Promise",
+    title: "Write one promise Manu would be proud of.",
+    scene:
+      "At the end of the adventure, Manu writes a small promise that can travel home with the child.",
+    play: "Complete the sentence: I promise to be brave when...",
+    choices: ["I try again", "I speak kindly", "I ask for help"],
+    lesson: "Reflection turns a story into a parent-child conversation.",
+    reward: "My Brave Promise",
+    icon: NotePencil,
+    tone: "rose",
+  },
+];
+
+const manuLearnCards = [
+  ["Asking courage", "Manu asks why when something feels unfair.", Lightbulb, "amber"],
+  ["Trying courage", "Manu begins even when the first step feels hard.", ShieldCheck, "teal"],
+  ["Kindness courage", "Manu chooses friendship and care before proving herself.", Heart, "rose"],
+  ["Quiet courage", "Manu does what is right even when no one is watching.", FlowerLotus, "violet"],
+];
+
+const manuCreateCards = [
+  ["Design your courage crest", "Choose a symbol for asking, trying, kindness, and quiet courage.", Crown, "amber"],
+  ["Sticker story builder", "Place Manu, Badal, marigolds, river stones, and value words into a scene.", Star, "rose"],
+  ["Stable spotter", "Look for gentle details in the stable before choosing the next move.", Sparkle, "teal"],
+  ["Letter from Manu", "Read a short note that makes Manu feel like a real friend.", NotePencil, "violet"],
+];
+
+const parentPrompts = [
+  "Where did you need courage today: in your body, your words, your kindness, or your patience?",
+  "What is one question you have about something that feels unfair?",
+  "Who could use a kind friend today?",
+  "What small right thing can you do that might help someone else?",
+];
+
+const firstBoxContents = [
+  ["Doll", "The emotional companion children can hold and play with.", Gift],
+  ["32-page storybook", "The relationship engine for Manu and Badal.", BookOpenText],
+  ["Letter from Manu", "A warm friend-to-child moment.", NotePencil],
+  ["Six activities", "Repeat play without school-test energy.", PaintBrush],
+  ["Sticker pages", "Characters, objects, values, and decorative motifs.", Star],
+];
+
+const futureFeatureSlots = [
+  ["Canon", "history and fiction boundaries"],
+  ["Story", "child-facing emotional arc"],
+  ["Product", "box and activity connection"],
+  ["Parents", "conversation prompts"],
+  ["World", "future discovery location"],
+];
 
 function GeneratedArt({ src, className = "", alt = "" }) {
   return (
@@ -579,7 +522,7 @@ function Hero() {
           </p>
           <div className="hero-actions">
             <ArrowButton href="#manu">Meet Manu</ArrowButton>
-            <ArrowButton href="#universe" variant="outline">
+            <ArrowButton href={publicPath("story-universe.html")} variant="outline">
               Explore the Universe
             </ArrowButton>
           </div>
@@ -591,9 +534,9 @@ function Hero() {
         </div>
         <div className="hero-art" aria-label="Maitri story world illustration">
           <GeneratedArt
-            src={generatedAssets.hero}
+            src={shwetikaAssets.horseRace}
             className="hero-asset"
-            alt="A Maitri doll sitting beside a river story world and a courage book"
+            alt="Young Manu racing on horseback in a warm illustrated story scene"
           />
         </div>
       </div>
@@ -613,7 +556,7 @@ function Universe() {
             nights, Maitri's world is full of places, people and stories that
             children can see themselves in.
           </p>
-          <ArrowButton href="#waitlist" variant="outline teal">
+          <ArrowButton href={publicPath("story-universe.html")} variant="outline teal">
             Explore the Universe
           </ArrowButton>
           <div className="values-card">
@@ -643,18 +586,19 @@ function Manu() {
       <div className="manu-layout">
         <div className="manu-portrait">
           <GeneratedArt
-            src={generatedAssets.manu}
+            src={shwetikaAssets.manuDoll}
             className="manu-asset"
-            alt="Manu, the first Maitri friend, with flowers and story treasures"
+            alt="Manu doll sample with Indian textile details and jewellery"
           />
         </div>
         <div className="manu-copy">
           <span className="section-label rose-label">Meet Manu</span>
-          <h2>Manu is curious. Brave. Kind. And always ready for an adventure.</h2>
+          <h2>Manu is the girl who would be queen, beginning with one brave question.</h2>
           <p>
-            She loves asking questions, trying new things and standing up for
-            what is right. Manu comes with her storybook, journal and little
-            everyday treasures.
+            The new source package frames Manu as a six-book journey: from a
+            seven-year-old by the Ganga to Lakshmibai of Jhansi. The doll,
+            stories and activities are designed to help children hold that
+            courage close.
           </p>
           <ArrowButton href="#waitlist">Discover Manu</ArrowButton>
         </div>
@@ -818,519 +762,547 @@ function CharacterVisual({ character, compact = false }) {
   );
 }
 
-function formatRupees(value) {
-  return new Intl.NumberFormat("en-IN", {
-    maximumFractionDigits: 0,
-    style: "currency",
-    currency: "INR",
-  }).format(value);
-}
-
-function AccessoryAtelier({
-  atelier,
-  character,
-  cart,
-  selectedAccessoryId,
-  checkoutState,
-  onSelect,
-  onAdd,
-  onRemove,
-  onBundle,
-  onCheckout,
-}) {
-  const activeAccessory =
-    atelier.accessories.find((item) => item.id === selectedAccessoryId) || atelier.accessories[0];
-  const selectedItems = atelier.accessories.filter((item) => cart[item.id]);
-  const itemCount = selectedItems.reduce((sum, item) => sum + cart[item.id], 0);
-  const total = selectedItems.reduce((sum, item) => sum + item.price * cart[item.id], 0);
-  const savings = Math.max(0, total - atelier.bundlePrice);
-  const ActiveIcon = activeAccessory.icon;
-
-  return (
-    <article className={`accessory-atelier ${character.tone}`} aria-label={`${character.name} accessories prototype`}>
-      <div className="atelier-head">
-        <div>
-          <span className="panel-label">Accessory Atelier</span>
-          <h3>{atelier.title}</h3>
-          <p>{atelier.subtitle}</p>
-        </div>
-        <button className="bundle-button" type="button" onClick={onBundle}>
-          <Sparkle size={17} weight="fill" />
-          <span>{atelier.bundleLabel}</span>
-          <strong>{formatRupees(atelier.bundlePrice)}</strong>
-        </button>
-      </div>
-
-      <div className="atelier-grid">
-        <section className="accessory-preview" aria-live="polite">
-          <div className={`accessory-orbit ${activeAccessory.tone}`}>
-            <CharacterVisual character={character} compact />
-            <span>
-              <ActiveIcon size={38} weight="duotone" />
-            </span>
-          </div>
-          <div className="accessory-preview-copy">
-            <span>{activeAccessory.category}</span>
-            <h4>{activeAccessory.name}</h4>
-            <p>{activeAccessory.story}</p>
-            <div className="accessory-includes">
-              {activeAccessory.includes.map((item) => (
-                <small key={item}>{item}</small>
-              ))}
-            </div>
-            <button className="add-accessory-button" type="button" onClick={() => onAdd(activeAccessory.id)}>
-              <Plus size={16} weight="bold" />
-              <span>Add to mock cart</span>
-              <strong>{formatRupees(activeAccessory.price)}</strong>
-            </button>
-          </div>
-        </section>
-
-        <section className="accessory-shelf" aria-label={`${character.name} accessory shelf`}>
-          {atelier.accessories.map((item) => {
-            const Icon = item.icon;
-            const active = item.id === activeAccessory.id;
-            const quantity = cart[item.id] || 0;
-            return (
-              <button
-                className={`accessory-card ${item.tone} ${active ? "active" : ""}`}
-                type="button"
-                key={item.id}
-                onClick={() => onSelect(item.id)}
-              >
-                <span className="accessory-card-icon">
-                  <Icon size={24} weight="duotone" />
-                </span>
-                <span className="accessory-card-copy">
-                  <strong>{item.name}</strong>
-                  <small>{item.category}</small>
-                </span>
-                <span className="accessory-price">{formatRupees(item.price)}</span>
-                {quantity > 0 && <span className="accessory-count">{quantity}</span>}
-              </button>
-            );
-          })}
-        </section>
-
-        <aside className="accessory-cart" aria-label="Accessory cart prototype">
-          <div className="cart-head">
-            <span>
-              <Tag size={18} weight="duotone" />
-              Prototype cart
-            </span>
-            <strong>{itemCount} items</strong>
-          </div>
-
-          <div className="cart-lines">
-            {selectedItems.length === 0 ? (
-              <p className="empty-cart">Choose accessories to build a mock order for {character.name}.</p>
-            ) : (
-              selectedItems.map((item) => (
-                <div className="cart-line" key={item.id}>
-                  <span>
-                    <strong>{item.name}</strong>
-                    <small>
-                      {cart[item.id]} x {formatRupees(item.price)}
-                    </small>
-                  </span>
-                  <div className="cart-stepper" aria-label={`${item.name} quantity`}>
-                    <button type="button" onClick={() => onRemove(item.id)} aria-label={`Remove ${item.name}`}>
-                      <Minus size={14} weight="bold" />
-                    </button>
-                    <b>{cart[item.id]}</b>
-                    <button type="button" onClick={() => onAdd(item.id)} aria-label={`Add ${item.name}`}>
-                      <Plus size={14} weight="bold" />
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-
-          <div className="cart-total">
-            <span>Estimated total</span>
-            <strong>{formatRupees(total)}</strong>
-            {savings > 0 && <small>Bundle could save {formatRupees(savings)}</small>}
-          </div>
-
-          <button className={`mock-checkout ${checkoutState}`} type="button" disabled={!itemCount} onClick={onCheckout}>
-            {checkoutState === "reserved" ? <CheckCircle size={18} weight="fill" /> : <Gift size={18} weight="duotone" />}
-            <span>{checkoutState === "reserved" ? "Mock order saved" : "Preview purchase"}</span>
-          </button>
-
-          <p className="atelier-note">{atelier.note}</p>
-        </aside>
-      </div>
-    </article>
-  );
-}
-
 function CharacterPage() {
   const [selectedId, setSelectedId] = useState("manu");
-  const [mode, setMode] = useState("profile");
-  const [promptId, setPromptId] = useState("horse");
-  const [pulse, setPulse] = useState(false);
-  const [selectedAccessoryByCharacter, setSelectedAccessoryByCharacter] = useState({
-    manu: "badal",
-    kalpana: "patch",
-    mary: "wraps",
-  });
-  const [accessoryCart, setAccessoryCart] = useState({});
-  const [checkoutByCharacter, setCheckoutByCharacter] = useState({});
+  const [mode, setMode] = useState("story");
+  const [activeStopId, setActiveStopId] = useState("meet");
+  const [selectedChoice, setSelectedChoice] = useState("Ask why");
+  const [completedStops, setCompletedStops] = useState(["meet"]);
+  const [trackerMarks, setTrackerMarks] = useState(["Mon"]);
+  const [promise, setPromise] = useState("");
 
   const character = characterLibrary[selectedId];
-  const atelier = accessoryAtelier[selectedId];
-  const activePrompt = character.prompts.find((item) => item.id === promptId) || character.prompts[0];
-  const activeMode = character.tabs[mode] || character.tabs.profile;
-  const selectedAccessoryId = selectedAccessoryByCharacter[selectedId] || atelier.accessories[0].id;
-  const currentCart = accessoryCart[selectedId] || {};
-  const checkoutState = checkoutByCharacter[selectedId] || "idle";
+  const isManu = selectedId === "manu";
+  const activeStop = manuAdventureStops.find((item) => item.id === activeStopId) || manuAdventureStops[0];
+  const ActiveStopIcon = activeStop.icon;
+  const activeStopIndex = manuAdventureStops.findIndex((item) => item.id === activeStop.id);
+  const completedCount = completedStops.length;
+  const progressPercent = Math.round((completedCount / manuAdventureStops.length) * 100);
+  const activeBadgeCollected = completedStops.includes(activeStop.id);
+  const nextStop = manuAdventureStops[activeStopIndex + 1] || manuAdventureStops[0];
 
   const selectCharacter = (id) => {
-    const next = characterLibrary[id];
     setSelectedId(id);
-    setMode("profile");
-    setPromptId(next.prompts[0].id);
+    setMode(id === "manu" ? mode : "story");
   };
 
-  const selectMode = (nextMode) => {
-    setMode(nextMode);
-    const preferredPrompt = {
-      profile: character.prompts[0],
-      studio: character.prompts[0],
-      voice: character.prompts[1] || character.prompts[0],
-      world: character.prompts[2] || character.prompts[0],
-      notes: character.prompts[2] || character.prompts[0],
-    }[nextMode];
-    setPromptId(preferredPrompt.id);
+  const selectStop = (id) => {
+    const nextStop = manuAdventureStops.find((item) => item.id === id);
+    setActiveStopId(id);
+    setSelectedChoice(nextStop?.choices[0] || "");
   };
 
-  const regenerate = () => {
-    setPulse(true);
-    window.setTimeout(() => setPulse(false), 420);
+  const collectBadge = () => {
+    setCompletedStops((current) =>
+      current.includes(activeStop.id) ? current : [...current, activeStop.id],
+    );
   };
 
-  const selectAccessory = (id) => {
-    setSelectedAccessoryByCharacter((current) => ({
-      ...current,
-      [selectedId]: id,
-    }));
+  const toggleTrackerMark = (day) => {
+    setTrackerMarks((current) =>
+      current.includes(day) ? current.filter((item) => item !== day) : [...current, day],
+    );
   };
 
-  const markCartChanged = () => {
-    setCheckoutByCharacter((current) => ({
-      ...current,
-      [selectedId]: "idle",
-    }));
-  };
-
-  const addAccessory = (id) => {
-    setAccessoryCart((current) => {
-      const characterCart = current[selectedId] || {};
-      return {
-        ...current,
-        [selectedId]: {
-          ...characterCart,
-          [id]: (characterCart[id] || 0) + 1,
-        },
-      };
-    });
-    setSelectedAccessoryByCharacter((current) => ({
-      ...current,
-      [selectedId]: id,
-    }));
-    markCartChanged();
-  };
-
-  const removeAccessory = (id) => {
-    setAccessoryCart((current) => {
-      const characterCart = current[selectedId] || {};
-      const nextQuantity = (characterCart[id] || 0) - 1;
-      const nextCart = { ...characterCart };
-      if (nextQuantity > 0) {
-        nextCart[id] = nextQuantity;
-      } else {
-        delete nextCart[id];
-      }
-      return {
-        ...current,
-        [selectedId]: nextCart,
-      };
-    });
-    markCartChanged();
-  };
-
-  const addBundle = () => {
-    setAccessoryCart((current) => {
-      const characterCart = current[selectedId] || {};
-      const nextCart = { ...characterCart };
-      atelier.bundle.forEach((id) => {
-        nextCart[id] = Math.max(nextCart[id] || 0, 1);
-      });
-      return {
-        ...current,
-        [selectedId]: nextCart,
-      };
-    });
-    setSelectedAccessoryByCharacter((current) => ({
-      ...current,
-      [selectedId]: atelier.bundle[0],
-    }));
-    markCartChanged();
-  };
-
-  const previewCheckout = () => {
-    setCheckoutByCharacter((current) => ({
-      ...current,
-      [selectedId]: "reserved",
-    }));
-  };
-
-  return (
-    <main className="maitri-page character-lab-page">
-      <section className="character-lab-shell section-shell" id="top">
-        <CharacterLabHeader />
-
-        <div className="character-lab-hero">
-          <div>
-            <span className="section-label violet-label">Character Lab</span>
-            <h1>Shape every Maitri friend with story, values, and play in one place.</h1>
-            <p>
-              An interactive story studio for exploring each character's values,
-              child-safe prompts, parent conversation hooks, and product readiness.
-            </p>
-          </div>
-          <div className="lab-principle-strip" aria-label="Character lab principles">
-            <span>
-              <strong>Story</strong>
-              <small>first</small>
-            </span>
-            <span>
-              <strong>Parent</strong>
-              <small>trusted</small>
-            </span>
-            <span>
-              <strong>Child</strong>
-              <small>loved</small>
-            </span>
-          </div>
-        </div>
-
-        <div className="character-lab-grid">
-          <aside className="character-library-panel" aria-label="Character selector">
-            <div className="panel-kicker">
-              <span>Character library</span>
-              <strong>{characterOrder.length}</strong>
+  const renderManuMode = () => {
+    if (mode === "play") {
+      return (
+        <div className="manu-play-grid">
+          <section className="adventure-map" aria-label="Manu adventure path">
+            <div className="panel-kicker world-kicker">
+              <span>Adventure path</span>
+              <strong>{completedStops.length}/{manuAdventureStops.length}</strong>
             </div>
-            <div className="character-selector-stack">
-              {characterOrder.map((id) => {
-                const item = characterLibrary[id];
-                const active = id === selectedId;
+            <div className="adventure-path">
+              {manuAdventureStops.map((stop, index) => {
+                const StopIcon = stop.icon;
+                const active = stop.id === activeStop.id;
+                const complete = completedStops.includes(stop.id);
                 return (
                   <button
-                    className={`character-selector-card ${active ? "active" : ""}`}
+                    className={`adventure-stop ${stop.tone} ${active ? "active" : ""} ${complete ? "complete" : ""}`}
                     type="button"
-                    data-character-selector={id}
+                    key={stop.id}
+                    onClick={() => selectStop(stop.id)}
                     aria-pressed={active}
-                    key={id}
-                    onClick={() => selectCharacter(id)}
                   >
-                    <CharacterVisual character={item} compact />
-                    <span>
-                      <strong>{item.name}</strong>
-                      <small>{item.role}</small>
-                    </span>
-                    <ArrowRight size={18} weight="bold" />
+                    <span className="stop-number">{index + 1}</span>
+                    <StopIcon size={24} weight="duotone" />
+                    <strong>{stop.label}</strong>
+                    {complete && <CheckCircle size={18} weight="fill" />}
                   </button>
                 );
               })}
             </div>
-            <div className="library-note">
-              <strong>Foundation rule</strong>
-              <p>Manu remains the first launch anchor. Other friends stay as future universe previews.</p>
-            </div>
-          </aside>
-
-          <section className="character-workspace" aria-live="polite">
-            <article className={`character-feature ${character.tone}`}>
-              <div className="character-feature-copy">
-                <span>{character.role}</span>
-                <h2>{character.name}</h2>
-                <p>{character.tagline}</p>
-                <div className="character-feature-metrics" aria-label={`${character.name} story facts`}>
-                  {character.meta.map(([label, value]) => (
-                    <div key={label}>
-                      <small>{label}</small>
-                      <strong>{value}</strong>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="character-feature-art">
-                <CharacterVisual character={character} />
-                <div className="character-world-pill">{character.worldPill}</div>
-              </div>
-            </article>
-
-            <div className="character-mode-bar" role="tablist" aria-label="Character modes">
-              {characterModes.map(([id, label, Icon]) => (
-                <button
-                  className={mode === id ? "active" : ""}
-                  type="button"
-                  role="tab"
-                  aria-selected={mode === id}
-                  key={id}
-                  onClick={() => selectMode(id)}
-                >
-                  <Icon size={18} weight="duotone" />
-                  <span>{label}</span>
-                </button>
-              ))}
-            </div>
-
-            <div className="character-detail-grid">
-              <article className="character-story-panel">
-                <span className="panel-label">{activeMode[0]}</span>
-                <h3>{activeMode[1]}</h3>
-                <div className="character-meta-grid">
-                  <div>
-                    <span>Inner question</span>
-                    <strong>{character.question}</strong>
-                  </div>
-                  <div>
-                    <span>Signature objects</span>
-                    <strong>{character.signature}</strong>
-                  </div>
-                  <div>
-                    <span>Child takeaway</span>
-                    <strong>{character.takeaway}</strong>
-                  </div>
-                  <div>
-                    <span>World notes</span>
-                    <strong>{character.world}</strong>
-                  </div>
-                </div>
-                <div className="trait-cloud" aria-label={`${character.name} traits`}>
-                  {character.traits.map((trait) => (
-                    <span key={trait}>{trait}</span>
-                  ))}
-                </div>
-              </article>
-
-              <article className="prompt-studio-panel">
-                <div className="prompt-panel-head">
-                  <span className="panel-label">Prompt queue</span>
-                  <p>Tap a prompt to change the preview output.</p>
-                </div>
-                <div className="prompt-choice-list">
-                  {character.prompts.map((prompt) => (
-                    <button
-                      className={activePrompt.id === prompt.id ? "active" : ""}
-                      type="button"
-                      aria-pressed={activePrompt.id === prompt.id}
-                      key={prompt.id}
-                      onClick={() => setPromptId(prompt.id)}
-                    >
-                      <BookOpenText size={18} weight="duotone" />
-                      <span>{prompt.label}</span>
-                    </button>
-                  ))}
-                </div>
-                <div className={`mock-output ${pulse ? "pulse" : ""}`}>
-                  <div>
-                    <span>Mock story output</span>
-                    <button type="button" onClick={regenerate}>
-                      Regenerate
-                    </button>
-                  </div>
-                  <h4>{activePrompt.title}</h4>
-                  <p>{activePrompt.text}</p>
-                </div>
-              </article>
-            </div>
-
           </section>
 
-          <aside className="character-readiness-panel" aria-label="Character readiness">
-            <article className="character-insight-panel">
-              <div className="insight-section">
-                <span className="panel-label">Values</span>
-                <div className="lab-value-stack">
-                  {character.values.map(([label, text, Icon, tone]) => (
-                    <div className={`lab-value ${tone}`} key={label}>
-                      <Icon size={24} weight="duotone" />
-                      <span>
-                        <strong>{label}</strong>
-                        <small>{text}</small>
-                      </span>
-                    </div>
-                  ))}
-                </div>
+          <section className={`quest-panel ${activeStop.tone}`} aria-live="polite">
+            <div className="quest-scene">
+              <span className="quest-icon">
+                <ActiveStopIcon size={34} weight="duotone" />
+              </span>
+              <div>
+                <span className="panel-label">{activeStop.label}</span>
+                <h3>{activeStop.title}</h3>
+                <p>{activeStop.scene}</p>
               </div>
+            </div>
 
-              <div className="insight-section">
-                <span className="panel-label">Readiness</span>
-                <div className="health-list">
-                  {character.health.map(([label, value]) => (
-                    <div className="health-item" key={label}>
-                      <div>
-                        <span>{label}</span>
-                        <strong>{value}%</strong>
-                      </div>
-                      <i>
-                        <b style={{ width: `${value}%` }} />
-                      </i>
-                    </div>
-                  ))}
-                </div>
+            <div className="choice-board">
+              <span>{activeStop.play}</span>
+              <div>
+                {activeStop.choices.map((choice) => (
+                  <button
+                    className={selectedChoice === choice ? "active" : ""}
+                    type="button"
+                    key={choice}
+                    onClick={() => setSelectedChoice(choice)}
+                  >
+                    {choice}
+                  </button>
+                ))}
               </div>
+              <p className="choice-response">
+                <Sparkle size={16} weight="fill" />
+                Manu is trying: <strong>{selectedChoice}</strong>
+              </p>
+            </div>
 
-              <div className="insight-section">
-                <span className="panel-label">Outputs</span>
-                <div className="output-stack">
-                  <p>
-                    <strong>Parent prompt</strong>
-                    {character.outputs.parent}
-                  </p>
-                  <p>
-                    <strong>Social snippet</strong>
-                    {character.outputs.social}
-                  </p>
-                  <p>
-                    <strong>Activity idea</strong>
-                    {character.outputs.activity}
-                  </p>
-                </div>
+            {activeStop.id === "tracker" && (
+              <div className="courage-tracker" aria-label="Seven-day courage tracker">
+                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
+                  <button
+                    className={trackerMarks.includes(day) ? "marked" : ""}
+                    type="button"
+                    key={day}
+                    onClick={() => toggleTrackerMark(day)}
+                  >
+                    <span>{day}</span>
+                    <Star size={16} weight={trackerMarks.includes(day) ? "fill" : "duotone"} />
+                  </button>
+                ))}
               </div>
+            )}
 
-              <div className="insight-section">
-                <span className="panel-label">Process modules</span>
-                <div className="module-list">
-                  {character.modules.map(([label, status, text]) => (
-                    <div key={label}>
-                      <span className={status.toLowerCase().replaceAll(" ", "-")}>{status}</span>
-                      <strong>{label}</strong>
-                      <p>{text}</p>
-                    </div>
-                  ))}
-                </div>
+            {activeStop.id === "promise" && (
+              <label className="promise-input">
+                <span>I promise to be brave when...</span>
+                <input
+                  type="text"
+                  value={promise}
+                  onChange={(event) => setPromise(event.target.value)}
+                  placeholder="I try something hard"
+                />
+              </label>
+            )}
+
+            <div className="quest-reward">
+              <p>
+                <strong>Learning moment</strong>
+                {activeStop.lesson}
+              </p>
+              <button type="button" onClick={collectBadge} disabled={activeBadgeCollected}>
+                <Sparkle size={17} weight="fill" />
+                <span>{activeBadgeCollected ? "Badge collected" : `Collect ${activeStop.reward}`}</span>
+              </button>
+            </div>
+          </section>
+
+          <aside className="badge-shelf" aria-label="Collected badges">
+            <span className="panel-label">Collected badges</span>
+            <div>
+              {manuAdventureStops.map((stop) => {
+                const StopIcon = stop.icon;
+                const complete = completedStops.includes(stop.id);
+                return (
+                  <span className={complete ? "earned" : ""} key={stop.id}>
+                    <StopIcon size={20} weight={complete ? "fill" : "duotone"} />
+                    {stop.reward}
+                  </span>
+                );
+              })}
+            </div>
+          </aside>
+        </div>
+      );
+    }
+
+    if (mode === "learn") {
+      return (
+        <div className="learning-grid">
+          {manuLearnCards.map(([label, text, Icon, tone]) => (
+            <article className={`learning-card ${tone}`} key={label}>
+              <Icon size={32} weight="duotone" />
+              <h3>{label}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      );
+    }
+
+    if (mode === "create") {
+      return (
+        <div className="creation-grid">
+          {manuCreateCards.map(([label, text, Icon, tone]) => (
+            <article className={`creation-card ${tone}`} key={label}>
+              <Icon size={30} weight="duotone" />
+              <div>
+                <h3>{label}</h3>
+                <p>{text}</p>
               </div>
             </article>
-          </aside>
-
-          <AccessoryAtelier
-            atelier={atelier}
-            character={character}
-            cart={currentCart}
-            selectedAccessoryId={selectedAccessoryId}
-            checkoutState={checkoutState}
-            onSelect={selectAccessory}
-            onAdd={addAccessory}
-            onRemove={removeAccessory}
-            onBundle={addBundle}
-            onCheckout={previewCheckout}
-          />
+          ))}
         </div>
+      );
+    }
+
+    if (mode === "parents") {
+      return (
+        <div className="parent-grid">
+          <section className="parent-prompts">
+            <span className="panel-label">Conversation prompts</span>
+            {parentPrompts.map((prompt) => (
+              <p key={prompt}>{prompt}</p>
+            ))}
+          </section>
+          <section className="first-box-panel">
+            <span className="panel-label">First Manu box</span>
+            <div>
+              {firstBoxContents.map(([label, text, Icon]) => (
+                <article key={label}>
+                  <Icon size={24} weight="duotone" />
+                  <span>
+                    <strong>{label}</strong>
+                    <small>{text}</small>
+                  </span>
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
+      );
+    }
+
+    return (
+      <div className="story-act-grid">
+        {manuStoryActs.map((act) => (
+          <article className="story-act-card" key={act.title}>
+            <img src={act.image} alt={act.imageAlt} />
+            <span>{act.pages}</span>
+            <h3>{act.title}</h3>
+            <p>{act.text}</p>
+            <strong>{act.value}</strong>
+          </article>
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <main className="maitri-page character-world-page">
+      <section className="character-world-shell section-shell" id="top">
+        <CharacterLabHeader />
+
+        <section className="character-world-hero" aria-labelledby="character-world-title">
+          <div className="character-world-copy">
+            <h1 id="character-world-title">Start with Manu.</h1>
+            <p>
+              Enter a living character bible where story, play, parent clarity, and product thinking meet
+              before Maitri expands into a wider universe.
+            </p>
+            <div className="hero-actions">
+              <a className="arrow-button" href="#manu-adventure">
+                <span>Begin the journey</span>
+                <span className="arrow-orb">
+                  <ArrowRight size={18} weight="bold" />
+                </span>
+              </a>
+              <a className="arrow-button outline" href="#future-friends">
+                <span>See future friends</span>
+                <span className="arrow-orb">
+                  <ArrowRight size={18} weight="bold" />
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div className="story-stage" aria-label="Interactive Manu story stage">
+            <div className="stage-sky" aria-hidden="true" />
+            <div className="stage-river" aria-hidden="true" />
+          <div className="stage-portrait">
+            <CharacterVisual character={characterLibrary.manu} />
+              <span>The Girl Who Would Be Queen</span>
+            </div>
+            <div className="stage-scene-card">
+              <span>{activeStop.label}</span>
+              <h2>{activeStop.title}</h2>
+              <p>{activeStop.scene}</p>
+            </div>
+            <div className="stage-path" aria-label="Four courages path">
+              {manuAdventureStops.slice(0, 4).map((stop, index) => {
+                const StopIcon = stop.icon;
+                const active = stop.id === activeStop.id;
+                const complete = completedStops.includes(stop.id);
+                return (
+                  <button
+                    className={`stage-token token-${index + 1} ${stop.tone} ${active ? "active" : ""} ${complete ? "complete" : ""}`}
+                    type="button"
+                    key={stop.id}
+                    onClick={() => selectStop(stop.id)}
+                    aria-pressed={active}
+                  >
+                    <StopIcon size={22} weight={complete ? "fill" : "duotone"} />
+                    <span>{stop.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {isManu ? (
+          <section className="manu-dashboard" id="manu-adventure" aria-live="polite">
+            <section className="journey-console">
+              <div className="journey-copy">
+                <span className="panel-label">Active character</span>
+                <h2>{character.name}: The Girl Who Would Be Queen</h2>
+                <p>{character.tagline}</p>
+              </div>
+
+              <div className="journey-switchboard" aria-label="Explore Manu modes">
+                {characterWorldModes.map(([id, label, Icon]) => (
+                  <button
+                    className={mode === id ? "active" : ""}
+                    type="button"
+                    role="tab"
+                    aria-selected={mode === id}
+                    key={id}
+                    onClick={() => setMode(id)}
+                  >
+                    <Icon size={19} weight="duotone" />
+                    <span>{label}</span>
+                  </button>
+                ))}
+              </div>
+            </section>
+
+            <section className="quest-workbench" style={{ "--progress": `${progressPercent}%` }}>
+              <div className="quest-map" aria-label="Manu adventure stops">
+                {manuAdventureStops.map((stop, index) => {
+                  const StopIcon = stop.icon;
+                  const active = stop.id === activeStop.id;
+                  const complete = completedStops.includes(stop.id);
+                  return (
+                    <button
+                      className={`quest-map-stop ${stop.tone} ${active ? "active" : ""} ${complete ? "complete" : ""}`}
+                      type="button"
+                      key={stop.id}
+                      onClick={() => selectStop(stop.id)}
+                      aria-pressed={active}
+                    >
+                      <span>{index + 1}</span>
+                      <StopIcon size={21} weight={complete ? "fill" : "duotone"} />
+                      <strong>{stop.label}</strong>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <article className={`quest-panel ${activeStop.tone}`} aria-live="polite">
+                <div className="quest-progress-meter">
+                  <div>
+                    <span>{completedCount} of {manuAdventureStops.length} badges collected</span>
+                    <strong>{progressPercent}%</strong>
+                  </div>
+                  <i aria-hidden="true" />
+                </div>
+
+                <div className="quest-scene">
+                  <span className="quest-icon">
+                    <ActiveStopIcon size={34} weight="duotone" />
+                  </span>
+                  <div>
+                    <span className="panel-label">{activeStop.label}</span>
+                    <h3>{activeStop.title}</h3>
+                    <p>{activeStop.scene}</p>
+                  </div>
+                </div>
+
+                <div className="choice-board">
+                  <span>{activeStop.play}</span>
+                  <div>
+                    {activeStop.choices.map((choice) => (
+                      <button
+                        className={selectedChoice === choice ? "active" : ""}
+                        type="button"
+                        key={choice}
+                        onClick={() => setSelectedChoice(choice)}
+                      >
+                        {choice}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="choice-response">
+                    <Sparkle size={16} weight="fill" />
+                    Manu is trying: <strong>{selectedChoice}</strong>
+                  </p>
+                </div>
+
+                {activeStop.id === "tracker" && (
+                  <div className="courage-tracker" aria-label="Seven-day courage tracker">
+                    {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
+                      <button
+                        className={trackerMarks.includes(day) ? "marked" : ""}
+                        type="button"
+                        key={day}
+                        onClick={() => toggleTrackerMark(day)}
+                      >
+                        <span>{day}</span>
+                        <Star size={16} weight={trackerMarks.includes(day) ? "fill" : "duotone"} />
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {activeStop.id === "promise" && (
+                  <label className="promise-input">
+                    <span>I promise to be brave when...</span>
+                    <input
+                      type="text"
+                      value={promise}
+                      onChange={(event) => setPromise(event.target.value)}
+                      placeholder="I try something hard"
+                    />
+                  </label>
+                )}
+
+                <div className="quest-reward">
+                  <p>
+                    <strong>Learning moment</strong>
+                    {activeStop.lesson}
+                  </p>
+                  <button type="button" onClick={collectBadge} disabled={activeBadgeCollected}>
+                    <Sparkle size={17} weight="fill" />
+                    <span>{activeBadgeCollected ? "Badge collected" : `Collect ${activeStop.reward}`}</span>
+                  </button>
+                </div>
+              </article>
+
+              <aside className="parent-clarity-board" aria-label="Parent clarity">
+                <span className="panel-label">Parent clarity</span>
+                <h3>Why this character matters</h3>
+                <p>
+                  Manu keeps bravery close to childhood: asking why, learning to belong,
+                  leaving what she loves, listening as a leader, and carrying courage forward.
+                </p>
+                <div className="mini-promise-list">
+                  <span>
+                    <strong>Child promise</strong>
+                    Courage does not wait until you are grown up.
+                  </span>
+                  <span>
+                    <strong>Review boundary</strong>
+                    History and fiction stay visibly separated.
+                  </span>
+                  <span>
+                    <strong>Next stop</strong>
+                    {nextStop.label}
+                  </span>
+                </div>
+              </aside>
+            </section>
+
+            <section className="mode-canvas" aria-live="polite">
+              {renderManuMode()}
+            </section>
+
+            <section className="first-box-bridge" aria-label="Manu first box bridge">
+              <div>
+                <span className="panel-label">First box bridge</span>
+                <h2>The story becomes something children can hold, read, and return to.</h2>
+                <p>
+                  Manu's first box stays focused: the doll creates friendship, the storybook builds attachment,
+                  and the activities turn courage into small parent-child moments.
+                </p>
+              </div>
+              <div className="first-box-river">
+                {firstBoxContents.map(([label, text, Icon]) => (
+                  <article key={label}>
+                    <Icon size={24} weight="duotone" />
+                    <strong>{label}</strong>
+                    <span>{text}</span>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </section>
+        ) : (
+          <section className={`future-character-preview ${character.tone}`} aria-live="polite">
+            <div className="future-character-art">
+              <CharacterVisual character={character} />
+              <span>{character.worldPill}</span>
+            </div>
+            <div className="future-character-copy">
+              <span className="panel-label">Future Maitri friend</span>
+              <h2>{character.name}</h2>
+              <p>
+                This character is intentionally held as a future signal. Maitri should complete the same canon,
+                history, product, and child-language review used for Manu before building a full page.
+              </p>
+              <div className="future-slot-grid">
+                {futureFeatureSlots.map(([label, text]) => (
+                  <span key={label}>
+                    <strong>{label}</strong>
+                    <small>{text}</small>
+                  </span>
+                ))}
+              </div>
+              <button className="future-back-button" type="button" onClick={() => selectCharacter("manu")}>
+                <Compass size={18} weight="duotone" />
+                <span>Play Manu first</span>
+              </button>
+            </div>
+          </section>
+        )}
+
+        <section className="future-feature-band" id="future-friends" aria-label="Future character functionality">
+          <div className="future-band-head">
+            <span className="panel-label">Future character system</span>
+            <h2>More friends can join after their bibles are ready.</h2>
+          </div>
+          <div className="world-character-row">
+            {characterOrder.map((id) => {
+              const item = characterLibrary[id];
+              const locked = id !== "manu";
+              return (
+                <button
+                  className={`world-character-card ${id === selectedId ? "active" : ""} ${locked ? "preview" : ""}`}
+                  type="button"
+                  aria-pressed={id === selectedId}
+                  aria-label={locked ? `${item.name} preview, canon pending` : `${item.name} master pattern`}
+                  key={id}
+                  onClick={() => selectCharacter(id)}
+                >
+                  <CharacterVisual character={item} compact />
+                  <span>
+                    <strong>{item.name}</strong>
+                    <small>{locked ? "Canon pending" : "Master pattern"}</small>
+                  </span>
+                  {locked ? <LockKey size={17} weight="bold" /> : <ArrowRight size={18} weight="bold" />}
+                </button>
+              );
+            })}
+          </div>
+          <div>
+            {futureFeatureSlots.map(([label, text]) => (
+              <article key={label}>
+                <strong>{label}</strong>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
       </section>
       <a className="floating-compass" href="#top" aria-label="Back to top">
         <Compass size={22} weight="duotone" />
@@ -1372,9 +1344,29 @@ function Footer() {
 export function App() {
   const path = window.location.pathname.replace(/\/$/, "");
   const isCharacterPage = path === "/characters" || path.endsWith("/characters.html");
+  const isStoryUniversePage = path === "/story-universe" || path.endsWith("/story-universe.html");
 
   if (isCharacterPage) {
     return <CharacterPage />;
+  }
+
+  if (isStoryUniversePage) {
+    return (
+      <Suspense
+        fallback={
+          <main className="maitri-page">
+            <section
+              className="section-shell"
+              style={{ minHeight: "100vh", display: "grid", placeItems: "center" }}
+            >
+              Opening Story Universe...
+            </section>
+          </main>
+        }
+      >
+        <StoryUniversePage />
+      </Suspense>
+    );
   }
 
   return (

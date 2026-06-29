@@ -9,6 +9,12 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         characters: resolve(__dirname, "characters.html"),
+        storyUniverse: resolve(__dirname, "story-universe.html"),
+      },
+      output: {
+        manualChunks: {
+          three: ["three"],
+        },
       },
     },
   },
