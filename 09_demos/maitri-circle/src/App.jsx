@@ -14,6 +14,7 @@ import {
   Lightbulb,
   List,
   LockKey,
+  MoonStars,
   NotePencil,
   PaintBrush,
   Plant,
@@ -21,6 +22,8 @@ import {
   ShieldCheck,
   Sparkle,
   Star,
+  Sun,
+  UserCircle,
   UsersThree,
   X,
 } from "@phosphor-icons/react";
@@ -51,7 +54,6 @@ const navItems = [
   ["First Box", publicPath("#first-box")],
   ["For Families", publicPath("#circle")],
   ["Schools", publicPath("#schools")],
-  ["Waitlist", publicPath("#waitlist")],
 ];
 
 const heroProof = [
@@ -420,14 +422,24 @@ function GeneratedArt({ src, className = "", alt = "", parallax = false, feather
     const depth = typeof parallax === "number" ? parallax : 7;
     const x = ((event.clientX - rect.left) / rect.width - 0.5) * depth;
     const y = ((event.clientY - rect.top) / rect.height - 0.5) * depth;
-    event.currentTarget.style.setProperty("--parallax-x", x.toFixed(2));
-    event.currentTarget.style.setProperty("--parallax-y", y.toFixed(2));
+    const target = event.currentTarget.parentElement || event.currentTarget;
+    target.style.setProperty("--parallax-x", x.toFixed(2));
+    target.style.setProperty("--parallax-y", y.toFixed(2));
+    target.style.setProperty("--layer-back-x", `${(-x * 0.72).toFixed(2)}px`);
+    target.style.setProperty("--layer-back-y", `${(-y * 0.52).toFixed(2)}px`);
+    target.style.setProperty("--layer-shadow-x", `${(x * 0.4).toFixed(2)}px`);
+    target.style.setProperty("--layer-shadow-y", `${(y * 0.46).toFixed(2)}px`);
   };
 
   const resetParallax = (event) => {
     if (!parallax) return;
-    event.currentTarget.style.setProperty("--parallax-x", "0");
-    event.currentTarget.style.setProperty("--parallax-y", "0");
+    const target = event.currentTarget.parentElement || event.currentTarget;
+    target.style.setProperty("--parallax-x", "0");
+    target.style.setProperty("--parallax-y", "0");
+    target.style.setProperty("--layer-back-x", "0px");
+    target.style.setProperty("--layer-back-y", "0px");
+    target.style.setProperty("--layer-shadow-x", "0px");
+    target.style.setProperty("--layer-shadow-y", "0px");
   };
 
   return (
@@ -503,6 +515,7 @@ function HeroFeature({ item }) {
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [darkPreview, setDarkPreview] = useState(false);
 
   const close = () => setOpen(false);
 
@@ -517,9 +530,23 @@ function Header() {
         ))}
       </nav>
       <div className="header-actions">
-        <a className="waitlist-pill" href="#waitlist">
-          Join Waitlist
-        </a>
+        <div className="header-utility-pill" aria-label="Quick actions">
+          <a className="waitlist-pill" href="#waitlist">
+            Join Waitlist
+          </a>
+          <button
+            className={`header-icon-button ${darkPreview ? "active" : ""}`}
+            type="button"
+            aria-label={darkPreview ? "Switch to light mode" : "Switch to dark mode"}
+            aria-pressed={darkPreview}
+            onClick={() => setDarkPreview((value) => !value)}
+          >
+            {darkPreview ? <MoonStars size={21} weight="duotone" /> : <Sun size={21} weight="duotone" />}
+          </button>
+          <button className="header-icon-button profile-button" type="button" aria-label="Profile">
+            <UserCircle size={23} weight="duotone" />
+          </button>
+        </div>
         <button
           className="menu-button"
           type="button"

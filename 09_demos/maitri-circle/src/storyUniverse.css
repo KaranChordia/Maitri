@@ -50,7 +50,7 @@
 }
 
 .story-universe-brand span {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(1.9rem, 3vw, 3rem);
   line-height: 0.88;
 }
@@ -256,7 +256,7 @@
 .launch-gate-card h1 {
   max-width: 10ch;
   margin: 0;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(3rem, 8vw, 6rem);
   line-height: 0.9;
 }
@@ -764,7 +764,7 @@
 }
 
 .open-book h3 {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   line-height: 0.96;
 }
@@ -830,7 +830,7 @@
 }
 
 .table-book-meta strong {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(1.2rem, 2.2vw, 1.75rem);
   line-height: 1;
 }
@@ -875,7 +875,7 @@
 
 .book-page h3 {
   margin: 0;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(1.8rem, 3.2vw, 3.4rem);
   line-height: 0.94;
   color: #3b291d;
@@ -1112,7 +1112,7 @@
 .scene-item-card h2,
 .simple-location-copy h2 {
   margin: 4px 0 0;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(2rem, 3vw, 2.9rem);
   line-height: 0.94;
 }
@@ -1224,7 +1224,7 @@
 }
 
 .book-cover strong {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 1.22rem;
   line-height: 0.94;
 }
@@ -1325,7 +1325,7 @@
 
 .location-pocket-panel h2 {
   margin: 0;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(1.55rem, 2.4vw, 2.35rem);
   line-height: 0.98;
 }
