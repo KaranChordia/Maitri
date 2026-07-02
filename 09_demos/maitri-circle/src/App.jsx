@@ -36,6 +36,9 @@ const siteBase = import.meta.env.BASE_URL || "/";
 const publicPath = (path = "") => `${siteBase}${path.replace(/^\/+/, "")}`;
 
 const generatedAssets = {
+  hero: publicPath("assets/generated/optimized/hero-scene.jpg"),
+  manuPortrait: publicPath("assets/generated/optimized/manu-portrait.jpg"),
+  universeMap: publicPath("assets/generated/optimized/universe-map.jpg"),
   circle: publicPath("assets/generated/optimized/circle-gathering.jpg"),
   schools: publicPath("assets/generated/optimized/schools-workshop.jpg"),
   portal: publicPath("assets/generated/optimized/waitlist-portal.jpg"),
@@ -587,9 +590,9 @@ function Hero() {
         </div>
         <div className="hero-art" aria-label="Maitri story world illustration">
           <GeneratedArt
-            src={shwetikaAssets.horseRace}
+            src={generatedAssets.hero}
             className="hero-asset"
-            alt="Young Manu racing on horseback in a warm illustrated story scene"
+            alt="A warm illustrated Maitri story world with children gathered in a magical landscape"
             parallax={9}
             feather
           />
@@ -605,9 +608,9 @@ function Manu() {
       <div className="manu-layout">
         <div className="manu-portrait">
           <GeneratedArt
-            src={shwetikaAssets.manuDoll}
+            src={generatedAssets.manuPortrait}
             className="manu-asset"
-            alt="Manu doll sample with Indian textile details and jewellery"
+            alt="A soft illustrated portrait of Manu in the Maitri story world"
             parallax={6}
             feather
           />
