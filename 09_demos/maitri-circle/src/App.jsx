@@ -1,7 +1,6 @@
 import { lazy, Suspense, useState } from "react";
 import {
   ArrowRight,
-  Backpack,
   BookBookmark,
   BookOpenText,
   CalendarDots,
@@ -9,30 +8,21 @@ import {
   CheckCircle,
   Compass,
   Crown,
-  FacebookLogo,
   FlowerLotus,
   Gift,
-  GraduationCap,
   Heart,
-  InstagramLogo,
   Lightbulb,
   List,
   LockKey,
-  Minus,
   NotePencil,
-  Package,
   PaintBrush,
   Plant,
-  Plus,
   SealCheck,
   ShieldCheck,
   Sparkle,
   Star,
-  Tag,
-  TShirt,
   UsersThree,
   X,
-  YoutubeLogo,
 } from "@phosphor-icons/react";
 
 const StoryUniversePage = lazy(() =>
@@ -43,84 +33,73 @@ const siteBase = import.meta.env.BASE_URL || "/";
 const publicPath = (path = "") => `${siteBase}${path.replace(/^\/+/, "")}`;
 
 const generatedAssets = {
-  hero: publicPath("assets/generated/hero-scene.png"),
-  universe: publicPath("assets/generated/universe-map.png"),
-  manu: publicPath("assets/generated/manu-portrait.png"),
-  circle: publicPath("assets/generated/circle-gathering.png"),
-  schools: publicPath("assets/generated/schools-workshop.png"),
-  portal: publicPath("assets/generated/waitlist-portal.png"),
+  circle: publicPath("assets/generated/optimized/circle-gathering.jpg"),
+  schools: publicPath("assets/generated/optimized/schools-workshop.jpg"),
+  portal: publicPath("assets/generated/optimized/waitlist-portal.jpg"),
 };
 
 const shwetikaAssets = {
-  manuDoll: publicPath("assets/shwetika/manu/manu-doll-sample.png"),
-  manuOnHorse: publicPath("assets/shwetika/manu/manu-on-horse.png"),
-  manuWithFather: publicPath("assets/shwetika/manu/manu-riding-with-father.png"),
-  horseRace: publicPath("assets/shwetika/manu/horse-race.png"),
-  manuAtGhats: publicPath("assets/shwetika/manu/manu-at-ghats.png"),
+  manuDoll: publicPath("assets/shwetika/manu/optimized/manu-doll-cutout.png"),
+  manuOnHorse: publicPath("assets/shwetika/manu/optimized/manu-on-horse.jpg"),
+  manuWithFather: publicPath("assets/shwetika/manu/optimized/manu-riding-with-father.jpg"),
+  horseRace: publicPath("assets/shwetika/manu/optimized/horse-race.jpg"),
+  manuAtGhats: publicPath("assets/shwetika/manu/optimized/manu-at-ghats.jpg"),
 };
 
 const navItems = [
-  ["Story Universe", publicPath("story-universe.html")],
   ["Meet Manu", publicPath("#manu")],
-  ["Characters", publicPath("characters.html")],
-  ["For Parents", publicPath("#circle")],
-  ["For Schools", publicPath("#schools")],
-  ["Maitri Circle", publicPath("#waitlist")],
+  ["First Box", publicPath("#first-box")],
+  ["For Families", publicPath("#circle")],
+  ["Schools", publicPath("#schools")],
+  ["Waitlist", publicPath("#waitlist")],
 ];
 
 const heroProof = [
   {
     icon: Heart,
-    text: "Built on values that last",
+    text: "A friend children can return to",
     tone: "rose",
   },
   {
     icon: BookOpenText,
-    text: "Stories rooted in India, for today",
+    text: "Stories rooted in India",
     tone: "teal",
   },
   {
     icon: ShieldCheck,
-    text: "Parent-trusted, child-loved",
+    text: "Gentle values without preaching",
     tone: "violet",
   },
 ];
 
-const values = [
-  ["Courage", ShieldCheck, "teal"],
-  ["Kindness", Heart, "rose"],
-  ["Curiosity", Lightbulb, "amber"],
-  ["Empathy", FlowerLotus, "violet"],
-];
-
 const manuKeepsakes = [
-  ["Storybook that inspires", BookOpenText, "cyan"],
-  ["A journal for big ideas & doodles", NotePencil, "orange"],
-  ["Thoughtful little extras", Backpack, "mauve"],
+  ["Doll companion", Gift, "rose"],
+  ["32-page storybook", BookOpenText, "cyan"],
+  ["Letter, activities, stickers", NotePencil, "orange"],
 ];
 
 const circleBenefits = [
-  ["Parent connect and support", UsersThree, "violet"],
-  ["Story + activity kits every month", CalendarDots, "teal"],
-  ["Early access to new stories & friends", Gift, "amber"],
+  ["Story-led play", BookOpenText, "violet"],
+  ["Small family rituals", CalendarDots, "teal"],
+  ["A calmer gifting choice", UsersThree, "amber"],
 ];
 
 const schoolBenefits = [
-  ["Curriculum-aligned story programs", BookBookmark, "cyan"],
-  ["Teacher training & resources", ChalkboardTeacher, "blue"],
-  ["Social-emotional learning focus", Plant, "green"],
+  ["Read-aloud moments", BookBookmark, "cyan"],
+  ["Workshop interest", ChalkboardTeacher, "blue"],
+  ["Values-led reflection", Plant, "green"],
 ];
 
 const characterLibrary = {
   manu: {
     name: "Manu",
     initials: "M",
-    role: "Master character pattern",
+    role: "Launch character",
     image: shwetikaAssets.manuDoll,
     tone: "rose",
-    tagline: "The girl who asked why, learned to belong, and kept courage alive as she grew into Lakshmibai.",
+    tagline: "The girl who asked why, listened closely, and found courage one small step at a time.",
     worldPill: "Bithoor and the Ganga banks",
-    origin: "Inspired by Manikarnika Tambe, later remembered as Rani Laxmibai",
+    origin: "Inspired by the childhood courage of Manikarnika, remembered as Rani Laxmibai",
     question: "How does courage grow as a child grows?",
     signature: "Badal, a wooden sword, the Ganga ghats, the Peshwa's court, Jhansi Fort, and one brave question.",
     takeaway: "Courage does not wait until you are grown up.",
@@ -132,9 +111,9 @@ const characterLibrary = {
     ],
     traits: ["Curious", "Patient", "Kind", "Fair", "Steady", "Observant"],
     meta: [
-      ["Age range", "Manu from age 7 through Lakshmibai"],
-      ["Series frame", "The Girl Who Would Be Queen"],
-      ["Canon status", "Internal planning, review before publication"],
+      ["First value", "Courage with tenderness"],
+      ["First story", "The Horse Nobody Could Ride"],
+      ["Child promise", "You do not have to be grown up to be brave"],
     ],
     prompts: [
       {
@@ -261,36 +240,36 @@ const characterWorldModes = [
 
 const manuStoryActs = [
   {
-    title: "Book 1: The Courage to Begin",
-    pages: "Manu's Big, Brave Heart",
-    text: "Seven-year-old Manu asks why girls cannot learn everything boys learn, rides Badal, races through Bithoor, and learns that courage starts now.",
+    title: "The Courage to Begin",
+    pages: "Book One preview",
+    text: "Manu asks a brave question, notices that Badal is scared, and learns that patience can be courage too.",
     value: "Ask the brave question",
     image: shwetikaAssets.manuWithFather,
     imageAlt: "Manu learning to ride with her father beside her",
   },
   {
-    title: "Book 2: The Courage to Belong",
-    pages: "Manu and the Court of Kings",
-    text: "Ten-year-old Manu enters the Peshwa's court, learns its hidden rules, keeps her own voice, and discovers she does not have to shrink to fit a room.",
+    title: "The Courage to Belong",
+    pages: "Next story direction",
+    text: "Later stories can follow Manu into new rooms, new responsibilities, and new moments where she keeps her voice.",
     value: "Belong without disappearing",
     image: shwetikaAssets.manuAtGhats,
     imageAlt: "Manu at the Ganga ghats in warm storybook light",
   },
   {
-    title: "Book 3: The Courage to Love",
-    pages: "Manu Becomes Lakshmibai",
-    text: "Manu leaves Bithoor, travels to Jhansi, receives a new name, and learns that growing up can expand who she is without erasing who she was.",
+    title: "The Courage to Grow",
+    pages: "Future Manu story",
+    text: "The wider series can grow with Manu while keeping the child-facing promise warm, gentle, and age-aware.",
     value: "Take the next step",
     image: shwetikaAssets.manuOnHorse,
     imageAlt: "Young Manu riding a horse in storybook artwork",
   },
   {
-    title: "Books 4-6: The Legacy Arc",
-    pages: "Stand, Fight, Last",
-    text: "The planned arc carries Manu into moral, collective, and legacy courage, with history handled through age-appropriate notes and activities.",
+    title: "More Brave Friends",
+    pages: "Future Maitri shelf",
+    text: "After families fall in love with Manu, Maitri can grow into more Indian heroines with the same warmth, care, and story-led play.",
     value: "Let courage last",
     image: shwetikaAssets.horseRace,
-    imageAlt: "Manu racing on horseback as a symbol of the later legacy arc",
+    imageAlt: "Manu racing on horseback as a symbol of a growing story shelf",
   },
 ];
 
@@ -397,20 +376,42 @@ const parentPrompts = [
 ];
 
 const firstBoxContents = [
-  ["Doll", "The emotional companion children can hold and play with.", Gift],
-  ["32-page storybook", "The relationship engine for Manu and Badal.", BookOpenText],
-  ["Letter from Manu", "A warm friend-to-child moment.", NotePencil],
-  ["Six activities", "Repeat play without school-test energy.", PaintBrush],
+  ["Doll", "A Manu friend children can hold, dress, and play with.", Gift],
+  ["32-page storybook", "The first adventure with Manu and Badal.", BookOpenText],
+  ["Letter from Manu", "A warm note that makes Manu feel close.", NotePencil],
+  ["Six activities", "Simple prompts for drawing, choosing, and talking.", PaintBrush],
   ["Sticker pages", "Characters, objects, values, and decorative motifs.", Star],
 ];
 
 const futureFeatureSlots = [
-  ["Canon", "history and fiction boundaries"],
-  ["Story", "child-facing emotional arc"],
-  ["Product", "box and activity connection"],
+  ["Story", "a warm child-facing arc"],
+  ["Values", "one clear life skill"],
+  ["Play", "activities children can repeat"],
   ["Parents", "conversation prompts"],
-  ["World", "future discovery location"],
+  ["Shelf", "a growing circle of friends"],
 ];
+
+const waitlistStorageKey = "maitri-waitlist-v1";
+
+function readSavedWaitlist() {
+  try {
+    const raw = window.localStorage.getItem(waitlistStorageKey);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveWaitlistEntry(entry) {
+  const current = readSavedWaitlist();
+  const withoutDuplicate = current.filter(
+    (item) => item.email?.toLowerCase() !== entry.email.toLowerCase(),
+  );
+  const next = [entry, ...withoutDuplicate].slice(0, 100);
+  window.localStorage.setItem(waitlistStorageKey, JSON.stringify(next));
+  return next;
+}
 
 function GeneratedArt({ src, className = "", alt = "" }) {
   return (
@@ -420,9 +421,9 @@ function GeneratedArt({ src, className = "", alt = "" }) {
 
 function Brand() {
   return (
-    <a className="brand" href={publicPath("#top")} aria-label="Maitri Circle home">
+    <a className="brand" href={publicPath("#top")} aria-label="Maitri Dolls home">
       <span>Maitri</span>
-      <i aria-hidden="true">Circle</i>
+      <i aria-hidden="true">Dolls</i>
     </a>
   );
 }
@@ -516,14 +517,14 @@ function Hero() {
         <div className="hero-copy">
           <h1>A brave friend for every child.</h1>
           <p>
-            Maitri Circle is a story-first companion universe that helps
-            children befriend courage, kindness and curiosity through stories
-            they love and companions they treasure.
+            Maitri begins with Manu: an Indian companion doll, a storybook,
+            and simple courage rituals that help children carry bravery into
+            everyday life.
           </p>
           <div className="hero-actions">
             <ArrowButton href="#manu">Meet Manu</ArrowButton>
-            <ArrowButton href={publicPath("story-universe.html")} variant="outline">
-              Explore the Universe
+            <ArrowButton href="#first-box" variant="outline">
+              See the First Box
             </ArrowButton>
           </div>
           <div className="hero-proofs" aria-label="Maitri values">
@@ -544,42 +545,6 @@ function Hero() {
   );
 }
 
-function Universe() {
-  return (
-    <section className="universe-section section-shell wave-top" id="universe">
-      <div className="split-grid universe-grid">
-        <div className="section-copy">
-          <span className="section-label teal-label">Story Universe</span>
-          <h2>Where stories come alive and friendships grow.</h2>
-          <p>
-            From river towns to mountain paths, from busy classrooms to festival
-            nights, Maitri's world is full of places, people and stories that
-            children can see themselves in.
-          </p>
-          <ArrowButton href={publicPath("story-universe.html")} variant="outline teal">
-            Explore the Universe
-          </ArrowButton>
-          <div className="values-card">
-            <strong>Values at the heart of every Maitri story</strong>
-            <div>
-              {values.map((item) => (
-                <IconNote item={item} compact key={item[0]} />
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="map-stage">
-          <GeneratedArt
-            src={generatedAssets.universe}
-            className="map-asset"
-            alt="A pastel Maitri map with the library, classroom, river town, bazaar and hillside"
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Manu() {
   return (
     <section className="manu-section section-shell" id="manu">
@@ -593,18 +558,47 @@ function Manu() {
         </div>
         <div className="manu-copy">
           <span className="section-label rose-label">Meet Manu</span>
-          <h2>Manu is the girl who would be queen, beginning with one brave question.</h2>
+          <h2>Meet Manu, the brave friend children can hold close.</h2>
           <p>
-            The new source package frames Manu as a six-book journey: from a
-            seven-year-old by the Ganga to Lakshmibai of Jhansi. The doll,
-            stories and activities are designed to help children hold that
-            courage close.
+            Manu gives courage a face, a voice, and a place in daily play.
+            Her first story helps children ask honest questions, try gently,
+            and feel brave without needing to be loud.
           </p>
-          <ArrowButton href="#waitlist">Discover Manu</ArrowButton>
+          <ArrowButton href={publicPath("characters.html")}>Discover Manu</ArrowButton>
         </div>
         <div className="keepsakes" aria-label="Manu keepsakes">
           {manuKeepsakes.map((item) => (
             <IconNote item={item} compact key={item[0]} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FirstBox() {
+  return (
+    <section className="first-box-section section-shell" id="first-box">
+      <div className="first-box-home">
+        <div className="section-copy">
+          <span className="section-label amber-label">First Manu Box</span>
+          <h2>The story becomes something children can hold.</h2>
+          <p>
+            The first box is designed around one warm relationship: the Manu
+            doll for attachment, the storybook for imagination, and activities
+            that turn courage into small family moments.
+          </p>
+          <ArrowButton href="#waitlist" variant="outline">
+            Join for updates
+          </ArrowButton>
+        </div>
+        <div className="first-box-home-grid" aria-label="First Manu box contents">
+          {firstBoxContents.map(([label, text, Icon]) => (
+            <article key={label}>
+              <Icon size={25} weight="duotone" />
+              <strong>{label}</strong>
+              <span>{text}</span>
+            </article>
           ))}
         </div>
       </div>
@@ -617,11 +611,12 @@ function Circle() {
     <section className="circle-section section-shell" id="circle">
       <div className="split-grid circle-grid">
         <div className="section-copy">
-          <span className="section-label violet-label">Maitri Circle</span>
-          <h2>A community of parents and children, growing together.</h2>
+          <span className="section-label violet-label">For Families</span>
+          <h2>A keepsake that makes values feel close, not forced.</h2>
           <p>
-            Maitri Circle is a warm, safe space for families to share, learn and
-            grow through stories, activities and real conversations.
+            For parents, Maitri is a calmer alternative to generic toys and
+            screen-led entertainment: a friend, a story, and a reason to talk
+            about courage at home.
           </p>
           <ArrowButton href="#waitlist" variant="outline violet">
             Join the Circle
@@ -636,7 +631,7 @@ function Circle() {
           <GeneratedArt
             src={generatedAssets.circle}
             className="circle-asset"
-            alt="Children and parents seated together in a warm Maitri Circle story gathering"
+            alt="Children and parents seated together in a warm Maitri story gathering"
           />
         </div>
       </div>
@@ -657,10 +652,11 @@ function Schools() {
         </div>
         <div className="section-copy schools-copy">
           <span className="section-label blue-label">For Schools & Workshops</span>
-          <h2>Stories that build confident, compassionate learners.</h2>
+          <h2>Story-led moments for classrooms, libraries, and workshops.</h2>
           <p>
-            Our programs blend stories, play and reflection to help children
-            build life skills while making learning joyful.
+            Manu can become a warm read-aloud companion for values-led sessions,
+            library circles, and creative workshops where children reflect,
+            draw, listen, and share.
           </p>
           <ArrowButton href="#waitlist" variant="outline blue">
             Partner With Us
@@ -677,16 +673,51 @@ function Schools() {
 }
 
 function Waitlist() {
-  const [email, setEmail] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    role: "Parent / guardian",
+    interest: "Manu updates",
+  });
   const [status, setStatus] = useState("idle");
 
-  const submitWaitlist = (event) => {
+  const updateField = (field, value) => {
+    setForm((current) => ({ ...current, [field]: value }));
+    setStatus("idle");
+  };
+
+  const submitWaitlist = async (event) => {
     event.preventDefault();
-    if (!email.trim()) {
+    const email = form.email.trim();
+    if (!email || !email.includes("@")) {
       setStatus("missing");
       return;
     }
+
+    const entry = {
+      ...form,
+      name: form.name.trim(),
+      email,
+      source: window.location.pathname,
+      createdAt: new Date().toISOString(),
+    };
+
+    const endpoint = import.meta.env.VITE_MAITRI_WAITLIST_ENDPOINT;
+    if (endpoint) {
+      try {
+        await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(entry),
+        });
+      } catch {
+        // Keep the signup locally if the launch endpoint is unavailable during review.
+      }
+    }
+
+    saveWaitlistEntry(entry);
     setStatus("joined");
+    setForm((current) => ({ ...current, name: "", email: "" }));
   };
 
   return (
@@ -697,34 +728,60 @@ function Waitlist() {
         alt="A small illustrated Maitri story portal beside marigolds"
       />
       <div className="waitlist-copy">
-        <h2>Be the first to step into the world of Maitri.</h2>
+        <h2>Join the early list for Manu.</h2>
         <p>
-          Join our waitlist for early access to Manu, our stories and special
-          surprises.
+          Get first access to story previews, launch notes, and gentle
+          parent-child activities as the first Manu box comes together.
         </p>
       </div>
       <form className="waitlist-form" onSubmit={submitWaitlist} noValidate>
+        <label>
+          <span>Name</span>
+          <input
+            type="text"
+            placeholder="Your name"
+            value={form.name}
+            onChange={(event) => updateField("name", event.target.value)}
+            autoComplete="name"
+          />
+        </label>
         <label>
           <span>Email address</span>
           <input
             type="email"
             placeholder="Enter your email address"
-            value={email}
-            onChange={(event) => {
-              setEmail(event.target.value);
-              setStatus("idle");
-            }}
+            value={form.email}
+            onChange={(event) => updateField("email", event.target.value)}
             aria-describedby="waitlist-note"
+            autoComplete="email"
           />
+        </label>
+        <label>
+          <span>I am joining as</span>
+          <select value={form.role} onChange={(event) => updateField("role", event.target.value)}>
+            <option>Parent / guardian</option>
+            <option>Gift buyer</option>
+            <option>Educator / school</option>
+            <option>Beta reader</option>
+          </select>
+        </label>
+        <label>
+          <span>Interest</span>
+          <select value={form.interest} onChange={(event) => updateField("interest", event.target.value)}>
+            <option>Manu updates</option>
+            <option>Story previews</option>
+            <option>Beta reading</option>
+            <option>School workshop interest</option>
+          </select>
         </label>
         <ArrowButton type="button">Join Waitlist</ArrowButton>
         <p className={`form-status ${status}`} id="waitlist-note">
           <LockKey size={15} weight="fill" />
           {status === "joined"
-            ? "You are on the Maitri Circle preview list."
+            ? "You are on the early Manu list."
             : status === "missing"
-              ? "Enter an email address to join the waitlist."
-              : "We respect your privacy. Unsubscribe anytime."}
+              ? "Enter a valid email address to join the waitlist."
+              : "No clutter. Just Manu launch updates, story previews, and parent-child ideas."}
         </p>
       </form>
     </section>
@@ -738,7 +795,7 @@ function CharacterLabHeader() {
       <nav className="character-mini-nav" aria-label="Character page">
         <a href={publicPath("")}>Home</a>
         <a href={publicPath("#manu")}>Meet Manu</a>
-        <a href={publicPath("#waitlist")}>Join Circle</a>
+        <a href={publicPath("#waitlist")}>Join Waitlist</a>
       </nav>
     </header>
   );
@@ -1008,8 +1065,8 @@ function CharacterPage() {
           <div className="character-world-copy">
             <h1 id="character-world-title">Start with Manu.</h1>
             <p>
-              Enter a living character bible where story, play, parent clarity, and product thinking meet
-              before Maitri expands into a wider universe.
+              Meet Maitri's first friend through story, play, family prompts,
+              and a focused first-box experience children can return to.
             </p>
             <div className="hero-actions">
               <a className="arrow-button" href="#manu-adventure">
@@ -1065,7 +1122,7 @@ function CharacterPage() {
           <section className="manu-dashboard" id="manu-adventure" aria-live="polite">
             <section className="journey-console">
               <div className="journey-copy">
-                <span className="panel-label">Active character</span>
+                <span className="panel-label">Meet Manu</span>
                 <h2>{character.name}: The Girl Who Would Be Queen</h2>
                 <p>{character.tagline}</p>
               </div>
@@ -1202,8 +1259,8 @@ function CharacterPage() {
                     Courage does not wait until you are grown up.
                   </span>
                   <span>
-                    <strong>Review boundary</strong>
-                    History and fiction stay visibly separated.
+                    <strong>Story care</strong>
+                    Inspired by history, told gently for children.
                   </span>
                   <span>
                     <strong>Next stop</strong>
@@ -1219,12 +1276,13 @@ function CharacterPage() {
 
             <section className="first-box-bridge" aria-label="Manu first box bridge">
               <div>
-                <span className="panel-label">First box bridge</span>
-                <h2>The story becomes something children can hold, read, and return to.</h2>
-                <p>
-                  Manu's first box stays focused: the doll creates friendship, the storybook builds attachment,
-                  and the activities turn courage into small parent-child moments.
-                </p>
+              <span className="panel-label">First Manu box</span>
+              <h2>The story becomes something children can hold, read, and return to.</h2>
+              <p>
+                  Manu's first box stays simple and meaningful: the doll creates
+                  friendship, the storybook builds attachment, and the activities
+                  turn courage into small parent-child moments.
+              </p>
               </div>
               <div className="first-box-river">
                 {firstBoxContents.map(([label, text, Icon]) => (
@@ -1247,8 +1305,9 @@ function CharacterPage() {
               <span className="panel-label">Future Maitri friend</span>
               <h2>{character.name}</h2>
               <p>
-                This character is intentionally held as a future signal. Maitri should complete the same canon,
-                history, product, and child-language review used for Manu before building a full page.
+                This friend belongs to the future Maitri shelf. Manu comes
+                first, so every new friend can receive the same care in story,
+                values, play, and child-facing language.
               </p>
               <div className="future-slot-grid">
                 {futureFeatureSlots.map(([label, text]) => (
@@ -1266,10 +1325,10 @@ function CharacterPage() {
           </section>
         )}
 
-        <section className="future-feature-band" id="future-friends" aria-label="Future character functionality">
+        <section className="future-feature-band" id="future-friends" aria-label="Future Maitri friends">
           <div className="future-band-head">
-            <span className="panel-label">Future character system</span>
-            <h2>More friends can join after their bibles are ready.</h2>
+            <span className="panel-label">Future Maitri shelf</span>
+            <h2>More friends can join when Manu has found her first families.</h2>
           </div>
           <div className="world-character-row">
             {characterOrder.map((id) => {
@@ -1280,14 +1339,14 @@ function CharacterPage() {
                   className={`world-character-card ${id === selectedId ? "active" : ""} ${locked ? "preview" : ""}`}
                   type="button"
                   aria-pressed={id === selectedId}
-                  aria-label={locked ? `${item.name} preview, canon pending` : `${item.name} master pattern`}
+                  aria-label={locked ? `${item.name} future preview` : `${item.name} launch character`}
                   key={id}
                   onClick={() => selectCharacter(id)}
                 >
                   <CharacterVisual character={item} compact />
                   <span>
                     <strong>{item.name}</strong>
-                    <small>{locked ? "Canon pending" : "Master pattern"}</small>
+                    <small>{locked ? "Future direction" : "Launch character"}</small>
                   </span>
                   {locked ? <LockKey size={17} weight="bold" /> : <ArrowRight size={18} weight="bold" />}
                 </button>
@@ -1317,7 +1376,7 @@ function Footer() {
     <footer className="site-footer">
       <div>
         <Brand />
-        <p>Stories today. Values forever.</p>
+        <p>A brave friend. A story to keep. Values children can practice.</p>
       </div>
       <nav aria-label="Footer">
         {navItems.slice(0, 5).map(([label, href]) => (
@@ -1326,16 +1385,9 @@ function Footer() {
           </a>
         ))}
       </nav>
-      <div className="socials" aria-label="Social links">
-        <a href="#top" aria-label="Instagram">
-          <InstagramLogo size={21} weight="duotone" />
-        </a>
-        <a href="#top" aria-label="YouTube">
-          <YoutubeLogo size={21} weight="duotone" />
-        </a>
-        <a href="#top" aria-label="Facebook">
-          <FacebookLogo size={21} weight="duotone" />
-        </a>
+      <div className="footer-note" aria-label="Maitri launch note">
+        <span>First box in development</span>
+        <strong>Join the early list for Manu story and launch updates.</strong>
       </div>
     </footer>
   );
@@ -1359,7 +1411,7 @@ export function App() {
               className="section-shell"
               style={{ minHeight: "100vh", display: "grid", placeItems: "center" }}
             >
-              Opening Story Universe...
+              Opening Story World...
             </section>
           </main>
         }
@@ -1372,8 +1424,8 @@ export function App() {
   return (
     <main className="maitri-page">
       <Hero />
-      <Universe />
       <Manu />
+      <FirstBox />
       <Circle />
       <Schools />
       <Waitlist />

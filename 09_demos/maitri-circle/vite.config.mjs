@@ -2,8 +2,11 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
 
+const rawBasePath = process.env.MAITRI_BASE_PATH || "/Maitri/";
+const basePath = rawBasePath.endsWith("/") ? rawBasePath : `${rawBasePath}/`;
+
 export default defineConfig({
-  base: "/Maitri/",
+  base: basePath,
   build: {
     rollupOptions: {
       input: {

@@ -3,9 +3,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import {
   ArrowRight,
-  Backpack,
   BookOpenText,
-  CheckCircle,
   Compass,
   Gift,
   Minus,
@@ -24,7 +22,7 @@ const siteBase = import.meta.env.BASE_URL || "/";
 const publicPath = (path = "") => `${siteBase}${path.replace(/^\/+/, "")}`;
 
 const generatedAssets = {
-  manu: publicPath("assets/generated/manu-portrait.png"),
+  manu: publicPath("assets/generated/optimized/manu-portrait.jpg"),
 };
 
 const worldModelAsset = publicPath("assets/models/maitri-world-archipelago.glb");
@@ -325,7 +323,7 @@ const bazaarItems = [
   {
     id: "badal",
     name: "Badal Companion Horse",
-    price: "Rs. 1299",
+    status: "First-box concept",
     tone: "teal",
     icon: Package,
     detail: "A small horse companion for recreating Manu's stable scene.",
@@ -333,7 +331,7 @@ const bazaarItems = [
   {
     id: "crest",
     name: "Courage Crest Sticker Pack",
-    price: "Rs. 349",
+    status: "Activity concept",
     tone: "rose",
     icon: Sparkle,
     detail: "Reusable symbols for promise notes, journals, and activity pages.",
@@ -341,7 +339,7 @@ const bazaarItems = [
   {
     id: "journal",
     name: "Brave Promise Journal",
-    price: "Rs. 499",
+    status: "Reflection concept",
     tone: "violet",
     icon: NotePencil,
     detail: "Guided prompts for brave moments, questions, and doodles.",
@@ -1796,7 +1794,7 @@ function StoryUniverseHeader() {
     <header className="story-universe-header">
       <a className="story-universe-brand" href={publicPath("")} aria-label="Maitri home">
         <span>Maitri</span>
-        <strong>World Prototype</strong>
+        <strong>Story World</strong>
       </a>
       <nav className="story-universe-nav" aria-label="World navigation">
         <a className="active" href={publicPath("story-universe.html")}>
@@ -1817,7 +1815,7 @@ function WorldStatusHud({ journeyId, selectedDestinationId, enteredPlace }) {
   const destination = destinationById.get(enteredPlace || selectedDestinationId) || worldDestinations[0];
   return (
     <div className="world-status-hud" aria-live="polite">
-      <span>WORLD [LIVE]</span>
+      <span>Story world</span>
       <strong>{journey.label}</strong>
       <small>{enteredPlace ? `INSIDE ${destination.label.toUpperCase()}` : `TRACKING ${destination.label.toUpperCase()}`}</small>
     </div>
@@ -2047,7 +2045,7 @@ function LibrarySceneExperience({ activeBookId, page, onPageChange, onSelectBook
   );
 }
 
-function BazaarSceneExperience({ activeItemId, inventory, onSelectItem, onBuy, onClose }) {
+function BazaarSceneExperience({ activeItemId, onSelectItem, onClose }) {
   const activeItem = bazaarItemById.get(activeItemId || bazaarItems[0].id) || bazaarItems[0];
   const ActiveIcon = activeItem.icon;
   return (
@@ -2071,7 +2069,7 @@ function BazaarSceneExperience({ activeItemId, inventory, onSelectItem, onBuy, o
         <span>Bazaar Object</span>
         <h2>{activeItem.name}</h2>
         <p>{activeItem.detail}</p>
-        <strong>{activeItem.price}</strong>
+        <strong>{activeItem.status}</strong>
       </div>
       <div className="bazaar-grid compact">
         {bazaarItems.map((item) => {
@@ -2089,18 +2087,9 @@ function BazaarSceneExperience({ activeItemId, inventory, onSelectItem, onBuy, o
           );
         })}
       </div>
-      <button className="scene-buy-button" type="button" onClick={() => onBuy(activeItem.id)}>
-        {inventory.includes(activeItem.id) ? (
-          <>
-            <CheckCircle size={16} weight="fill" />
-            Added
-          </>
-        ) : (
-          <>
-            <Tag size={16} weight="fill" />
-            Add to inventory
-          </>
-        )}
+      <button className="scene-buy-button concept-only" type="button" disabled>
+        <Tag size={16} weight="fill" />
+        Preview concept
       </button>
     </section>
   );
@@ -2178,16 +2167,6 @@ function HillsideSceneExperience({ destination, onClose }) {
   );
 }
 
-function MiniInventory({ inventory }) {
-  return (
-    <div className="mini-inventory" aria-label="Inventory">
-      <Backpack size={20} weight="duotone" />
-      <span>Inventory</span>
-      <strong>{inventory.length}</strong>
-    </div>
-  );
-}
-
 function LocationPocketPanel({ destination, children, onBackToWorld }) {
   const Icon = destination.icon;
   return (
@@ -2238,12 +2217,12 @@ function LibraryReaderPanel({ activeBookId, page, onPageChange, onSelectBook, on
   );
 }
 
-function BazaarObjectPanel({ activeItemId, inventory, onSelectItem, onBuy, onBackToWorld }) {
+function BazaarObjectPanel({ activeItemId, onSelectItem, onBackToWorld }) {
   const activeItem = bazaarItemById.get(activeItemId || bazaarItems[0].id) || bazaarItems[0];
   return (
     <LocationPocketPanel destination={destinationById.get("bazaar")} onBackToWorld={onBackToWorld}>
       <div className="bazaar-object-panel">
-        <span>{activeItem.price}</span>
+        <span>{activeItem.status}</span>
         <h2>{activeItem.name}</h2>
         <p>{activeItem.detail}</p>
         <div className="library-book-tabs" aria-label="Bazaar objects">
@@ -2258,8 +2237,8 @@ function BazaarObjectPanel({ activeItemId, inventory, onSelectItem, onBuy, onBac
             </button>
           ))}
         </div>
-        <button className="inventory-add-button" type="button" onClick={() => onBuy(activeItem.id)}>
-          {inventory.includes(activeItem.id) ? "In inventory" : "Add to inventory"}
+        <button className="inventory-add-button concept-only" type="button" disabled>
+          Preview concept only
         </button>
       </div>
     </LocationPocketPanel>
@@ -2285,7 +2264,6 @@ export function StoryUniversePage() {
   const [hoverPosition, setHoverPosition] = useState(null);
   const [transitionPhase, setTransitionPhase] = useState("idle");
   const [activeJourney, setActiveJourney] = useState("manu");
-  const [inventory, setInventory] = useState([]);
   const [activeBookId, setActiveBookId] = useState(storyBooks[0].id);
   const [activeBookPage, setActiveBookPage] = useState(1);
   const [readingBookMode, setReadingBookMode] = useState(false);
@@ -2379,10 +2357,6 @@ export function StoryUniversePage() {
     }
   }, []);
 
-  const buyItem = useCallback((id) => {
-    setInventory((current) => (current.includes(id) ? current : [...current, id]));
-  }, []);
-
   const pageClass = useMemo(
     () =>
       `story-universe-page world-live ${enteredPlace ? "place-entered" : "street-view"} transition-${transitionPhase}`,
@@ -2465,9 +2439,7 @@ export function StoryUniversePage() {
         {enteredPlace === "bazaar" && (
           <BazaarObjectPanel
             activeItemId={activeBazaarItemId}
-            inventory={inventory}
             onSelectItem={setActiveBazaarItemId}
-            onBuy={buyItem}
             onBackToWorld={leavePlace}
           />
         )}
@@ -2476,7 +2448,6 @@ export function StoryUniversePage() {
         {enteredPlace === "classroom" && <PlaceMoodPanel destination={activePlace} onBackToWorld={leavePlace} />}
         {enteredPlace === "hillside" && <PlaceMoodPanel destination={activePlace} onBackToWorld={leavePlace} />}
 
-        {inventory.length > 0 && <MiniInventory inventory={inventory} />}
       </section>
     </main>
   );

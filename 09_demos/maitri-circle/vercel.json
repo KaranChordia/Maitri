@@ -1,0 +1,16 @@
+{
+  "buildCommand": "MAITRI_BASE_PATH=/ npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/characters",
+      "destination": "/characters.html"
+    },
+    {
+      "source": "/story-universe",
+      "destination": "/story-universe.html"
+    }
+  ]
+}
