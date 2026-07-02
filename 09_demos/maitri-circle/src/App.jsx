@@ -413,9 +413,34 @@ function saveWaitlistEntry(entry) {
   return next;
 }
 
-function GeneratedArt({ src, className = "", alt = "" }) {
+function GeneratedArt({ src, className = "", alt = "", parallax = false, feather = false }) {
+  const moveParallax = (event) => {
+    if (!parallax) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const depth = typeof parallax === "number" ? parallax : 7;
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * depth;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * depth;
+    event.currentTarget.style.setProperty("--parallax-x", x.toFixed(2));
+    event.currentTarget.style.setProperty("--parallax-y", y.toFixed(2));
+  };
+
+  const resetParallax = (event) => {
+    if (!parallax) return;
+    event.currentTarget.style.setProperty("--parallax-x", "0");
+    event.currentTarget.style.setProperty("--parallax-y", "0");
+  };
+
   return (
-    <img className={`generated-art ${className}`} src={src} alt={alt} aria-hidden={alt ? undefined : true} />
+    <img
+      className={`generated-art ${parallax ? "home-parallax" : ""} ${feather ? "soft-feather" : ""} ${className}`}
+      src={src}
+      alt={alt}
+      aria-hidden={alt ? undefined : true}
+      onPointerMove={moveParallax}
+      onPointerLeave={resetParallax}
+      onPointerOut={resetParallax}
+      onPointerCancel={resetParallax}
+    />
   );
 }
 
@@ -538,6 +563,8 @@ function Hero() {
             src={shwetikaAssets.horseRace}
             className="hero-asset"
             alt="Young Manu racing on horseback in a warm illustrated story scene"
+            parallax={9}
+            feather
           />
         </div>
       </div>
@@ -554,6 +581,8 @@ function Manu() {
             src={shwetikaAssets.manuDoll}
             className="manu-asset"
             alt="Manu doll sample with Indian textile details and jewellery"
+            parallax={6}
+            feather
           />
         </div>
         <div className="manu-copy">
@@ -632,6 +661,8 @@ function Circle() {
             src={generatedAssets.circle}
             className="circle-asset"
             alt="Children and parents seated together in a warm Maitri story gathering"
+            parallax={7}
+            feather
           />
         </div>
       </div>
@@ -648,6 +679,8 @@ function Schools() {
             src={generatedAssets.schools}
             className="school-asset"
             alt="A teacher reading Maitri stories to children in a classroom"
+            parallax={7}
+            feather
           />
         </div>
         <div className="section-copy schools-copy">
@@ -722,11 +755,15 @@ function Waitlist() {
 
   return (
     <section className="waitlist-section section-shell" id="waitlist">
-      <GeneratedArt
-        src={generatedAssets.portal}
-        className="footer-portal"
-        alt="A small illustrated Maitri story portal beside marigolds"
-      />
+      <div className="waitlist-art">
+        <GeneratedArt
+          src={generatedAssets.portal}
+          className="footer-portal"
+          alt="A small illustrated Maitri story portal beside marigolds"
+          parallax={5}
+          feather
+        />
+      </div>
       <div className="waitlist-copy">
         <h2>Join the early list for Manu.</h2>
         <p>
