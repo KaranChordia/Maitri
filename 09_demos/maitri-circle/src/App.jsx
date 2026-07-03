@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -74,13 +75,17 @@ const shwetikaAssets = {
   manuWithFather: publicPath("assets/shwetika/manu/optimized/manu-riding-with-father.jpg"),
   horseRace: publicPath("assets/shwetika/manu/optimized/horse-race.jpg"),
   manuAtGhats: publicPath("assets/shwetika/manu/optimized/manu-at-ghats.jpg"),
+  storyOneChance: publicPath("assets/shwetika/manu/optimized/story-one-chance.jpg"),
+  storyBadalChooses: publicPath("assets/shwetika/manu/optimized/story-badal-chooses.jpg"),
+  storyLetterFromManu: publicPath("assets/shwetika/manu/optimized/story-letter-from-manu.jpg"),
+  storyActivitiesStickers: publicPath("assets/shwetika/manu/optimized/story-activities-stickers.jpg"),
 };
 
 const navItems = [
   ["Meet Manu", publicPath("#manu")],
   ["First Box", publicPath("#first-box")],
   ["For Families", publicPath("#circle")],
-  ["Manu Page", publicPath("characters.html")],
+  ["Companions", publicPath("companions.html")],
   ["Reading Circles", publicPath("#schools")],
 ];
 
@@ -124,7 +129,7 @@ const characterLibrary = {
   manu: {
     name: "Manu",
     initials: "M",
-    role: "Launch character",
+    role: "First companion",
     image: shwetikaAssets.manuDoll,
     tone: "rose",
     tagline: "The girl who asked why, listened closely, and found courage one small step at a time.",
@@ -166,10 +171,57 @@ const characterLibrary = {
       },
     ],
   },
+  
+  savitribai: {
+    name: "Savitribai",
+    initials: "SP",
+    role: "Pioneer of Girls' Education",
+    image: null,
+    tone: "amber",
+    tagline: "The girl who believed that a book was the most powerful tool in the world, and courage was simply sharing it.",
+    worldPill: "Pune's first classrooms and chalk dust",
+    origin: "Inspired by Savitribai Phule, India's first female teacher",
+    question: "How does learning open a door that can never be closed?",
+    signature: "A wooden slate, a book of poetry, a spare saree, and a classroom lamp.",
+    takeaway: "Learning is a superpower that nobody can take away from you.",
+    world: "The bustling streets of 19th-century Pune, quiet courtyards turned into classrooms, wooden slates, chalk dust, and resilient smiles.",
+    values: [
+      ["Learning courage", "She believes every girl has the right to read.", BookOpenText, "amber"],
+      ["Resilient courage", "She keeps walking even when people throw mud.", ShieldCheck, "teal"],
+      ["Teaching courage", "She shares everything she learns with others.", Lightbulb, "violet"],
+    ],
+    traits: ["Resilient", "Determined", "Compassionate", "Pioneering", "Poetic"],
+    meta: [
+      ["First value", "Courage through resilience"],
+      ["First story", "The Mud on the Saree"],
+      ["Child promise", "No one can stop you from learning"],
+    ],
+    prompts: [
+      {
+        id: "learn",
+        label: "Savitribai learns to read.",
+        title: "Story beat",
+        text: "When she was young, books were not meant for girls. But Savitribai looked at the letters and saw magic. She practiced in secret until the letters became words, and the words became her voice.",
+      },
+      {
+        id: "mud",
+        label: "People throw mud on her way to school.",
+        title: "Brave choice",
+        text: "Some people did not want girls to learn. They threw mud at Savitribai as she walked. She did not yell back. She simply carried a spare, clean saree in her bag, changed when she arrived, and taught her class with a smile.",
+      },
+      {
+        id: "letter",
+        label: "A letter from Savitribai.",
+        title: "Friend letter",
+        text: "Dear Friend, sometimes doing the right thing makes other people upset. When they throw 'mud' at your dreams, just brush it off, change your 'saree', and keep going. Your mind is yours alone.",
+      },
+    ],
+  },
+
   kalpana: {
     name: "Kalpana",
     initials: "KC",
-    role: "Future STEM friend",
+    role: "Future STEM companion",
     image: null,
     tone: "teal",
     tagline: "A determined dreamer who looked at the sky and wanted to understand how far courage could travel.",
@@ -410,7 +462,7 @@ const firstBoxContents = [
   ["32-page storybook", "The first adventure with Manu and Badal.", BookOpenText],
   ["Letter from Manu", "A warm note that makes Manu feel close.", NotePencil],
   ["Six activities", "Simple prompts for drawing, choosing, and talking.", PaintBrush],
-  ["Sticker pages", "Characters, objects, values, and decorative motifs.", Star],
+  ["Sticker pages", "Companion art, objects, values, and decorative motifs.", Star],
 ];
 
 const futureFeatureSlots = [
@@ -421,12 +473,117 @@ const futureFeatureSlots = [
   ["Shelf", "a growing circle of friends"],
 ];
 
+
+const savitribaiStorybookPreviews = [
+  {
+    pages: "Pages 1-5",
+    title: "The Girl Who Wanted to Learn",
+    image: null,
+    text: "Savitribai discovers a book for the first time. She realizes that the strange marks on the paper hold stories, and she decides she must learn them.",
+    takeaway: "Curiosity is the beginning of courage.",
+    reader: [
+      ["Page 1", "A secret book", "In a world where girls were not taught to read, Savitribai saw her first book. The letters looked like strange birds waiting to take flight."],
+      ["Page 2", "Drawing in the dust", "She picked up a stick and traced the shapes in the soft dust of the courtyard. She practiced in secret until the letters became words."],
+      ["Page 4", "Her own voice", "When she finally read her first full word, it felt like unlocking a door that could never be closed again."],
+    ],
+  },
+  {
+    pages: "Pages 6-11",
+    title: "The First Classroom",
+    image: null,
+    text: "Learning wasn't enough. Savitribai and her husband open the very first school for girls. The classroom is small, but the dreams inside are massive.",
+    takeaway: "True courage is sharing what you have.",
+    reader: [
+      ["Page 6", "Opening the doors", "Savitribai arranged the wooden slates perfectly. Today was the first day of India's first school for girls. Her heart raced."],
+      ["Page 8", "Waiting", "At first, no one came. Parents were afraid. But Savitribai waited by the door with a warm smile, refusing to give up."],
+      ["Page 10", "The first student", "Finally, a small girl peaked around the corner. Savitribai held out her hand, and the world changed forever."],
+    ],
+  },
+  {
+    pages: "Pages 12-17",
+    title: "The Mud on the Saree",
+    image: null,
+    text: "The village is angry that girls are learning. They throw mud at Savitribai. Instead of fighting, she prepares a brilliant, peaceful solution.",
+    takeaway: "Resilience means you do not let others stop your mission.",
+    reader: [
+      ["Page 12", "Angry voices", "As she walked to school, people shouted and threw mud. It ruined her beautiful saree. But she did not yell back."],
+      ["Page 13", "The spare saree", "Instead, she began carrying a spare, clean saree in her bag. She would arrive, change quietly, and begin teaching."],
+      ["Page 16", "Unstoppable", "The bullies soon realized that no amount of mud could stop her. Her mind was hers alone, and her mission was unstoppable."],
+    ],
+  },
+  {
+    pages: "Pages 18-20",
+    title: "A Letter From Savitribai",
+    image: null,
+    text: "Savitribai speaks directly to the child, reminding them that an educated mind is the strongest shield they can ever wear.",
+    takeaway: "The story becomes a keepsake message.",
+    reader: [
+      ["Page 18", "Dear Friend", "Dear friend, sometimes doing the right thing makes other people upset. They might throw 'mud' at your dreams."],
+      ["Page 20", "Keep going", "When they do, just brush it off, change your 'saree', and keep going. Learning is a superpower that nobody can take away from you."],
+    ],
+  },
+];
+
+
 const characterDashboardModes = [
   ["storybook", "Storybook", BookOpenText],
   ["talk", "Courage Prompts", Heart],
   ["accessories", "Future Add-ons", Gift],
   ["activities", "Activities", PaintBrush],
 ];
+
+
+const savitribaiAdventureStops = [
+  {
+    id: "secret",
+    label: "The First Letter",
+    title: "Tracing letters in the dust.",
+    scene: "Savitribai wants to read, but girls aren't allowed to hold books. She sees a stick and some soft dirt.",
+    play: "How should she practice her first letter?",
+    choices: ["Draw in the dirt", "Hide a slate", "Ask for help"],
+    lesson: "Curiosity is the beginning of courage.",
+    reward: "Curiosity Badge",
+    icon: BookOpenText,
+    tone: "violet",
+  },
+  {
+    id: "school",
+    label: "The Empty Room",
+    title: "Waiting for the first student.",
+    scene: "The school is open, but the room is empty. Parents are too scared to send their daughters.",
+    play: "What should Savitribai do?",
+    choices: ["Wait patiently", "Visit families", "Sing a song"],
+    lesson: "True courage is sharing what you have.",
+    reward: "Patience Badge",
+    icon: Heart,
+    tone: "teal",
+  },
+  {
+    id: "mud",
+    label: "The Walk to School",
+    title: "Facing the bullies.",
+    scene: "Angry villagers block the path and throw mud on Savitribai's beautiful saree.",
+    play: "Help Savitribai choose a response.",
+    choices: ["Bring a spare saree", "Yell at them", "Run away"],
+    lesson: "You don't always have to fight back loudly to win.",
+    reward: "Resilience Badge",
+    icon: ShieldCheck,
+    tone: "amber",
+  },
+  {
+    id: "poem",
+    label: "The Poetry of Courage",
+    title: "Writing a line of poetry when feeling sad.",
+    scene: "It was a hard day. Savitribai sits by the lamp with her slate.",
+    play: "What should she write about?",
+    choices: ["The joy of reading", "Being strong", "A new tomorrow"],
+    lesson: "Your voice is powerful.",
+    reward: "Voice Badge",
+    icon: Lightbulb,
+    tone: "rose",
+  },
+];
+
 
 const manuStorybookPreviews = [
   {
@@ -456,7 +613,7 @@ const manuStorybookPreviews = [
   {
     pages: "Pages 12-17",
     title: "One Chance",
-    image: shwetikaAssets.manuAtGhats,
+    image: shwetikaAssets.storyOneChance,
     text: "When Badal may be sent away, Manu asks for one chance. She feels afraid, but chooses care before control.",
     takeaway: "Being brave does not mean being fearless.",
     reader: [
@@ -468,7 +625,7 @@ const manuStorybookPreviews = [
   {
     pages: "Pages 18-22",
     title: "Badal Chooses",
-    image: shwetikaAssets.manuOnHorse,
+    image: shwetikaAssets.storyBadalChooses,
     text: "Manu earns Badal's trust one careful circle at a time. The courtyard sees a different kind of strength.",
     takeaway: "Real courage helps others feel safe too.",
     reader: [
@@ -480,7 +637,7 @@ const manuStorybookPreviews = [
   {
     pages: "Pages 23-24",
     title: "A Letter From Manu",
-    image: shwetikaAssets.manuDoll,
+    image: shwetikaAssets.storyLetterFromManu,
     text: "Manu speaks directly to the child as a friend, reminding them that one kind step forward still counts as courage.",
     takeaway: "The story becomes a keepsake message.",
     reader: [
@@ -491,7 +648,7 @@ const manuStorybookPreviews = [
   {
     pages: "Pages 25-32",
     title: "Activities and Stickers",
-    image: generatedAssets.universeMap,
+    image: shwetikaAssets.storyActivitiesStickers,
     text: "Crest design, what-would-Manu-do choices, courage tracking, stable play, a maze, a brave promise, and sticker sheets.",
     takeaway: "Repeat play carries the value home.",
     reader: [
@@ -706,11 +863,11 @@ function Hero() {
       <Header />
       <div className="hero-grid">
         <div className="hero-copy">
-          <h1>Meet Manu, Maitri's first brave friend.</h1>
+          <h1>Meet Manu, Maitri's first companion.</h1>
           <p>
-            Maitri is a story-first Indian companion doll brand beginning with
-            Manu: a child-facing courage story, a premium doll in development,
-            and a first box designed for meaningful family play.
+            Maitri begins with Manu and grows into Companions: a place where
+            children can meet story-led companions, open their books, explore
+            courage prompts, and keep returning through meaningful play.
           </p>
           <div className="hero-actions">
             <ArrowButton href="#manu">Meet Manu</ArrowButton>
@@ -759,7 +916,7 @@ function Manu() {
             brave question, trying once, being kind first, and taking one steady
             step.
           </p>
-          <ArrowButton href={publicPath("characters.html")}>Open Manu's Story</ArrowButton>
+          <ArrowButton href={publicPath("companions.html")}>Open Companions</ArrowButton>
         </div>
         <div className="keepsakes" aria-label="Manu keepsakes">
           {manuKeepsakes.map((item) => (
@@ -1016,49 +1173,52 @@ function CharacterVisual({ character, compact = false }) {
 }
 
 function CharacterSelectorFullscreen({ onSelect }) {
-  const characters = [
+    const characters = [
     { id: "manu", ...characterLibrary.manu },
     { id: "kalpana", ...characterLibrary.kalpana },
-    { id: "mary", ...characterLibrary["Mary Kom"] || {
-      name: "Mary Kom", role: "Future athlete friend", tone: "amber",
-      initials: "MK",
-      tagline: "A fighter who learned that true strength starts from within."
-    }}
+    { id: "savitribai", ...characterLibrary.savitribai },
   ];
 
   return (
-    <div className="character-selector-fullscreen">
-      <div className="character-selector-grid">
-        {characters.map(char => {
-          if (!char.name) return null;
+    <div className="cx-selector">
+      <section className="cx-selector-intro" aria-labelledby="character-title">
+        <div>
+          <span className="cx-section-mark">Maitri Companions</span>
+          <h1 id="character-title">A place to meet, read, and play with story companions.</h1>
+        </div>
+        <p>
+          Start with Manu, open her storybook, try courage prompts, and preview
+          how future companions can bring new stories, activities, and add-ons
+          into the same gentle world.
+        </p>
+      </section>
+      <div className="cx-selector-grid" aria-label="Maitri companions">
+        {characters.map((char) => {
           return (
-            <div 
+            <button
               key={char.id} 
-              className={`character-selector-card ${char.tone}`}
+              className={`cx-selector-card ${char.id} ${char.tone}`}
               onClick={() => onSelect(char.id)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  onSelect(char.id);
-                }
-              }}
+              type="button"
             >
-              {char.image ? (
-                <img src={char.image} alt={char.name} className="selector-character-img" />
-              ) : (
-                <div className="selector-placeholder-img">
+              <span className="cx-selector-art">
+                {char.image ? (
+                  <img src={char.image} alt="" />
+                ) : (
                   <span>{char.initials}</span>
-                </div>
-              )}
-              <div className="selector-card-bg"></div>
-              <div className="selector-card-content">
-                <h2>{char.name}</h2>
-                <p>{char.tagline}</p>
-              </div>
-            </div>
-          )
+                )}
+              </span>
+              <span className="cx-selector-copy">
+                <span>{char.role}</span>
+                <strong>{char.name}</strong>
+                <small>{char.tagline}</small>
+              </span>
+              <span className="cx-selector-meta">
+                <span>{char.worldPill}</span>
+                <ArrowRight size={18} weight="bold" />
+              </span>
+            </button>
+          );
         })}
       </div>
     </div>
@@ -1067,190 +1227,268 @@ function CharacterSelectorFullscreen({ onSelect }) {
 
 function CharacterDashboard({ selectedId, onBack }) {
   const [activeFeature, setActiveFeature] = useState("storybook");
-  const [activeStoryIndex, setActiveStoryIndex] = useState(null);
+  const [selectedStoryIndex, setSelectedStoryIndex] = useState(0);
+  const [readerOpen, setReaderOpen] = useState(false);
+  const [selectedPrompt, setSelectedPrompt] = useState(manuTalkPrompts[0]);
   
-  const character = characterLibrary[selectedId];
-  const displayCharacter = character || {
-      name: "Mary Kom", role: "Future athlete friend", tone: "amber",
-      initials: "MK",
-      tagline: "A fighter who learned that true strength starts from within."
+  const character = characterLibrary[selectedId] || characterLibrary.manu;
+  const isManu = selectedId === "manu";
+  const activeStoryPreview = manuStorybookPreviews[selectedStoryIndex] || manuStorybookPreviews[0];
+  const heroStops = manuAdventureStops.slice(0, 4);
+  const FeatureIcon =
+    characterDashboardModes.find(([id]) => id === activeFeature)?.[2] || BookOpenText;
+  const selectFeature = (feature) => {
+    setActiveFeature(feature);
+    if (feature !== "storybook") {
+      setReaderOpen(false);
+    }
+  };
+  const openStoryPreview = (index) => {
+    setSelectedStoryIndex(index);
+    setReaderOpen(true);
   };
 
-  const isManu = selectedId === "manu";
+  useEffect(() => {
+    if (!readerOpen) return undefined;
 
-  // For manu dashboard
-  const activeStoryPreview = activeStoryIndex === null ? null : manuStorybookPreviews[activeStoryIndex];
-  const heroStops = manuAdventureStops.slice(0, 4);
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape" || event.key === "Esc" || event.code === "Escape") {
+        setReaderOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", closeOnEscape, true);
+    return () => document.removeEventListener("keydown", closeOnEscape, true);
+  }, [readerOpen]);
+
+  if (!isManu) {
+    return (
+      <div className={`cx-dashboard cx-dashboard-future ${character.tone}`}>
+        <aside className="cx-character-rail">
+          <button className="cx-back-button" onClick={onBack} type="button">
+            <ArrowLeft size={18} weight="bold" />
+            <span>Companions</span>
+          </button>
+          <div className="cx-rail-selected">
+            <CharacterVisual character={character} />
+            <div>
+              <span>{character.role}</span>
+              <strong>{character.name}</strong>
+            </div>
+          </div>
+        </aside>
+        <main className="cx-future-stage">
+          <div className="cx-future-emblem" aria-hidden="true">
+            <CharacterVisual character={character} />
+          </div>
+          <span className="cx-section-mark">Future Companion</span>
+          <h1>{character.name} is being held for the next Maitri companion shelf.</h1>
+          <p>{character.tagline}</p>
+          <div className="cx-future-grid">
+            {futureFeatureSlots.map(([label, text]) => (
+              <article key={label}>
+                <strong>{label}</strong>
+                <span>{text}</span>
+              </article>
+            ))}
+          </div>
+          <button className="cx-primary-action" type="button" onClick={onBack}>
+            <ArrowLeft size={18} weight="bold" />
+            <span>Return to Manu</span>
+          </button>
+        </main>
+      </div>
+    );
+  }
 
   return (
-    <div className="character-dashboard-layout">
-      <aside className="dashboard-sidebar">
-        <button className="dashboard-back-btn" onClick={onBack}>
+    <div className="cx-dashboard">
+      <aside className="cx-character-rail">
+        <button className="cx-back-button" onClick={onBack} type="button">
           <ArrowLeft size={18} weight="bold" />
-          <span>Back to Characters</span>
+            <span>Companions</span>
         </button>
-        <div className="dashboard-character-info">
-          <div className="dashboard-avatar">
-            {displayCharacter.image ? <img src={displayCharacter.image} alt={displayCharacter.name} /> : <span>{displayCharacter.initials}</span>}
+        <div className="cx-rail-selected">
+          <CharacterVisual character={character} />
+          <div>
+            <span>{character.role}</span>
+            <strong>{character.name}</strong>
           </div>
-          <h2>{displayCharacter.name}</h2>
-          <span className="dashboard-role">{displayCharacter.role}</span>
         </div>
-        
-        <nav className="dashboard-nav">
+        <nav className="cx-rail-menu" aria-label="Companion dashboard">
           {characterDashboardModes.map(([id, label, Icon]) => (
-            <button 
+            <button
               key={id}
-              className={`dashboard-nav-item ${activeFeature === id ? "active" : ""}`}
-              onClick={() => setActiveFeature(id)}
+              className={activeFeature === id ? "active" : ""}
+              onClick={() => selectFeature(id)}
+              type="button"
             >
-              <Icon size={20} weight="duotone" />
+              <Icon size={21} weight="duotone" />
               <span>{label}</span>
             </button>
           ))}
         </nav>
       </aside>
 
-      <main className="dashboard-content">
-        {!isManu ? (
-          <div className="dashboard-placeholder">
-            <LockKey size={48} weight="duotone" />
-            <h2>{displayCharacter.name} is a future friend.</h2>
-            <p>Her story, doll, and activity rituals will follow after Manu finds her first families.</p>
+      <main className="cx-stage">
+        <section className="cx-story-hero">
+          <img src={activeStoryPreview.image} alt="" />
+          <div className="cx-story-hero-copy">
+            <span>
+              <FeatureIcon size={18} weight="duotone" />
+              {activeFeature === "storybook" ? activeStoryPreview.pages : character.name}
+            </span>
+            <h1>
+              {activeFeature === "storybook"
+                ? activeStoryPreview.title
+                : "Manu's world stays story-first."}
+            </h1>
+            <p>
+              {activeFeature === "storybook"
+                ? activeStoryPreview.text
+                : "Every activity, prompt, and add-on should feel like it belongs inside Manu's courage story."}
+            </p>
+            <button className="cx-primary-action" type="button" onClick={() => setReaderOpen(true)}>
+              <BookOpenText size={19} weight="duotone" />
+              <span>Open Reader</span>
+            </button>
           </div>
-        ) : (
-          <div className="dashboard-panel-container">
-            {activeFeature === "storybook" && (
-              <div className="dashboard-panel storybook-panel">
-                <div className="dashboard-panel-head">
-                  <BookOpenText size={30} weight="duotone" />
-                  <div>
-                    <span>Book one preview</span>
-                    <h3>Manu: The Horse Nobody Could Ride</h3>
-                    <p>An early 32-page first-box story plan: 22 story pages, 2 pages from Manu, 6 activity pages, and 2 sticker pages.</p>
-                  </div>
-                </div>
-                <div className="storybook-preview-grid">
-                  {manuStorybookPreviews.map((preview, index) => (
-                    <button
-                      className={activeStoryIndex === index ? "active" : ""}
-                      key={preview.pages}
-                      onClick={() => setActiveStoryIndex(index)}
-                    >
-                      <span className="storybook-thumb">
-                        <img src={preview.image} alt="" />
-                      </span>
-                      <span>{preview.pages}</span>
-                      <h4>{preview.title}</h4>
-                      <p>{preview.text}</p>
-                    </button>
-                  ))}
-                </div>
-                {activeStoryPreview && (
-                  <div className="storybook-immersive-overlay">
-                    <div className="storybook-immersive-backdrop" onClick={() => setActiveStoryIndex(null)}></div>
-                    <div className="storybook-immersive-modal">
-                      <button className="storybook-close-btn" onClick={() => setActiveStoryIndex(null)}>
-                        <X size={24} weight="bold" />
-                      </button>
-                      <div className="storybook-spread">
-                        <div className="storybook-page storybook-left-page">
-                          <img src={activeStoryPreview.image} alt="" className="storybook-full-image" />
-                        </div>
-                        <div className="storybook-page storybook-right-page">
-                          <span className="storybook-tag">Preview reader</span>
-                          <h2>{activeStoryPreview.title}</h2>
-                          <h4>{activeStoryPreview.takeaway}</h4>
-                          <div className="storybook-text-content">
-                            {activeStoryPreview.reader.map(([page, title, text]) => (
-                              <article key={`${activeStoryPreview.pages}-${page}`}>
-                                <strong>{page}</strong>
-                                <h5>{title}</h5>
-                                <p>{text}</p>
-                              </article>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-            
-            {activeFeature === "talk" && (
-              <div className="dashboard-panel talk-panel">
-                <div className="dashboard-panel-head">
-                  <Heart size={30} weight="duotone" />
-                  <div>
-                    <span>Future possibility</span>
-                    <h3>Courage prompts with Manu</h3>
-                    <p>A guided prompt format where children can explore brave questions with a grown-up nearby.</p>
-                  </div>
-                </div>
-                <div className="talk-preview">
-                  <div>
-                    {manuTalkPrompts.map((prompt) => (
-                      <button type="button" key={prompt}>{prompt}</button>
-                    ))}
-                  </div>
-                  <blockquote>
-                    I felt scared too. A brave step does not have to be loud. Try one kind step, then tell someone you trust what happened.
-                  </blockquote>
-                </div>
-              </div>
-            )}
-            
-            {activeFeature === "accessories" && (
-              <div className="dashboard-panel accessories-panel">
-                <div className="dashboard-panel-head">
-                  <Gift size={30} weight="duotone" />
-                  <div>
-                    <span>Future add-on direction</span>
-                    <h3>Accessories that belong to the story.</h3>
-                    <p>Add-ons should feel earned from Manu's world, not random merchandise.</p>
-                  </div>
-                </div>
-                <div className="accessory-preview-grid">
-                  {manuAccessoryPreviews.map(([label, text, Icon]) => (
-                    <article key={label}>
-                      <Icon size={28} weight="duotone" />
-                      <h4>{label}</h4>
-                      <p>{text}</p>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            )}
-            
-            {activeFeature === "activities" && (
-              <div className="dashboard-panel activities-panel">
-                <div className="dashboard-panel-head">
-                  <PaintBrush size={30} weight="duotone" />
-                  <div>
-                    <span>Repeat play</span>
-                    <h3>Activities that turn the story into practice.</h3>
-                    <p>Manu's first experience can keep children returning through choices, stickers, drawing prompts, and family conversations.</p>
-                  </div>
-                </div>
-                <div className="manu-investor-grid">
-                  {heroStops.map((stop) => {
-                    const StopIcon = stop.icon;
-                    return (
-                      <article className={`investor-story-card ${stop.tone}`} key={stop.id}>
-                        <StopIcon size={28} weight="duotone" />
-                        <span>{stop.label}</span>
-                        <h3>{stop.title}</h3>
-                        <p>{stop.lesson}</p>
-                      </article>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
+        </section>
+
+        {activeFeature === "storybook" && (
+          <section className="cx-chapter-grid" aria-label="Storybook chapters">
+            {manuStorybookPreviews.map((preview, index) => (
+              <button
+                className={selectedStoryIndex === index ? "active" : ""}
+                key={preview.pages}
+                onClick={() => openStoryPreview(index)}
+                type="button"
+              >
+                <img src={preview.image} alt="" />
+                <span>{preview.pages}</span>
+                <strong>{preview.title}</strong>
+                <small>{preview.takeaway}</small>
+              </button>
+            ))}
+          </section>
+        )}
+
+        {activeFeature === "talk" && (
+          <section className="cx-dialogue-panel">
+            <div className="cx-prompt-list">
+              {manuTalkPrompts.map((prompt) => (
+                <button
+                  className={selectedPrompt === prompt ? "active" : ""}
+                  type="button"
+                  key={prompt}
+                  onClick={() => setSelectedPrompt(prompt)}
+                >
+                  {prompt}
+                </button>
+              ))}
+            </div>
+            <blockquote>
+              <Heart size={25} weight="duotone" />
+              <p>
+                I felt scared too. A brave step does not have to be loud. Try
+                one kind step, then tell someone you trust what happened.
+              </p>
+              <span>{selectedPrompt}</span>
+            </blockquote>
+          </section>
+        )}
+
+        {activeFeature === "accessories" && (
+          <section className="cx-addon-grid" aria-label="Future add-ons">
+            {manuAccessoryPreviews.map(([label, text, Icon]) => (
+              <article key={label}>
+                <Icon size={28} weight="duotone" />
+                <strong>{label}</strong>
+                <span>{text}</span>
+              </article>
+            ))}
+          </section>
+        )}
+
+        {activeFeature === "activities" && (
+          <section className="cx-activity-grid" aria-label="Manu activities">
+            {heroStops.map((stop) => {
+              const StopIcon = stop.icon;
+              return (
+                <article className={stop.tone} key={stop.id}>
+                  <StopIcon size={26} weight="duotone" />
+                  <span>{stop.label}</span>
+                  <strong>{stop.title}</strong>
+                  <p>{stop.lesson}</p>
+                </article>
+              );
+            })}
+          </section>
         )}
       </main>
+
+      <aside className="cx-context-panel" aria-label="Manu context">
+        <section className="cx-context-card cx-question-card">
+          <span>
+            <Lightbulb size={20} weight="duotone" />
+            Courage Prompt
+          </span>
+          <p>{parentPrompts[selectedStoryIndex % parentPrompts.length]}</p>
+        </section>
+        <section className="cx-context-card">
+          <span>
+            <Gift size={20} weight="duotone" />
+            First Box
+          </span>
+          <div className="cx-keepsake-list">
+            {firstBoxContents.slice(0, 4).map(([label, text, Icon]) => (
+              <article key={label}>
+                <Icon size={20} weight="duotone" />
+                <div>
+                  <strong>{label}</strong>
+                  <small>{text}</small>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="cx-context-card cx-world-card">
+          <span>
+            <Compass size={20} weight="duotone" />
+            Story World
+          </span>
+          <p>{character.world}</p>
+        </section>
+      </aside>
+
+      {readerOpen && createPortal(
+        <div className="cx-reader-overlay" role="dialog" aria-modal="true" aria-label="Storybook preview">
+          <button className="cx-reader-backdrop" type="button" onClick={() => setReaderOpen(false)} aria-label="Dismiss reader" />
+          <div className="cx-reader-modal">
+            <button className="cx-reader-close" onClick={() => setReaderOpen(false)} type="button" aria-label="Close reader">
+              <X size={22} weight="bold" />
+            </button>
+            <div className="cx-reader-image">
+              <img src={activeStoryPreview.image} alt="" />
+            </div>
+            <div className="cx-reader-copy">
+              <span>{activeStoryPreview.pages}</span>
+              <h2>{activeStoryPreview.title}</h2>
+              <p>{activeStoryPreview.takeaway}</p>
+              <div>
+                {activeStoryPreview.reader.map(([page, title, text]) => (
+                  <article key={`${activeStoryPreview.pages}-${page}`}>
+                    <strong>{page}</strong>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body,
+      )}
     </div>
   );
 }
@@ -1515,7 +1753,7 @@ function CharacterPageLegacy() {
           <div className="character-world-copy">
             <h1 id="character-world-title">Start with Manu.</h1>
             <p>
-              Meet Maitri's first friend through story, play, family prompts,
+              Meet Maitri's first companion through story, play, family prompts,
               and a focused first-box experience children can return to.
             </p>
             <div className="hero-actions">
@@ -1526,7 +1764,7 @@ function CharacterPageLegacy() {
                 </span>
               </a>
               <a className="arrow-button outline" href="#future-friends">
-                <span>See future friends</span>
+                <span>See future companions</span>
                 <span className="arrow-orb">
                   <ArrowRight size={18} weight="bold" />
                 </span>
@@ -1789,14 +2027,14 @@ function CharacterPageLegacy() {
                   className={`world-character-card ${id === selectedId ? "active" : ""} ${locked ? "preview" : ""}`}
                   type="button"
                   aria-pressed={id === selectedId}
-                  aria-label={locked ? `${item.name} future preview` : `${item.name} launch character`}
+                  aria-label={locked ? `${item.name} future companion preview` : `${item.name} first companion`}
                   key={id}
                   onClick={() => selectCharacter(id)}
                 >
                   <CharacterVisual character={item} compact />
                   <span>
                     <strong>{item.name}</strong>
-                    <small>{locked ? "Future direction" : "Launch character"}</small>
+                    <small>{locked ? "Future companion" : "First companion"}</small>
                   </span>
                   {locked ? <LockKey size={17} weight="bold" /> : <ArrowRight size={18} weight="bold" />}
                 </button>
@@ -1826,7 +2064,7 @@ function Footer() {
     <footer className="site-footer">
       <div>
         <Brand />
-        <p>A brave friend. A story to keep. Values children can practice.</p>
+        <p>A brave companion. A story to keep. Values children can practice.</p>
       </div>
       <nav aria-label="Footer">
         {navItems.slice(0, 5).map(([label, href]) => (
@@ -1845,10 +2083,14 @@ function Footer() {
 
 export function App() {
   const path = window.location.pathname.replace(/\/$/, "");
-  const isCharacterPage = path === "/characters" || path.endsWith("/characters.html");
+  const isCompanionPage =
+    path === "/companions" ||
+    path === "/characters" ||
+    path.endsWith("/companions.html") ||
+    path.endsWith("/characters.html");
   const isStoryUniversePage = path === "/story-universe" || path.endsWith("/story-universe.html");
 
-  if (isCharacterPage) {
+  if (isCompanionPage) {
     return <CharacterPage />;
   }
 
