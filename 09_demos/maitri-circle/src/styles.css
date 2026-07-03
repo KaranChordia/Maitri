@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap");
+@import url("./character-page.css");
 
 :root {
   color-scheme: light;
@@ -312,7 +313,6 @@ input:focus-visible {
 
 .site-header {
   position: fixed;
-  overflow: hidden;
   top: max(14px, env(safe-area-inset-top));
   left: 50%;
   z-index: 120;
@@ -326,40 +326,50 @@ input:focus-visible {
   padding: 8px 10px 8px clamp(18px, 2.1vw, 28px);
   border: 1px solid rgba(255, 255, 255, 0.48);
   border-radius: 999px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.38), rgba(255, 248, 239, 0.2)),
-    rgba(255, 255, 255, 0.22);
   box-shadow:
     0 38px 46px -26px rgba(69, 16, 57, 0.5),
     0 24px 58px rgba(79, 28, 69, 0.14),
-    0 12px 22px rgba(33, 134, 137, 0.09),
-    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    0 12px 22px rgba(33, 134, 137, 0.09);
   transform: translateX(-50%);
-  backdrop-filter: blur(30px) saturate(1.34);
-  -webkit-backdrop-filter: blur(30px) saturate(1.34);
 }
 
 :root[data-theme="dark"] .site-header {
   border-color: rgba(255, 235, 225, 0.16);
-  background:
-    linear-gradient(135deg, rgba(59, 31, 51, 0.64), rgba(23, 40, 46, 0.38)),
-    rgba(24, 12, 26, 0.54);
   box-shadow:
     0 38px 46px -26px rgba(0, 0, 0, 0.68),
     0 24px 58px rgba(255, 127, 160, 0.09),
-    0 12px 22px rgba(84, 216, 203, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    0 12px 22px rgba(84, 216, 203, 0.06);
 }
 
-.site-header::before,
-.site-header::after {
+.site-header-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.38), rgba(255, 248, 239, 0.2));
+  background-color: rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(30px) saturate(1.34);
+  -webkit-backdrop-filter: blur(30px) saturate(1.34);
+}
+
+:root[data-theme="dark"] .site-header-bg {
+  background-image: linear-gradient(135deg, rgba(59, 31, 51, 0.64), rgba(23, 40, 46, 0.38));
+  background-color: rgba(24, 12, 26, 0.54);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.site-header-bg::before,
+.site-header-bg::after {
   content: "";
   position: absolute;
   pointer-events: none;
   border-radius: inherit;
 }
 
-.site-header::before {
+.site-header-bg::before {
   top: -36%;
   bottom: -36%;
   left: -34%;
@@ -374,7 +384,7 @@ input:focus-visible {
   will-change: transform, opacity;
 }
 
-:root[data-theme="dark"] .site-header::before {
+:root[data-theme="dark"] .site-header-bg::before {
   background:
     radial-gradient(ellipse at 18% 48%, rgba(255, 199, 97, 0.18) 0 20%, transparent 48%),
     radial-gradient(ellipse at 56% 52%, rgba(255, 127, 160, 0.2) 0 22%, transparent 52%),
@@ -382,7 +392,7 @@ input:focus-visible {
   opacity: 0.28;
 }
 
-.site-header::after {
+.site-header-bg::after {
   inset: 5px;
   border: 1px solid rgba(255, 255, 255, 0.28);
   box-shadow:
@@ -390,14 +400,14 @@ input:focus-visible {
     inset 0 -1px 0 rgba(244, 111, 140, 0.1);
 }
 
-:root[data-theme="dark"] .site-header::after {
+:root[data-theme="dark"] .site-header-bg::after {
   border-color: rgba(255, 235, 225, 0.12);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     inset 0 -1px 0 rgba(255, 127, 160, 0.12);
 }
 
-.site-header > * {
+.site-header > *:not(.site-header-bg) {
   position: relative;
   z-index: 1;
 }
@@ -750,7 +760,7 @@ input:focus-visible {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .site-header::before {
+  .site-header-bg::before {
     animation: nav-glow-drift 7s ease-in-out infinite;
   }
 }
@@ -6209,22 +6219,40 @@ p {
     grid-template-columns: auto auto;
   }
 
-  .primary-nav {
+  .site-header .primary-nav {
     position: absolute;
     top: calc(100% + 10px);
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 40;
     display: none;
     width: min(330px, calc(100vw - 44px));
     padding: 18px;
-    border: 1px solid rgba(79, 28, 69, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.48);
     border-radius: 24px;
-    background: rgba(255, 255, 255, 0.985);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(22px);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.38), rgba(255, 248, 239, 0.2));
+    background-color: rgba(255, 255, 255, 0.22);
+    box-shadow:
+      0 38px 46px -26px rgba(69, 16, 57, 0.5),
+      0 24px 58px rgba(79, 28, 69, 0.14),
+      0 12px 22px rgba(33, 134, 137, 0.09),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(30px) saturate(1.34);
+    -webkit-backdrop-filter: blur(30px) saturate(1.34);
   }
 
-  .primary-nav.open {
+  :root[data-theme="dark"] .site-header .primary-nav {
+    border-color: rgba(255, 235, 225, 0.16);
+    background-image: linear-gradient(135deg, rgba(59, 31, 51, 0.64), rgba(23, 40, 46, 0.38));
+    background-color: rgba(24, 12, 26, 0.54);
+    box-shadow:
+      0 38px 46px -26px rgba(0, 0, 0, 0.68),
+      0 24px 58px rgba(255, 127, 160, 0.09),
+      0 12px 22px rgba(84, 216, 203, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .site-header .primary-nav.open {
     display: grid;
     justify-items: start;
     gap: 14px;

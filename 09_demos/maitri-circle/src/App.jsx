@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import {
+  ArrowLeft,
   ArrowRight,
   BookBookmark,
   BookOpenText,
@@ -41,7 +42,7 @@ function getSavedTheme() {
   const saved = window.localStorage.getItem(themeStorageKey);
   if (saved === "dark" || saved === "light") return saved;
 
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "light"; // Default to light mode
 }
 
 function applyTheme(theme, animate = false) {
@@ -669,6 +670,7 @@ function Header() {
 
   return (
     <header className="site-header">
+      <div className="site-header-bg" />
       <Brand />
       <nav className={`primary-nav ${open ? "open" : ""}`} aria-label="Primary">
         {navItems.map(([label, href]) => (
@@ -995,22 +997,6 @@ function Waitlist() {
   );
 }
 
-function CharacterLabHeader() {
-  return (
-    <header className="site-header character-page-header">
-      <Brand />
-      <nav className="character-mini-nav" aria-label="Manu page">
-        <a href={publicPath("")}>Home</a>
-        <a href={publicPath("#manu")}>Meet Manu</a>
-        <a href={publicPath("#first-box")}>First Box</a>
-        <a href={publicPath("characters.html")}>Manu Page</a>
-        <a href={publicPath("#waitlist")}>Join Waitlist</a>
-      </nav>
-      <ThemeToggle className="character-theme-toggle" />
-    </header>
-  );
-}
-
 function CharacterVisual({ character, compact = false }) {
   if (character.image) {
     return (
@@ -1029,370 +1015,260 @@ function CharacterVisual({ character, compact = false }) {
   );
 }
 
-function CharacterPage() {
-  const [selectedId, setSelectedId] = useState("manu");
-  const [activeFeature, setActiveFeature] = useState("storybook");
-  const [activeStoryIndex, setActiveStoryIndex] = useState(0);
-  const selectedCharacter = selectedId ? characterLibrary[selectedId] : null;
-  const selectedIsManu = selectedId === "manu";
-  const activeStoryPreview =
-    activeStoryIndex === null ? null : manuStorybookPreviews[activeStoryIndex];
-  const heroStops = manuAdventureStops.slice(0, 4);
-  const manuShowcase = [
-    ["Storybook", "The first Manu story introduces courage through friendship, questions, and Badal.", BookOpenText],
-    ["Companion doll", "A Manu doll in development, shaped around meaningful daily play.", Gift],
-    ["Activity rituals", "Drawing, choosing, sticker play, and parent prompts turn the story into practice.", PaintBrush],
-    ["Letters from Manu", "Warm notes make Manu feel close and extend the bond beyond the book.", NotePencil],
+function CharacterSelectorFullscreen({ onSelect }) {
+  const characters = [
+    { id: "manu", ...characterLibrary.manu },
+    { id: "kalpana", ...characterLibrary.kalpana },
+    { id: "mary", ...characterLibrary["Mary Kom"] || {
+      name: "Mary Kom", role: "Future athlete friend", tone: "amber",
+      initials: "MK",
+      tagline: "A fighter who learned that true strength starts from within."
+    }}
   ];
-  const selectCharacter = (id) => {
-    setSelectedId(id);
-    setActiveFeature("storybook");
-    setActiveStoryIndex(null);
-  };
 
   return (
-    <main className="maitri-page character-world-page character-investor-page">
-      <section className="character-world-shell section-shell" id="top">
-        <CharacterLabHeader />
-
-        <section
-          className={`character-picker-section ${selectedId ? "has-selection" : "entry-selection"}`}
-          id="choose-character"
-          aria-label="Meet Manu"
-        >
-          <div className="investor-section-head">
-            <span className="panel-label">Maitri's first friend</span>
-            <h1>Meet Manu.</h1>
-            <p>
-              Start with the brave Indian friend at the heart of Maitri's first
-              box: a child-facing story, a companion doll in development,
-              activity rituals, and parent-child prompts.
-            </p>
-          </div>
-          <div className="character-picker-grid">
-            {["manu"].map((id) => {
-              const item = characterLibrary[id];
-              const active = selectedId === id;
-              const future = id !== "manu";
-              return (
-                <button
-                  className={`character-picker-card ${item.tone} ${active ? "active" : ""} ${future ? "future" : ""}`}
-                  type="button"
-                  key={id}
-                  aria-pressed={active}
-                  onClick={() => selectCharacter(id)}
-                >
-                  <CharacterVisual character={item} compact />
-                  <span>{future ? "Future friend" : "First Maitri friend"}</span>
-                  <strong>{item.name}</strong>
-                  <small>{item.tagline}</small>
-                  <em>{future ? "Future direction" : "Open Manu's story"}</em>
-                </button>
-              );
-            })}
-          </div>
-          <div className="manu-showcase-grid entry-proof-grid" aria-label="Manu first experience">
-            {manuShowcase.map(([label, text, Icon]) => (
-              <article key={label}>
-                <Icon size={25} weight="duotone" />
-                <strong>{label}</strong>
-                <span>{text}</span>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {selectedId && selectedIsManu ? (
-          <>
-            <section
-              className="selected-character-showcase"
-              id="manu-story"
-              key="manu-showcase"
-              aria-label="Selected Manu showcase"
+    <div className="character-selector-fullscreen">
+      <div className="character-selector-grid">
+        {characters.map(char => {
+          if (!char.name) return null;
+          return (
+            <div 
+              key={char.id} 
+              className={`character-selector-card ${char.tone}`}
+              onClick={() => onSelect(char.id)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onSelect(char.id);
+                }
+              }}
             >
-              <div className="selected-character-portrait">
-                <img src={shwetikaAssets.manuDoll} alt="Full portrait of Manu doll" />
+              {char.image ? (
+                <img src={char.image} alt={char.name} className="selector-character-img" />
+              ) : (
+                <div className="selector-placeholder-img">
+                  <span>{char.initials}</span>
+                </div>
+              )}
+              <div className="selector-card-bg"></div>
+              <div className="selector-card-content">
+                <h2>{char.name}</h2>
+                <p>{char.tagline}</p>
               </div>
-              <div className="selected-character-copy">
-                <span className="panel-label">Manu first</span>
-                <h2>A story-led first experience around one brave friend.</h2>
-                <p>
-                  Manu is the emotional center of the first Maitri box: a
-                  storybook, companion doll in development, letter, stickers,
-                  activities, and parent-child prompts designed to be revisited.
-                </p>
-                <div className="manu-showcase-grid">
-                  {manuShowcase.map(([label, text, Icon]) => (
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  );
+}
+
+function CharacterDashboard({ selectedId, onBack }) {
+  const [activeFeature, setActiveFeature] = useState("storybook");
+  const [activeStoryIndex, setActiveStoryIndex] = useState(null);
+  
+  const character = characterLibrary[selectedId];
+  const displayCharacter = character || {
+      name: "Mary Kom", role: "Future athlete friend", tone: "amber",
+      initials: "MK",
+      tagline: "A fighter who learned that true strength starts from within."
+  };
+
+  const isManu = selectedId === "manu";
+
+  // For manu dashboard
+  const activeStoryPreview = activeStoryIndex === null ? null : manuStorybookPreviews[activeStoryIndex];
+  const heroStops = manuAdventureStops.slice(0, 4);
+
+  return (
+    <div className="character-dashboard-layout">
+      <aside className="dashboard-sidebar">
+        <button className="dashboard-back-btn" onClick={onBack}>
+          <ArrowLeft size={18} weight="bold" />
+          <span>Back to Characters</span>
+        </button>
+        <div className="dashboard-character-info">
+          <div className="dashboard-avatar">
+            {displayCharacter.image ? <img src={displayCharacter.image} alt={displayCharacter.name} /> : <span>{displayCharacter.initials}</span>}
+          </div>
+          <h2>{displayCharacter.name}</h2>
+          <span className="dashboard-role">{displayCharacter.role}</span>
+        </div>
+        
+        <nav className="dashboard-nav">
+          {characterDashboardModes.map(([id, label, Icon]) => (
+            <button 
+              key={id}
+              className={`dashboard-nav-item ${activeFeature === id ? "active" : ""}`}
+              onClick={() => setActiveFeature(id)}
+            >
+              <Icon size={20} weight="duotone" />
+              <span>{label}</span>
+            </button>
+          ))}
+        </nav>
+      </aside>
+
+      <main className="dashboard-content">
+        {!isManu ? (
+          <div className="dashboard-placeholder">
+            <LockKey size={48} weight="duotone" />
+            <h2>{displayCharacter.name} is a future friend.</h2>
+            <p>Her story, doll, and activity rituals will follow after Manu finds her first families.</p>
+          </div>
+        ) : (
+          <div className="dashboard-panel-container">
+            {activeFeature === "storybook" && (
+              <div className="dashboard-panel storybook-panel">
+                <div className="dashboard-panel-head">
+                  <BookOpenText size={30} weight="duotone" />
+                  <div>
+                    <span>Book one preview</span>
+                    <h3>Manu: The Horse Nobody Could Ride</h3>
+                    <p>An early 32-page first-box story plan: 22 story pages, 2 pages from Manu, 6 activity pages, and 2 sticker pages.</p>
+                  </div>
+                </div>
+                <div className="storybook-preview-grid">
+                  {manuStorybookPreviews.map((preview, index) => (
+                    <button
+                      className={activeStoryIndex === index ? "active" : ""}
+                      key={preview.pages}
+                      onClick={() => setActiveStoryIndex(index)}
+                    >
+                      <span className="storybook-thumb">
+                        <img src={preview.image} alt="" />
+                      </span>
+                      <span>{preview.pages}</span>
+                      <h4>{preview.title}</h4>
+                      <p>{preview.text}</p>
+                    </button>
+                  ))}
+                </div>
+                {activeStoryPreview && (
+                  <div className="storybook-immersive-overlay">
+                    <div className="storybook-immersive-backdrop" onClick={() => setActiveStoryIndex(null)}></div>
+                    <div className="storybook-immersive-modal">
+                      <button className="storybook-close-btn" onClick={() => setActiveStoryIndex(null)}>
+                        <X size={24} weight="bold" />
+                      </button>
+                      <div className="storybook-spread">
+                        <div className="storybook-page storybook-left-page">
+                          <img src={activeStoryPreview.image} alt="" className="storybook-full-image" />
+                        </div>
+                        <div className="storybook-page storybook-right-page">
+                          <span className="storybook-tag">Preview reader</span>
+                          <h2>{activeStoryPreview.title}</h2>
+                          <h4>{activeStoryPreview.takeaway}</h4>
+                          <div className="storybook-text-content">
+                            {activeStoryPreview.reader.map(([page, title, text]) => (
+                              <article key={`${activeStoryPreview.pages}-${page}`}>
+                                <strong>{page}</strong>
+                                <h5>{title}</h5>
+                                <p>{text}</p>
+                              </article>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {activeFeature === "talk" && (
+              <div className="dashboard-panel talk-panel">
+                <div className="dashboard-panel-head">
+                  <Heart size={30} weight="duotone" />
+                  <div>
+                    <span>Future possibility</span>
+                    <h3>Courage prompts with Manu</h3>
+                    <p>A guided prompt format where children can explore brave questions with a grown-up nearby.</p>
+                  </div>
+                </div>
+                <div className="talk-preview">
+                  <div>
+                    {manuTalkPrompts.map((prompt) => (
+                      <button type="button" key={prompt}>{prompt}</button>
+                    ))}
+                  </div>
+                  <blockquote>
+                    I felt scared too. A brave step does not have to be loud. Try one kind step, then tell someone you trust what happened.
+                  </blockquote>
+                </div>
+              </div>
+            )}
+            
+            {activeFeature === "accessories" && (
+              <div className="dashboard-panel accessories-panel">
+                <div className="dashboard-panel-head">
+                  <Gift size={30} weight="duotone" />
+                  <div>
+                    <span>Future add-on direction</span>
+                    <h3>Accessories that belong to the story.</h3>
+                    <p>Add-ons should feel earned from Manu's world, not random merchandise.</p>
+                  </div>
+                </div>
+                <div className="accessory-preview-grid">
+                  {manuAccessoryPreviews.map(([label, text, Icon]) => (
                     <article key={label}>
-                      <Icon size={25} weight="duotone" />
-                      <strong>{label}</strong>
-                      <span>{text}</span>
+                      <Icon size={28} weight="duotone" />
+                      <h4>{label}</h4>
+                      <p>{text}</p>
                     </article>
                   ))}
                 </div>
               </div>
-            </section>
-
-            <section className="character-experience-dashboard" aria-label="Manu experience dashboard">
-              <div className="investor-section-head">
-                <span className="panel-label">Manu story preview</span>
-                <h2>Explore Manu through story, play, and future possibilities.</h2>
-                <p>
-                  The storybook preview is the focus today. The other modules
-                  show how Maitri can grow carefully around Manu after families
-                  respond to the first story and box.
-                </p>
-              </div>
-              <div className="character-dashboard-nav" role="tablist" aria-label="Manu features">
-                {characterDashboardModes.map(([id, label, Icon]) => (
-                  <button
-                    className={activeFeature === id ? "active" : ""}
-                    type="button"
-                    role="tab"
-                    aria-selected={activeFeature === id}
-                    key={id}
-                    onClick={() => setActiveFeature(id)}
-                  >
-                    <Icon size={20} weight="duotone" />
-                    <span>{label}</span>
-                  </button>
-                ))}
-              </div>
-
-              {activeFeature === "storybook" && (
-                <div className="character-dashboard-panel storybook-panel" role="tabpanel">
-                  <div className="dashboard-panel-head">
-                    <BookOpenText size={30} weight="duotone" />
-                    <div>
-                      <span>Book one preview</span>
-                      <h3>Manu: The Horse Nobody Could Ride</h3>
-                      <p>
-                        An early 32-page first-box story plan: 22 story pages,
-                        2 pages from Manu, 6 activity pages, and 2 sticker pages.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="storybook-preview-grid">
-                    {manuStorybookPreviews.map((preview, index) => (
-                      <button
-                        className={activeStoryIndex === index ? "active" : ""}
-                        type="button"
-                        key={preview.pages}
-                        onClick={() => setActiveStoryIndex(index)}
-                      >
-                        <span className="storybook-thumb">
-                          <img src={preview.image} alt="" />
-                        </span>
-                        <span>{preview.pages}</span>
-                        <h4>{preview.title}</h4>
-                        <p>{preview.text}</p>
-                        <strong>{activeStoryIndex === index ? "Reading now" : "Preview this section"}</strong>
-                      </button>
-                    ))}
-                  </div>
-                  {activeStoryPreview && (
-                    <div className="storybook-reader" aria-live="polite">
-                      <div className="storybook-reader-cover">
-                        <img src={activeStoryPreview.image} alt="" />
-                        <span>{activeStoryPreview.pages}</span>
-                        <h4>{activeStoryPreview.title}</h4>
-                      </div>
-                      <div className="storybook-reader-pages">
-                        <span>Preview reader</span>
-                        <h4>{activeStoryPreview.takeaway}</h4>
-                        {activeStoryPreview.reader.map(([page, title, text]) => (
-                          <article key={`${activeStoryPreview.pages}-${page}`}>
-                            <strong>{page}</strong>
-                            <h5>{title}</h5>
-                            <p>{text}</p>
-                          </article>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {activeFeature === "talk" && (
-                <div className="character-dashboard-panel talk-panel" role="tabpanel">
-                  <div className="dashboard-panel-head">
-                    <Heart size={30} weight="duotone" />
-                    <div>
-                      <span>Future possibility</span>
-                      <h3>Courage prompts with Manu</h3>
-                      <p>
-                        A guided prompt format where children can explore brave
-                        questions with a grown-up nearby. This should stay
-                        parent-aware, warm, and values-led before any interactive
-                        product is promised.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="talk-preview">
-                    <div>
-                      {manuTalkPrompts.map((prompt) => (
-                        <button type="button" key={prompt}>{prompt}</button>
-                      ))}
-                    </div>
-                    <blockquote>
-                      I felt scared too. A brave step does not have to be loud.
-                      Try one kind step, then tell someone you trust what happened.
-                    </blockquote>
+            )}
+            
+            {activeFeature === "activities" && (
+              <div className="dashboard-panel activities-panel">
+                <div className="dashboard-panel-head">
+                  <PaintBrush size={30} weight="duotone" />
+                  <div>
+                    <span>Repeat play</span>
+                    <h3>Activities that turn the story into practice.</h3>
+                    <p>Manu's first experience can keep children returning through choices, stickers, drawing prompts, and family conversations.</p>
                   </div>
                 </div>
-              )}
-
-              {activeFeature === "accessories" && (
-                <div className="character-dashboard-panel accessories-panel" role="tabpanel">
-                  <div className="dashboard-panel-head">
-                    <Gift size={30} weight="duotone" />
-                    <div>
-                      <span>Future add-on direction</span>
-                      <h3>Accessories that belong to the story.</h3>
-                      <p>
-                        Add-ons should feel earned from Manu's world, not random
-                        merchandise. Badal, courage symbols, and outfits can be
-                        tested only after the first box proves demand.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="accessory-preview-grid">
-                    {manuAccessoryPreviews.map(([label, text, Icon]) => (
-                      <article key={label}>
-                        <Icon size={28} weight="duotone" />
-                        <h4>{label}</h4>
-                        <p>{text}</p>
-                        <button type="button">Concept only</button>
+                <div className="manu-investor-grid">
+                  {heroStops.map((stop) => {
+                    const StopIcon = stop.icon;
+                    return (
+                      <article className={`investor-story-card ${stop.tone}`} key={stop.id}>
+                        <StopIcon size={28} weight="duotone" />
+                        <span>{stop.label}</span>
+                        <h3>{stop.title}</h3>
+                        <p>{stop.lesson}</p>
                       </article>
-                    ))}
-                  </div>
+                    );
+                  })}
                 </div>
-              )}
-
-              {activeFeature === "activities" && (
-                <div className="character-dashboard-panel activities-panel" role="tabpanel">
-                  <div className="dashboard-panel-head">
-                    <PaintBrush size={30} weight="duotone" />
-                    <div>
-                      <span>Repeat play</span>
-                      <h3>Activities that turn the story into practice.</h3>
-                      <p>
-                        Manu's first experience can keep children returning
-                        through choices, stickers, drawing prompts, and small
-                        family conversations.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="manu-investor-grid">
-                    {heroStops.map((stop) => {
-                      const StopIcon = stop.icon;
-                      return (
-                        <article className={`investor-story-card ${stop.tone}`} key={stop.id}>
-                          <StopIcon size={28} weight="duotone" />
-                          <span>{stop.label}</span>
-                          <h3>{stop.title}</h3>
-                          <p>{stop.lesson}</p>
-                        </article>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </section>
-
-            <section className="manu-investor-box" aria-label="First Manu box">
-              <div>
-                <span className="panel-label">First Manu box</span>
-                <h2>The first product is simple, tangible, and repeatable.</h2>
-                <p>
-                  The first box keeps the experience focused while the product is
-                  still in development: children meet Manu, read her first
-                  adventure, receive a letter from her, and use activities and
-                  stickers to carry the story into everyday life.
-                </p>
               </div>
-              <div className="first-box-river">
-                {firstBoxContents.map(([label, text, Icon]) => (
-                  <article key={label}>
-                    <Icon size={24} weight="duotone" />
-                    <strong>{label}</strong>
-                    <span>{text}</span>
-                  </article>
-                ))}
-              </div>
-            </section>
-          </>
-        ) : selectedId && selectedCharacter ? (
-          <section
-            className={`selected-character-showcase future-selected ${selectedCharacter.tone}`}
-            key={selectedId}
-            aria-live="polite"
-          >
-            <div className="selected-character-portrait placeholder">
-              <CharacterVisual character={selectedCharacter} />
-            </div>
-            <div className="selected-character-copy">
-              <span className="panel-label">Future friend selected</span>
-              <h2>{selectedCharacter.name} can join after Manu finds her first families.</h2>
-              <p>
-                This future friend shows how Maitri can grow into a wider circle:
-                each character needs a clear story, values, play pattern, parent
-                prompts, and a product experience before launch.
-              </p>
-              <div className="manu-showcase-grid">
-                {futureFeatureSlots.slice(0, 4).map(([label, text]) => (
-                  <article key={label}>
-                    <LockKey size={24} weight="duotone" />
-                    <strong>{label}</strong>
-                    <span>{text}</span>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-        ) : null}
-
-        {selectedId && (
-          <section className="manu-investor-parent" aria-label="Parent and future brand promise">
-          <div className="parent-prompts investor-parent-panel">
-            <span className="panel-label">Parent value</span>
-            <h2>Values without preaching.</h2>
-            <p>
-              Maitri gives parents a warmer alternative to mass-market toys and
-              screen-led entertainment: a friend, a story, and prompts that make
-              courage easier to discuss without turning play into a lesson.
-            </p>
-            <div>
-              {parentPrompts.slice(0, 3).map((prompt) => (
-                <p key={prompt}>{prompt}</p>
-              ))}
-            </div>
+            )}
           </div>
-          <div className="future-feature-band investor-future-panel" id="future-friends">
-            <div className="future-band-head">
-              <span className="panel-label">Future shelf</span>
-              <h2>Future friends can follow after Manu is loved by first families.</h2>
-            </div>
-            <div>
-              {futureFeatureSlots.map(([label, text]) => (
-                <article key={label}>
-                  <strong>{label}</strong>
-                  <p>{text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-          </section>
         )}
-      </section>
-      <a className="floating-compass" href="#top" aria-label="Back to top">
-        <Compass size={22} weight="duotone" />
-        <Sparkle size={11} weight="fill" />
-      </a>
-    </main>
+      </main>
+    </div>
   );
 }
 
+function CharacterPage() {
+  const [selectedId, setSelectedId] = useState(null);
+
+  return (
+    <main className={`maitri-page character-world-page ${!selectedId ? 'no-scroll' : 'dashboard-active'}`}>
+      <Header />
+      {!selectedId ? (
+        <CharacterSelectorFullscreen onSelect={setSelectedId} />
+      ) : (
+        <CharacterDashboard selectedId={selectedId} onBack={() => setSelectedId(null)} />
+      )}
+    </main>
+  );
+}
 function CharacterPageLegacy() {
   const [selectedId, setSelectedId] = useState("manu");
   const [mode, setMode] = useState("story");
@@ -1633,7 +1509,7 @@ function CharacterPageLegacy() {
   return (
     <main className="maitri-page character-world-page">
       <section className="character-world-shell section-shell" id="top">
-        <CharacterLabHeader />
+        <Header />
 
         <section className="character-world-hero" aria-labelledby="character-world-title">
           <div className="character-world-copy">
