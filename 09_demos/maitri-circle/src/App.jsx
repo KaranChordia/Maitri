@@ -219,6 +219,52 @@ const characterLibrary = {
     ],
   },
 
+  kalpana: {
+    name: "Kalpana",
+    initials: "KC",
+    role: "Future STEM companion",
+    image: null,
+    tone: "teal",
+    tagline: "A determined dreamer who looked at the sky and wanted to understand how far courage could travel.",
+    worldPill: "Karnal skies and space journeys",
+    origin: "Inspired by Kalpana Chawla",
+    question: "What happens when a small dream keeps growing?",
+    signature: "A notebook of flight sketches, stars, and a paper plane.",
+    takeaway: "Big dreams become real through practice, questions, and persistence.",
+    world: "Rooftops, classrooms, aircraft sketches, night skies, mission rooms, and a view of Earth.",
+    values: [
+      ["Wonder", "She notices the sky and keeps asking how things fly.", Sparkle, "violet"],
+      ["Science", "She tests ideas and keeps learning.", Lightbulb, "teal"],
+      ["Persistence", "She keeps working when the dream feels far away.", SealCheck, "amber"],
+    ],
+    traits: ["Dreamer", "Scientific", "Persistent", "Humble", "Adventurous"],
+    meta: [
+      ["Age in story", "9-12 years"],
+      ["Core book", "The Girl Who Looked Up"],
+      ["Product lane", "STEM story and activity kit"],
+    ],
+    prompts: [
+      {
+        id: "stars",
+        label: "Kalpana maps the night sky from a rooftop.",
+        title: "Story beat",
+        text: "Kalpana lay on the terrace with a notebook beside her. The stars did not feel far away tonight. They felt like questions waiting for someone patient enough to answer them.",
+      },
+      {
+        id: "practice",
+        label: "Kalpana keeps working on a difficult idea.",
+        title: "Persistence",
+        text: "The drawing did not look right the first time. Or the second. Kalpana sharpened her pencil, turned the page, and tried the wing shape again.",
+      },
+      {
+        id: "earth",
+        label: "Kalpana describes Earth from far away.",
+        title: "Wonder note",
+        text: "From high above, Earth looked like one glowing home. Kalpana pressed her hand near the window and remembered every child who had ever looked up.",
+      },
+    ],
+  },
+
   shirisha: {
     name: "Shirisha",
     initials: "BS",
@@ -311,7 +357,7 @@ const characterLibrary = {
   },
 };
 
-const characterOrder = ["manu", "shirisha", "mary"];
+const characterOrder = ["manu", "kalpana", "shirisha", "mary"];
 
 const characterWorldModes = [
   ["story", "Story", BookOpenText],
@@ -1253,6 +1299,7 @@ function CharacterVisual({ character, compact = false }) {
 function CharacterSelectorFullscreen({ onSelect }) {
     const characters = [
     { id: "manu", ...characterLibrary.manu },
+    { id: "kalpana", ...characterLibrary.kalpana },
     { id: "shirisha", ...characterLibrary.shirisha },
     { id: "savitribai", ...characterLibrary.savitribai },
   ];
