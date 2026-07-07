@@ -44,25 +44,29 @@ The default pre-launch website is now `09_demos/maitri-circle/`.
 Purpose:
 
 - Introduce Maitri as a story-first companion doll universe.
-- Introduce Manu as the first character anchor.
+- Lead the homepage with Maitri Circle as the overall story-first companion universe.
+- Introduce Manu as the first character anchor after the overall Maitri promise is clear.
 - Invite families into the Maitri Circle.
-- Provide the Character Lab at `characters.html`.
+- Provide the Meet Manu / character world page at `characters.html`.
+- Provide the Maitri Companions page at `companions.html`.
+- Provide the Story Universe prototype at `story-universe.html`.
 - Capture local demo waitlist interest.
 - Capture parent survey signals for audience segment, story preference, beta-reader interest, school interest, preorder interest, and objections.
 - Support future beta reader, school workshop, newsletter, and preorder integrations.
 
-The earlier static website demo and old Sites-ready clone have been removed. Maitri Circle and the Character Lab are the default website direction.
+The earlier static website demo and old Sites-ready clone have been removed. Maitri Circle, Meet Manu, Maitri Companions, and the Story Universe prototype are the default website direction.
 
 Run locally:
 
 ```bash
 cd /Users/karanchordia/Documents/GitHub/Maitri/09_demos/maitri-circle
-npm run dev -- --port 5174
+npm run dev -- --port 3001
 ```
 
 Then open:
 
 ```text
-http://127.0.0.1:5174/
-http://127.0.0.1:5174/characters.html
+http://127.0.0.1:3001/Maitri/
+http://127.0.0.1:3001/Maitri/characters.html
+http://127.0.0.1:3001/Maitri/companions.html
 ```

@@ -97,7 +97,7 @@ What works:
 
 Needs removal or rewrite:
 
-- Brand reads as "Maitri Circle" while the investor reference leads with "Maitri" and "Meet Manu." Decide whether the public brand should be Maitri Dolls, Maitri, or Maitri Circle before the demo.
+- Keep the resolved homepage hierarchy: Maitri Circle should introduce the overall story-first companion universe, and Manu should follow as the first companion / first-box proof point.
 - The Story Universe CTA appears before Manu/product context. For investors, this may make the site feel like an experience prototype rather than a product company.
 - Meet Manu copy says "The new source package frames Manu..." This is internal language and should be removed.
 - Meet Manu says Manu is a "six-book journey" from age seven to Lakshmibai. This may be directionally true in source files, but it should be softened unless Shwetika approves it as public copy.
@@ -109,13 +109,14 @@ Requires attention:
 
 - The mobile hero pushes the character image below the first viewport. This is not a bug, but it weakens the immediate Manu/doll signal.
 - The waitlist only collects email and stores no persistent lead. The source capture plan expects richer fields and a server or browser-local fallback.
-- The homepage should probably become the investor-safe consumer narrative:
-  1. Meet Manu
-  2. What the first box is
-  3. Why parents care
-  4. What children do
-  5. Story Universe preview
-  6. Join waitlist
+- The homepage should continue the investor-safe consumer narrative:
+  1. Maitri Circle as the overall story-first companion universe
+  2. Manu as the first companion
+  3. What the first box is
+  4. Why parents care
+  5. What children do
+  6. Story Universe preview
+  7. Join waitlist
 
 ### Character Page: `/Maitri/characters.html`
 

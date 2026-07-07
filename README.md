@@ -48,23 +48,28 @@ The first product should stay focused: make parents feel the doll is educational
 
 The default pre-launch website is Maitri Circle and lives in `09_demos/maitri-circle`.
 
+Current homepage hierarchy: lead with Maitri Circle as the overall story-first companion universe, then introduce Manu as the first companion and first-box anchor. Future hero work should preserve that order unless the strategy changes.
+
 It includes:
 
 - Main Maitri Circle website: `index.html`
-- Character Lab page: `characters.html`
+- Meet Manu / character world page: `characters.html`
+- Maitri Companions page: `companions.html`
+- Story Universe prototype: `story-universe.html`
 
 To run it locally:
 
 ```bash
 cd 09_demos/maitri-circle
-npm run dev
+npm run dev -- --port 3001
 ```
 
 Then open:
 
 ```text
-http://127.0.0.1:5174/
-http://127.0.0.1:5174/characters.html
+http://127.0.0.1:3001/Maitri/
+http://127.0.0.1:3001/Maitri/characters.html
+http://127.0.0.1:3001/Maitri/companions.html
 ```
 
 The earlier website demo and old Sites-ready clone have been removed so Maitri Circle remains the single default website direction.

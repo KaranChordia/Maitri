@@ -62,6 +62,7 @@ applyTheme(getSavedTheme());
 
 const generatedAssets = {
   hero: publicPath("assets/generated/optimized/hero-scene.jpg"),
+  maitriCircleHero: publicPath("assets/generated/optimized/maitri-circle-hero.jpg"),
   manuPortrait: publicPath("assets/generated/optimized/manu-portrait.jpg"),
   universeMap: publicPath("assets/generated/optimized/universe-map.jpg"),
   circle: publicPath("assets/generated/optimized/circle-gathering.jpg"),
@@ -91,18 +92,18 @@ const navItems = [
 
 const heroProof = [
   {
-    icon: Heart,
-    text: "A brave Indian friend to grow with",
+    icon: UsersThree,
+    text: "Girls meet brave Indian heroines as friends",
     tone: "rose",
   },
   {
-    icon: BookOpenText,
-    text: "Stories rooted in India",
+    icon: Sparkle,
+    text: "Courage, kindness, curiosity, and leadership",
     tone: "teal",
   },
   {
     icon: ShieldCheck,
-    text: "Gentle values without preaching",
+    text: "Parents get meaningful, culturally rooted play",
     tone: "violet",
   },
 ];
@@ -863,16 +864,17 @@ function Hero() {
       <Header />
       <div className="hero-grid">
         <div className="hero-copy">
-          <h1>Meet Manu, Maitri's first companion.</h1>
+          <span className="section-label teal-label">A story-first companion universe</span>
+          <h1>Maitri Circle</h1>
           <p>
-            Maitri begins with Manu and grows into Companions: a place where
-            children can meet story-led companions, open their books, explore
-            courage prompts, and keep returning through meaningful play.
+            A warm Indian story world where children befriend brave companions
+            and practise courage, kindness, curiosity, and leadership through
+            story, play, and parent-child reflection.
           </p>
           <div className="hero-actions">
-            <ArrowButton href="#manu">Meet Manu</ArrowButton>
-            <ArrowButton href="#first-box" variant="outline">
-              See the First Box
+            <ArrowButton href={publicPath("companions.html")}>Enter Companions</ArrowButton>
+            <ArrowButton href="#manu" variant="outline">
+              Meet Manu
             </ArrowButton>
           </div>
           <div className="hero-proofs" aria-label="Maitri values">
@@ -883,9 +885,9 @@ function Hero() {
         </div>
         <div className="hero-art" aria-label="Maitri story world illustration">
           <GeneratedArt
-            src={generatedAssets.hero}
+            src={generatedAssets.maitriCircleHero}
             className="hero-asset"
-            alt="A warm illustrated Indian Maitri story world with children gathered in a magical landscape"
+            alt="A warm illustrated Maitri Circle with families, children, books, companion keepsakes, and story-led play"
             parallax={9}
             feather
           />

@@ -827,6 +827,10 @@ input:focus-visible {
   padding: 18px 0 28px;
 }
 
+.hero-copy .section-label {
+  margin-bottom: 18px;
+}
+
 h1,
 h2 {
   margin: 0;
