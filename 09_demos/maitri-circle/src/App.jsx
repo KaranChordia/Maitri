@@ -83,10 +83,10 @@ const shwetikaAssets = {
 };
 
 const navItems = [
-  ["Meet Manu", publicPath("#manu")],
+  ["Meet Manu", publicPath("manu.html")],
   ["First Box", publicPath("#first-box")],
   ["For Families", publicPath("#circle")],
-  ["Companions", publicPath("companions.html")],
+  ["Companions", publicPath("characters.html")],
   ["Reading Circles", publicPath("#schools")],
 ];
 
@@ -474,6 +474,8 @@ const futureFeatureSlots = [
   ["Shelf", "a growing circle of friends"],
 ];
 
+const companionPageIds = ["manu", "savitribai", "kalpana"];
+
 
 const savitribaiStorybookPreviews = [
   {
@@ -660,6 +662,151 @@ const manuStorybookPreviews = [
   },
 ];
 
+const manuBookJourney = [
+  {
+    pages: "Book 1",
+    title: "Manu's Big, Brave Heart",
+    image: shwetikaAssets.manuWithFather,
+    text: "Manu is a curious child who asks why girls should stand aside, learns to ride, and begins discovering courage in everyday choices.",
+    takeaway: "Early manuscript direction exists; preview copy in development.",
+    reader: [
+      ["Opening promise", "Before she was a queen, Manu was a girl like the child reader."],
+      ["Core scenes", "Ghats, stables, riding practice, friendship, family love, and one brave question."],
+      ["First-box connection", "This story anchors the doll, letter, activities, and stickers in one warm first experience."],
+    ],
+  },
+  {
+    pages: "Book 2",
+    title: "Manu and the Court of Kings",
+    image: shwetikaAssets.manuAtGhats,
+    text: "Manu grows older inside a larger court world, learning how to stay herself in rooms shaped by rules, politics, and quiet judgment.",
+    takeaway: "Early manuscript direction exists; preview copy in development.",
+    reader: [
+      ["Emotional question", "How do you belong without shrinking yourself?"],
+      ["Story world", "Bithoor, the Peshwa's court, friendships, debates, and listening before leadership."],
+      ["Preview note", "This page shares the direction of the journey while the final story wording is still being shaped."],
+    ],
+  },
+  {
+    pages: "Book 3",
+    title: "Manu Becomes Lakshmibai",
+    image: shwetikaAssets.manuOnHorse,
+    text: "Manu faces change, leaves familiar places, reaches Jhansi, and begins understanding what a new name and new responsibility can mean.",
+    takeaway: "Early manuscript direction exists; sensitive details remain review-led.",
+    reader: [
+      ["Emotional question", "How does courage help a child move through change?"],
+      ["Story world", "The road to Jhansi, the fort, a new name, and early lessons in responsibility."],
+      ["Preview note", "This later story should stay gentle, age-aware, and emotionally clear for children."],
+    ],
+  },
+  {
+    pages: "Book 4",
+    title: "The Rani Who Said No",
+    image: shwetikaAssets.storyOneChance,
+    text: "A later, more serious arc about responsibility, loss, and standing firm, to be handled with extra care for child readers.",
+    takeaway: "Journey preview only; needs careful story and historical review before final detail.",
+    reader: [
+      ["Preview lane", "A future story about resolve and responsibility."],
+      ["Care note", "This arc should stay light at preview stage and be shaped with child emotional safety in mind."],
+    ],
+  },
+  {
+    pages: "Book 5",
+    title: "Laxmibai Rides",
+    image: shwetikaAssets.horseRace,
+    text: "A later action-led story direction that should only appear as a high-level journey marker for now.",
+    takeaway: "Journey preview only; keep the focus on courage rather than spectacle.",
+    reader: [
+      ["Preview lane", "A future story about courage under pressure."],
+      ["Care note", "The story direction should keep child-safety and emotional care ahead of spectacle."],
+    ],
+  },
+  {
+    pages: "Book 6",
+    title: "Manu Lives Forever",
+    image: shwetikaAssets.storyLetterFromManu,
+    text: "The final arc keeps Manu's legacy alive through a modern child who discovers the story and carries its courage forward.",
+    takeaway: "Journey preview only; useful as the emotional end-point of the Manu journey.",
+    reader: [
+      ["Preview lane", "A future bridge between history, family memory, and today's child."],
+      ["Care note", "The ending should leave children with living courage, not only a history lesson."],
+    ],
+  },
+];
+
+const kalpanaStorybookPreviews = characterLibrary.kalpana.prompts.map((prompt, index) => ({
+  pages: `Preview ${index + 1}`,
+  title: prompt.label.replace(/\.$/, ""),
+  image: null,
+  text: prompt.text,
+  takeaway:
+    index === 0
+      ? "Wonder can become a serious dream."
+      : index === 1
+        ? "Practice turns curiosity into confidence."
+        : "A big dream can still stay humble and human.",
+  reader: [
+    ["Story seed", prompt.title, prompt.text],
+    ["Page direction", "Development note", "Keep this child-facing and focused on curiosity, practice, and persistence."],
+  ],
+}));
+
+const companionPageContent = {
+  manu: {
+    id: "manu",
+    ...characterLibrary.manu,
+    pageTitle: "Manu: Maitri's first brave friend",
+    eyebrow: "First Maitri companion",
+    intro:
+      "Meet Manu through story previews, parent-child prompts, the first-box experience, and the larger book journey being developed around her.",
+    note: "Preview and development copy.",
+    primaryAction: ["Explore the book previews", "#book-previews"],
+    secondaryAction: ["See all companions", publicPath("characters.html")],
+    storyPreviews: manuStorybookPreviews,
+    bookJourney: manuBookJourney,
+    valuesTitle: "Four ways Manu makes courage feel close",
+    values: manuLearnCards,
+    parentPanelTitle: "Parent-child conversation",
+    parentPanelText:
+      "Manu helps families talk about asking brave questions, trying once, being kind first, and taking one steady step when something feels hard.",
+    firstBox: true,
+  },
+  savitribai: {
+    id: "savitribai",
+    ...characterLibrary.savitribai,
+    pageTitle: "Savitribai: the friend who keeps learning",
+    eyebrow: "Developing companion",
+    intro:
+      "Savitribai's page introduces a learning-led companion direction around courage, resilience, teaching, and the right of every child to read.",
+    note: "Developing companion page. Story and history details will be shaped carefully before final publication.",
+    primaryAction: ["Read story previews", "#book-previews"],
+    secondaryAction: ["Back to companions", publicPath("characters.html")],
+    storyPreviews: savitribaiStorybookPreviews,
+    valuesTitle: "A companion for learning courage",
+    values: characterLibrary.savitribai.values,
+    parentPanelTitle: "Parent-child conversation",
+    parentPanelText:
+      "Savitribai gives families a warm way to talk about learning, resilience, and continuing gently when others do not understand your dream.",
+  },
+  kalpana: {
+    id: "kalpana",
+    ...characterLibrary.kalpana,
+    pageTitle: "Kalpana: the friend who looked up",
+    eyebrow: "Developing companion",
+    intro:
+      "Kalpana's page gives Maitri a distinct STEM and wonder lane: questions, practice, persistence, and the courage to keep a dream alive.",
+    note: "Developing companion page. Story and history details will be shaped carefully before final publication.",
+    primaryAction: ["Read story previews", "#book-previews"],
+    secondaryAction: ["Back to companions", publicPath("characters.html")],
+    storyPreviews: kalpanaStorybookPreviews,
+    valuesTitle: "A companion for wonder and persistence",
+    values: characterLibrary.kalpana.values,
+    parentPanelTitle: "Parent-child conversation",
+    parentPanelText:
+      "Kalpana helps families talk about curiosity, science, practice, and how small questions can grow into big dreams.",
+  },
+};
+
 const manuAccessoryPreviews = [
   ["Badal companion concept", "A possible story-led horse add-on after the first Manu box is validated.", Gift],
   ["Courage sticker pack", "A small future extension for brave, curious, kind, and steady moments.", Star],
@@ -839,7 +986,7 @@ function Header() {
       </nav>
       <div className="header-actions">
         <div className="header-utility-pill" aria-label="Quick actions">
-          <a className="waitlist-pill" href="#waitlist">
+          <a className="waitlist-pill" href={publicPath("#waitlist")}>
             Join Waitlist
           </a>
           <ThemeToggle />
@@ -872,9 +1019,9 @@ function Hero() {
             story, play, and parent-child reflection.
           </p>
           <div className="hero-actions">
-            <ArrowButton href={publicPath("companions.html")}>Enter Companions</ArrowButton>
-            <ArrowButton href="#manu" variant="outline">
-              Meet Manu
+            <ArrowButton href={publicPath("manu.html")}>Meet Manu</ArrowButton>
+            <ArrowButton href={publicPath("characters.html")} variant="outline">
+              Explore Companions
             </ArrowButton>
           </div>
           <div className="hero-proofs" aria-label="Maitri values">
@@ -918,7 +1065,7 @@ function Manu() {
             brave question, trying once, being kind first, and taking one steady
             step.
           </p>
-          <ArrowButton href={publicPath("companions.html")}>Open Companions</ArrowButton>
+          <ArrowButton href={publicPath("manu.html")}>Open Manu Page</ArrowButton>
         </div>
         <div className="keepsakes" aria-label="Manu keepsakes">
           {manuKeepsakes.map((item) => (
@@ -1096,8 +1243,8 @@ function Waitlist() {
         <h2>Join the early list for Manu.</h2>
         <p>
           Receive early story previews, parent-child prompts, beta-reader
-          invitations, and first updates as the Manu box develops. No preorder
-          payment is being taken yet.
+          invitations, and first updates as the Manu box develops. No payment
+          is being collected here.
         </p>
       </div>
       <form className="waitlist-form" onSubmit={submitWaitlist} noValidate>
@@ -1149,7 +1296,7 @@ function Waitlist() {
             ? "You are on the early Manu list."
             : status === "missing"
               ? "Enter a valid email address to join the waitlist."
-              : "No preorder payment. Just Manu story updates, previews, and parent-child ideas."}
+              : "No payment here. Just Manu story updates, previews, and parent-child ideas."}
         </p>
       </form>
     </section>
@@ -1171,6 +1318,254 @@ function CharacterVisual({ character, compact = false }) {
     <span className={`character-initial ${character.tone} ${compact ? "compact" : ""}`} aria-hidden="true">
       {character.initials}
     </span>
+  );
+}
+
+function usePageMetadata(title, description) {
+  useEffect(() => {
+    if (!title || typeof document === "undefined") return;
+
+    document.title = title;
+    const descriptionTag = document.querySelector('meta[name="description"]');
+    if (descriptionTag && description) {
+      descriptionTag.setAttribute("content", description);
+    }
+  }, [title, description]);
+}
+
+function StoryThumb({ preview, character }) {
+  if (preview.image) {
+    return (
+      <span className="storybook-thumb">
+        <img src={preview.image} alt="" />
+      </span>
+    );
+  }
+
+  return (
+    <span className={`storybook-thumb placeholder ${character.tone}`}>
+      <CharacterVisual character={character} compact />
+    </span>
+  );
+}
+
+function StoryPreviewSection({ character, previews, title, intro }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activePreview = previews[activeIndex] || previews[0];
+
+  if (!activePreview) return null;
+
+  return (
+    <section className="character-experience-dashboard" id="book-previews">
+      <div className="dashboard-panel-head">
+        <BookOpenText size={34} weight="duotone" />
+        <div>
+          <span>Story previews</span>
+          <h3>{title}</h3>
+          <p>{intro}</p>
+        </div>
+      </div>
+      <div className="storybook-preview-grid">
+        {previews.map((preview, index) => (
+          <button
+            className={activeIndex === index ? "active" : ""}
+            key={`${character.id}-${preview.pages}-${preview.title}`}
+            onClick={() => setActiveIndex(index)}
+            type="button"
+          >
+            <StoryThumb preview={preview} character={character} />
+            <span>{preview.pages}</span>
+            <h4>{preview.title}</h4>
+            <p>{preview.text}</p>
+            <strong>{preview.takeaway}</strong>
+          </button>
+        ))}
+      </div>
+      <div className="storybook-reader">
+        <div className={`storybook-reader-cover ${activePreview.image ? "" : "placeholder"}`}>
+          {activePreview.image ? (
+            <img src={activePreview.image} alt="" />
+          ) : (
+            <CharacterVisual character={character} />
+          )}
+          <span>{activePreview.pages}</span>
+          <h4>{activePreview.title}</h4>
+        </div>
+        <div className="storybook-reader-pages">
+          <span>{character.note || "Preview copy"}</span>
+          <h4>{activePreview.takeaway}</h4>
+          {activePreview.reader.map(([page, heading, text]) => (
+            <article key={`${activePreview.title}-${page}-${heading}`}>
+              <strong>{page}</strong>
+              <h5>{heading}</h5>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CompanionHubPage() {
+  usePageMetadata(
+    "Maitri Companions - Maitri Dolls",
+    "Meet Manu, Savitribai, and Kalpana in the Maitri companion universe.",
+  );
+
+  return (
+    <main className="maitri-page character-world-page character-investor-page">
+      <section className="character-world-shell section-shell" id="top">
+        <Header />
+        <section className="entry-selection">
+          <div className="investor-section-head">
+            <span>Maitri Companions</span>
+            <h1>Meet the story friends at the heart of Maitri.</h1>
+            <p>
+              Begin with Manu, then preview how Savitribai and Kalpana can bring
+              learning, resilience, wonder, and persistence into the same
+              child-facing companion world.
+            </p>
+          </div>
+          <div className="character-picker-grid" aria-label="Maitri companion pages">
+            {companionPageIds.map((id) => {
+              const character = companionPageContent[id];
+              const href = publicPath(`${id}.html`);
+              return (
+                <a className={`character-picker-card ${character.tone}`} href={href} key={id}>
+                  <CharacterVisual character={character} compact />
+                  <span>{character.eyebrow}</span>
+                  <strong>{character.name}</strong>
+                  <small>{character.tagline}</small>
+                  <em>{id === "manu" ? "Open Manu page" : "Open companion page"}</em>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      </section>
+    </main>
+  );
+}
+
+function CompanionDetailPage({ characterId }) {
+  const character = companionPageContent[characterId] || companionPageContent.manu;
+  const valueCards = character.values || [];
+
+  usePageMetadata(
+    `${character.name} - Maitri Dolls`,
+    `${character.name} in the Maitri companion universe: ${character.tagline}`,
+  );
+
+  return (
+    <main className="maitri-page character-world-page character-investor-page">
+      <section className="character-world-shell section-shell" id="top">
+        <Header />
+        <section className="selected-character-showcase character-page-hero" aria-labelledby={`${character.id}-title`}>
+          <div className={`selected-character-portrait ${character.image ? "" : "placeholder"}`}>
+            <CharacterVisual character={character} />
+          </div>
+          <div className="selected-character-copy">
+            <span>{character.eyebrow}</span>
+            <h1 id={`${character.id}-title`}>{character.pageTitle}</h1>
+            <p>{character.intro}</p>
+            <div className="companion-note">
+              <Sparkle size={18} weight="fill" />
+              <span>{character.note}</span>
+            </div>
+            <div className="hero-actions">
+              <ArrowButton href={character.primaryAction[1]}>{character.primaryAction[0]}</ArrowButton>
+              <ArrowButton href={character.secondaryAction[1]} variant="outline">
+                {character.secondaryAction[0]}
+              </ArrowButton>
+            </div>
+          </div>
+        </section>
+
+        {character.bookJourney && (
+          <StoryPreviewSection
+            character={character}
+            previews={character.bookJourney}
+            title="The Manu book journey"
+            intro="A preview of the wider Manu arc from early story materials. These are development previews, not final published book copy."
+          />
+        )}
+
+        <StoryPreviewSection
+          character={character}
+          previews={character.storyPreviews}
+          title={character.id === "manu" ? "First-box storybook preview" : `${character.name} story direction`}
+          intro={
+            character.id === "manu"
+              ? "Book 1 stays closest to the first product experience: story, letter, activities, and stickers."
+              : "These preview beats show how the companion page can become a fuller story experience after careful review."
+          }
+        />
+
+        <section className="manu-investor-box companion-values-section">
+          <div>
+            <span className="panel-label">{character.valuesTitle}</span>
+            <h2>{character.question}</h2>
+            <p>{character.takeaway}</p>
+          </div>
+          <div className="manu-investor-grid">
+            {valueCards.map(([label, text, Icon, tone]) => (
+              <article className={`investor-story-card ${tone}`} key={label}>
+                <Icon size={28} weight="duotone" />
+                <span>{label}</span>
+                <h3>{text}</h3>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {character.firstBox && (
+          <section className="manu-investor-box">
+            <div>
+              <span className="panel-label">First Manu box</span>
+              <h2>Book 1 connects the doll, storybook, letter, activities, and stickers.</h2>
+              <p>
+                The first-box page keeps the focus on story meaning, family
+                connection, and early development updates while the product is
+                still being shaped carefully.
+              </p>
+            </div>
+            <div className="first-box-river">
+              {firstBoxContents.map(([label, text, Icon]) => (
+                <article key={label}>
+                  <Icon size={24} weight="duotone" />
+                  <strong>{label}</strong>
+                  <span>{text}</span>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="manu-investor-parent">
+          <article className="investor-parent-panel">
+            <span className="panel-label">{character.parentPanelTitle}</span>
+            <h2>What this page helps families feel</h2>
+            <p>{character.parentPanelText}</p>
+          </article>
+          <article className="investor-future-panel">
+            <span className="panel-label">Next step</span>
+            <h2>Bring this story into the Maitri Circle.</h2>
+            <p>
+              Invite early families to follow story previews, parent-child
+              prompts, and companion development updates while the product is
+              still being shaped carefully.
+            </p>
+            <div className="hero-actions">
+              <ArrowButton href={publicPath("#waitlist")}>Join Waitlist</ArrowButton>
+              <ArrowButton href={publicPath("characters.html")} variant="outline">
+                See Companions
+              </ArrowButton>
+            </div>
+          </article>
+        </section>
+      </section>
+    </main>
   );
 }
 
@@ -2090,10 +2485,17 @@ export function App() {
     path === "/characters" ||
     path.endsWith("/companions.html") ||
     path.endsWith("/characters.html");
+  const companionRoute = companionPageIds.find(
+    (id) => path === `/${id}` || path.endsWith(`/${id}`) || path.endsWith(`/${id}.html`),
+  );
   const isStoryUniversePage = path === "/story-universe" || path.endsWith("/story-universe.html");
 
   if (isCompanionPage) {
-    return <CharacterPage />;
+    return <CompanionHubPage />;
+  }
+
+  if (companionRoute) {
+    return <CompanionDetailPage characterId={companionRoute} />;
   }
 
   if (isStoryUniversePage) {

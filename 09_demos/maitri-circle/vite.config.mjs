@@ -13,6 +13,9 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         companions: resolve(__dirname, "companions.html"),
         characters: resolve(__dirname, "characters.html"),
+        manu: resolve(__dirname, "manu.html"),
+        savitribai: resolve(__dirname, "savitribai.html"),
+        kalpana: resolve(__dirname, "kalpana.html"),
         storyUniverse: resolve(__dirname, "story-universe.html"),
       },
       output: {
