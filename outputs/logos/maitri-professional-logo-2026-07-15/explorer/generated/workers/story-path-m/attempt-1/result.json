@@ -1,0 +1,7 @@
+{
+  "id": "story-path-m",
+  "status": "failed",
+  "image_path": null,
+  "error": "Native image generation returned an image but no filesystem path or binary handle was available to save it.",
+  "caveats": ""
+}

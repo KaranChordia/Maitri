@@ -1,0 +1,5 @@
+Native image generation ran, but the tool did not expose a savable PNG payload or local file path in this environment, so I did not create placeholder art.
+
+Wrote the required failed result JSON to:
+
+[outputs/logos/maitri-professional-logo-2026-07-15/explorer/generated/workers/open-embrace/attempt-2/result.json](/Users/karanchordia/Documents/GitHub/Maitri/outputs/logos/maitri-professional-logo-2026-07-15/explorer/generated/workers/open-embrace/attempt-2/result.json)

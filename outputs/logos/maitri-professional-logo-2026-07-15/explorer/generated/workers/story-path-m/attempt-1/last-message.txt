@@ -1,0 +1,5 @@
+Wrote the required failure JSON to:
+
+[ result.json](/Users/karanchordia/Documents/GitHub/Maitri/outputs/logos/maitri-professional-logo-2026-07-15/explorer/generated/workers/story-path-m/attempt-1/result.json)
+
+The native image tool generated an image in-chat, but did not provide a filesystem path or binary handle I could save as the requested PNG.

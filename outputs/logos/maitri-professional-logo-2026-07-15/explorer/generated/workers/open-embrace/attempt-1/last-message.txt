@@ -1,0 +1,5 @@
+Generated exactly one image with `image_gen.imagegen`, but the tool did not expose a filesystem path or bytes I could save to the requested PNG path.
+
+Wrote the required failed worker result JSON at:
+
+`outputs/logos/maitri-professional-logo-2026-07-15/explorer/generated/workers/open-embrace/attempt-1/result.json`

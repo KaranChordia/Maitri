@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "title": "Maitri professional logo exploration",
+    "stage": "Logo exploration",
+    "brand_name": "Maitri",
+    "anchor": "A warm, premium, story-first companion universe where children befriend brave Indian heroines",
+    "summary": "Six distinct identity directions built around an M, companionship, and Maitri's rose-led, rounded website language.",
+    "base_asset": "/Users/karanchordia/Documents/GitHub/Maitri/09_demos/maitri-circle/reference-assets/maitri-circle-reference.png"
+  },
+  "constraints": {
+    "preserve": [
+      "Exact brand name spelling: Maitri",
+      "A clearly recognisable letter M",
+      "Companionship expressed as two presences, an embrace, or a shared path",
+      "Warm premium child-and-parent appeal",
+      "Visual compatibility with Outfit typography and rounded website forms",
+      "Primary palette led by Maitri Rose #ef6f8b, Deep Rose #db5474, Plum #451039, and Amber #f3a823",
+      "A silhouette that can work in one colour and at favicon size",
+      "A multi-character universe rather than a Manu-specific identity"
+    ],
+    "avoid": [
+      "Generic hearts or holding-hands stock icons",
+      "Crowns, swords, forts, warrior silhouettes, dolls, or Manu portraits",
+      "NGO seals, school badges, mandalas, or ornate Indian decoration",
+      "Tiny facial features, delicate linework, gradients required for recognition, or several nested elements",
+      "Preschool clip-art styling, glossy 3D effects, shadows, mockups, taglines, or extra copy",
+      "Unrelated blue-corporate or cold technology aesthetics"
+    ]
+  },
+  "routes": [
+    {
+      "id": "shared-arc",
+      "label": "Shared Arc",
+      "family": "monogram",
+      "usage_contexts": ["website header", "storybook cover", "box label", "social profile", "favicon"],
+      "prompt": "Create one professional flat vector-style logo direction for the Indian children's companion brand Maitri on a pure white inspection background. The symbol must be a clear uppercase M constructed from two soft rounded arches that lean gently toward one another like two companions, while their outer strokes imply one open protective circle or embrace. Keep the geometry proprietary, balanced, minimal, warm, and highly recognisable at 16 px. Pair it with the exact wordmark text 'Maitri' in a custom rounded humanist style compatible with Outfit, with the M construction echoed subtly in the wordmark. Use Maitri rose #ef6f8b as the main color, deep plum #451039 for the wordmark, and at most one tiny amber #f3a823 accent. Crisp flat shapes, generous white space, no gradients, no shadows, no mockup, no border, no tagline, no extra words, no heart, no people silhouettes, no doll, no crown, no ornate motifs. Show a single clean horizontal logo lockup with the isolated symbol at left and the exact wordmark at right.",
+      "rationale": "Two equal arches make companionship intrinsic to the M while the open outer gesture suggests belonging without becoming a literal badge.",
+      "best_for": "The broadest brand system: website, packaging, books, labels, and social use.",
+      "decision_advice": "Strongest balance of warmth, ownership, and production simplicity; choose this if Maitri should feel like a confident consumer brand first.",
+      "watch_out": "The arc spacing must be carefully tuned so the M remains obvious before the embrace metaphor.",
+      "next_step": "Reconstruct the mark as precise vector geometry and test the opening at 16-64 px.",
+      "final_owner": "external-production-identity"
+    },
+    {
+      "id": "companion-orbit",
+      "label": "Companion Orbit",
+      "family": "symbol",
+      "usage_contexts": ["social profile", "app icon", "community touchpoints", "storybook stamp"],
+      "prompt": "Design one original flat vector-style logo for Maitri, a warm premium Indian story-first companion universe for children, on a pure white background. Build a bold uppercase M from one continuous rounded ribbon. Place two small equal circular presences at the upper terminals so the letter reads as two companions moving together; extend one lower ribbon stroke into a clean incomplete orbit around the M to express the wider Maitri Circle. The M must read immediately and the orbit must stay open, simple, and strong at favicon size. Pair with the exact wordmark 'Maitri' in a rounded humanist custom style compatible with Outfit. Use deep rose #db5474 and plum #451039, with one restrained amber #f3a823 dot if useful. Flat solid color only. No gradients, shadows, 3D, mockups, extra words, tagline, generic heart, holding-hands pictogram, faces, doll, crown, mandala, or decorative Indian pattern. Present one clean horizontal lockup only.",
+      "rationale": "The two terminals create companionship while the continuing orbit gives Maitri Circle a natural universe-level expression.",
+      "best_for": "Community, digital avatars, story stamps, and places where the circle idea should be visible.",
+      "decision_advice": "Choose this if the public identity should make the growing companion universe more explicit.",
+      "watch_out": "The dots must feel intentional rather than like heads on a generic people icon.",
+      "next_step": "Reduce the orbit and terminal details into a one-colour master and check social-avatar cropping.",
+      "final_owner": "external-production-identity"
+    },
+    {
+      "id": "story-path-m",
+      "label": "Story Path M",
+      "family": "adaptive",
+      "usage_contexts": ["storybook", "website motion", "universe map", "packaging ribbon"],
+      "prompt": "Create one refined flat vector logo direction for Maitri on a pure white inspection background. Maitri is a premium story-first companion universe for Indian children. Draw a clear uppercase M as one thick, friendly continuous path with rounded ends, like a story trail. Let the path begin as two nearby companion points, meet through the center valley, and continue into one open circular path at the final stroke, communicating friendship, continuity, and a growing story world. Keep the mark compact, not illustrative, with no literal book icon. Pair it with the exact wordmark 'Maitri' in a custom rounded humanist style compatible with Outfit. Use Maitri rose #ef6f8b, teal #189a93 only as a restrained secondary accent, and deep plum #451039 for text. Strong one-colour-ready silhouette, flat solid fills, generous white space. No gradient, shadow, 3D, mockup, extra copy, tagline, heart, faces, doll, crown, fort, mandala, map pins, or fine ornament. Show one simple horizontal logo lockup.",
+      "rationale": "A continuous story path connects the letter, companionship, and the wider story universe without relying on a literal character.",
+      "best_for": "Storybooks, animated website moments, maps, and packaging systems that can extend the path motif.",
+      "decision_advice": "Choose this if Maitri needs a logo that can grow into a richer motion and illustration system.",
+      "watch_out": "The path extension must not turn into a location or navigation icon.",
+      "next_step": "Simplify the path into a compact master mark, then prototype a subtle website draw-on animation.",
+      "final_owner": "external-production-identity"
+    },
+    {
+      "id": "woven-friendship",
+      "label": "Woven Friendship",
+      "family": "geometric",
+      "usage_contexts": ["fabric label", "embroidery", "box seal", "publisher mark", "favicon"],
+      "prompt": "Design one premium geometric logo direction for Maitri on a pure white background. Construct a clear uppercase M from two broad interlocking rounded bands of equal weight: each band is one companion, and their overlap at the center creates a subtle circular negative-space bond. The result should feel like a modern friendship weave, not a knot, braid, heart, or cultural ornament. Make the silhouette compact, symmetrical enough to reproduce, friendly rather than corporate, and strong in one color for embroidery and small labels. Pair with the exact wordmark 'Maitri' in a calm rounded humanist custom style compatible with Outfit. Use deep plum #451039 for the wordmark, rose #ef6f8b for one band, and warm amber #f3a823 or teal #189a93 for the second band, with a valid single-color interpretation implied. Flat vector shapes only, no gradients, shadows, texture, 3D, mockup, badge, border, tagline, or extra words. Present one clean horizontal logo lockup only.",
+      "rationale": "Two equal bands become one M, giving companionship a tactile, manufacturable metaphor.",
+      "best_for": "Physical product details, fabric labels, box seals, book spines, and small production marks.",
+      "decision_advice": "Choose this if physical product applications and a sturdy one-colour mark are the priority.",
+      "watch_out": "Interlocking geometry can become visually busy if the overlap is not radically simplified.",
+      "next_step": "Resolve the overlap as two-color and single-color vector masters and test embroidery closure.",
+      "final_owner": "external-production-identity"
+    },
+    {
+      "id": "open-embrace",
+      "label": "Open Embrace",
+      "family": "premium",
+      "usage_contexts": ["founder materials", "premium packaging", "website header", "visiting card"],
+      "prompt": "Create one quiet premium flat vector logo direction for Maitri on a pure white inspection background. Form a distinctive uppercase M inside an incomplete circular embrace using only three confident rounded strokes: two mirrored outer strokes suggest companions turning toward each other, and the center stroke completes the M. The circle must remain open and airy, expressing welcome rather than enclosure. Avoid human figures and avoid a badge appearance. Pair with the exact wordmark 'Maitri' in a refined rounded humanist style compatible with Outfit, with generous spacing and a slightly customized M. Use deep plum #451039 as the primary, Maitri rose #ef6f8b as the secondary, and no more than one small amber #f3a823 accent. The logo must feel warm to a child and trustworthy to a parent. Flat solid shapes, strong one-colour silhouette, no gradient, shadow, mockup, border, tagline, extra words, heart, holding hands, doll, crown, mandala, or ornate detail. Show one clean horizontal lockup only.",
+      "rationale": "A restrained open embrace makes the friendship idea emotional while retaining adult confidence and premium calm.",
+      "best_for": "Founder-facing materials, visiting cards, premium packaging, and restrained website use.",
+      "decision_advice": "Choose this if Maitri should skew slightly more premium and parent-trusted while remaining warm.",
+      "watch_out": "Too much restraint could reduce child delight; the rose proportion and corner radii must carry warmth.",
+      "next_step": "Tune the stroke terminals and spacing, then test reversed white on plum and teal-black.",
+      "final_owner": "external-production-identity"
+    },
+    {
+      "id": "belonging-wordmark",
+      "label": "Belonging Wordmark",
+      "family": "wordmark",
+      "usage_contexts": ["website header", "storybook title", "packaging front", "social wordmark"],
+      "prompt": "Design one professional custom wordmark-led logo for the exact name 'Maitri' on a pure white background. Maitri is a warm premium Indian children's companion and story universe. Make the initial uppercase M the hero: construct its two outer stems as paired companion forms, join them through a gentle circular counterspace at the center, and let the remaining lowercase letters flow in a rounded humanist rhythm compatible with the Outfit typeface used on the website. The result must read 'Maitri' instantly, feel proprietary, work without a separate mascot, and remain sturdy at small size. Add only a very small detached companion-circle accent if essential; do not use a heart as the i dot. Use deep plum #451039 with Maitri rose #ef6f8b on the custom M and perhaps one amber #f3a823 accent. Flat vector lettering only. No gradient, shadow, texture, 3D, mockup, tagline, extra text, badge, people silhouettes, doll, crown, mandala, ornate motif, or generic playful font. Show only the finished wordmark centered with generous white space.",
+      "rationale": "The companionship idea lives inside the name itself, keeping the identity direct and reducing reliance on a separate symbol.",
+      "best_for": "The cleanest website-header and packaging-front expression when name recognition is the main goal.",
+      "decision_advice": "Choose this if a distinctive, memorable name treatment matters more than a standalone icon system.",
+      "watch_out": "A wordmark-first route needs a separate small avatar/favicon solution after selection.",
+      "next_step": "Redraw the wordmark as exact vector letterforms and derive a compact M avatar from its construction.",
+      "final_owner": "external-production-identity"
+    }
+  ],
+  "handoff": {
+    "default_owner": "external-production-identity",
+    "next_prompt_hints": [
+      "Refine only the selected construction",
+      "Build exact vector geometry and wordmark",
+      "Test symbol, wordmark, and lockup in color and one colour",
+      "Run favicon, website header, social profile, print, embroidery, storybook, and box-label tests"
+    ]
+  }
+}

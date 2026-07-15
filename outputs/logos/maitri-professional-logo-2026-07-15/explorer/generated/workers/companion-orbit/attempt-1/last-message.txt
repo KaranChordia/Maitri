@@ -1,0 +1,5 @@
+Generated exactly one image with `image_gen.imagegen`, but the native tool did not expose a local PNG file I could save.
+
+I wrote the required failure JSON here:
+
+[ result.json ](/Users/karanchordia/Documents/GitHub/Maitri/outputs/logos/maitri-professional-logo-2026-07-15/explorer/generated/workers/companion-orbit/attempt-1/result.json)

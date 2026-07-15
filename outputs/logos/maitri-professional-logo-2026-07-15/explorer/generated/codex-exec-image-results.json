@@ -1,0 +1,51 @@
+{
+  "status": "partial",
+  "total": 6,
+  "complete": 5,
+  "failed": 1,
+  "pending": 0,
+  "results": [
+    {
+      "id": "shared-arc",
+      "status": "complete",
+      "image_path": "outputs/logos/maitri-professional-logo-2026-07-15/explorer/generated/01-shared-arc.png",
+      "error": null,
+      "caveats": ""
+    },
+    {
+      "id": "companion-orbit",
+      "status": "complete",
+      "image_path": "outputs/logos/maitri-professional-logo-2026-07-15/explorer/generated/02-companion-orbit.png",
+      "error": null,
+      "caveats": ""
+    },
+    {
+      "id": "story-path-m",
+      "status": "complete",
+      "image_path": "outputs/logos/maitri-professional-logo-2026-07-15/explorer/generated/03-story-path-m.png",
+      "error": null,
+      "caveats": ""
+    },
+    {
+      "id": "woven-friendship",
+      "status": "complete",
+      "image_path": "outputs/logos/maitri-professional-logo-2026-07-15/explorer/generated/04-woven-friendship.png",
+      "error": null,
+      "caveats": ""
+    },
+    {
+      "id": "open-embrace",
+      "status": "failed",
+      "image_path": null,
+      "error": "Native image generation returned an image in chat but did not expose a savable PNG payload or local file path.",
+      "caveats": ""
+    },
+    {
+      "id": "belonging-wordmark",
+      "status": "complete",
+      "image_path": "outputs/logos/maitri-professional-logo-2026-07-15/explorer/generated/06-belonging-wordmark.png",
+      "error": null,
+      "caveats": ""
+    }
+  ]
+}
