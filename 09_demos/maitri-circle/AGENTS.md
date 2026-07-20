@@ -23,3 +23,7 @@ Clicked world locations must open authored Three.js interior scenes inside the c
 Hover treatment on the world should be minimal: show only the location name near the pointer, and keep the world, landmarks, camera, lighting, and location interiors as the primary experience.
 
 The public Maitri Circle waitlist collects only name and email. Its free production backend is the bound Google Apps Script documented under `05_waitlist_preorder/google_sheets_waitlist/`, reached through the Vercel serverless route at `/api/waitlist`. Keep the honeypot, server-side validation, response-body verification, and explicit success/failure states intact. Never report a successful signup from a local-only fallback or expose the Apps Script URL or shared secret through a `VITE_` variable.
+
+Treat the existing Outfit-led `Maitri` website wordmark as the official identity anchor unless the founder changes direction. Logo refinements should preserve the current word shape, weight, plum color, and friendly simplicity. Prefer subtle companion-circle details integrated with the two `i` letters over a separate geometric `M` badge or a wholesale wordmark redesign.
+
+The selected logo direction is `A3 — Companion circle garland`: the two `i` dots anchor a shallow garland made entirely from brand-colour circles. Use this version for visiting-card exploration and later identity applications while keeping `Outfit` at weight `700` and letter-spacing `0` unchanged.

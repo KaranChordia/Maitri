@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="96mm" height="56mm" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Warm Minimal visiting card front</title>
+  <desc id="desc">Cream Maitri visiting card front using the selected A3 companion circle garland logo.</desc>
+  <rect width="960" height="560" fill="#FFF8ED"/>
+  <circle cx="870" cy="70" r="118" fill="#FFF1E7"/>
+  <circle cx="84" cy="500" r="86" fill="#E9FBFB"/>
+  <g transform="translate(110 78) scale(.62)">
+    <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+    <circle cx="625" cy="135" r="21" fill="#EF6F8B"/>
+    <circle cx="690" cy="99" r="10" fill="#F3A823"/>
+    <circle cx="746" cy="78" r="8" fill="#EF6F8B"/>
+    <circle cx="801" cy="69" r="7" fill="#189A93"/>
+    <circle cx="856" cy="78" r="8" fill="#EF6F8B"/>
+    <circle cx="911" cy="99" r="10" fill="#F3A823"/>
+    <circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+  </g>
+  <circle cx="818" cy="472" r="10" fill="#EF6F8B"/>
+  <circle cx="847" cy="472" r="7" fill="#F3A823"/>
+  <circle cx="872" cy="472" r="5" fill="#189A93"/>
+</svg>

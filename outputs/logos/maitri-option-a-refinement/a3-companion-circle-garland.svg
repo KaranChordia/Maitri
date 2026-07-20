@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3200" height="1120" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri companion circle garland</title>
+  <desc id="desc">The exact website Outfit Bold wordmark with a shallow garland of circles connecting the two i dots without a line.</desc>
+  <g>
+    <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+    <circle cx="625" cy="135" r="21" fill="#EF6F8B"/>
+    <circle cx="690" cy="99" r="10" fill="#F3A823"/>
+    <circle cx="746" cy="78" r="8" fill="#EF6F8B"/>
+    <circle cx="801" cy="69" r="7" fill="#189A93"/>
+    <circle cx="856" cy="78" r="8" fill="#EF6F8B"/>
+    <circle cx="911" cy="99" r="10" fill="#F3A823"/>
+    <circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+  </g>
+</svg>

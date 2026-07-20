@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="96mm" height="56mm" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Story World Split visiting card back</title>
+  <desc id="desc">Split plum and cream founder card with placeholder contact details.</desc>
+  <rect width="960" height="560" fill="#FFF8ED"/>
+  <path d="M0 0 H338 C306 116 364 216 316 318 C274 407 184 464 0 500 Z" fill="#451039"/>
+  <path d="M0 500 C106 468 207 465 316 430 L338 560 H0 Z" fill="#0B6F74" opacity=".55"/>
+  <g transform="translate(-8 128) scale(.31)">
+    <text x="150" y="395" fill="#FFF8ED" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+    <circle cx="625" cy="135" r="21" fill="#EF6F8B"/><circle cx="690" cy="99" r="10" fill="#F3A823"/><circle cx="746" cy="78" r="8" fill="#EF6F8B"/><circle cx="801" cy="69" r="7" fill="#189A93"/><circle cx="856" cy="78" r="8" fill="#EF6F8B"/><circle cx="911" cy="99" r="10" fill="#F3A823"/><circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+  </g>
+  <circle cx="76" cy="430" r="16" fill="#EF6F8B"/><circle cx="116" cy="410" r="10" fill="#F3A823"/><circle cx="151" cy="424" r="8" fill="#189A93"/>
+
+  <text x="400" y="145" fill="#451039" font-family="Outfit, sans-serif" font-size="54" font-weight="700">Shwetika Kumar</text>
+  <text x="403" y="193" fill="#DB5474" font-family="Outfit, sans-serif" font-size="24" font-weight="700" letter-spacing="1.4">FOUNDER · MAITRI</text>
+  <text x="403" y="286" fill="#6D4961" font-family="Outfit, sans-serif" font-size="14" font-weight="700" letter-spacing="1.8">PHONE</text>
+  <text x="403" y="320" fill="#243533" font-family="Outfit, sans-serif" font-size="23" font-weight="500">+91 00000 00000</text>
+  <text x="403" y="379" fill="#6D4961" font-family="Outfit, sans-serif" font-size="14" font-weight="700" letter-spacing="1.8">EMAIL</text>
+  <text x="403" y="413" fill="#243533" font-family="Outfit, sans-serif" font-size="23" font-weight="500">shwetika@maitri.example</text>
+  <text x="403" y="472" fill="#6D4961" font-family="Outfit, sans-serif" font-size="14" font-weight="700" letter-spacing="1.8">WEBSITE</text>
+  <text x="403" y="506" fill="#243533" font-family="Outfit, sans-serif" font-size="23" font-weight="500">maitri.example</text>
+</svg>

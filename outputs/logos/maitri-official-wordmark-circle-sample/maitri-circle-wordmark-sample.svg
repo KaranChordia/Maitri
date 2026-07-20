@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3200" height="1120" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri companion circles wordmark sample</title>
+  <desc id="desc">The existing Maitri Outfit wordmark in plum, refined with rose dots and small amber and teal companion circles above the two i letters.</desc>
+
+  <g id="maitri-wordmark">
+    <text
+      x="150"
+      y="395"
+      fill="#451039"
+      font-family="Outfit, sans-serif"
+      font-size="300"
+      font-weight="700"
+      letter-spacing="0"
+      aria-label="Maitri"
+    >Maıtrı</text>
+
+    <!-- First i: the primary friend and a warm companion ring. -->
+    <circle cx="625" cy="135" r="22" fill="#EF6F8B"/>
+    <circle cx="660" cy="103" r="13" fill="none" stroke="#F3A823" stroke-width="7"/>
+    <circle cx="684" cy="128" r="6" fill="#451039"/>
+
+    <!-- Final i: the returning friend and the wider Maitri world. -->
+    <circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+    <circle cx="927" cy="105" r="11" fill="none" stroke="#189A93" stroke-width="6"/>
+    <circle cx="904" cy="132" r="6" fill="#F3A823"/>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="96mm" height="56mm" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Story World Split visiting card front</title>
+  <desc id="desc">Free-flow Maitri card front with aqua and rose fields surrounding the selected A3 logo.</desc>
+  <rect width="960" height="560" fill="#FFF8ED"/>
+  <path d="M0 0 H365 C330 112 357 205 270 286 C194 358 86 338 0 418 Z" fill="#E9FBFB"/>
+  <path d="M960 0 H760 C795 82 754 145 800 211 C838 266 911 269 960 309 Z" fill="#FFD0DF"/>
+  <path d="M0 506 C171 453 313 472 456 560 H0 Z" fill="#FFF1E7"/>
+  <circle cx="104" cy="108" r="18" fill="#EF6F8B"/>
+  <circle cx="143" cy="85" r="10" fill="#F3A823"/>
+  <circle cx="174" cy="107" r="7" fill="#189A93"/>
+  <g transform="translate(92 80) scale(.61)">
+    <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+    <circle cx="625" cy="135" r="21" fill="#EF6F8B"/><circle cx="690" cy="99" r="10" fill="#F3A823"/><circle cx="746" cy="78" r="8" fill="#EF6F8B"/><circle cx="801" cy="69" r="7" fill="#189A93"/><circle cx="856" cy="78" r="8" fill="#EF6F8B"/><circle cx="911" cy="99" r="10" fill="#F3A823"/><circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+  </g>
+</svg>

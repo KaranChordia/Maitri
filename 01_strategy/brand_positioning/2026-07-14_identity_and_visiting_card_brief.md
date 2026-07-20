@@ -22,6 +22,12 @@ Maitri / Maitri Circle
 
 The route study should show how the mark and wordmark behave when the public-facing name is written as `Maitri` and when the community/universe expression `Maitri Circle` is needed. The designer must not silently decide which form is canonical; that is a founder decision.
 
+### Current founder direction — 2026-07-16
+
+Use the existing Outfit-led `Maitri` website wordmark as the official identity anchor and refine it additively. The current exploration direction replaces the two heart-like accents with a restrained companion-circle system tied to the two `i` letters. Do not redesign the name into a separate geometric `M` badge unless this direction is explicitly reopened.
+
+The selected direction is `A3 — Companion circle garland`, in which the two `i` dots anchor a shallow garland made entirely from brand-colour circles. Use A3 for visiting-card exploration and later identity applications; the underlying Outfit wordmark is not being reconsidered.
+
 ### Current positioning
 
 Maitri is a story-first companion universe where children befriend brave Indian heroines through stories, play, and meaningful parent-child reflection.
@@ -148,6 +154,7 @@ The test is successful when the name is legible where it must be, the symbol rem
 - Delicate line work, miniature faces, or several nested elements that collapse at favicon and print size.
 - A mark that works only in the current gradient.
 - A logo system that makes the website feel like it belongs to a different brand.
+- A standalone geometric `M` built from familiar arches, envelope folds, crossing ribbons, or circular app-badge construction that could recall established brands such as McDonald's, Gmail, Myntra, or generic consumer-tech identities. Prefer a proprietary wordmark-led relationship between letters, or a story/companionship gesture that belongs to the full Maitri name.
 - Unverified claims such as “India's first,” product-safety language, or launch promises inside identity applications.
 
 ## Founder selection gate

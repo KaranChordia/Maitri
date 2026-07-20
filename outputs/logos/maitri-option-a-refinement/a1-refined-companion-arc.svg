@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3200" height="1120" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri refined companion arc</title>
+  <desc id="desc">The exact website Outfit Bold wordmark with a restrained rose arc between the two i dots and two small companion circles.</desc>
+  <g>
+    <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+    <path d="M647 128 C725 68 855 67 935 128" fill="none" stroke="#EF6F8B" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="625" cy="135" r="21" fill="#EF6F8B"/>
+    <circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+    <circle cx="760" cy="82" r="7" fill="#F3A823"/>
+    <circle cx="842" cy="82" r="6" fill="#189A93"/>
+  </g>
+</svg>

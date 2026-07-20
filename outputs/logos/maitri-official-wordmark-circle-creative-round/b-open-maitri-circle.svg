@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3200" height="1120" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri open-circle wordmark</title>
+  <desc id="desc">The exact website Outfit Bold wordmark with one open rose circle passing behind the final letters and using the i dots as endpoints.</desc>
+  <g>
+    <path d="M625 135 C700 34 945 23 1040 110 C1150 210 1135 404 1008 468 C868 539 626 485 582 338" fill="none" stroke="#F7A5B7" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="625" cy="135" r="23" fill="#EF6F8B"/>
+    <circle cx="956" cy="135" r="20" fill="#EF6F8B"/>
+    <circle cx="1039" cy="110" r="11" fill="#F3A823"/>
+    <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+    <circle cx="625" cy="135" r="23" fill="#EF6F8B"/>
+    <circle cx="956" cy="135" r="20" fill="#EF6F8B"/>
+  </g>
+</svg>

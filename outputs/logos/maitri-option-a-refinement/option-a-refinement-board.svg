@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="2025" viewBox="0 0 1600 1350" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri Option A refinement board</title>
+  <desc id="desc">Three refinements of the selected Companion Arc direction, all using the exact website Outfit Bold wordmark.</desc>
+  <rect width="1600" height="1350" fill="#FFF8ED"/>
+
+  <g transform="translate(60 40)">
+    <rect width="1480" height="380" rx="36" fill="#FFFFFF"/>
+    <text x="42" y="56" fill="#6D4961" font-family="Outfit, sans-serif" font-size="24" font-weight="700">A1 · Refined companion arc</text>
+    <g transform="translate(320 45) scale(.72)">
+      <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+      <path d="M647 128 C725 68 855 67 935 128" fill="none" stroke="#EF6F8B" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="625" cy="135" r="21" fill="#EF6F8B"/>
+      <circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+      <circle cx="760" cy="82" r="7" fill="#F3A823"/>
+      <circle cx="842" cy="82" r="6" fill="#189A93"/>
+    </g>
+  </g>
+
+  <g transform="translate(60 485)">
+    <rect width="1480" height="380" rx="36" fill="#FFF1E7"/>
+    <text x="42" y="56" fill="#6D4961" font-family="Outfit, sans-serif" font-size="24" font-weight="700">A2 · Shared circle</text>
+    <g transform="translate(320 45) scale(.72)">
+      <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+      <path d="M647 128 C695 86 742 72 780 80" fill="none" stroke="#EF6F8B" stroke-width="8" stroke-linecap="round"/>
+      <path d="M820 80 C858 72 905 86 935 128" fill="none" stroke="#EF6F8B" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="625" cy="135" r="21" fill="#EF6F8B"/>
+      <circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+      <circle cx="800" cy="79" r="15" fill="#FFF1E7" stroke="#F3A823" stroke-width="7"/>
+      <circle cx="800" cy="79" r="4" fill="#189A93"/>
+    </g>
+  </g>
+
+  <g transform="translate(60 930)">
+    <rect width="1480" height="380" rx="36" fill="#E9FBFB"/>
+    <text x="42" y="56" fill="#6D4961" font-family="Outfit, sans-serif" font-size="24" font-weight="700">A3 · Companion circle garland</text>
+    <g transform="translate(320 45) scale(.72)">
+      <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+      <circle cx="625" cy="135" r="21" fill="#EF6F8B"/>
+      <circle cx="690" cy="99" r="10" fill="#F3A823"/>
+      <circle cx="746" cy="78" r="8" fill="#EF6F8B"/>
+      <circle cx="801" cy="69" r="7" fill="#189A93"/>
+      <circle cx="856" cy="78" r="8" fill="#EF6F8B"/>
+      <circle cx="911" cy="99" r="10" fill="#F3A823"/>
+      <circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+    </g>
+  </g>
+</svg>

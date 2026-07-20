@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3200" height="1120" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri circle story-trail wordmark</title>
+  <desc id="desc">The exact website Outfit Bold wordmark with circles placed inside the M valley, the a counter, and the two i positions.</desc>
+  <g>
+    <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+    <circle cx="280" cy="279" r="14" fill="#EF6F8B"/>
+    <circle cx="504" cy="327" r="24" fill="#FFF8ED" stroke="#F3A823" stroke-width="8"/>
+    <circle cx="625" cy="135" r="22" fill="#EF6F8B"/>
+    <circle cx="658" cy="106" r="11" fill="none" stroke="#189A93" stroke-width="6"/>
+    <circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+    <circle cx="929" cy="108" r="9" fill="#F3A823"/>
+  </g>
+</svg>

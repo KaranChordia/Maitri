@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="2025" viewBox="0 0 1600 1350" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri official wordmark creative circle variants</title>
+  <desc id="desc">Three refinements of the exact Outfit Bold Maitri website wordmark using companion circles.</desc>
+  <rect width="1600" height="1350" fill="#FFF8ED"/>
+
+  <g transform="translate(60 40)">
+    <rect width="1480" height="380" rx="36" fill="#FFFFFF"/>
+    <text x="42" y="56" fill="#6D4961" font-family="Outfit, sans-serif" font-size="24" font-weight="700">A · Companion arc</text>
+    <g transform="translate(320 45) scale(.72)">
+      <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+      <path d="M646 126 C720 55 860 48 940 123" fill="none" stroke="#EF6F8B" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="625" cy="135" r="23" fill="#EF6F8B"/>
+      <circle cx="956" cy="135" r="20" fill="#EF6F8B"/>
+      <circle cx="735" cy="73" r="10" fill="#F3A823"/>
+      <circle cx="844" cy="69" r="8" fill="#189A93"/>
+      <circle cx="900" cy="92" r="5" fill="#8B61C8"/>
+    </g>
+  </g>
+
+  <g transform="translate(60 485)">
+    <rect width="1480" height="380" rx="36" fill="#FFF1E7"/>
+    <text x="42" y="56" fill="#6D4961" font-family="Outfit, sans-serif" font-size="24" font-weight="700">B · Open Maitri Circle</text>
+    <g transform="translate(320 25) scale(.72)">
+      <path d="M625 135 C700 34 945 23 1040 110 C1150 210 1135 404 1008 468 C868 539 626 485 582 338" fill="none" stroke="#F7A5B7" stroke-width="12" stroke-linecap="round"/>
+      <circle cx="1039" cy="110" r="11" fill="#F3A823"/>
+      <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+      <circle cx="625" cy="135" r="23" fill="#EF6F8B"/>
+      <circle cx="956" cy="135" r="20" fill="#EF6F8B"/>
+    </g>
+  </g>
+
+  <g transform="translate(60 930)">
+    <rect width="1480" height="380" rx="36" fill="#E9FBFB"/>
+    <text x="42" y="56" fill="#6D4961" font-family="Outfit, sans-serif" font-size="24" font-weight="700">C · Circle story trail</text>
+    <g transform="translate(320 45) scale(.72)">
+      <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+      <circle cx="280" cy="279" r="14" fill="#EF6F8B"/>
+      <circle cx="504" cy="327" r="24" fill="#FFF8ED" stroke="#F3A823" stroke-width="8"/>
+      <circle cx="625" cy="135" r="22" fill="#EF6F8B"/>
+      <circle cx="658" cy="106" r="11" fill="none" stroke="#189A93" stroke-width="6"/>
+      <circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+      <circle cx="929" cy="108" r="9" fill="#F3A823"/>
+    </g>
+  </g>
+</svg>

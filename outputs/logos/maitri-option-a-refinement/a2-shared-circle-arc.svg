@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3200" height="1120" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri shared-circle arc</title>
+  <desc id="desc">The exact website Outfit Bold wordmark with two rose arc segments meeting at one open amber circle.</desc>
+  <g>
+    <text x="150" y="395" fill="#451039" font-family="Outfit, sans-serif" font-size="300" font-weight="700" letter-spacing="0" aria-label="Maitri">Maıtrı</text>
+    <path d="M647 128 C695 86 742 72 780 80" fill="none" stroke="#EF6F8B" stroke-width="8" stroke-linecap="round"/>
+    <path d="M820 80 C858 72 905 86 935 128" fill="none" stroke="#EF6F8B" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="625" cy="135" r="21" fill="#EF6F8B"/>
+    <circle cx="956" cy="135" r="19" fill="#EF6F8B"/>
+    <circle cx="800" cy="79" r="15" fill="#FFFFFF" stroke="#F3A823" stroke-width="7"/>
+    <circle cx="800" cy="79" r="4" fill="#189A93"/>
+  </g>
+</svg>
