@@ -1,101 +1,80 @@
-# Maitri Circle waitlist: Vercel + Google Sheets setup
+# Maitri Circle waitlist: production setup
 
-This is the free production setup for the Maitri homepage waitlist. Visitors provide only their name and email address. The website sends that information to Maitri's private Vercel API route, which validates it and stores it through Google Apps Script.
+The Maitri homepage sends waitlist submissions to the private Vercel function at `/api/waitlist`. The function validates the request, keeps the shared credential server-side, and forwards valid entries to a Google Apps Script web app that owns duplicate checking and Sheet storage.
 
-## What is already prepared
+## Live resources
 
-- [Maitri Circle Waitlist Google Sheet](https://docs.google.com/spreadsheets/d/1Z8V7NnF2oDk6Zf1Kq2C4EVRBr_LM2YXlly6d2BAFCrQ/edit)
-- Sheet columns: `Submitted At | Name | Email | Source`
-- Apps Script receiver: [`Code.gs`](./Code.gs)
-- Private Vercel API route: `09_demos/maitri-circle/api/waitlist.js`
-- Homepage validation, bot honeypot, duplicate-email handling, timeout, and visible success/failure states
+- Google Sheet: [maitri_waitlist_form](https://docs.google.com/spreadsheets/d/1rmEJKNXKh7NUQgpFlhtBCaUrtnvJbK4PC6zVIqsbXmo/edit)
+- Exact tab name: `Waitlist`
+- Columns: `Submitted At | Name | Email | Source`
+- Apps Script source template: [`Code.gs`](./Code.gs)
+- Vercel function: `09_demos/maitri-circle/api/waitlist.js`
+- Production site: `https://maitricircle.vercel.app`
 
-## Values you will need
+The Sheet is private. The Apps Script deployment executes as its owner and allows anonymous web-app requests, but rejects every request that does not contain the matching shared credential.
 
-Prepare one long random secret, for example a password-manager-generated string of at least 32 characters. The exact same secret must be used in Apps Script and Vercel.
+## Credential and deployment rules
+
+Use one long random credential for Apps Script and Vercel. Never put its real value, the private Apps Script `/exec` URL, or a `.env.local` file in Git.
+
+In Apps Script, replace only this placeholder before deploying:
+
+```js
+const SHARED_SECRET = '__REPLACE_WITH_THE_SINGLE_VERCEL_SECRET__';
+```
+
+Deploy the script as a **Web app** with:
+
+- Execute as: **Me**
+- Who has access: **Anyone**
+- URL: the production `/exec` URL, never the `/dev` test URL
+
+After a code change, use **Deploy → Manage deployments → Edit → New version**. Saving the editor alone does not update the live web app. The existing `/exec` URL remains stable when the deployment is updated.
+
+## Vercel configuration
+
+The Vercel project must use this Root Directory:
+
+```txt
+09_demos/maitri-circle
+```
+
+Configure both variables in Production, Preview, and Development:
 
 ```txt
 MAITRI_WAITLIST_WEBHOOK_URL=https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
 MAITRI_WAITLIST_WEBHOOK_SECRET=YOUR_LONG_RANDOM_SECRET
 ```
 
-These are server-side Vercel environment variables. Do not prefix either name with `VITE_`.
+Keep both variables **Sensitive** in Production and Preview. Vercel does not support Sensitive variables in Development, so create separate Development-only entries with the same values and leave Sensitive disabled there. Redeploy after changing the Root Directory or environment variables.
 
-## Step 1: deploy the Google Apps Script receiver
+Do not prefix either variable with `VITE_`; they must remain available only to the serverless function.
 
-1. Open the [Maitri Circle Waitlist Google Sheet](https://docs.google.com/spreadsheets/d/1Z8V7NnF2oDk6Zf1Kq2C4EVRBr_LM2YXlly6d2BAFCrQ/edit).
-2. Choose **Extensions → Apps Script**.
-3. Delete the sample function in the editor.
-4. Copy everything from [`Code.gs`](./Code.gs) and paste it into the Apps Script editor.
-5. Replace this placeholder in the first lines:
+## Verification checklist
 
-   ```js
-   const SHARED_SECRET = 'REPLACE_WITH_THE_SAME_LONG_RANDOM_SECRET_USED_IN_VERCEL';
-   ```
-
-   Use your long random secret between the quote marks.
-6. Click **Save** and name the project `Maitri Circle Waitlist`.
-7. Click **Deploy → New deployment**.
-8. Next to **Select type**, choose **Web app**.
-9. Use these settings:
-   - Description: `Maitri website waitlist`
-   - Execute as: **Me**
-   - Who has access: **Anyone**
-10. Click **Deploy**, approve Google's permission prompts, and copy the Web app URL ending in `/exec`. Do not use the `/dev` test URL.
-
-The Sheet itself can remain private. Only the web-app receiver requires **Anyone** access, and it rejects requests without the shared secret.
-
-## Step 2: add the private variables in Vercel
-
-1. Open the Maitri project in Vercel.
-2. Choose **Settings → Environment Variables**.
-3. Create `MAITRI_WAITLIST_WEBHOOK_URL` and paste the Apps Script `/exec` URL.
-4. Create `MAITRI_WAITLIST_WEBHOOK_SECRET` and paste the exact secret used in `Code.gs`.
-5. Apply both variables to **Production**, **Preview**, and **Development** unless you intentionally want separate test storage.
-6. Save the variables.
-7. Open **Deployments**, select the latest Maitri deployment, and choose **Redeploy** so the new variables become available to the serverless function.
-
-The Apps Script URL and secret stay inside Vercel. They are never included in the public Vite JavaScript bundle.
-
-## Step 3: test the live form
-
-1. Open the deployed Maitri homepage.
-2. Submit a test name and email in the Maitri Circle waitlist.
-3. Confirm the page says: `You are on the Maitri Circle early list. We have saved your details.`
-4. Open the Google Sheet and confirm the new row appears in the `Waitlist` tab.
-5. Submit the same email again. The page should still succeed, but the Sheet should not create a duplicate row.
+1. Open `https://maitricircle.vercel.app` and submit a clearly identified test name and email.
+2. Confirm the page reports success only after the server returns `{ "ok": true }`.
+3. Confirm exactly one matching row appears in the `Waitlist` tab.
+4. Submit the same email again and confirm the page still succeeds without creating a second row.
+5. Remove only the verification row after the duplicate check passes.
 
 ## Local development
 
-Ordinary `npm run dev` serves the Vite frontend but does not run Vercel serverless functions. Use `vercel dev` from `09_demos/maitri-circle` when you need to test the complete form locally.
+`npm run dev` serves only the Vite frontend. Run `vercel dev` from `09_demos/maitri-circle` to exercise `/api/waitlist` locally, and create an uncommitted `.env.local` from `.env.example` with the two variables above.
 
-For local Vercel testing, create `.env.local` from `.env.example` and add:
+## Operational behavior
 
-```txt
-MAITRI_WAITLIST_WEBHOOK_URL=https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
-MAITRI_WAITLIST_WEBHOOK_SECRET=YOUR_LONG_RANDOM_SECRET
-```
-
-Never commit `.env.local`.
-
-## Normal operation
-
-- Each email is stored once. Repeat submissions return success without adding duplicate rows.
-- Keep the first row and the tab name `Waitlist` unchanged.
-- Do not publish the Apps Script URL or shared secret in frontend code.
-- To stop collection immediately, archive the Apps Script deployment or remove either Vercel environment variable and redeploy.
-
-## Updating Apps Script later
-
-1. Edit and save `Code.gs` in Apps Script.
-2. Choose **Deploy → Manage deployments**.
-3. Edit the web-app deployment and select **New version**.
-4. Deploy again. The existing `/exec` URL remains the same.
+- Name and email are normalized and validated at both the Vercel and Apps Script boundaries.
+- The honeypot field is handled by the Vercel function before storage.
+- Email duplicate checks are case-insensitive and protected by an Apps Script lock.
+- Spreadsheet formula prefixes are escaped before storage.
+- The tab name and header row are verified before writes; a mismatch fails closed.
+- Logs contain processing stages and duplicate status, never names, emails, URLs, or credentials.
+- GitHub Pages is not part of this waitlist deployment.
 
 ## Troubleshooting
 
-- **“The waitlist is being connected”**: one or both Vercel variables are missing. Add them and redeploy.
-- **“We could not save your details”**: verify the `/exec` URL, confirm Apps Script access is **Anyone**, and ensure the two secret values match exactly.
-- **No row but the page reports success**: search the Email column first; duplicate emails intentionally do not create new rows.
-- **Changed Apps Script code has no effect**: deploy a new Apps Script version; saving alone does not update the live web app.
-- **Environment variables were added but the form still fails**: redeploy the Vercel project after saving the variables.
+- **`/api/waitlist` returns 404:** verify the Vercel Root Directory is exactly `09_demos/maitri-circle`, then redeploy.
+- **“The waitlist is being connected”:** one or both Vercel variables are missing from the active deployment.
+- **“We could not save your details”:** verify the `/exec` URL, anonymous Apps Script access, the matching credential, and the active Apps Script version.
+- **No new row but the page succeeds:** search the Email column; duplicate emails intentionally return success without another row.
