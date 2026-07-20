@@ -233,7 +233,7 @@ Current technical state:
 - `npm run build` passes.
 - Vite emits three HTML outputs: `index.html`, `characters.html`, `story-universe.html`.
 - Build warning: chunks over 500 KB after minification, mainly app and Three.js bundles.
-- `vite.config.mjs` sets `base: "/Maitri/"`, which fits GitHub Pages-style hosting.
+- `vite.config.mjs` supports a configurable base path, while `vercel.json` builds the production deployment at `/`.
 
 Vercel/domain attention:
 

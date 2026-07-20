@@ -66,6 +66,6 @@ http://127.0.0.1:5174/
 http://127.0.0.1:5174/characters.html
 ```
 
-The repository includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml` that publishes Maitri Circle to GitHub Pages. In GitHub, enable Pages for the repository and set the build source to **GitHub Actions**.
+Maitri Circle is deployed through the repository's connected Vercel project. Treat Vercel as the only production website target.
 
 The earlier website demo and old Sites-ready clone have been removed so Maitri Circle remains the single default website direction.
