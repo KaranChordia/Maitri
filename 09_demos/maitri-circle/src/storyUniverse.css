@@ -1848,3 +1848,77 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Align the immersive world with Maitri's layered-circle identity while preserving functional HUD containment. */
+.story-universe-brand {
+  position: relative;
+  padding-right: 42px;
+}
+
+.story-universe-brand::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 0;
+  width: 30px;
+  height: 13px;
+  background:
+    radial-gradient(circle at 5px 7px, #ef6f8b 0 4px, transparent 4.5px),
+    radial-gradient(circle at 15px 4px, #f3a823 0 4px, transparent 4.5px),
+    radial-gradient(circle at 25px 8px, #46b9b0 0 4px, transparent 4.5px);
+}
+
+.world-status-hud,
+.journey-dock,
+.world-mini-map,
+.street-navigator,
+.scene-location-badge,
+.mini-inventory,
+.scene-reader,
+.scene-item-card {
+  border: 0;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(243, 168, 35, 0.12) 0 42px, transparent 44px),
+    radial-gradient(circle at 8% 88%, rgba(70, 185, 176, 0.12) 0 54px, transparent 56px),
+    rgba(14, 29, 31, 0.6);
+  box-shadow: 0 24px 58px rgba(0, 0, 0, 0.24);
+}
+
+.world-status-hud,
+.journey-dock,
+.world-mini-map,
+.street-navigator,
+.mini-inventory {
+  border-radius: 28px;
+}
+
+.world-mini-map-grid button,
+.journey-dock-switcher button,
+.journey-dock-stops button {
+  border: 0;
+}
+
+.world-mini-map-grid button.active,
+.journey-dock-switcher button.active,
+.journey-dock-stops button.active {
+  box-shadow: inset 0 0 0 1px rgba(255, 248, 237, 0.14);
+}
+
+@media (max-width: 640px) {
+  .story-universe-brand {
+    padding-right: 30px;
+  }
+
+  .story-universe-brand::after {
+    transform: scale(0.78);
+    transform-origin: right top;
+  }
+
+  .world-status-hud,
+  .journey-dock,
+  .world-mini-map,
+  .street-navigator,
+  .mini-inventory {
+    border-radius: 22px;
+  }
+}

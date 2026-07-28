@@ -5,6 +5,14 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/about",
+      "destination": "/"
+    },
+    {
+      "source": "/about.html",
+      "destination": "/"
+    },
+    {
       "source": "/characters",
       "destination": "/characters.html"
     },
