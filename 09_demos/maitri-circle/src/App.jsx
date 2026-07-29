@@ -85,33 +85,51 @@ const shwetikaAssets = {
 const ENABLE_ABOUT_PAGE = false;
 
 const navItems = [
-  ["What is Maitri", publicPath("#about")],
+  ["Home", publicPath("#top")],
   ["Companions", publicPath("characters.html")],
   ["Stories", publicPath("#stories")],
   ...(ENABLE_ABOUT_PAGE ? [["About Us", publicPath("about.html")]] : []),
 ];
 
+const brandAssets = {
+  mark: publicPath("assets/brand/maitri-mark.svg"),
+  motifs: {
+    layeredOrbit: publicPath("assets/brand/icons/svg/18.svg"),
+    quietPetals: publicPath("assets/brand/icons/svg/19.svg"),
+    storyBloom: publicPath("assets/brand/icons/svg/20.svg"),
+    gentleBridge: publicPath("assets/brand/icons/svg/21.svg"),
+    openHeart: publicPath("assets/brand/icons/svg/22.svg"),
+    flowingPages: publicPath("assets/brand/icons/svg/23.svg"),
+    storySpark: publicPath("assets/brand/icons/svg/24.svg"),
+    softSun: publicPath("assets/brand/icons/svg/25.svg"),
+    friendshipClover: publicPath("assets/brand/icons/svg/26.svg"),
+    steadySteps: publicPath("assets/brand/icons/svg/27.svg"),
+    courageRipple: publicPath("assets/brand/icons/svg/28.svg"),
+    growingCircle: publicPath("assets/brand/icons/svg/29.svg"),
+  },
+};
+
 const brandPillars = [
   {
-    icon: Heart,
+    motif: "friendshipClover",
     label: "Friendship",
     text: "The friends children choose during play become part of the stories they tell about themselves.",
     tone: "rose",
   },
   {
-    icon: FlowerLotus,
+    motif: "storyBloom",
     label: "Stories",
     text: "Every Maitri friend has her own personality, dreams, family, strengths, and adventures.",
     tone: "amber",
   },
   {
-    icon: ShieldCheck,
+    motif: "flowingPages",
     label: "Imagination",
     text: "Through play and storytelling, children discover new places, cultures, and inspiring role models.",
     tone: "teal",
   },
   {
-    icon: Sparkle,
+    motif: "layeredOrbit",
     label: "Values",
     text: "Timeless values stay with children long after childhood.",
     tone: "violet",
@@ -139,6 +157,36 @@ const homepageLibraryBooks = [
     character: "Manu",
     tone: "amber",
     premise: "Manu makes a promise to try again even when the first answer is no.",
+  },
+];
+
+const homepageCompanions = [
+  {
+    name: "Manu",
+    number: "01",
+    role: "Courage with kindness",
+    world: "Bithoor and the Ganga banks",
+    image: shwetikaAssets.manuDoll,
+    href: publicPath("manu.html"),
+    tone: "rose",
+  },
+  {
+    name: "Savitribai",
+    number: "02",
+    role: "Learning with courage",
+    world: "Pune's first classrooms",
+    image: generatedAssets.savitribaiCutout,
+    href: publicPath("savitribai.html"),
+    tone: "amber",
+  },
+  {
+    name: "Kalpana",
+    number: "03",
+    role: "Dreaming with persistence",
+    world: "Karnal skies and space journeys",
+    image: generatedAssets.kalpanaCutout,
+    href: publicPath("kalpana.html"),
+    tone: "teal",
   },
 ];
 
@@ -171,19 +219,19 @@ const aboutPrinciples = [
 
 const audienceGroups = [
   {
-    icon: Sparkle,
+    motif: "openHeart",
     label: "For children",
     text: "A warm friend, an absorbing story, and play that makes bravery feel possible in small, everyday moments.",
     tone: "rose",
   },
   {
-    icon: Heart,
+    motif: "softSun",
     label: "For parents and families",
     text: "Culturally rooted stories and gentle conversation starters that feel meaningful without feeling like a lesson.",
     tone: "teal",
   },
   {
-    icon: Gift,
+    motif: "layeredOrbit",
     label: "For thoughtful gift-givers",
     text: "A more personal Indian gift direction built around friendship, representation, imagination, and values.",
     tone: "violet",
@@ -543,10 +591,55 @@ const firstBoxContents = [
 ];
 
 const manuQuickFacts = [
-  ["Known as", "Manikarnika, lovingly called Manu"],
-  ["Story world", "Bithoor and the Ganga banks"],
-  ["Animal friend", "Badal, a horse who needs patience"],
-  ["Manu is", "Curious, kind, fair, and steady"],
+  {
+    label: "Full name",
+    value: "Manikarnika",
+    note: "Everyone calls her Manu.",
+    motif: "courageRipple",
+    tone: "rose",
+    size: "wide",
+  },
+  {
+    label: "Her story begins",
+    value: "Bithoor",
+    note: "Beside the Ganga, before her journey became forever linked with Jhansi.",
+    motif: "layeredOrbit",
+    tone: "teal",
+    size: "wide",
+  },
+  {
+    label: "Favourite treat",
+    value: "Hot jalebis",
+    note: "A warm, playful detail from Manu's character world.",
+    motif: "softSun",
+    tone: "amber",
+    size: "compact",
+  },
+  {
+    label: "She loves",
+    value: "Riding horses",
+    note: "Especially learning patiently with Badal.",
+    motif: "steadySteps",
+    tone: "violet",
+    size: "compact",
+  },
+  {
+    label: "Birthday",
+    value: "19 November",
+    note: "A date remembered with her story.",
+    motif: "storySpark",
+    tone: "rose",
+    size: "compact",
+  },
+];
+
+const manuReadingMotifs = ["openHeart", "friendshipClover", "growingCircle"];
+const manuBoxMotifs = [
+  "quietPetals",
+  "storyBloom",
+  "gentleBridge",
+  "flowingPages",
+  "courageRipple",
 ];
 
 const manuChildActivities = [
@@ -845,10 +938,10 @@ const companionPageContent = {
   manu: {
     id: "manu",
     ...characterLibrary.manu,
-    pageTitle: "Manu: Maitri's first brave friend",
-    eyebrow: "First Maitri companion",
+    pageTitle: "My name is Manikarnika. You can call me Manu.",
+    eyebrow: "Hi, I'm Manu",
     intro:
-      "Meet Manu through a warm first story about brave questions, patient friendship, and the small choices that help courage grow.",
+      "My story begins beside the Ganga in Bithoor, long before I was remembered as Rani Lakshmibai of Jhansi. I love horses, brave questions, and the kind of courage that grows one small step at a time.",
     note: null,
     primaryAction: ["Read Manu's first story", "#first-story"],
     secondaryAction: ["See all companions", publicPath("characters.html")],
@@ -977,8 +1070,20 @@ function GeneratedArt({ src, className = "", alt = "", parallax = false, feather
 function Brand() {
   return (
     <a className="brand" href={publicPath("#top")} aria-label="Maitri home">
-      <span>Maitri</span>
+      <img src={brandAssets.mark} alt="" aria-hidden="true" />
+      <span className="brand-wordmark">Maitri</span>
     </a>
+  );
+}
+
+function BrandMotif({ name, className = "" }) {
+  return (
+    <img
+      className={`brand-motif ${className}`}
+      src={brandAssets.motifs[name]}
+      alt=""
+      aria-hidden="true"
+    />
   );
 }
 
@@ -1052,11 +1157,36 @@ function Header({ waitlistHref = publicPath("#waitlist") }) {
 
   const close = () => setOpen(false);
 
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") close();
+    };
+    const closeOutside = (event) => {
+      if (event.target instanceof Element && !event.target.closest(".site-header")) {
+        close();
+      }
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+    document.addEventListener("pointerdown", closeOutside);
+
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("pointerdown", closeOutside);
+    };
+  }, [open]);
+
   return (
     <header className="site-header">
       <div className="site-header-bg" />
       <Brand />
-      <nav className={`primary-nav ${open ? "open" : ""}`} aria-label="Primary">
+      <nav
+        className={`primary-nav ${open ? "open" : ""}`}
+        id="primary-navigation"
+        aria-label="Primary"
+      >
         {navItems.map(([label, href]) => (
           <a href={href} key={label} onClick={close}>
             {label}
@@ -1075,6 +1205,7 @@ function Header({ waitlistHref = publicPath("#waitlist") }) {
           type="button"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
+          aria-controls="primary-navigation"
           onClick={() => setOpen((value) => !value)}
         >
           {open ? <X size={22} weight="bold" /> : <List size={24} weight="bold" />}
@@ -1103,7 +1234,7 @@ function Hero() {
             with confidence.
           </p>
           <div className="hero-actions">
-            <ArrowButton href="#friends">Explore the Friends</ArrowButton>
+            <ArrowButton href="#friends">Explore the Companions</ArrowButton>
             <ArrowButton href="#waitlist" variant="outline">Join the Waitlist</ArrowButton>
           </div>
         </div>
@@ -1139,10 +1270,10 @@ function BrandIntroduction() {
         <svg className="pillar-constellation" viewBox="0 0 1200 250" preserveAspectRatio="none" aria-hidden="true">
           <path d="M35 118 C160 28 266 40 340 124 S545 218 635 113 S832 12 904 119 S1080 202 1170 82" />
         </svg>
-        {brandPillars.map(({ icon: Icon, label, text, tone }, index) => (
+        {brandPillars.map(({ motif, label, text, tone }, index) => (
           <article className={`brand-pillar-card ${tone}`} key={label}>
             <small className="pillar-index">0{index + 1}</small>
-            <span><Icon size={30} weight="duotone" /></span>
+            <span><BrandMotif name={motif} /></span>
             <h3>{label}</h3>
             <p>{text}</p>
           </article>
@@ -1158,7 +1289,7 @@ function WhatWeDo() {
       <div className="what-we-do-layout">
         <div className="section-copy what-we-do-copy">
           <span className="section-label amber-label">Stories You'll Read Together</span>
-          <h2>Every Friend Comes With Her Own Book Series.</h2>
+          <h2>Every Companion Comes With Her Own Book Series.</h2>
           <p>
             Every Maitri character is brought to life through beautifully illustrated
             chapter books written especially for young readers. These stories follow
@@ -1177,7 +1308,7 @@ function WhatWeDo() {
               src={generatedAssets.girlsReading}
               alt="Three girls sharing a beautifully illustrated book in a warm Maitri reading nook"
             />
-            <span aria-hidden="true"><BookOpenText size={27} weight="duotone" /></span>
+            <span aria-hidden="true"><BrandMotif name="openHeart" /></span>
           </figure>
           <div className="story-library-books" aria-label="Books in the Maitri Story Library">
             {homepageLibraryBooks.map(({ id, title, character, tone, premise }, index) => (
@@ -1213,9 +1344,9 @@ function WhoItIsFor() {
         </p>
       </div>
       <div className="audience-grid">
-        {audienceGroups.map(({ icon: Icon, label, text, tone }) => (
+        {audienceGroups.map(({ motif, label, text, tone }) => (
           <article className={tone} key={label}>
-            <span><Icon size={30} weight="duotone" /></span>
+            <span><BrandMotif name={motif} /></span>
             <h3>{label}</h3>
             <p>{text}</p>
           </article>
@@ -1230,18 +1361,42 @@ function ExploreMaitri() {
     <section className="explore-maitri-section section-shell" id="friends">
       <div className="explore-maitri-head">
         <div>
-          <span className="section-label teal-label">Meet the Friends</span>
-          <h2>Every Friend Has Her Own Story.</h2>
+          <span className="section-label teal-label">Meet the Companions</span>
+          <h2>Every Companion Has Her Own Story.</h2>
           <div className="hero-actions">
-            <ArrowButton href={publicPath("characters.html")}>Explore the Friends</ArrowButton>
+            <ArrowButton href={publicPath("characters.html")}>Explore All Companions</ArrowButton>
           </div>
         </div>
         <p>
-          No two Maitri friends are alike. Some dream of becoming scientists. Some
+          No two Maitri companions are alike. Some dream of becoming scientists. Some
           become leaders. Some make history. Some simply remind us that kindness can
           change the world. Each character invites children into a different corner
           of India, its cultures, traditions, landscapes, and stories.
         </p>
+      </div>
+      <div className="home-companion-constellation" aria-label="A preview of the Maitri companions">
+        <svg
+          className="home-companion-path"
+          viewBox="0 0 1200 320"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M72 195 C224 55 376 74 492 178 S760 292 882 150 S1061 70 1142 128" />
+        </svg>
+        {homepageCompanions.map(({ name, number, role, world, image, href, tone }) => (
+          <a className={`home-companion ${tone}`} href={href} key={name}>
+            <figure>
+              <img src={image} alt={`${name}, a Maitri companion`} />
+            </figure>
+            <div className="home-companion-copy">
+              <span>Maitri Companion {number}</span>
+              <h3>{name}</h3>
+              <strong>{role}</strong>
+              <small>{world}</small>
+              <em>Meet {name} <ArrowRight size={16} weight="bold" /></em>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
   );
@@ -1421,6 +1576,9 @@ function Waitlist() {
           parallax={5}
           feather
         />
+        <span className="waitlist-brand-motif" aria-hidden="true">
+          <BrandMotif name="softSun" />
+        </span>
       </div>
       <div className="waitlist-copy">
         <span className="section-label violet-label">Be Among the First</span>
@@ -1555,7 +1713,11 @@ function StoryPreviewSection({ character, previews, title, intro, sectionId = "b
   return (
     <section className="character-experience-dashboard" id={sectionId}>
       <div className="dashboard-panel-head">
-        <BookOpenText size={34} weight="duotone" />
+        {isManuStory ? (
+          <BrandMotif name="storyBloom" className="manu-section-motif" />
+        ) : (
+          <BookOpenText size={34} weight="duotone" />
+        )}
         <div>
           <span>{isManuStory ? "Manu's first story" : "Story preview"}</span>
           <h3>{title}</h3>
@@ -1720,18 +1882,20 @@ function CompanionDetailPage({ characterId }) {
           <section className="manu-investor-box companion-values-section" id="meet-manu">
             <div>
               <span className="panel-label">Meet Manu</span>
-              <h2>A curious, kind friend learning what everyday courage can look like.</h2>
+              <h2>Get to know your new story companion.</h2>
               <p>
-                Her world begins beside the Ganga, where one careful question
-                and one patient friendship can become a whole adventure.
+                Before she was remembered as Rani Lakshmibai of Jhansi, she was
+                Manikarnika: a curious child whose world included horses, brave
+                questions, warm jalebis, and the Ganga at Bithoor.
               </p>
             </div>
-            <div className="first-box-river" aria-label="Quick facts about Manu">
-              {manuQuickFacts.map(([label, text]) => (
-                <article key={label}>
-                  <Sparkle size={24} weight="duotone" />
-                  <strong>{label}</strong>
-                  <span>{text}</span>
+            <div className="first-box-river manu-fact-mosaic" aria-label="Get to know Manu">
+              {manuQuickFacts.map(({ label, value, note, motif, tone, size }) => (
+                <article className={`${tone} ${size}`} key={label}>
+                  <BrandMotif name={motif} className="manu-fact-motif" />
+                  <span className="manu-fact-label">{label}</span>
+                  <strong>{value}</strong>
+                  <p>{note}</p>
                 </article>
               ))}
             </div>
@@ -1773,14 +1937,17 @@ function CompanionDetailPage({ characterId }) {
               </div>
               <div className="manu-parent-prompts" aria-label="Ways to read Manu together">
                 <article>
+                  <BrandMotif name={manuReadingMotifs[0]} className="manu-reading-motif" />
                   <span>01</span>
                   <p>Pause when Manu faces a hard choice.</p>
                 </article>
                 <article>
+                  <BrandMotif name={manuReadingMotifs[1]} className="manu-reading-motif" />
                   <span>02</span>
                   <p>Ask what a kind next step could be.</p>
                 </article>
                 <article>
+                  <BrandMotif name={manuReadingMotifs[2]} className="manu-reading-motif" />
                   <span>03</span>
                   <p>Let the answer be small, honest, and their own.</p>
                 </article>
@@ -1797,10 +1964,13 @@ function CompanionDetailPage({ characterId }) {
                 </p>
               </div>
               <div className="manu-first-box-list" aria-label="Confirmed first Manu box contents">
-                {firstBoxContents.map(([label, text, Icon], index) => (
+                {firstBoxContents.map(([label, text], index) => (
                   <article key={label}>
                     <span className="box-count">0{index + 1}</span>
-                    <Icon size={27} weight="duotone" />
+                    <BrandMotif
+                      name={manuBoxMotifs[index]}
+                      className="manu-box-motif"
+                    />
                     <div>
                       <strong>{label}</strong>
                       <p>{text}</p>
@@ -1811,6 +1981,7 @@ function CompanionDetailPage({ characterId }) {
             </section>
 
             <section className="manu-circle-future" aria-labelledby="circle-future-title">
+              <BrandMotif name="growingCircle" className="manu-future-motif" />
               <span className="panel-label">A circle that can grow</span>
               <h2 id="circle-future-title">Manu is the first friend. More stories can follow.</h2>
               <p>
@@ -2909,7 +3080,58 @@ function Footer() {
   );
 }
 
+function usePremiumPageTransitions() {
+  useEffect(() => {
+    const root = document.documentElement;
+    let navigationTimer;
+
+    const resetTransition = () => root.classList.remove("maitri-page-leaving");
+    const followInternalLink = (event) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const target = event.target;
+      const link = target instanceof Element ? target.closest("a[href]") : null;
+      if (!link || link.target || link.hasAttribute("download")) return;
+
+      const destination = new URL(link.href, window.location.href);
+      const isSameDocument =
+        destination.pathname === window.location.pathname &&
+        destination.search === window.location.search;
+
+      if (destination.origin !== window.location.origin || isSameDocument) return;
+
+      event.preventDefault();
+      root.classList.add("maitri-page-leaving");
+      navigationTimer = window.setTimeout(() => {
+        window.location.assign(destination.href);
+      }, 180);
+    };
+
+    document.addEventListener("click", followInternalLink);
+    window.addEventListener("pageshow", resetTransition);
+    resetTransition();
+
+    return () => {
+      document.removeEventListener("click", followInternalLink);
+      window.removeEventListener("pageshow", resetTransition);
+      window.clearTimeout(navigationTimer);
+      resetTransition();
+    };
+  }, []);
+}
+
 export function App() {
+  usePremiumPageTransitions();
+
   const path = window.location.pathname.replace(/\/$/, "");
   const isCompanionPage =
     path === "/companions" ||

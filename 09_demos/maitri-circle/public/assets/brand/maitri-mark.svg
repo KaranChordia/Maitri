@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 384" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri companion mark</title>
+  <desc id="desc">Two softly layered pink leaves meet to form an open letter M.</desc>
+  <defs>
+    <linearGradient id="leaf-base" x1="0" y1="0" x2="0.72" y2="1">
+      <stop offset="0" stop-color="#e96f90"/>
+      <stop offset="0.48" stop-color="#ef90a9"/>
+      <stop offset="1" stop-color="#f8dce4"/>
+    </linearGradient>
+    <linearGradient id="leaf-middle" x1="0.05" y1="0.05" x2="0.9" y2="0.95">
+      <stop offset="0" stop-color="#f38eaa" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#f8cfda" stop-opacity="0.24"/>
+    </linearGradient>
+    <linearGradient id="leaf-light" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#f7afc1" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#fff4f7" stop-opacity="0.36"/>
+    </linearGradient>
+    <path id="left-leaf" d="M64 42C155 49 224 106 256 196c-8 10-16 21-23 34-10-23-23-38-35-38-12 0-19 10-19 27v89C102 276 57 177 64 42Z"/>
+    <clipPath id="left-clip">
+      <use href="#left-leaf"/>
+    </clipPath>
+  </defs>
+
+  <g>
+    <use href="#left-leaf" fill="url(#leaf-base)"/>
+    <g clip-path="url(#left-clip)">
+      <path d="M45 69C139 76 211 129 250 205c-27-39-68-64-119-74-31-6-58-5-81 2Z" fill="url(#leaf-middle)"/>
+      <path d="M51 145c73 3 141 33 188 86-38-30-82-43-133-39-25 2-45 7-61 14Z" fill="url(#leaf-light)"/>
+    </g>
+  </g>
+
+  <g transform="translate(512 0) scale(-1 1)">
+    <use href="#left-leaf" fill="url(#leaf-base)"/>
+    <g clip-path="url(#left-clip)">
+      <path d="M45 69C139 76 211 129 250 205c-27-39-68-64-119-74-31-6-58-5-81 2Z" fill="url(#leaf-middle)"/>
+      <path d="M51 145c73 3 141 33 188 86-38-30-82-43-133-39-25 2-45 7-61 14Z" fill="url(#leaf-light)"/>
+    </g>
+  </g>
+</svg>

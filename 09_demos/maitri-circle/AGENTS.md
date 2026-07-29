@@ -24,9 +24,19 @@ The public `about.html` route should explain Maitri through belief, story, and c
 
 Treat the homepage image system as the visual reference for every public page: use circular or softly organic image cutouts with a small number of offset rings, translucent layers, and restrained depth. Keep narrative sections borderless and connected through atmosphere, spacing, paths, and image rhythm; retain visible containment only for controls that own interactive state.
 
+Do not use straight divider rules to organize Maitri narrative content. On companion pages, separate facts, values, prompts, book details, and box contents through whitespace, organic colour fields, circular markers, and typographic rhythm so adjacent sections remain visually seamless.
+
 Give decorative circles and image-layer rings a clearly visible, unhurried ambient motion rather than leaving them static between hover interactions. Use enough travel, rotation, and breathing to be noticeable without competing with the content; preserve the stronger hover response, stagger the movement so the page does not pulse in unison, and disable non-essential motion for reduced-motion users.
 
 Use one consistent headline treatment for public narrative-section eyebrows: larger title-case Outfit text with a restrained brand-colour shimmer and a small companion-circle accent. Do not return to tiny all-caps labels or brush-stroke marker backgrounds; keep labels inside dense interactive controls compact and static.
+
+On the homepage, keep every narrative-section eyebrow visibly large and do not place the former row of decorative dots beneath it. Brand the character collective as “Companions” in navigation, section headings, and discovery calls to action. The “Meet the Companions” section should include a creative, image-led preview of the current companion circle rather than stopping after introductory copy. Keep all companion preview portrait frames visually equal in size even when their source cutouts use different aspect ratios.
+
+In the homepage “Stories You’ll Read Together” section, keep the reading illustration in the same softly asymmetrical, layered image-shape family as the hero artwork; do not revert it to a perfect circular crop.
+
+On `manu.html`, use the same large, title-case narrative-section headline treatment as the homepage and omit the decorative dot row beneath those labels. Present both the selectable book thumbnails and the large active-book preview with the homepage image system’s softly asymmetrical crops, offset translucent layers, and restrained depth; do not return to sharp polygon cutouts or perfect ellipses.
+
+When founder-provided Manu references are supplied as screenshots, use them as content-architecture inputs rather than visual-design sources. Keep the Maitri visual system, foreground a warm first-person introduction, and place memorable child-facing facts before the book experience. Current highlighted facts are Manikarnika/Manu, childhood in Bithoor with her later Jhansi legacy clearly distinguished, hot jalebis, horse riding with Badal, and 19 November. Do not inherit unsupported comparison claims, release claims, age labels, outfit counts, or product specifications from reference screenshots.
 
 Keep the in-progress About page disabled until the founder explicitly asks to publish it. Preserve its source reversibly, but omit it from public navigation and production build inputs while disabled.
 
@@ -42,6 +52,8 @@ Hover treatment on the world should be minimal: show only the location name near
 
 The public Maitri Circle waitlist collects only name and email. Its free production backend is the bound Google Apps Script documented under `05_waitlist_preorder/google_sheets_waitlist/`, reached through the Vercel serverless route at `/api/waitlist`. Keep the honeypot, server-side validation, response-body verification, and explicit success/failure states intact. Never report a successful signup from a local-only fallback or expose the Apps Script URL or shared secret through a `VITE_` variable.
 
-Treat the existing Outfit-led `Maitri` website wordmark as the official identity anchor unless the founder changes direction. Logo refinements should preserve the current word shape, weight, plum color, and friendly simplicity. Prefer subtle companion-circle details integrated with the two `i` letters over a separate geometric `M` badge or a wholesale wordmark redesign.
+The current website identity anchor is the founder-selected companion mark: two layered pink leaves meeting as an open `M`. Use the clean vector asset at `public/assets/brand/maitri-mark.svg`, paired horizontally with the Outfit `Maitri` wordmark in website headers and footers. Keep favicons icon-only. Preserve the mark's symmetrical silhouette, three soft tonal layers, transparent background, and rose palette.
 
-The selected logo direction is `A3 — Companion circle garland`: the two `i` dots anchor a shallow garland made entirely from brand-colour circles. Use this version for visiting-card exploration and later identity applications while keeping `Outfit` at weight `700` and letter-spacing `0` unchanged.
+The official Maitri website palette is pastel crimson `#ff96af` and pastel orange `#ffb098`. Use this pair for public narrative-section headline gradients and future brand-led colour decisions. Keep mobile navigation visually continuous with the main glass navigation bar through matching translucent borders, blur, opacity, and restrained motion.
+
+The 12 standalone pink motifs under `public/assets/brand/icons/svg/` are the approved decorative icon vocabulary. Render these individual SVGs directly, without bubbles, borders, shadows, coloured tiles, or enclosing shapes. The current homepage mapping is `26` friendship, `20` stories, `23` imagination, `18` values, `22` shared reading, and `25` waitlist. Retain conventional interface icons for controls whose meaning must remain immediately recognizable.
