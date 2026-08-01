@@ -1,0 +1,249 @@
+/*
+ * Maitri design tokens, translated from Shwetika's Okeo reference principles.
+ * These are role-based Maitri values, not a copy of Okeo's identity.
+ */
+:root {
+  --maitri-font-display: "Outfit", system-ui, sans-serif;
+  --maitri-font-body: "Outfit", system-ui, sans-serif;
+  --maitri-surface-story: #fff8ed;
+  --maitri-surface-wash: #f8f0e8;
+  --maitri-surface-aqua: #e7f8f7;
+  --maitri-surface-blush: #fff0eb;
+  --maitri-ink-story: #451039;
+  --maitri-ink-soft: #74566b;
+  --maitri-accent-courage: #ef6f8b;
+  --maitri-accent-wonder: #f3a823;
+  --maitri-accent-circle: #189a93;
+  --maitri-accent-dream: #8b61c8;
+  --maitri-line-soft: rgba(69, 16, 57, 0.12);
+  --maitri-radius-organic: 34px 22px 40px 26px;
+  --maitri-radius-pill: 999px;
+  --maitri-space-section: clamp(76px, 10vw, 148px);
+  --maitri-shadow-soft: 0 24px 64px rgba(69, 16, 57, 0.1);
+
+  /* Type roles: one warm geometric voice, different jobs. */
+  --maitri-type-display-xl: clamp(3.5rem, 7.5vw, 7.4rem);
+  --maitri-type-display-lg: clamp(2.8rem, 5.2vw, 5.2rem);
+  --maitri-type-display-md: clamp(2rem, 3.6vw, 3.8rem);
+  --maitri-type-body-lg: clamp(1.05rem, 1.35vw, 1.22rem);
+  --maitri-type-body: 1rem;
+  --maitri-type-caption: 0.78rem;
+  --maitri-leading-display: 0.94;
+  --maitri-leading-body: 1.55;
+
+  /* Layout roles: open editorial spacing, with containment reserved for action. */
+  --maitri-measure-copy: 39rem;
+  --maitri-measure-reading: 64rem;
+  --maitri-gutter: clamp(20px, 5vw, 84px);
+  --maitri-space-1: 0.5rem;
+  --maitri-space-2: 0.75rem;
+  --maitri-space-3: 1rem;
+  --maitri-space-4: 1.5rem;
+  --maitri-space-5: 2rem;
+  --maitri-space-6: 3rem;
+  --maitri-space-7: 5rem;
+
+  /* Interaction roles: quiet, legible, and consistent across all routes. */
+  --maitri-focus-ring: 0 0 0 4px rgba(24, 154, 147, 0.22);
+  --maitri-motion-spring: cubic-bezier(0.2, 0.82, 0.22, 1);
+  --maitri-motion-gentle: 520ms var(--maitri-motion-spring);
+}
+
+body {
+  background:
+    radial-gradient(circle at 4% 8%, rgba(255, 150, 175, 0.11), transparent 22rem),
+    radial-gradient(circle at 98% 26%, rgba(24, 154, 147, 0.08), transparent 24rem),
+    var(--maitri-surface-wash);
+  color: var(--maitri-ink-story);
+}
+
+.site-header {
+  border-color: var(--maitri-line-soft);
+  background: rgba(255, 248, 237, 0.78);
+  box-shadow: 0 18px 42px rgba(69, 16, 57, 0.1);
+}
+
+.site-header .primary-nav a,
+.site-header .waitlist-pill,
+.menu-button,
+.header-icon-button {
+  color: var(--maitri-ink-story);
+}
+
+.site-header .primary-nav a::after {
+  background: var(--maitri-accent-courage);
+}
+
+.section-shell {
+  position: relative;
+}
+
+.section-label,
+.panel-label {
+  font-family: var(--maitri-font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+.hero-copy,
+.section-copy,
+.manu-copy,
+.waitlist-copy,
+.selected-character-copy {
+  max-width: var(--maitri-measure-copy);
+}
+
+.hero-copy h1,
+.investor-section-head h1,
+.selected-character-copy h1 {
+  font-size: var(--maitri-type-display-xl);
+  line-height: var(--maitri-leading-display);
+}
+
+.section-copy h2,
+.manu-copy h2,
+.waitlist-copy h2 {
+  font-size: var(--maitri-type-display-lg);
+  line-height: var(--maitri-leading-display);
+}
+
+.hero-copy p,
+.section-copy p,
+.manu-copy > p,
+.waitlist-copy p,
+.selected-character-copy > p {
+  font-size: var(--maitri-type-body-lg);
+  line-height: var(--maitri-leading-body);
+  color: var(--maitri-ink-soft);
+}
+
+:where(a, button, input):focus-visible {
+  outline: none;
+  box-shadow: var(--maitri-focus-ring);
+}
+
+.hero-section,
+.brand-introduction,
+.what-we-do-section,
+.audience-section,
+.explore-maitri-section,
+.manu-section,
+.first-box-section,
+.circle-section,
+.schools-section,
+.waitlist-section,
+.character-world-page {
+  background-color: transparent;
+}
+
+.hero-section::before,
+.brand-introduction::before,
+.what-we-do-section::before,
+.audience-section::before,
+.explore-maitri-section::before,
+.manu-section::before,
+.first-box-section::before,
+.circle-section::before,
+.waitlist-section::before {
+  background: linear-gradient(90deg, transparent, var(--maitri-line-soft), transparent);
+}
+
+.hero-copy h1,
+.section-copy h2,
+.manu-copy h2,
+.waitlist-copy h2,
+.investor-section-head h1,
+.selected-character-copy h1 {
+  font-family: var(--maitri-font-display);
+  letter-spacing: -0.045em;
+}
+
+.hero-copy h1 strong,
+.section-copy h2 strong,
+.manu-copy h2 strong,
+.waitlist-copy h2 strong {
+  color: var(--maitri-accent-courage);
+}
+
+.hero-actions .arrow-button,
+.waitlist-form button,
+.waitlist-pill {
+  background: var(--maitri-accent-courage);
+  box-shadow: 0 14px 30px rgba(239, 111, 139, 0.25);
+}
+
+.hero-actions .arrow-button.outline,
+.section-copy .arrow-button.outline,
+.manu-copy .arrow-button.outline {
+  border-color: rgba(24, 154, 147, 0.45);
+  color: var(--maitri-accent-circle);
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.brand-pillar-card,
+.audience-grid article,
+.story-library-book,
+.home-companion,
+.first-box-home-grid article,
+.investor-story-card,
+.manu-first-box-list li {
+  border-color: var(--maitri-line-soft);
+  box-shadow: var(--maitri-shadow-soft);
+}
+
+.brand-pillar-card:nth-child(odd),
+.story-library-book:nth-child(odd) {
+  background: var(--maitri-surface-story);
+}
+
+.brand-pillar-card:nth-child(even),
+.story-library-book:nth-child(even) {
+  background: var(--maitri-surface-aqua);
+}
+
+.waitlist-section,
+.manu-section {
+  background: linear-gradient(135deg, rgba(255, 240, 235, 0.78), rgba(231, 248, 247, 0.7));
+}
+
+.waitlist-form input {
+  border-color: rgba(69, 16, 57, 0.18);
+  background: rgba(255, 248, 237, 0.86);
+}
+
+@media (max-width: 780px) {
+  .site-header,
+  .site-header .primary-nav {
+    background: rgba(255, 248, 237, 0.88);
+    border-color: rgba(69, 16, 57, 0.14);
+  }
+
+  .hero-copy h1,
+  .section-copy h2,
+  .manu-copy h2,
+  .waitlist-copy h2,
+  .investor-section-head h1,
+  .selected-character-copy h1 {
+    max-width: 100%;
+    font-size: clamp(2.5rem, 12vw, 3.7rem);
+    line-height: 0.98;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-copy .section-label,
+  .section-label {
+    max-width: 100%;
+    font-size: clamp(1.05rem, 5.2vw, 1.45rem);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-copy,
+  .section-copy,
+  .manu-copy,
+  .waitlist-copy,
+  .selected-character-copy {
+    max-width: none;
+  }
+}

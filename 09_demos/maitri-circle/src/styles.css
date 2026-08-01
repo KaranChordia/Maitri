@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap");
 @import url("./character-page.css");
+@import url("./maitri-tokens.css");
 
 :root {
   color-scheme: light;
