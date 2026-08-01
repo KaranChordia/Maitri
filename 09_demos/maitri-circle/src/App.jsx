@@ -70,6 +70,9 @@ const generatedAssets = {
   portal: publicPath("assets/generated/optimized/waitlist-portal.jpg"),
 };
 
+// Keep the existing artwork intact in the repository while the founder selects its replacement.
+const SHOW_MAITRI_LOGO = false;
+
 const shwetikaAssets = {
   manuDoll: publicPath("assets/shwetika/manu/optimized/manu-doll-cutout.png"),
   manuOnHorse: publicPath("assets/shwetika/manu/optimized/manu-on-horse.jpg"),
@@ -1179,9 +1182,15 @@ function Header({ waitlistHref = publicPath("#waitlist") }) {
   }, [open]);
 
   return (
-    <header className="site-header">
+    <header className={`site-header${SHOW_MAITRI_LOGO ? "" : " site-header--logo-hidden"}`}>
       <div className="site-header-bg" />
-      <Brand />
+      {SHOW_MAITRI_LOGO ? (
+        <Brand />
+      ) : (
+        <a className="site-wordmark" href={publicPath("#top")} aria-label="Maitri home">
+          Maitri
+        </a>
+      )}
       <nav
         className={`primary-nav ${open ? "open" : ""}`}
         id="primary-navigation"
@@ -1224,14 +1233,10 @@ function Hero() {
           <span className="section-label teal-label">A world of unforgettable friendships</span>
           <h1>Every Great Adventure Begins with a Friend.</h1>
           <p>
-            Meet Maitri, a world of stories, courage, kindness, and unforgettable
-            friendships.
-          </p>
-          <p>
-            Discover beautifully crafted 18-inch companions inspired by the remarkable
-            girls and women of India. Each friend has her own story, personality, dreams,
-            and adventures that inspire children to imagine boldly, live kindly, and grow
-            with confidence.
+            Meet Maitri, a world of stories, courage, kindness, and unforgettable friendships.
+            Discover beautifully crafted 18-inch companions inspired by the remarkable girls and
+            women of India. Each friend has her own story, personality, dreams, and adventures
+            that inspire children to imagine boldly, live kindly, and grow with confidence.
           </p>
           <div className="hero-actions">
             <ArrowButton href="#friends">Explore the Companions</ArrowButton>
@@ -1310,21 +1315,30 @@ function WhatWeDo() {
             />
             <span aria-hidden="true"><BrandMotif name="openHeart" /></span>
           </figure>
-          <div className="story-library-books" aria-label="Books in the Maitri Story Library">
-            {homepageLibraryBooks.map(({ id, title, character, tone, premise }, index) => (
-              <a
-                className={`story-library-book ${tone}`}
-                href={publicPath("story-universe.html")}
-                aria-label={`Explore ${title} in the Story Library`}
-                key={id}
-              >
-                <span className="story-library-edition">Maitri Story Library</span>
-                <strong>{title}</strong>
-                <small>{premise}</small>
-                <span className="story-library-character">{character}</span>
-                <span className="story-library-number" aria-hidden="true">0{index + 1}</span>
-              </a>
-            ))}
+          <div className="story-library-trail">
+            <span className="story-library-label">Maitri Story Library</span>
+            <svg className="story-library-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M52 3C15 15 88 25 51 47S16 75 54 97" />
+            </svg>
+            <ol className="story-library-books">
+              {homepageLibraryBooks.map(({ id, title, character, tone, premise }, index) => (
+                <li className={`story-library-book ${tone}`} key={id}>
+                  <a
+                    href={publicPath("story-universe.html")}
+                    aria-label={`Explore ${title} in the Story Library`}
+                  >
+                    <span className="story-library-marker" aria-hidden="true">
+                      <span>0{index + 1}</span>
+                    </span>
+                    <span className="story-library-entry-copy">
+                      <strong>{title}</strong>
+                      <small>{premise}</small>
+                      <span className="story-library-character">{character}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </div>
@@ -3061,20 +3075,34 @@ function AboutPage() {
 function Footer() {
   return (
     <footer className="site-footer">
-      <div>
-        <Brand />
-        <p>A world of stories, courage, kindness, and unforgettable friendships.</p>
+      <div className="footer-branding">
+        {SHOW_MAITRI_LOGO ? <Brand /> : null}
+        <p className="footer-brand-line">Companions for Girls Who Dream Big.</p>
       </div>
-      <nav aria-label="Footer">
-        {navItems.slice(0, 5).map(([label, href]) => (
-          <a href={href} key={label}>
-            {label}
+      <div className="footer-navigation">
+        <span className="footer-eyebrow">Explore Maitri</span>
+        <nav aria-label="Footer navigation">
+          {navItems.slice(0, 5).map(([label, href]) => (
+            <a href={href} key={label}>
+              {label}
+            </a>
+          ))}
+        </nav>
+      </div>
+      <div className="footer-legal" id="footer-legal">
+        <span className="footer-eyebrow">Stay in touch</span>
+        <nav aria-label="Footer legal and contact placeholders">
+          <a href="#footer-legal" aria-disabled="true" title="Placeholder link">
+            Copyright
           </a>
-        ))}
-      </nav>
-      <div className="footer-note" aria-label="Maitri launch note">
-        <span>Be among the first</span>
-        <strong>Our first collection is almost here.</strong>
+          <a href="#footer-legal" aria-disabled="true" title="Placeholder link">
+            Terms &amp; Conditions
+          </a>
+          <a href="#footer-legal" aria-disabled="true" title="Placeholder link">
+            Contact Us
+          </a>
+        </nav>
+        <span className="footer-placeholder-note">Links coming soon</span>
       </div>
     </footer>
   );
