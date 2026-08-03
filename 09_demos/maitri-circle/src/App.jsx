@@ -145,6 +145,7 @@ const homepageLibraryBooks = [
     title: "Manu: The Horse Nobody Could Ride",
     character: "Manu",
     tone: "violet",
+    image: shwetikaAssets.horseRace,
     premise: "Before Manu changed history, she learned to be brave one small step at a time.",
   },
   {
@@ -152,6 +153,7 @@ const homepageLibraryBooks = [
     title: "Manu and the River Festival",
     character: "Manu",
     tone: "teal",
+    image: shwetikaAssets.manuAtGhats,
     premise: "A festival day becomes a lesson in helping without needing attention.",
   },
   {
@@ -159,6 +161,7 @@ const homepageLibraryBooks = [
     title: "The Promise at Sunrise",
     character: "Manu",
     tone: "amber",
+    image: shwetikaAssets.storyOneChance,
     premise: "Manu makes a promise to try again even when the first answer is no.",
   },
 ];
@@ -1291,8 +1294,8 @@ function BrandIntroduction() {
 function WhatWeDo() {
   return (
     <section className="what-we-do-section section-shell" id="stories">
-      <div className="what-we-do-layout">
-        <div className="section-copy what-we-do-copy">
+      <div className="stories-editorial-layout">
+        <div className="section-copy stories-editorial-copy">
           <span className="section-label amber-label">Stories You'll Read Together</span>
           <h2>Every Companion Comes With Her Own Book Series.</h2>
           <p>
@@ -1307,34 +1310,35 @@ function WhatWeDo() {
             Explore the Library
           </ArrowButton>
         </div>
-        <div className="story-library-stage">
-          <figure className="story-reading-feature">
+        <div className="stories-reading-experience">
+          <figure className="stories-reading-scene">
             <img
               src={generatedAssets.girlsReading}
               alt="Three girls sharing a beautifully illustrated book in a warm Maitri reading nook"
             />
             <span aria-hidden="true"><BrandMotif name="openHeart" /></span>
           </figure>
-          <div className="story-library-trail">
-            <span className="story-library-label">Maitri Story Library</span>
-            <svg className="story-library-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M52 3C15 15 88 25 51 47S16 75 54 97" />
-            </svg>
-            <ol className="story-library-books">
-              {homepageLibraryBooks.map(({ id, title, character, tone, premise }, index) => (
-                <li className={`story-library-book ${tone}`} key={id}>
+          <div className="storybook-collection" aria-label="Three stories in the Maitri library">
+            <span className="storybook-collection-kicker">Maitri Story Library</span>
+            <ol className="storybook-collection-list">
+              {homepageLibraryBooks.map(({ id, title, character, tone, image, premise }, index) => (
+                <li className={`storybook-volume ${tone}`} key={id}>
                   <a
+                    className="storybook-book"
                     href={publicPath("story-universe.html")}
                     aria-label={`Explore ${title} in the Story Library`}
                   >
-                    <span className="story-library-marker" aria-hidden="true">
-                      <span>0{index + 1}</span>
+                    <span className="storybook-book-spine" aria-hidden="true" />
+                    <span className="storybook-book-image" aria-hidden="true">
+                      <img src={image} alt="" />
                     </span>
-                    <span className="story-library-entry-copy">
+                    <span className="storybook-book-copy">
+                      <span className="storybook-book-meta">Book {index + 1} · {character}</span>
                       <strong>{title}</strong>
                       <small>{premise}</small>
-                      <span className="story-library-character">{character}</span>
+                      <span className="storybook-book-action">Open the story <ArrowRight size={15} weight="bold" /></span>
                     </span>
+                    <span className="storybook-book-pages" aria-hidden="true" />
                   </a>
                 </li>
               ))}
@@ -1841,10 +1845,6 @@ function CompanionHubPage() {
       </section>
       <Waitlist />
       <Footer />
-      <a className="floating-compass" href="#top" aria-label="Back to top">
-        <Compass size={22} weight="duotone" />
-        <Sparkle size={11} weight="fill" />
-      </a>
     </main>
   );
 }
@@ -2048,10 +2048,6 @@ function CompanionDetailPage({ characterId }) {
       </section>
       <Waitlist />
       <Footer />
-      <a className="floating-compass" href="#top" aria-label="Back to top">
-        <Compass size={22} weight="duotone" />
-        <Sparkle size={11} weight="fill" />
-      </a>
     </main>
   );
 }
@@ -2935,10 +2931,6 @@ function CharacterPageLegacy() {
           </div>
         </section>
       </section>
-      <a className="floating-compass" href="#top" aria-label="Back to top">
-        <Compass size={22} weight="duotone" />
-        <Sparkle size={11} weight="fill" />
-      </a>
     </main>
   );
 }
@@ -3064,10 +3056,6 @@ function AboutPage() {
 
       <Waitlist />
       <Footer />
-      <a className="floating-compass" href="#top" aria-label="Back to top">
-        <Compass size={22} weight="duotone" />
-        <Sparkle size={11} weight="fill" />
-      </a>
     </main>
   );
 }
@@ -3211,10 +3199,6 @@ export function App() {
       <WhatWeDo />
       <Waitlist />
       <Footer />
-      <a className="floating-compass" href="#top" aria-label="Back to top">
-        <Compass size={22} weight="duotone" />
-        <Sparkle size={11} weight="fill" />
-      </a>
     </main>
   );
 }

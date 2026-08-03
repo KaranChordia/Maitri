@@ -5446,44 +5446,6 @@ p {
   line-height: 1.4;
 }
 
-.floating-compass {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 20;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.86);
-  color: var(--rose);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(14px);
-  transition: transform 260ms var(--spring), box-shadow 220ms ease, background 180ms ease;
-}
-
-.floating-compass:hover,
-.floating-compass:focus-visible {
-  background: #fff8ed;
-  box-shadow: var(--hover-shadow);
-  transform: translateY(-4px) rotate(-8deg);
-}
-
-.floating-compass svg:last-child {
-  position: absolute;
-  top: 9px;
-  right: 10px;
-  color: var(--amber);
-  transition: transform 260ms var(--spring);
-}
-
-.floating-compass:hover svg:last-child,
-.floating-compass:focus-visible svg:last-child {
-  transform: scale(1.35) rotate(16deg);
-}
-
 .character-lab-page {
   min-height: 100vh;
 }
@@ -9715,13 +9677,6 @@ p {
 :root[data-theme="dark"] .arrow-button.outline.blue {
   border-color: rgba(116, 213, 255, 0.42);
   color: #b8ecff;
-}
-
-:root[data-theme="dark"] .floating-compass {
-  border-color: rgba(255, 235, 225, 0.12);
-  background: rgba(43, 24, 38, 0.8);
-  color: #ffb6c8;
-  box-shadow: var(--dark-shadow);
 }
 
 .manu-investor-grid {
