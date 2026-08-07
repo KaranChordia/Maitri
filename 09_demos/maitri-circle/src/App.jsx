@@ -1821,6 +1821,7 @@ function Footer() {
             </a>
           ))}
           <a href={publicPath("#waitlist")}>Waitlist</a>
+          <a href={publicPath("content-studio/index.html")}>Content Studio</a>
         </nav>
       </div>
     </footer>

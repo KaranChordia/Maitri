@@ -19,6 +19,14 @@
     {
       "source": "/story-universe",
       "destination": "/story-universe.html"
+    },
+    {
+      "source": "/content-studio",
+      "destination": "/content-studio/index.html"
+    },
+    {
+      "source": "/content-studio/",
+      "destination": "/content-studio/index.html"
     }
   ]
 }

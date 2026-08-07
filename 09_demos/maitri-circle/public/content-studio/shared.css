@@ -1,0 +1,388 @@
+:root {
+  --rose: #ff96af;
+  --orange: #ffb098;
+  --ink: #451039;
+  --ink-soft: rgba(69, 16, 57, 0.78);
+  --cream: #fff8f5;
+  --blush: #ffe8ef;
+  --paper: rgba(255, 255, 255, 0.72);
+  --line: rgba(255, 150, 175, 0.32);
+  --shadow: 0 18px 40px rgba(124, 47, 80, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Josefin Sans", system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse 70% 45% at 12% 0%, rgba(255, 150, 175, 0.22), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 92% 8%, rgba(255, 176, 152, 0.2), transparent 50%),
+    linear-gradient(180deg, #fff8f5 0%, #ffe8ef 46%, #fff4f0 100%);
+  line-height: 1.55;
+}
+
+a {
+  color: var(--ink);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.studio-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 20px 80px;
+}
+
+.studio-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: 36px;
+  padding: 14px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+
+.studio-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.studio-brand img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.studio-brand span {
+  font-size: 1.15rem;
+}
+
+.studio-brand em {
+  font-style: normal;
+  font-weight: 400;
+  opacity: 0.65;
+  margin-left: 6px;
+  font-size: 0.85rem;
+}
+
+.studio-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  justify-content: flex-end;
+}
+
+.studio-nav a {
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  opacity: 0.78;
+  padding: 4px 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.studio-nav a:hover,
+.studio-nav a[aria-current="page"] {
+  opacity: 1;
+  border-bottom-color: var(--rose);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: linear-gradient(90deg, var(--rose), var(--orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+h1 {
+  margin: 0 0 14px;
+  font-size: clamp(1.9rem, 4.2vw, 2.7rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+  font-weight: 600;
+}
+
+h3 {
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.lede {
+  margin: 0 0 32px;
+  max-width: 42rem;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+}
+
+.note-banner {
+  margin: 0 0 36px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: rgba(255, 176, 152, 0.18);
+  border: 1px solid rgba(255, 176, 152, 0.35);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.tile,
+.draft,
+.pillar,
+.day {
+  padding: 22px 20px;
+  border-radius: 26px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+.tile a {
+  text-decoration: none;
+  display: block;
+}
+
+.tile h2 {
+  margin-top: 8px;
+}
+
+.tile p,
+.pillar p,
+.draft p,
+.day p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.motif {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.motif-lg {
+  width: 96px;
+  height: 96px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(255, 150, 175, 0.16);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.chip.orange {
+  background: rgba(255, 176, 152, 0.22);
+}
+
+.copy-block {
+  margin: 12px 0;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 248, 245, 0.9);
+  border: 1px dashed rgba(255, 150, 175, 0.4);
+  white-space: pre-wrap;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.label-row {
+  margin: 14px 0 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.review {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.list-clean {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+}
+
+.list-clean li + li {
+  margin-top: 6px;
+}
+
+.section {
+  margin: 42px 0 0;
+}
+
+.section-head {
+  margin-bottom: 18px;
+  max-width: 40rem;
+}
+
+.section-head p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.do-dont {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.do-dont article h3 {
+  color: var(--ink);
+}
+
+.do-dont .dont h3 {
+  color: #8a3358;
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.calendar-table th,
+.calendar-table td {
+  text-align: left;
+  padding: 14px 16px;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(255, 150, 175, 0.2);
+  font-size: 0.95rem;
+}
+
+.calendar-table th {
+  background: rgba(255, 150, 175, 0.14);
+  font-weight: 600;
+}
+
+.calendar-table tr:last-child td {
+  border-bottom: none;
+}
+
+.motif-inline {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.footer-note {
+  margin-top: 48px;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.footer-note a {
+  font-weight: 500;
+}
+
+@media (max-width: 720px) {
+  .studio-top {
+    border-radius: 24px;
+  }
+
+  .studio-nav {
+    justify-content: flex-start;
+  }
+
+  .calendar-table,
+  .calendar-table thead,
+  .calendar-table tbody,
+  .calendar-table th,
+  .calendar-table td,
+  .calendar-table tr {
+    display: block;
+  }
+
+  .calendar-table thead {
+    display: none;
+  }
+
+  .calendar-table tr {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 150, 175, 0.2);
+  }
+
+  .calendar-table td {
+    border: none;
+    padding: 4px 0;
+  }
+
+  .calendar-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 2px;
+  }
+}
