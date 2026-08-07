@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 384" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri soft petal M</title>
+  <desc id="desc">Two soft friendship petals meet to form an open letter M, with warm layered glow.</desc>
+  <defs>
+    <linearGradient id="pm-base" x1="0.1" y1="0" x2="0.75" y2="1">
+      <stop offset="0" stop-color="#ff96af"/>
+      <stop offset="0.45" stop-color="#ef7f9c"/>
+      <stop offset="1" stop-color="#f8dce4"/>
+    </linearGradient>
+    <linearGradient id="pm-mid" x1="0.05" y1="0.05" x2="0.9" y2="0.95">
+      <stop offset="0" stop-color="#ffb4c6" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#fff4f7" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="pm-light" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#ffc2d0" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#fff8ed" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="pm-core" x1="0.35" y1="0.2" x2="0.65" y2="0.9">
+      <stop offset="0" stop-color="#ffb098"/>
+      <stop offset="1" stop-color="#ff96af" stop-opacity="0.45"/>
+    </linearGradient>
+    <path id="pm-leaf" d="M72 48C158 54 222 108 252 196c-7 9-14 19-20 30-9-20-20-34-31-34-11 0-17 9-17 24v78C96 268 66 176 72 48Z"/>
+    <clipPath id="pm-clip">
+      <use href="#pm-leaf"/>
+    </clipPath>
+  </defs>
+
+  <!-- Soft bloom halo behind the M -->
+  <ellipse cx="256" cy="210" rx="210" ry="150" fill="#ff96af" opacity="0.08"/>
+
+  <g>
+    <use href="#pm-leaf" fill="url(#pm-base)"/>
+    <g clip-path="url(#pm-clip)">
+      <path d="M54 74C142 80 208 130 244 200c-24-34-60-56-106-66-28-6-52-5-72 2Z" fill="url(#pm-mid)"/>
+      <path d="M60 148c66 2 128 30 172 78-34-26-74-38-120-34-22 2-40 6-54 12Z" fill="url(#pm-light)"/>
+    </g>
+  </g>
+
+  <g transform="translate(512 0) scale(-1 1)">
+    <use href="#pm-leaf" fill="url(#pm-base)"/>
+    <g clip-path="url(#pm-clip)">
+      <path d="M54 74C142 80 208 130 244 200c-24-34-60-56-106-66-28-6-52-5-72 2Z" fill="url(#pm-mid)"/>
+      <path d="M60 148c66 2 128 30 172 78-34-26-74-38-120-34-22 2-40 6-54 12Z" fill="url(#pm-light)"/>
+    </g>
+  </g>
+
+  <!-- Friendship spark in the M valley -->
+  <circle cx="256" cy="188" r="22" fill="url(#pm-core)"/>
+  <circle cx="248" cy="180" r="8" fill="#fff8ed" opacity="0.55"/>
+</svg>

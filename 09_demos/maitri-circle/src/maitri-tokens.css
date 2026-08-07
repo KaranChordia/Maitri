@@ -3,8 +3,8 @@
  * These are role-based Maitri values, not a copy of Okeo's identity.
  */
 :root {
-  --maitri-font-display: "Outfit", system-ui, sans-serif;
-  --maitri-font-body: "Outfit", system-ui, sans-serif;
+  --maitri-font-display: "Josefin Sans", system-ui, sans-serif;
+  --maitri-font-body: "Josefin Sans", system-ui, sans-serif;
   --maitri-surface-story: #fff8ed;
   --maitri-surface-wash: #f8f0e8;
   --maitri-surface-aqua: #e7f8f7;
@@ -95,7 +95,7 @@ body {
 }
 
 .hero-copy h1,
-.investor-section-head h1,
+.companion-section-head h1,
 .selected-character-copy h1 {
   font-size: var(--maitri-type-display-xl);
   line-height: var(--maitri-leading-display);
@@ -146,14 +146,16 @@ body {
 .first-box-section::before,
 .circle-section::before,
 .waitlist-section::before {
-  background: linear-gradient(90deg, transparent, var(--maitri-line-soft), transparent);
+  content: none;
+  display: none;
+  background: none;
 }
 
 .hero-copy h1,
 .section-copy h2,
 .manu-copy h2,
 .waitlist-copy h2,
-.investor-section-head h1,
+.companion-section-head h1,
 .selected-character-copy h1 {
   font-family: var(--maitri-font-display);
   letter-spacing: -0.045em;
@@ -167,8 +169,7 @@ body {
 }
 
 .hero-actions .arrow-button,
-.waitlist-form button,
-.waitlist-pill {
+.waitlist-form button {
   background: var(--maitri-accent-courage);
   box-shadow: 0 14px 30px rgba(239, 111, 139, 0.25);
 }
@@ -186,7 +187,7 @@ body {
 .story-library-book,
 .home-companion,
 .first-box-home-grid article,
-.investor-story-card,
+.companion-story-card,
 .manu-first-box-list li {
   border-color: var(--maitri-line-soft);
   box-shadow: var(--maitri-shadow-soft);
@@ -213,9 +214,8 @@ body {
 }
 
 @media (max-width: 780px) {
-  .site-header,
-  .site-header .primary-nav {
-    background: rgba(255, 248, 237, 0.88);
+  .site-header {
+    background: rgba(255, 248, 237, 0.78);
     border-color: rgba(69, 16, 57, 0.14);
   }
 
@@ -223,7 +223,7 @@ body {
   .section-copy h2,
   .manu-copy h2,
   .waitlist-copy h2,
-  .investor-section-head h1,
+  .companion-section-head h1,
   .selected-character-copy h1 {
     max-width: 100%;
     font-size: clamp(2.5rem, 12vw, 3.7rem);

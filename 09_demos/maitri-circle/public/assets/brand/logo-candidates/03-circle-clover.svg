@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri circle clover</title>
+  <desc id="desc">A soft three-petal clover inside a gentle orbit, suggesting friendship within the Maitri circle.</desc>
+  <defs>
+    <linearGradient id="clover-base" x1="0.2" y1="0.05" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#ff96af"/>
+      <stop offset="0.48" stop-color="#f08aa5"/>
+      <stop offset="1" stop-color="#f8dce4"/>
+    </linearGradient>
+    <linearGradient id="clover-soft" x1="0.25" y1="0.1" x2="0.8" y2="0.95">
+      <stop offset="0" stop-color="#ffb8c9" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#fff4f7" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="orbit-stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff96af"/>
+      <stop offset="1" stop-color="#ffb098"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Gentle orbit -->
+  <circle cx="256" cy="256" r="198" fill="none" stroke="url(#orbit-stroke)" stroke-width="10" opacity="0.28"/>
+  <circle cx="256" cy="256" r="178" fill="none" stroke="#ff96af" stroke-width="3" opacity="0.18" stroke-dasharray="6 14" stroke-linecap="round"/>
+
+  <!-- Three clover petals -->
+  <g fill="url(#clover-base)">
+    <ellipse cx="256" cy="168" rx="78" ry="96" transform="rotate(0 256 256)"/>
+    <ellipse cx="332" cy="292" rx="78" ry="96" transform="rotate(120 256 256)"/>
+    <ellipse cx="180" cy="292" rx="78" ry="96" transform="rotate(240 256 256)"/>
+  </g>
+
+  <!-- Soft overlays -->
+  <g fill="url(#clover-soft)">
+    <ellipse cx="256" cy="176" rx="52" ry="68"/>
+    <ellipse cx="318" cy="286" rx="52" ry="68" transform="rotate(120 256 256)"/>
+    <ellipse cx="194" cy="286" rx="52" ry="68" transform="rotate(240 256 256)"/>
+  </g>
+
+  <!-- Center -->
+  <circle cx="256" cy="256" r="38" fill="#ffb098"/>
+  <circle cx="256" cy="256" r="38" fill="#ff96af" opacity="0.45"/>
+  <circle cx="246" cy="246" r="12" fill="#fff8ed" opacity="0.55"/>
+
+  <!-- Orbit accent dots -->
+  <circle cx="256" cy="58" r="9" fill="#ff96af" opacity="0.7"/>
+  <circle cx="428" cy="354" r="7" fill="#ffb098" opacity="0.75"/>
+  <circle cx="84" cy="354" r="7" fill="#ff96af" opacity="0.65"/>
+</svg>

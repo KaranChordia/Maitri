@@ -1,6 +1,6 @@
 # Maitri Brand Assets
 
-Working brand notes for the investor-demo website in `09_demos/maitri-circle`.
+Working brand notes for the public Maitri Circle website in `09_demos/maitri-circle`.
 
 ## Color System
 
@@ -33,7 +33,7 @@ Use yellow as the optimism and keepsake color: launch energy, story warmth, smal
 
 ## Recommended Pairing
 
-The investor-demo site should lead with the pink family and use yellow as a supporting warmth/highlight system. Avoid making the page mostly yellow; it should appear as light, optimism, and shimmer around the rose-led brand.
+The public Maitri Circle website should lead with the pink family and use yellow as a supporting warmth/highlight system. Avoid making the page mostly yellow; it should appear as light, optimism, and shimmer around the rose-led brand.
 
 ## Typography
 
@@ -41,6 +41,6 @@ Current selected family:
 
 | Role | Font | Reason |
 | --- | --- | --- |
-| Whole website | `Outfit` | Rounded, modern, friendly, and clean enough for a premium consumer product site |
+| Whole website | `Josefin Sans` | Clean geometric sans for the full consumer site type system |
 
-Outfit should be used across brand, headings, body, nav, buttons, forms, and Story Universe UI so the website feels like one cohesive consumer brand system.
+Josefin Sans should be used across brand, headings, body, nav, buttons, forms, and Story Universe UI so the website feels like one cohesive consumer brand system.

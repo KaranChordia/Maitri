@@ -1,12 +1,8 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import {
-  ArrowLeft,
   ArrowRight,
   BookOpenText,
   CalendarDots,
-  CheckCircle,
-  Compass,
   Crown,
   FlowerLotus,
   Gift,
@@ -23,7 +19,6 @@ import {
   Sparkle,
   Star,
   Sun,
-  UsersThree,
   X,
 } from "@phosphor-icons/react";
 
@@ -71,7 +66,7 @@ const generatedAssets = {
 };
 
 // Keep the existing artwork intact in the repository while the founder selects its replacement.
-const SHOW_MAITRI_LOGO = false;
+const SHOW_MAITRI_LOGO = true;
 
 const shwetikaAssets = {
   manuDoll: publicPath("assets/shwetika/manu/optimized/manu-doll-cutout.png"),
@@ -90,19 +85,18 @@ const ENABLE_ABOUT_PAGE = false;
 const navItems = [
   ["Home", publicPath("#top")],
   ["Companions", publicPath("characters.html")],
-  ["Stories", publicPath("#stories")],
   ...(ENABLE_ABOUT_PAGE ? [["About Us", publicPath("about.html")]] : []),
 ];
 
 const brandAssets = {
-  mark: publicPath("assets/brand/maitri-mark.svg"),
+  // Logo-only: Flowing pages (23.svg). Do not reuse as a decorative motif.
+  mark: publicPath("assets/brand/icons/svg/23.svg"),
   motifs: {
     layeredOrbit: publicPath("assets/brand/icons/svg/18.svg"),
     quietPetals: publicPath("assets/brand/icons/svg/19.svg"),
     storyBloom: publicPath("assets/brand/icons/svg/20.svg"),
     gentleBridge: publicPath("assets/brand/icons/svg/21.svg"),
     openHeart: publicPath("assets/brand/icons/svg/22.svg"),
-    flowingPages: publicPath("assets/brand/icons/svg/23.svg"),
     storySpark: publicPath("assets/brand/icons/svg/24.svg"),
     softSun: publicPath("assets/brand/icons/svg/25.svg"),
     friendshipClover: publicPath("assets/brand/icons/svg/26.svg"),
@@ -126,7 +120,7 @@ const brandPillars = [
     tone: "amber",
   },
   {
-    motif: "flowingPages",
+    motif: "storySpark",
     label: "Imagination",
     text: "Through play and storytelling, children discover new places, cultures, and inspiring role models.",
     tone: "teal",
@@ -221,39 +215,6 @@ const aboutPrinciples = [
     text: "Books and play are designed to become shared rituals that families can return to as children grow.",
     tone: "teal",
   },
-];
-
-const audienceGroups = [
-  {
-    motif: "openHeart",
-    label: "For children",
-    text: "A warm friend, an absorbing story, and play that makes bravery feel possible in small, everyday moments.",
-    tone: "rose",
-  },
-  {
-    motif: "softSun",
-    label: "For parents and families",
-    text: "Culturally rooted stories and gentle conversation starters that feel meaningful without feeling like a lesson.",
-    tone: "teal",
-  },
-  {
-    motif: "layeredOrbit",
-    label: "For thoughtful gift-givers",
-    text: "A more personal Indian gift direction built around friendship, representation, imagination, and values.",
-    tone: "violet",
-  },
-];
-
-const manuKeepsakes = [
-  ["Doll companion", Gift, "rose"],
-  ["32-page storybook", BookOpenText, "cyan"],
-  ["Letter, activities, stickers", NotePencil, "orange"],
-];
-
-const circleBenefits = [
-  ["Story-led play", BookOpenText, "violet"],
-  ["Small family rituals", CalendarDots, "teal"],
-  ["A calmer gifting choice", UsersThree, "amber"],
 ];
 
 const characterLibrary = {
@@ -441,151 +402,11 @@ const characterLibrary = {
   },
 };
 
-const characterOrder = ["manu", "kalpana", "mary"];
-
-const characterWorldModes = [
-  ["story", "Story", BookOpenText],
-  ["play", "Play", Compass],
-  ["learn", "Four Courages", Lightbulb],
-  ["create", "Create", PaintBrush],
-  ["parents", "Parents", UsersThree],
-];
-
-const manuStoryActs = [
-  {
-    title: "The Courage to Begin",
-    pages: "Book One preview",
-    text: "Manu asks a brave question, notices that Badal is scared, and learns that patience can be courage too.",
-    value: "Ask the brave question",
-    image: shwetikaAssets.manuWithFather,
-    imageAlt: "Manu learning to ride with her father beside her",
-  },
-  {
-    title: "The Courage to Belong",
-    pages: "Next story direction",
-    text: "Later stories can follow Manu into new rooms, new responsibilities, and new moments where she keeps her voice.",
-    value: "Belong without disappearing",
-    image: shwetikaAssets.manuAtGhats,
-    imageAlt: "Manu at the Ganga ghats in warm storybook light",
-  },
-  {
-    title: "The Courage to Grow",
-    pages: "Future Manu story",
-    text: "The wider series can grow with Manu while keeping the child-facing promise warm, gentle, and age-aware.",
-    value: "Take the next step",
-    image: shwetikaAssets.manuOnHorse,
-    imageAlt: "Young Manu riding a horse in storybook artwork",
-  },
-  {
-    title: "More Brave Friends",
-    pages: "Future Maitri shelf",
-    text: "After families fall in love with Manu, Maitri can grow into more Indian heroines with the same warmth, care, and story-led play.",
-    value: "Let courage last",
-    image: shwetikaAssets.horseRace,
-    imageAlt: "Manu racing on horseback as a symbol of a growing story shelf",
-  },
-];
-
-const manuAdventureStops = [
-  {
-    id: "meet",
-    label: "Meet Manu",
-    title: "Before she was a queen, she was a girl who asked why.",
-    scene:
-      "Start beside the Ganga at sunrise. Manu is watching the training yard, holding one big question in her heart.",
-    play: "Choose the first brave thing Manu should do.",
-    choices: ["Ask why", "Listen closely", "Try once"],
-    lesson: "Courage begins with noticing what feels unfair and asking with honesty.",
-    reward: "Brave Question Badge",
-    icon: BookOpenText,
-    tone: "rose",
-  },
-  {
-    id: "badal",
-    label: "Meet Badal",
-    title: "The horse nobody could ride is not angry. He is scared.",
-    scene:
-      "Badal stamps once and lowers his head. Manu watches quietly before stepping closer.",
-    play: "Pick how Manu should approach Badal.",
-    choices: ["Walk slowly", "Speak softly", "Wait patiently"],
-    lesson: "Patience can be braver than showing off.",
-    reward: "Kind Courage Badge",
-    icon: Heart,
-    tone: "teal",
-  },
-  {
-    id: "choice",
-    label: "What Would Manu Do?",
-    title: "Someone says, 'Girls cannot learn this.'",
-    scene:
-      "The courtyard goes quiet. Manu can walk away, argue loudly, or ask a brave question.",
-    play: "Help Manu choose a response.",
-    choices: ["Why not?", "Teach me once", "Let me try"],
-    lesson: "A brave question can open a new path.",
-    reward: "Fairness Badge",
-    icon: ShieldCheck,
-    tone: "amber",
-  },
-  {
-    id: "tracker",
-    label: "Courage Tracker",
-    title: "Small brave actions count too.",
-    scene:
-      "Manu's courage grows one try at a time. Mark a day when you tried, asked, helped, or waited.",
-    play: "Tap days to build a seven-day courage trail.",
-    choices: ["Try", "Ask", "Help"],
-    lesson: "Everyday courage is something children can practice.",
-    reward: "Seven Steps Badge",
-    icon: CalendarDots,
-    tone: "violet",
-  },
-  {
-    id: "maze",
-    label: "Reach Badal",
-    title: "Find the gentle path through the stable.",
-    scene:
-      "A playful maze moment helps Manu reach Badal without rushing or frightening him.",
-    play: "Collect the path markers in order.",
-    choices: ["River stone", "Marigold", "Stable door"],
-    lesson: "Problem solving works best when we slow down and look carefully.",
-    reward: "Pathfinder Badge",
-    icon: Compass,
-    tone: "green",
-  },
-  {
-    id: "promise",
-    label: "Brave Promise",
-    title: "Write one promise Manu would be proud of.",
-    scene:
-      "At the end of the adventure, Manu writes a small promise that can travel home with the child.",
-    play: "Complete the sentence: I promise to be brave when...",
-    choices: ["I try again", "I speak kindly", "I ask for help"],
-    lesson: "Reflection turns a story into a parent-child conversation.",
-    reward: "My Brave Promise",
-    icon: NotePencil,
-    tone: "rose",
-  },
-];
-
 const manuLearnCards = [
   ["Asking courage", "Manu asks why when something feels unfair.", Lightbulb, "amber"],
   ["Trying courage", "Manu begins even when the first step feels hard.", ShieldCheck, "teal"],
   ["Kindness courage", "Manu chooses friendship and care before proving herself.", Heart, "rose"],
   ["Quiet courage", "Manu does what is right even when no one is watching.", FlowerLotus, "violet"],
-];
-
-const manuCreateCards = [
-  ["Design your courage crest", "Choose a symbol for asking, trying, kindness, and quiet courage.", Crown, "amber"],
-  ["Sticker story builder", "Place Manu, Badal, marigolds, river stones, and value words into a scene.", Star, "rose"],
-  ["Stable spotter", "Look for gentle details in the stable before choosing the next move.", Sparkle, "teal"],
-  ["Letter from Manu", "Read a short note that makes Manu feel like a real friend.", NotePencil, "violet"],
-];
-
-const parentPrompts = [
-  "Where did you need courage today: in your body, your words, your kindness, or your patience?",
-  "What is one question you have about something that feels unfair?",
-  "Who could use a kind friend today?",
-  "What small right thing can you do that might help someone else?",
 ];
 
 const firstBoxContents = [
@@ -644,7 +465,7 @@ const manuBoxMotifs = [
   "quietPetals",
   "storyBloom",
   "gentleBridge",
-  "flowingPages",
+  "steadySteps",
   "courageRipple",
 ];
 
@@ -653,14 +474,6 @@ const manuChildActivities = [
   ["What would Manu do?", "Pause at a story choice and talk through a brave, kind response.", Lightbulb, "teal"],
   ["Track small brave steps", "Notice one moment of asking, trying, helping, or waiting each day.", CalendarDots, "violet"],
   ["Make a brave promise", "Write or draw one small promise to take beyond the story.", NotePencil, "rose"],
-];
-
-const futureFeatureSlots = [
-  ["Story", "a warm child-facing arc"],
-  ["Values", "one clear life skill"],
-  ["Play", "activities children can repeat"],
-  ["Parents", "conversation prompts"],
-  ["Shelf", "a growing circle of friends"],
 ];
 
 const companionPageIds = ["manu", "savitribai", "kalpana"];
@@ -713,66 +526,6 @@ const savitribaiStorybookPreviews = [
       ["Page 18", "Dear Friend", "Dear friend, sometimes doing the right thing makes other people upset. They might throw 'mud' at your dreams."],
       ["Page 20", "Keep going", "When they do, just brush it off, change your 'saree', and keep going. Learning is a superpower that nobody can take away from you."],
     ],
-  },
-];
-
-
-const characterDashboardModes = [
-  ["storybook", "Storybook", BookOpenText],
-  ["talk", "Courage Prompts", Heart],
-  ["accessories", "Future Add-ons", Gift],
-  ["activities", "Activities", PaintBrush],
-];
-
-
-const savitribaiAdventureStops = [
-  {
-    id: "secret",
-    label: "The First Letter",
-    title: "Tracing letters in the dust.",
-    scene: "Savitribai wants to read, but girls aren't allowed to hold books. She sees a stick and some soft dirt.",
-    play: "How should she practice her first letter?",
-    choices: ["Draw in the dirt", "Hide a slate", "Ask for help"],
-    lesson: "Curiosity is the beginning of courage.",
-    reward: "Curiosity Badge",
-    icon: BookOpenText,
-    tone: "violet",
-  },
-  {
-    id: "school",
-    label: "The Empty Room",
-    title: "Waiting for the first student.",
-    scene: "The school is open, but the room is empty. Parents are too scared to send their daughters.",
-    play: "What should Savitribai do?",
-    choices: ["Wait patiently", "Visit families", "Sing a song"],
-    lesson: "True courage is sharing what you have.",
-    reward: "Patience Badge",
-    icon: Heart,
-    tone: "teal",
-  },
-  {
-    id: "mud",
-    label: "The Walk to School",
-    title: "Facing the bullies.",
-    scene: "Angry villagers block the path and throw mud on Savitribai's beautiful saree.",
-    play: "Help Savitribai choose a response.",
-    choices: ["Bring a spare saree", "Yell at them", "Run away"],
-    lesson: "You don't always have to fight back loudly to win.",
-    reward: "Resilience Badge",
-    icon: ShieldCheck,
-    tone: "amber",
-  },
-  {
-    id: "poem",
-    label: "The Poetry of Courage",
-    title: "Writing a line of poetry when feeling sad.",
-    scene: "It was a hard day. Savitribai sits by the lamp with her slate.",
-    play: "What should she write about?",
-    choices: ["The joy of reading", "Being strong", "A new tomorrow"],
-    lesson: "Your voice is powerful.",
-    reward: "Voice Badge",
-    icon: Lightbulb,
-    tone: "rose",
   },
 ];
 
@@ -965,10 +718,10 @@ const companionPageContent = {
     ...characterLibrary.savitribai,
     image: generatedAssets.savitribaiCutout,
     pageTitle: "Savitribai: the friend who keeps learning",
-    eyebrow: "Developing companion",
+    eyebrow: "Maitri Companion",
     intro:
-      "Savitribai's page introduces a learning-led companion direction around courage, resilience, teaching, and the right of every child to read.",
-    note: "Developing companion page. Story and history details will be shaped carefully before final publication.",
+      "Savitribai is a learning-led friend whose story grows around courage, resilience, teaching, and the right of every child to read.",
+    note: "Her fuller story world is arriving next in the Maitri Circle.",
     primaryAction: ["Read story previews", "#book-previews"],
     secondaryAction: ["Back to companions", publicPath("characters.html")],
     storyPreviews: savitribaiStorybookPreviews,
@@ -983,10 +736,10 @@ const companionPageContent = {
     ...characterLibrary.kalpana,
     image: generatedAssets.kalpanaCutout,
     pageTitle: "Kalpana: the friend who looked up",
-    eyebrow: "Developing companion",
+    eyebrow: "Maitri Companion",
     intro:
-      "Kalpana's page gives Maitri a distinct STEM and wonder lane: questions, practice, persistence, and the courage to keep a dream alive.",
-    note: "Developing companion page. Story and history details will be shaped carefully before final publication.",
+      "Kalpana brings wonder and curiosity into the circle: questions, practice, persistence, and the courage to keep a dream alive.",
+    note: "Her fuller story world is arriving next in the Maitri Circle.",
     primaryAction: ["Read story previews", "#book-previews"],
     secondaryAction: ["Back to companions", publicPath("characters.html")],
     storyPreviews: kalpanaStorybookPreviews,
@@ -997,18 +750,6 @@ const companionPageContent = {
       "Kalpana helps families talk about curiosity, science, practice, and how small questions can grow into big dreams.",
   },
 };
-
-const manuAccessoryPreviews = [
-  ["Badal companion concept", "A possible story-led horse add-on after the first Manu box is validated.", Gift],
-  ["Courage sticker pack", "A small future extension for brave, curious, kind, and steady moments.", Star],
-  ["Festival outfit idea", "A later dress-up layer that could connect Manu to seasonal rituals and gifting.", FlowerLotus],
-];
-
-const manuTalkPrompts = [
-  "I felt scared to try something new.",
-  "Someone told me I cannot do it.",
-  "How can I help a nervous friend?",
-];
 
 const waitlistStorageKey = "maitri-waitlist-v1";
 
@@ -1145,19 +886,6 @@ function ThemeToggle({ className = "" }) {
   );
 }
 
-function IconNote({ item, compact = false }) {
-  const [label, Icon, tone] = item;
-
-  return (
-    <div className={`icon-note ${tone} ${compact ? "compact" : ""}`}>
-      <span>
-        <Icon size={compact ? 25 : 34} weight="duotone" />
-      </span>
-      <p>{label}</p>
-    </div>
-  );
-}
-
 function Header({ waitlistHref = publicPath("#waitlist") }) {
   const [open, setOpen] = useState(false);
 
@@ -1175,55 +903,76 @@ function Header({ waitlistHref = publicPath("#waitlist") }) {
       }
     };
 
+    document.body.classList.add("nav-open");
     document.addEventListener("keydown", closeOnEscape);
     document.addEventListener("pointerdown", closeOutside);
 
     return () => {
+      document.body.classList.remove("nav-open");
       document.removeEventListener("keydown", closeOnEscape);
       document.removeEventListener("pointerdown", closeOutside);
     };
   }, [open]);
 
   return (
-    <header className={`site-header${SHOW_MAITRI_LOGO ? "" : " site-header--logo-hidden"}`}>
-      <div className="site-header-bg" />
-      {SHOW_MAITRI_LOGO ? (
-        <Brand />
-      ) : (
-        <a className="site-wordmark" href={publicPath("#top")} aria-label="Maitri home">
-          Maitri
-        </a>
-      )}
-      <nav
-        className={`primary-nav ${open ? "open" : ""}`}
-        id="primary-navigation"
-        aria-label="Primary"
+    <>
+      <button
+        className={`nav-scrim${open ? " open" : ""}`}
+        type="button"
+        tabIndex={open ? 0 : -1}
+        aria-hidden={!open}
+        aria-label="Close navigation"
+        onClick={close}
+      />
+      <header
+        className={`site-header${SHOW_MAITRI_LOGO ? "" : " site-header--logo-hidden"}${
+          open ? " site-header--nav-open" : ""
+        }`}
       >
-        {navItems.map(([label, href]) => (
-          <a href={href} key={label} onClick={close}>
-            {label}
+        <div className="site-header-bg" />
+        {SHOW_MAITRI_LOGO ? (
+          <Brand />
+        ) : (
+          <a className="site-wordmark" href={publicPath("#top")} aria-label="Maitri home">
+            Maitri
           </a>
-        ))}
-      </nav>
-      <div className="header-actions">
-        <div className="header-utility-pill" aria-label="Quick actions">
-          <a className="waitlist-pill" href={waitlistHref}>
-            Join Waitlist
-          </a>
-          <ThemeToggle />
-        </div>
-        <button
-          className="menu-button"
-          type="button"
-          aria-label={open ? "Close navigation" : "Open navigation"}
-          aria-expanded={open}
-          aria-controls="primary-navigation"
-          onClick={() => setOpen((value) => !value)}
+        )}
+        <nav
+          className={`primary-nav ${open ? "open" : ""}`}
+          id="primary-navigation"
+          aria-label="Primary"
         >
-          {open ? <X size={22} weight="bold" /> : <List size={24} weight="bold" />}
-        </button>
-      </div>
-    </header>
+          <div className="primary-nav-panel">
+            <p className="primary-nav-eyebrow">Explore Maitri</p>
+            <div className="primary-nav-links">
+              {navItems.map(([label, href]) => (
+                <a href={href} key={label} onClick={close}>
+                  {label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </nav>
+        <div className="header-actions">
+          <div className="header-utility-pill" aria-label="Quick actions">
+            <a className="waitlist-pill" href={waitlistHref}>
+              Join Waitlist
+            </a>
+            <ThemeToggle />
+          </div>
+          <button
+            className="menu-button"
+            type="button"
+            aria-label={open ? "Close navigation" : "Open navigation"}
+            aria-expanded={open}
+            aria-controls="primary-navigation"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <X size={22} weight="bold" /> : <List size={24} weight="bold" />}
+          </button>
+        </div>
+      </header>
+    </>
   );
 }
 
@@ -1350,30 +1099,6 @@ function WhatWeDo() {
   );
 }
 
-function WhoItIsFor() {
-  return (
-    <section className="audience-section section-shell" id="for-families">
-      <div className="audience-head">
-        <span className="section-label violet-label">Who Maitri is for</span>
-        <h2>Made for children. Chosen by grown-ups who want play to mean something.</h2>
-        <p>
-          The child should feel friendship, wonder, and adventure. The grown-up should
-          feel cultural care, emotional depth, and a useful way to begin conversations.
-        </p>
-      </div>
-      <div className="audience-grid">
-        {audienceGroups.map(({ motif, label, text, tone }) => (
-          <article className={tone} key={label}>
-            <span><BrandMotif name={motif} /></span>
-            <h3>{label}</h3>
-            <p>{text}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function ExploreMaitri() {
   return (
     <section className="explore-maitri-section section-shell" id="friends">
@@ -1415,106 +1140,6 @@ function ExploreMaitri() {
             </div>
           </a>
         ))}
-      </div>
-    </section>
-  );
-}
-
-function Manu() {
-  return (
-    <section className="manu-section section-shell" id="manu">
-      <div className="manu-layout">
-        <div className="manu-portrait">
-          <GeneratedArt
-            src={generatedAssets.manuPortrait}
-            className="manu-asset"
-            alt="A soft illustrated portrait of Manu in the Maitri story world"
-            parallax={6}
-            feather
-          />
-        </div>
-        <div className="manu-copy">
-          <span className="section-label rose-label">Meet Manu</span>
-          <h2>Before she was remembered as a queen, Manu was a girl who asked why.</h2>
-          <p>
-            Her first Maitri story keeps courage close to childhood: asking a
-            brave question, trying once, being kind first, and taking one steady
-            step.
-          </p>
-          <ArrowButton href={publicPath("manu.html")}>Open Manu Page</ArrowButton>
-        </div>
-        <div className="keepsakes" aria-label="Manu keepsakes">
-          {manuKeepsakes.map((item) => (
-            <IconNote item={item} compact key={item[0]} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FirstBox() {
-  return (
-    <section className="first-box-section section-shell" id="first-box">
-      <div className="first-box-home">
-        <div className="section-copy">
-          <span className="section-label amber-label">First Manu Box</span>
-          <h2>Manu's story becomes a first box children can hold.</h2>
-          <p>
-            The first Manu box is intentionally focused: a companion doll in
-            development, a 32-page storybook, a letter from Manu, six activity
-            pages, and stickers. The story builds the bond; the box gives
-            children ways to keep playing.
-          </p>
-          <ArrowButton href="#waitlist" variant="outline">
-            Join for updates
-          </ArrowButton>
-        </div>
-        <div className="first-box-home-grid" aria-label="First Manu box contents">
-          {firstBoxContents.map(([label, text, Icon]) => (
-            <article key={label}>
-              <Icon size={25} weight="duotone" />
-              <strong>{label}</strong>
-              <span>{text}</span>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Circle() {
-  return (
-    <section className="circle-section section-shell" id="circle">
-      <div className="split-grid circle-grid">
-        <div className="section-copy">
-          <span className="section-label violet-label">For Families</span>
-          <h2>A story-led gift that makes values feel close, not forced.</h2>
-          <p>
-            For parents and family buyers, Maitri is a warmer alternative to
-            mass-market toys and screen-led entertainment: a culturally rooted
-            friend, a story worth rereading, and simple prompts for courage,
-            fairness, kindness, and trying again.
-          </p>
-          <ArrowButton href="#waitlist" variant="outline violet">
-            Join the Early List
-          </ArrowButton>
-          <div className="benefit-row">
-            {circleBenefits.map((item) => (
-              <IconNote item={item} compact key={item[0]} />
-            ))}
-          </div>
-        </div>
-        <div className="circle-art">
-          <GeneratedArt
-            src={generatedAssets.circle}
-            className="circle-asset"
-            alt="Children and parents seated together in a warm Maitri story gathering"
-            parallax={7}
-            feather
-          />
-        </div>
       </div>
     </section>
   );
@@ -1729,8 +1354,8 @@ function StoryPreviewSection({ character, previews, title, intro, sectionId = "b
   if (!activePreview) return null;
 
   return (
-    <section className="character-experience-dashboard" id={sectionId}>
-      <div className="dashboard-panel-head">
+    <section className="companion-story-experience" id={sectionId}>
+      <div className="story-panel-head">
         {isManuStory ? (
           <BrandMotif name="storyBloom" className="manu-section-motif" />
         ) : (
@@ -1791,12 +1416,12 @@ function CompanionHubPage() {
   );
 
   return (
-    <main className="maitri-page character-world-page character-investor-page companion-hub-page">
+    <main className="maitri-page character-world-page companion-public-page companion-hub-page">
       <section className="character-world-shell section-shell" id="top">
         <Header />
         <section className="entry-selection">
           <div className="companion-hub-hero">
-            <div className="investor-section-head">
+            <div className="companion-section-head">
               <span>Maitri Companions</span>
               <h1>Every Maitri journey begins with Manu.</h1>
               <p>
@@ -1812,7 +1437,6 @@ function CompanionHubPage() {
                 className="companion-circle-asset"
                 alt="Children and families sharing stories with Maitri companions"
                 parallax={7}
-                feather
               />
               <span className="companion-art-orbit orbit-one" aria-hidden="true" />
               <span className="companion-art-orbit orbit-two" aria-hidden="true" />
@@ -1824,7 +1448,9 @@ function CompanionHubPage() {
               const href = publicPath(`${id}.html`);
               return (
                 <a className={`character-picker-card ${character.tone}`} href={href} key={id}>
-                  <CharacterVisual character={character} compact />
+                  <span className="character-picker-frame">
+                    <CharacterVisual character={character} compact />
+                  </span>
                   <span>{id === "manu" ? "Start here" : "A friend for the circle"}</span>
                   <strong>{character.name}</strong>
                   <small>
@@ -1861,7 +1487,7 @@ function CompanionDetailPage({ characterId }) {
 
   return (
     <main
-      className={`maitri-page character-world-page character-investor-page companion-detail-page ${
+      className={`maitri-page character-world-page companion-public-page companion-detail-page ${
         isManu ? "manu-detail-page" : ""
       }`}
     >
@@ -1871,7 +1497,9 @@ function CompanionDetailPage({ characterId }) {
           <div className={`selected-character-portrait ${character.image ? "" : "placeholder"}`}>
             <span className="companion-portrait-orbit orbit-one" aria-hidden="true" />
             <span className="companion-portrait-orbit orbit-two" aria-hidden="true" />
-            <CharacterVisual character={character} />
+            <span className="selected-character-frame">
+              <CharacterVisual character={character} />
+            </span>
           </div>
           <div className="selected-character-copy">
             <span>{character.eyebrow}</span>
@@ -1893,7 +1521,7 @@ function CompanionDetailPage({ characterId }) {
         </section>
 
         {isManu && (
-          <section className="manu-investor-box companion-values-section" id="meet-manu">
+          <section className="companion-story-box companion-values-section" id="meet-manu">
             <div>
               <span className="panel-label">Meet Manu</span>
               <h2>Get to know your new story companion.</h2>
@@ -1913,9 +1541,9 @@ function CompanionDetailPage({ characterId }) {
                 </article>
               ))}
             </div>
-            <div className="manu-investor-grid">
+            <div className="companion-story-grid">
               {valueCards.map(([label, text, Icon, tone]) => (
-                <article className={`investor-story-card ${tone}`} key={label}>
+                <article className={`companion-story-card ${tone}`} key={label}>
                   <Icon size={28} weight="duotone" />
                   <span>{label}</span>
                   <h3>{text}</h3>
@@ -2011,15 +1639,15 @@ function CompanionDetailPage({ characterId }) {
 
         {!isManu && (
           <>
-            <section className="manu-investor-box companion-values-section">
+            <section className="companion-story-box companion-values-section">
               <div>
                 <span className="panel-label">{character.valuesTitle}</span>
                 <h2>{character.question}</h2>
                 <p>{character.takeaway}</p>
               </div>
-              <div className="manu-investor-grid">
+              <div className="companion-story-grid">
                 {valueCards.map(([label, text, Icon, tone]) => (
-                  <article className={`investor-story-card ${tone}`} key={label}>
+                  <article className={`companion-story-card ${tone}`} key={label}>
                     <Icon size={28} weight="duotone" />
                     <span>{label}</span>
                     <h3>{text}</h3>
@@ -2027,18 +1655,18 @@ function CompanionDetailPage({ characterId }) {
                 ))}
               </div>
             </section>
-            <section className="manu-investor-parent">
-              <article className="investor-parent-panel">
+            <section className="companion-parent-section">
+              <article className="companion-parent-panel">
                 <span className="panel-label">{character.parentPanelTitle}</span>
                 <h2>What this page helps families feel</h2>
                 <p>{character.parentPanelText}</p>
               </article>
-              <article className="investor-future-panel">
+              <article className="companion-future-panel">
                 <span className="panel-label">Next step</span>
                 <h2>Bring this story into the Maitri Circle.</h2>
                 <p>
-                  Follow story previews and companion development updates while
-                  this direction is still being shaped carefully.
+                  Join the waitlist for companion updates and the stories
+                  growing around Manu and her friends.
                 </p>
                 <ArrowButton href={publicPath("#waitlist")}>Join Waitlist</ArrowButton>
               </article>
@@ -2048,889 +1676,6 @@ function CompanionDetailPage({ characterId }) {
       </section>
       <Waitlist />
       <Footer />
-    </main>
-  );
-}
-
-function CharacterSelectorFullscreen({ onSelect }) {
-    const characters = [
-    { id: "manu", ...characterLibrary.manu },
-    { id: "kalpana", ...characterLibrary.kalpana },
-    { id: "savitribai", ...characterLibrary.savitribai },
-  ];
-
-  return (
-    <div className="cx-selector">
-      <section className="cx-selector-intro" aria-labelledby="character-title">
-        <div>
-          <span className="cx-section-mark">Maitri Companions</span>
-          <h1 id="character-title">A place to meet, read, and play with story companions.</h1>
-        </div>
-        <p>
-          Start with Manu, open her storybook, try courage prompts, and preview
-          how future companions can bring new stories, activities, and add-ons
-          into the same gentle world.
-        </p>
-      </section>
-      <div className="cx-selector-grid" aria-label="Maitri companions">
-        {characters.map((char) => {
-          return (
-            <button
-              key={char.id} 
-              className={`cx-selector-card ${char.id} ${char.tone}`}
-              onClick={() => onSelect(char.id)}
-              type="button"
-            >
-              <span className="cx-selector-art">
-                {char.image ? (
-                  <img src={char.image} alt="" />
-                ) : (
-                  <span>{char.initials}</span>
-                )}
-              </span>
-              <span className="cx-selector-copy">
-                <span>{char.role}</span>
-                <strong>{char.name}</strong>
-                <small>{char.tagline}</small>
-              </span>
-              <span className="cx-selector-meta">
-                <span>{char.worldPill}</span>
-                <ArrowRight size={18} weight="bold" />
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function CharacterDashboard({ selectedId, onBack }) {
-  const [activeFeature, setActiveFeature] = useState("storybook");
-  const [selectedStoryIndex, setSelectedStoryIndex] = useState(0);
-  const [readerOpen, setReaderOpen] = useState(false);
-  const [selectedPrompt, setSelectedPrompt] = useState(manuTalkPrompts[0]);
-  
-  const character = characterLibrary[selectedId] || characterLibrary.manu;
-  const isManu = selectedId === "manu";
-  const activeStoryPreview = manuStorybookPreviews[selectedStoryIndex] || manuStorybookPreviews[0];
-  const heroStops = manuAdventureStops.slice(0, 4);
-  const FeatureIcon =
-    characterDashboardModes.find(([id]) => id === activeFeature)?.[2] || BookOpenText;
-  const selectFeature = (feature) => {
-    setActiveFeature(feature);
-    if (feature !== "storybook") {
-      setReaderOpen(false);
-    }
-  };
-  const openStoryPreview = (index) => {
-    setSelectedStoryIndex(index);
-    setReaderOpen(true);
-  };
-
-  useEffect(() => {
-    if (!readerOpen) return undefined;
-
-    const closeOnEscape = (event) => {
-      if (event.key === "Escape" || event.key === "Esc" || event.code === "Escape") {
-        setReaderOpen(false);
-      }
-    };
-
-    document.addEventListener("keydown", closeOnEscape, true);
-    return () => document.removeEventListener("keydown", closeOnEscape, true);
-  }, [readerOpen]);
-
-  if (!isManu) {
-    return (
-      <div className={`cx-dashboard cx-dashboard-future ${character.tone}`}>
-        <aside className="cx-character-rail">
-          <button className="cx-back-button" onClick={onBack} type="button">
-            <ArrowLeft size={18} weight="bold" />
-            <span>Companions</span>
-          </button>
-          <div className="cx-rail-selected">
-            <CharacterVisual character={character} />
-            <div>
-              <span>{character.role}</span>
-              <strong>{character.name}</strong>
-            </div>
-          </div>
-        </aside>
-        <main className="cx-future-stage">
-          <div className="cx-future-emblem" aria-hidden="true">
-            <CharacterVisual character={character} />
-          </div>
-          <span className="cx-section-mark">Future Companion</span>
-          <h1>{character.name} is being held for the next Maitri companion shelf.</h1>
-          <p>{character.tagline}</p>
-          <div className="cx-future-grid">
-            {futureFeatureSlots.map(([label, text]) => (
-              <article key={label}>
-                <strong>{label}</strong>
-                <span>{text}</span>
-              </article>
-            ))}
-          </div>
-          <button className="cx-primary-action" type="button" onClick={onBack}>
-            <ArrowLeft size={18} weight="bold" />
-            <span>Return to Manu</span>
-          </button>
-        </main>
-      </div>
-    );
-  }
-
-  return (
-    <div className="cx-dashboard">
-      <aside className="cx-character-rail">
-        <button className="cx-back-button" onClick={onBack} type="button">
-          <ArrowLeft size={18} weight="bold" />
-            <span>Companions</span>
-        </button>
-        <div className="cx-rail-selected">
-          <CharacterVisual character={character} />
-          <div>
-            <span>{character.role}</span>
-            <strong>{character.name}</strong>
-          </div>
-        </div>
-        <nav className="cx-rail-menu" aria-label="Companion dashboard">
-          {characterDashboardModes.map(([id, label, Icon]) => (
-            <button
-              key={id}
-              className={activeFeature === id ? "active" : ""}
-              onClick={() => selectFeature(id)}
-              type="button"
-            >
-              <Icon size={21} weight="duotone" />
-              <span>{label}</span>
-            </button>
-          ))}
-        </nav>
-      </aside>
-
-      <main className="cx-stage">
-        <section className="cx-story-hero">
-          <img src={activeStoryPreview.image} alt="" />
-          <div className="cx-story-hero-copy">
-            <span>
-              <FeatureIcon size={18} weight="duotone" />
-              {activeFeature === "storybook" ? activeStoryPreview.pages : character.name}
-            </span>
-            <h1>
-              {activeFeature === "storybook"
-                ? activeStoryPreview.title
-                : "Manu's world stays story-first."}
-            </h1>
-            <p>
-              {activeFeature === "storybook"
-                ? activeStoryPreview.text
-                : "Every activity, prompt, and add-on should feel like it belongs inside Manu's courage story."}
-            </p>
-            <button className="cx-primary-action" type="button" onClick={() => setReaderOpen(true)}>
-              <BookOpenText size={19} weight="duotone" />
-              <span>Open Reader</span>
-            </button>
-          </div>
-        </section>
-
-        {activeFeature === "storybook" && (
-          <section className="cx-chapter-grid" aria-label="Storybook chapters">
-            {manuStorybookPreviews.map((preview, index) => (
-              <button
-                className={selectedStoryIndex === index ? "active" : ""}
-                key={preview.pages}
-                onClick={() => openStoryPreview(index)}
-                type="button"
-              >
-                <img src={preview.image} alt="" />
-                <span>{preview.pages}</span>
-                <strong>{preview.title}</strong>
-                <small>{preview.takeaway}</small>
-              </button>
-            ))}
-          </section>
-        )}
-
-        {activeFeature === "talk" && (
-          <section className="cx-dialogue-panel">
-            <div className="cx-prompt-list">
-              {manuTalkPrompts.map((prompt) => (
-                <button
-                  className={selectedPrompt === prompt ? "active" : ""}
-                  type="button"
-                  key={prompt}
-                  onClick={() => setSelectedPrompt(prompt)}
-                >
-                  {prompt}
-                </button>
-              ))}
-            </div>
-            <blockquote>
-              <Heart size={25} weight="duotone" />
-              <p>
-                I felt scared too. A brave step does not have to be loud. Try
-                one kind step, then tell someone you trust what happened.
-              </p>
-              <span>{selectedPrompt}</span>
-            </blockquote>
-          </section>
-        )}
-
-        {activeFeature === "accessories" && (
-          <section className="cx-addon-grid" aria-label="Future add-ons">
-            {manuAccessoryPreviews.map(([label, text, Icon]) => (
-              <article key={label}>
-                <Icon size={28} weight="duotone" />
-                <strong>{label}</strong>
-                <span>{text}</span>
-              </article>
-            ))}
-          </section>
-        )}
-
-        {activeFeature === "activities" && (
-          <section className="cx-activity-grid" aria-label="Manu activities">
-            {heroStops.map((stop) => {
-              const StopIcon = stop.icon;
-              return (
-                <article className={stop.tone} key={stop.id}>
-                  <StopIcon size={26} weight="duotone" />
-                  <span>{stop.label}</span>
-                  <strong>{stop.title}</strong>
-                  <p>{stop.lesson}</p>
-                </article>
-              );
-            })}
-          </section>
-        )}
-      </main>
-
-      <aside className="cx-context-panel" aria-label="Manu context">
-        <section className="cx-context-card cx-question-card">
-          <span>
-            <Lightbulb size={20} weight="duotone" />
-            Courage Prompt
-          </span>
-          <p>{parentPrompts[selectedStoryIndex % parentPrompts.length]}</p>
-        </section>
-        <section className="cx-context-card">
-          <span>
-            <Gift size={20} weight="duotone" />
-            First Box
-          </span>
-          <div className="cx-keepsake-list">
-            {firstBoxContents.slice(0, 4).map(([label, text, Icon]) => (
-              <article key={label}>
-                <Icon size={20} weight="duotone" />
-                <div>
-                  <strong>{label}</strong>
-                  <small>{text}</small>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-        <section className="cx-context-card cx-world-card">
-          <span>
-            <Compass size={20} weight="duotone" />
-            Story World
-          </span>
-          <p>{character.world}</p>
-        </section>
-      </aside>
-
-      {readerOpen && createPortal(
-        <div className="cx-reader-overlay" role="dialog" aria-modal="true" aria-label="Storybook preview">
-          <button className="cx-reader-backdrop" type="button" onClick={() => setReaderOpen(false)} aria-label="Dismiss reader" />
-          <div className="cx-reader-modal">
-            <button className="cx-reader-close" onClick={() => setReaderOpen(false)} type="button" aria-label="Close reader">
-              <X size={22} weight="bold" />
-            </button>
-            <div className="cx-reader-image">
-              <img src={activeStoryPreview.image} alt="" />
-            </div>
-            <div className="cx-reader-copy">
-              <span>{activeStoryPreview.pages}</span>
-              <h2>{activeStoryPreview.title}</h2>
-              <p>{activeStoryPreview.takeaway}</p>
-              <div>
-                {activeStoryPreview.reader.map(([page, title, text]) => (
-                  <article key={`${activeStoryPreview.pages}-${page}`}>
-                    <strong>{page}</strong>
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>,
-        document.body,
-      )}
-    </div>
-  );
-}
-
-function CharacterPage() {
-  const [selectedId, setSelectedId] = useState(null);
-
-  return (
-    <main className={`maitri-page character-world-page ${!selectedId ? 'no-scroll' : 'dashboard-active'}`}>
-      <Header />
-      {!selectedId ? (
-        <CharacterSelectorFullscreen onSelect={setSelectedId} />
-      ) : (
-        <CharacterDashboard selectedId={selectedId} onBack={() => setSelectedId(null)} />
-      )}
-    </main>
-  );
-}
-function CharacterPageLegacy() {
-  const [selectedId, setSelectedId] = useState("manu");
-  const [mode, setMode] = useState("story");
-  const [activeStopId, setActiveStopId] = useState("meet");
-  const [selectedChoice, setSelectedChoice] = useState("Ask why");
-  const [completedStops, setCompletedStops] = useState(["meet"]);
-  const [trackerMarks, setTrackerMarks] = useState(["Mon"]);
-  const [promise, setPromise] = useState("");
-
-  const character = characterLibrary[selectedId];
-  const isManu = selectedId === "manu";
-  const activeStop = manuAdventureStops.find((item) => item.id === activeStopId) || manuAdventureStops[0];
-  const ActiveStopIcon = activeStop.icon;
-  const activeStopIndex = manuAdventureStops.findIndex((item) => item.id === activeStop.id);
-  const completedCount = completedStops.length;
-  const progressPercent = Math.round((completedCount / manuAdventureStops.length) * 100);
-  const activeBadgeCollected = completedStops.includes(activeStop.id);
-  const nextStop = manuAdventureStops[activeStopIndex + 1] || manuAdventureStops[0];
-
-  const selectCharacter = (id) => {
-    setSelectedId(id);
-    setMode(id === "manu" ? mode : "story");
-  };
-
-  const selectStop = (id) => {
-    const nextStop = manuAdventureStops.find((item) => item.id === id);
-    setActiveStopId(id);
-    setSelectedChoice(nextStop?.choices[0] || "");
-  };
-
-  const collectBadge = () => {
-    setCompletedStops((current) =>
-      current.includes(activeStop.id) ? current : [...current, activeStop.id],
-    );
-  };
-
-  const toggleTrackerMark = (day) => {
-    setTrackerMarks((current) =>
-      current.includes(day) ? current.filter((item) => item !== day) : [...current, day],
-    );
-  };
-
-  const renderManuMode = () => {
-    if (mode === "play") {
-      return (
-        <div className="manu-play-grid">
-          <section className="adventure-map" aria-label="Manu adventure path">
-            <div className="panel-kicker world-kicker">
-              <span>Adventure path</span>
-              <strong>{completedStops.length}/{manuAdventureStops.length}</strong>
-            </div>
-            <div className="adventure-path">
-              {manuAdventureStops.map((stop, index) => {
-                const StopIcon = stop.icon;
-                const active = stop.id === activeStop.id;
-                const complete = completedStops.includes(stop.id);
-                return (
-                  <button
-                    className={`adventure-stop ${stop.tone} ${active ? "active" : ""} ${complete ? "complete" : ""}`}
-                    type="button"
-                    key={stop.id}
-                    onClick={() => selectStop(stop.id)}
-                    aria-pressed={active}
-                  >
-                    <span className="stop-number">{index + 1}</span>
-                    <StopIcon size={24} weight="duotone" />
-                    <strong>{stop.label}</strong>
-                    {complete && <CheckCircle size={18} weight="fill" />}
-                  </button>
-                );
-              })}
-            </div>
-          </section>
-
-          <section className={`quest-panel ${activeStop.tone}`} aria-live="polite">
-            <div className="quest-scene">
-              <span className="quest-icon">
-                <ActiveStopIcon size={34} weight="duotone" />
-              </span>
-              <div>
-                <span className="panel-label">{activeStop.label}</span>
-                <h3>{activeStop.title}</h3>
-                <p>{activeStop.scene}</p>
-              </div>
-            </div>
-
-            <div className="choice-board">
-              <span>{activeStop.play}</span>
-              <div>
-                {activeStop.choices.map((choice) => (
-                  <button
-                    className={selectedChoice === choice ? "active" : ""}
-                    type="button"
-                    key={choice}
-                    onClick={() => setSelectedChoice(choice)}
-                  >
-                    {choice}
-                  </button>
-                ))}
-              </div>
-              <p className="choice-response">
-                <Sparkle size={16} weight="fill" />
-                Manu is trying: <strong>{selectedChoice}</strong>
-              </p>
-            </div>
-
-            {activeStop.id === "tracker" && (
-              <div className="courage-tracker" aria-label="Seven-day courage tracker">
-                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
-                  <button
-                    className={trackerMarks.includes(day) ? "marked" : ""}
-                    type="button"
-                    key={day}
-                    onClick={() => toggleTrackerMark(day)}
-                  >
-                    <span>{day}</span>
-                    <Star size={16} weight={trackerMarks.includes(day) ? "fill" : "duotone"} />
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {activeStop.id === "promise" && (
-              <label className="promise-input">
-                <span>I promise to be brave when...</span>
-                <input
-                  type="text"
-                  value={promise}
-                  onChange={(event) => setPromise(event.target.value)}
-                  placeholder="I try something hard"
-                />
-              </label>
-            )}
-
-            <div className="quest-reward">
-              <p>
-                <strong>Learning moment</strong>
-                {activeStop.lesson}
-              </p>
-              <button type="button" onClick={collectBadge} disabled={activeBadgeCollected}>
-                <Sparkle size={17} weight="fill" />
-                <span>{activeBadgeCollected ? "Badge collected" : `Collect ${activeStop.reward}`}</span>
-              </button>
-            </div>
-          </section>
-
-          <aside className="badge-shelf" aria-label="Collected badges">
-            <span className="panel-label">Collected badges</span>
-            <div>
-              {manuAdventureStops.map((stop) => {
-                const StopIcon = stop.icon;
-                const complete = completedStops.includes(stop.id);
-                return (
-                  <span className={complete ? "earned" : ""} key={stop.id}>
-                    <StopIcon size={20} weight={complete ? "fill" : "duotone"} />
-                    {stop.reward}
-                  </span>
-                );
-              })}
-            </div>
-          </aside>
-        </div>
-      );
-    }
-
-    if (mode === "learn") {
-      return (
-        <div className="learning-grid">
-          {manuLearnCards.map(([label, text, Icon, tone]) => (
-            <article className={`learning-card ${tone}`} key={label}>
-              <Icon size={32} weight="duotone" />
-              <h3>{label}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
-        </div>
-      );
-    }
-
-    if (mode === "create") {
-      return (
-        <div className="creation-grid">
-          {manuCreateCards.map(([label, text, Icon, tone]) => (
-            <article className={`creation-card ${tone}`} key={label}>
-              <Icon size={30} weight="duotone" />
-              <div>
-                <h3>{label}</h3>
-                <p>{text}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      );
-    }
-
-    if (mode === "parents") {
-      return (
-        <div className="parent-grid">
-          <section className="parent-prompts">
-            <span className="panel-label">Conversation prompts</span>
-            {parentPrompts.map((prompt) => (
-              <p key={prompt}>{prompt}</p>
-            ))}
-          </section>
-          <section className="first-box-panel">
-            <span className="panel-label">First Manu box</span>
-            <div>
-              {firstBoxContents.map(([label, text, Icon]) => (
-                <article key={label}>
-                  <Icon size={24} weight="duotone" />
-                  <span>
-                    <strong>{label}</strong>
-                    <small>{text}</small>
-                  </span>
-                </article>
-              ))}
-            </div>
-          </section>
-        </div>
-      );
-    }
-
-    return (
-      <div className="story-act-grid">
-        {manuStoryActs.map((act) => (
-          <article className="story-act-card" key={act.title}>
-            <img src={act.image} alt={act.imageAlt} />
-            <span>{act.pages}</span>
-            <h3>{act.title}</h3>
-            <p>{act.text}</p>
-            <strong>{act.value}</strong>
-          </article>
-        ))}
-      </div>
-    );
-  };
-
-  return (
-    <main className="maitri-page character-world-page">
-      <section className="character-world-shell section-shell" id="top">
-        <Header />
-
-        <section className="character-world-hero" aria-labelledby="character-world-title">
-          <div className="character-world-copy">
-            <h1 id="character-world-title">Start with Manu.</h1>
-            <p>
-              Meet Maitri's first companion through story, play, family prompts,
-              and a focused first-box experience children can return to.
-            </p>
-            <div className="hero-actions">
-              <a className="arrow-button" href="#manu-adventure">
-                <span>Begin the journey</span>
-                <span className="arrow-orb">
-                  <ArrowRight size={18} weight="bold" />
-                </span>
-              </a>
-              <a className="arrow-button outline" href="#future-friends">
-                <span>See future companions</span>
-                <span className="arrow-orb">
-                  <ArrowRight size={18} weight="bold" />
-                </span>
-              </a>
-            </div>
-          </div>
-
-          <div className="story-stage" aria-label="Interactive Manu story stage">
-            <div className="stage-sky" aria-hidden="true" />
-            <div className="stage-river" aria-hidden="true" />
-          <div className="stage-portrait">
-            <CharacterVisual character={characterLibrary.manu} />
-              <span>The Girl Who Would Be Queen</span>
-            </div>
-            <div className="stage-scene-card">
-              <span>{activeStop.label}</span>
-              <h2>{activeStop.title}</h2>
-              <p>{activeStop.scene}</p>
-            </div>
-            <div className="stage-path" aria-label="Four courages path">
-              {manuAdventureStops.slice(0, 4).map((stop, index) => {
-                const StopIcon = stop.icon;
-                const active = stop.id === activeStop.id;
-                const complete = completedStops.includes(stop.id);
-                return (
-                  <button
-                    className={`stage-token token-${index + 1} ${stop.tone} ${active ? "active" : ""} ${complete ? "complete" : ""}`}
-                    type="button"
-                    key={stop.id}
-                    onClick={() => selectStop(stop.id)}
-                    aria-pressed={active}
-                  >
-                    <StopIcon size={22} weight={complete ? "fill" : "duotone"} />
-                    <span>{stop.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {isManu ? (
-          <section className="manu-dashboard" id="manu-adventure" aria-live="polite">
-            <section className="journey-console">
-              <div className="journey-copy">
-                <span className="panel-label">Meet Manu</span>
-                <h2>{character.name}: The Girl Who Would Be Queen</h2>
-                <p>{character.tagline}</p>
-              </div>
-
-              <div className="journey-switchboard" aria-label="Explore Manu modes">
-                {characterWorldModes.map(([id, label, Icon]) => (
-                  <button
-                    className={mode === id ? "active" : ""}
-                    type="button"
-                    role="tab"
-                    aria-selected={mode === id}
-                    key={id}
-                    onClick={() => setMode(id)}
-                  >
-                    <Icon size={19} weight="duotone" />
-                    <span>{label}</span>
-                  </button>
-                ))}
-              </div>
-            </section>
-
-            <section className="quest-workbench" style={{ "--progress": `${progressPercent}%` }}>
-              <div className="quest-map" aria-label="Manu adventure stops">
-                {manuAdventureStops.map((stop, index) => {
-                  const StopIcon = stop.icon;
-                  const active = stop.id === activeStop.id;
-                  const complete = completedStops.includes(stop.id);
-                  return (
-                    <button
-                      className={`quest-map-stop ${stop.tone} ${active ? "active" : ""} ${complete ? "complete" : ""}`}
-                      type="button"
-                      key={stop.id}
-                      onClick={() => selectStop(stop.id)}
-                      aria-pressed={active}
-                    >
-                      <span>{index + 1}</span>
-                      <StopIcon size={21} weight={complete ? "fill" : "duotone"} />
-                      <strong>{stop.label}</strong>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <article className={`quest-panel ${activeStop.tone}`} aria-live="polite">
-                <div className="quest-progress-meter">
-                  <div>
-                    <span>{completedCount} of {manuAdventureStops.length} badges collected</span>
-                    <strong>{progressPercent}%</strong>
-                  </div>
-                  <i aria-hidden="true" />
-                </div>
-
-                <div className="quest-scene">
-                  <span className="quest-icon">
-                    <ActiveStopIcon size={34} weight="duotone" />
-                  </span>
-                  <div>
-                    <span className="panel-label">{activeStop.label}</span>
-                    <h3>{activeStop.title}</h3>
-                    <p>{activeStop.scene}</p>
-                  </div>
-                </div>
-
-                <div className="choice-board">
-                  <span>{activeStop.play}</span>
-                  <div>
-                    {activeStop.choices.map((choice) => (
-                      <button
-                        className={selectedChoice === choice ? "active" : ""}
-                        type="button"
-                        key={choice}
-                        onClick={() => setSelectedChoice(choice)}
-                      >
-                        {choice}
-                      </button>
-                    ))}
-                  </div>
-                  <p className="choice-response">
-                    <Sparkle size={16} weight="fill" />
-                    Manu is trying: <strong>{selectedChoice}</strong>
-                  </p>
-                </div>
-
-                {activeStop.id === "tracker" && (
-                  <div className="courage-tracker" aria-label="Seven-day courage tracker">
-                    {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
-                      <button
-                        className={trackerMarks.includes(day) ? "marked" : ""}
-                        type="button"
-                        key={day}
-                        onClick={() => toggleTrackerMark(day)}
-                      >
-                        <span>{day}</span>
-                        <Star size={16} weight={trackerMarks.includes(day) ? "fill" : "duotone"} />
-                      </button>
-                    ))}
-                  </div>
-                )}
-
-                {activeStop.id === "promise" && (
-                  <label className="promise-input">
-                    <span>I promise to be brave when...</span>
-                    <input
-                      type="text"
-                      value={promise}
-                      onChange={(event) => setPromise(event.target.value)}
-                      placeholder="I try something hard"
-                    />
-                  </label>
-                )}
-
-                <div className="quest-reward">
-                  <p>
-                    <strong>Learning moment</strong>
-                    {activeStop.lesson}
-                  </p>
-                  <button type="button" onClick={collectBadge} disabled={activeBadgeCollected}>
-                    <Sparkle size={17} weight="fill" />
-                    <span>{activeBadgeCollected ? "Badge collected" : `Collect ${activeStop.reward}`}</span>
-                  </button>
-                </div>
-              </article>
-
-              <aside className="parent-clarity-board" aria-label="Parent clarity">
-                <span className="panel-label">Parent clarity</span>
-                <h3>Why this character matters</h3>
-                <p>
-                  Manu keeps bravery close to childhood: asking why, learning to belong,
-                  leaving what she loves, listening as a leader, and carrying courage forward.
-                </p>
-                <div className="mini-promise-list">
-                  <span>
-                    <strong>Child promise</strong>
-                    Courage does not wait until you are grown up.
-                  </span>
-                  <span>
-                    <strong>Story care</strong>
-                    Inspired by history, told gently for children.
-                  </span>
-                  <span>
-                    <strong>Next stop</strong>
-                    {nextStop.label}
-                  </span>
-                </div>
-              </aside>
-            </section>
-
-            <section className="mode-canvas" aria-live="polite">
-              {renderManuMode()}
-            </section>
-
-            <section className="first-box-bridge" aria-label="Manu first box bridge">
-              <div>
-              <span className="panel-label">First Manu box</span>
-              <h2>The story becomes something children can hold, read, and return to.</h2>
-              <p>
-                  Manu's first box stays simple and meaningful: the doll creates
-                  friendship, the storybook builds attachment, and the activities
-                  turn courage into small parent-child moments.
-              </p>
-              </div>
-              <div className="first-box-river">
-                {firstBoxContents.map(([label, text, Icon]) => (
-                  <article key={label}>
-                    <Icon size={24} weight="duotone" />
-                    <strong>{label}</strong>
-                    <span>{text}</span>
-                  </article>
-                ))}
-              </div>
-            </section>
-          </section>
-        ) : (
-          <section className={`future-character-preview ${character.tone}`} aria-live="polite">
-            <div className="future-character-art">
-              <CharacterVisual character={character} />
-              <span>{character.worldPill}</span>
-            </div>
-            <div className="future-character-copy">
-              <span className="panel-label">Future Maitri friend</span>
-              <h2>{character.name}</h2>
-              <p>
-                This friend belongs to the future Maitri shelf. Manu comes
-                first, so every new friend can receive the same care in story,
-                values, play, and child-facing language.
-              </p>
-              <div className="future-slot-grid">
-                {futureFeatureSlots.map(([label, text]) => (
-                  <span key={label}>
-                    <strong>{label}</strong>
-                    <small>{text}</small>
-                  </span>
-                ))}
-              </div>
-              <button className="future-back-button" type="button" onClick={() => selectCharacter("manu")}>
-                <Compass size={18} weight="duotone" />
-                <span>Play Manu first</span>
-              </button>
-            </div>
-          </section>
-        )}
-
-        <section className="future-feature-band" id="future-friends" aria-label="Future Maitri friends">
-          <div className="future-band-head">
-            <span className="panel-label">Future Maitri shelf</span>
-            <h2>More friends can join when Manu has found her first families.</h2>
-          </div>
-          <div className="world-character-row">
-            {characterOrder.map((id) => {
-              const item = characterLibrary[id];
-              const locked = id !== "manu";
-              return (
-                <button
-                  className={`world-character-card ${id === selectedId ? "active" : ""} ${locked ? "preview" : ""}`}
-                  type="button"
-                  aria-pressed={id === selectedId}
-                  aria-label={locked ? `${item.name} future companion preview` : `${item.name} first companion`}
-                  key={id}
-                  onClick={() => selectCharacter(id)}
-                >
-                  <CharacterVisual character={item} compact />
-                  <span>
-                    <strong>{item.name}</strong>
-                    <small>{locked ? "Future companion" : "First companion"}</small>
-                  </span>
-                  {locked ? <LockKey size={17} weight="bold" /> : <ArrowRight size={18} weight="bold" />}
-                </button>
-              );
-            })}
-          </div>
-          <div>
-            {futureFeatureSlots.map(([label, text]) => (
-              <article key={label}>
-                <strong>{label}</strong>
-                <p>{text}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-      </section>
     </main>
   );
 }
@@ -3070,27 +1815,13 @@ function Footer() {
       <div className="footer-navigation">
         <span className="footer-eyebrow">Explore Maitri</span>
         <nav aria-label="Footer navigation">
-          {navItems.slice(0, 5).map(([label, href]) => (
+          {navItems.map(([label, href]) => (
             <a href={href} key={label}>
               {label}
             </a>
           ))}
+          <a href={publicPath("#waitlist")}>Waitlist</a>
         </nav>
-      </div>
-      <div className="footer-legal" id="footer-legal">
-        <span className="footer-eyebrow">Stay in touch</span>
-        <nav aria-label="Footer legal and contact placeholders">
-          <a href="#footer-legal" aria-disabled="true" title="Placeholder link">
-            Copyright
-          </a>
-          <a href="#footer-legal" aria-disabled="true" title="Placeholder link">
-            Terms &amp; Conditions
-          </a>
-          <a href="#footer-legal" aria-disabled="true" title="Placeholder link">
-            Contact Us
-          </a>
-        </nav>
-        <span className="footer-placeholder-note">Links coming soon</span>
       </div>
     </footer>
   );

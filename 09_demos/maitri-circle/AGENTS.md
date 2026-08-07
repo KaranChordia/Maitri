@@ -28,7 +28,7 @@ Do not use straight divider rules to organize Maitri narrative content. On compa
 
 Give decorative circles and image-layer rings a clearly visible, unhurried ambient motion rather than leaving them static between hover interactions. Use enough travel, rotation, and breathing to be noticeable without competing with the content; preserve the stronger hover response, stagger the movement so the page does not pulse in unison, and disable non-essential motion for reduced-motion users.
 
-Use one consistent headline treatment for public narrative-section eyebrows: larger title-case Outfit text with a restrained brand-colour shimmer and a small companion-circle accent. Do not return to tiny all-caps labels or brush-stroke marker backgrounds; keep labels inside dense interactive controls compact and static.
+Use one consistent headline treatment for public narrative-section eyebrows: larger title-case Josefin Sans text with a restrained brand-colour shimmer and a small companion-circle accent. Do not return to tiny all-caps labels or brush-stroke marker backgrounds; keep labels inside dense interactive controls compact and static.
 
 On the homepage, keep every narrative-section eyebrow visibly large and do not place the former row of decorative dots beneath it. Brand the character collective as “Companions” in navigation, section headings, and discovery calls to action. The “Meet the Companions” section should include a creative, image-led preview of the current companion circle rather than stopping after introductory copy. Keep all companion preview portrait frames visually equal in size even when their source cutouts use different aspect ratios.
 
@@ -52,8 +52,18 @@ Hover treatment on the world should be minimal: show only the location name near
 
 The public Maitri Circle waitlist collects only name and email. Its free production backend is the bound Google Apps Script documented under `05_waitlist_preorder/google_sheets_waitlist/`, reached through the Vercel serverless route at `/api/waitlist`. Keep the honeypot, server-side validation, response-body verification, and explicit success/failure states intact. Never report a successful signup from a local-only fallback or expose the Apps Script URL or shared secret through a `VITE_` variable.
 
-The current website identity anchor is the founder-selected companion mark: two layered pink leaves meeting as an open `M`. Use the clean vector asset at `public/assets/brand/maitri-mark.svg`, paired horizontally with the Outfit `Maitri` wordmark in website headers and footers. Keep favicons icon-only. Preserve the mark's symmetrical silhouette, three soft tonal layers, transparent background, and rose palette.
+The current website logo is the founder-selected Flowing pages motif: `public/assets/brand/icons/svg/23.svg`, paired horizontally with the Josefin Sans `Maitri` wordmark in website headers and footers. Keep favicons icon-only using the same `23.svg`. Do not reuse `23.svg` as a decorative motif elsewhere on the site.
+
+Josefin Sans is the single font family across the public website: headings, body, nav, buttons, forms, and Story Universe UI. Do not reintroduce Outfit, Lora, or mixed type systems.
+
+The public brand mark is enabled in header and footer: `23.svg` paired with the Josefin Sans `Maitri` wordmark (`SHOW_MAITRI_LOGO = true`).
+
+The companions hub canonical route is `characters.html`. Keep `companions.html` as a redirect/alias only; do not maintain two competing hub implementations. Public UI classnames must stay consumer-facing (`companion-*`, `story-*`); do not reintroduce `investor-*` or dashboard/lab naming on public pages.
+
+Story Universe 3D polish is deferred and is not part of the current ship-ready homepage/companions pass. Keep the existing world route working, but do not prioritize overlay/layout rewrites there until the founder asks.
+
+The mobile hamburger menu opens a glass panel anchored under the header, matching the header width and glass treatment. Keep a soft pastel wash, circular motif accents, editorial Josefin Sans links, an in-panel Join Waitlist CTA, and a light scrim behind the panel. Do not return to a cramped generic dropdown or conflicting absolute/transform centering that breaks layout.
 
 The official Maitri website palette is pastel crimson `#ff96af` and pastel orange `#ffb098`. Use this pair for public narrative-section headline gradients and future brand-led colour decisions. Keep mobile navigation visually continuous with the main glass navigation bar through matching translucent borders, blur, opacity, and restrained motion.
 
-The 12 standalone pink motifs under `public/assets/brand/icons/svg/` are the approved decorative icon vocabulary. Render these individual SVGs directly, without bubbles, borders, shadows, coloured tiles, or enclosing shapes. The current homepage mapping is `26` friendship, `20` stories, `23` imagination, `18` values, `22` shared reading, and `25` waitlist. Retain conventional interface icons for controls whose meaning must remain immediately recognizable.
+The standalone pink motifs under `public/assets/brand/icons/svg/` (except `23.svg`, which is logo-only) are the approved decorative icon vocabulary. Render these individual SVGs directly, without bubbles, borders, shadows, coloured tiles, or enclosing shapes. The current homepage mapping is `26` friendship, `20` stories, `24` imagination, `18` values, `22` shared reading, and `25` waitlist. Retain conventional interface icons for controls whose meaning must remain immediately recognizable.

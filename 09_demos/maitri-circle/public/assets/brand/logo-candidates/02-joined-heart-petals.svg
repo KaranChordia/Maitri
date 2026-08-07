@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri joined heart petals</title>
+  <desc id="desc">Two soft petals open like a heart and clover, suggesting friendship and care.</desc>
+  <defs>
+    <linearGradient id="heart-base" x1="0.15" y1="0.05" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#ff96af"/>
+      <stop offset="0.5" stop-color="#ef7f9c"/>
+      <stop offset="1" stop-color="#f7d5df"/>
+    </linearGradient>
+    <linearGradient id="heart-mid" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#ffb4c6" stop-opacity="0.88"/>
+      <stop offset="1" stop-color="#fff4f7" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="heart-accent" x1="0.35" y1="0.15" x2="0.7" y2="0.95">
+      <stop offset="0" stop-color="#ffb098" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ff96af" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Soft ground glow -->
+  <ellipse cx="256" cy="390" rx="120" ry="28" fill="#451039" opacity="0.06"/>
+
+  <!-- Left petal -->
+  <path fill="url(#heart-base)" d="M256 392C168 318 96 248 96 176c0-48 36-84 84-84 28 0 52 14 76 44 24-30 48-44 76-44 48 0 84 36 84 84 0 72-72 142-160 216Z"/>
+
+  <!-- Layered softness -->
+  <path fill="url(#heart-mid)" d="M256 352C188 292 132 238 132 184c0-34 26-60 60-60 20 0 38 10 56 34 18-24 36-34 56-34 34 0 60 26 60 60 0 54-56 108-108 168Z"/>
+
+  <!-- Inner friendship highlight -->
+  <path fill="url(#heart-accent)" d="M256 300C214 266 180 232 180 198c0-20 16-36 36-36 12 0 24 6 40 24 16-18 28-24 40-24 20 0 36 16 36 36 0 34-34 68-76 102Z"/>
+
+  <!-- Tiny story spark -->
+  <circle cx="256" cy="214" r="18" fill="#fff8ed" opacity="0.55"/>
+  <circle cx="248" cy="206" r="7" fill="#ffffff" opacity="0.65"/>
+</svg>

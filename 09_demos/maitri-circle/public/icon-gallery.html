@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maitri provided icons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #451039;
+        --rose: #ff96af;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Josefin Sans", sans-serif;
+        color: var(--ink);
+        background: linear-gradient(180deg, #fff8f5 0%, #ffe8ef 50%, #fff4f0 100%);
+        min-height: 100vh;
+      }
+
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px 20px 72px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(1.7rem, 4vw, 2.4rem);
+        font-weight: 600;
+      }
+
+      p {
+        margin: 0 0 28px;
+        max-width: 40rem;
+        line-height: 1.5;
+        opacity: 0.85;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 16px;
+      }
+
+      .tile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 18px 14px 16px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 150, 175, 0.3);
+      }
+
+      .frame {
+        width: 140px;
+        height: 140px;
+        display: grid;
+        place-items: center;
+      }
+
+      .frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      .id {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--rose);
+      }
+
+      .name {
+        font-size: 0.98rem;
+        font-weight: 500;
+        text-align: center;
+      }
+
+      .file {
+        font-size: 0.8rem;
+        opacity: 0.65;
+        word-break: break-all;
+        text-align: center;
+      }
+
+      a.back {
+        color: var(--ink);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Your provided icons</h1>
+      <p>
+        All motif SVGs from
+        <code>public/assets/brand/icons/svg/</code>
+        (18–29), plus the current brand mark.
+        <a class="back" href="/Maitri/">Back to site</a>
+      </p>
+
+      <div class="grid" id="grid"></div>
+    </main>
+    <script>
+      const base = "/Maitri/assets/brand";
+      const icons = [
+        { id: "logo", name: "Logo (Flowing pages)", file: "23.svg", path: `${base}/icons/svg/23.svg` },
+        { id: "18", name: "Layered orbit", file: "18.svg" },
+        { id: "19", name: "Quiet petals", file: "19.svg" },
+        { id: "20", name: "Story bloom", file: "20.svg" },
+        { id: "21", name: "Gentle bridge", file: "21.svg" },
+        { id: "22", name: "Open heart", file: "22.svg" },
+        { id: "24", name: "Story spark", file: "24.svg" },
+        { id: "25", name: "Soft sun", file: "25.svg" },
+        { id: "26", name: "Friendship clover", file: "26.svg" },
+        { id: "27", name: "Steady steps", file: "27.svg" },
+        { id: "28", name: "Courage ripple", file: "28.svg" },
+        { id: "29", name: "Growing circle", file: "29.svg" },
+        // 23.svg is logo-only — listed above, not as a motif tile
+      ];
+
+      const grid = document.getElementById("grid");
+      for (const icon of icons) {
+        const src =
+          icon.path || `${base}/icons/svg/${icon.file}`;
+        const tile = document.createElement("article");
+        tile.className = "tile";
+        tile.innerHTML = `
+          <div class="id">${icon.id}</div>
+          <div class="frame"><img src="${src}" alt="${icon.name}" loading="lazy" /></div>
+          <div class="name">${icon.name}</div>
+          <div class="file">${icon.file}</div>
+        `;
+        grid.appendChild(tile);
+      }
+    </script>
+  </body>
+</html>

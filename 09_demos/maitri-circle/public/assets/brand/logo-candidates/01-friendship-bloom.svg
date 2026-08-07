@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Maitri friendship bloom</title>
+  <desc id="desc">Four soft rose petals meet at a warm center, suggesting friendship and stories.</desc>
+  <defs>
+    <linearGradient id="bloom-base" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#ff96af"/>
+      <stop offset="0.55" stop-color="#f07a9a"/>
+      <stop offset="1" stop-color="#f8dce4"/>
+    </linearGradient>
+    <linearGradient id="bloom-soft" x1="0.15" y1="0.1" x2="0.85" y2="0.95">
+      <stop offset="0" stop-color="#ffb4c6" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#fff4f7" stop-opacity="0.28"/>
+    </linearGradient>
+    <linearGradient id="bloom-core" x1="0.3" y1="0.2" x2="0.7" y2="0.9">
+      <stop offset="0" stop-color="#ffb098"/>
+      <stop offset="1" stop-color="#ff96af" stop-opacity="0.55"/>
+    </linearGradient>
+    <radialGradient id="bloom-glow" cx="50%" cy="48%" r="42%">
+      <stop offset="0" stop-color="#fff8ed" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ff96af" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="256" cy="256" r="210" fill="url(#bloom-glow)"/>
+
+  <!-- Top petal -->
+  <path fill="url(#bloom-base)" d="M256 78c38 42 58 92 58 148 0 18-8 34-22 42-10-28-26-52-36-64-10 12-26 36-36 64-14-8-22-24-22-42 0-56 20-106 58-148Z"/>
+  <!-- Right petal -->
+  <path fill="url(#bloom-base)" d="M434 256c-42 38-92 58-148 58-18 0-34-8-42-22 28-10 52-26 64-36-12-10-36-26-64-36 8-14 24-22 42-22 56 0 106 20 148 58Z"/>
+  <!-- Bottom petal -->
+  <path fill="url(#bloom-base)" d="M256 434c-38-42-58-92-58-148 0-18 8-34 22-42 10 28 26 52 36 64 10-12 26-36 36-64 14 8 22 24 22 42 0 56-20 106-58 148Z"/>
+  <!-- Left petal -->
+  <path fill="url(#bloom-base)" d="M78 256c42-38 92-58 148-58 18 0 34 8 42 22-28 10-52 26-64 36 12 10 36 26 64 36-8 14-24 22-42 22-56 0-106-20-148-58Z"/>
+
+  <!-- Soft highlight overlays -->
+  <path fill="url(#bloom-soft)" d="M256 98c28 34 44 74 44 118 0 10-3 20-10 26-8-22-20-42-28-52-8 10-20 30-28 52-7-6-10-16-10-26 0-44 16-84 44-118Z" opacity="0.85"/>
+  <path fill="url(#bloom-soft)" d="M414 256c-34 28-74 44-118 44-10 0-20-3-26-10 22-8 42-20 52-28-10-8-30-20-52-28 6-7 16-10 26-10 44 0 84 16 118 44Z" opacity="0.72"/>
+
+  <!-- Warm friendship core -->
+  <circle cx="256" cy="256" r="46" fill="url(#bloom-core)"/>
+  <circle cx="246" cy="244" r="16" fill="#fff8ed" opacity="0.45"/>
+</svg>

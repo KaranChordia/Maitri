@@ -1801,7 +1801,7 @@ function StoryUniverseHeader() {
           <Sparkle size={18} weight="duotone" />
           <span>World</span>
         </a>
-        <a href={publicPath("companions.html")}>
+        <a href={publicPath("characters.html")}>
           <UsersThree size={18} weight="duotone" />
           <span>Companions</span>
         </a>

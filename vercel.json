@@ -9,6 +9,14 @@
       "destination": "/characters.html"
     },
     {
+      "source": "/companions",
+      "destination": "/characters.html"
+    },
+    {
+      "source": "/companions.html",
+      "destination": "/characters.html"
+    },
+    {
       "source": "/story-universe",
       "destination": "/story-universe.html"
     }

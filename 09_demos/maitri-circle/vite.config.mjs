@@ -11,7 +11,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, "index.html"),
-        companions: resolve(__dirname, "companions.html"),
         characters: resolve(__dirname, "characters.html"),
         manu: resolve(__dirname, "manu.html"),
         savitribai: resolve(__dirname, "savitribai.html"),
