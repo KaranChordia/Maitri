@@ -386,3 +386,203 @@ h3 {
     margin-bottom: 2px;
   }
 }
+
+/* Match the public Maitri shell: open editorial groupings, solid motifs, compact rhythm. */
+body {
+  background:
+    radial-gradient(circle at 10% 9%, rgba(255, 150, 175, 0.17), transparent 22rem),
+    radial-gradient(circle at 92% 24%, rgba(255, 176, 152, 0.16), transparent 25rem),
+    linear-gradient(180deg, #fffaf6 0%, #fff5f2 54%, #fffaf7 100%);
+}
+
+.studio-shell {
+  padding-top: 22px;
+  padding-bottom: 58px;
+}
+
+.studio-top {
+  margin-bottom: clamp(28px, 4vw, 42px);
+  border-color: rgba(255, 150, 175, 0.26);
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 18px 42px rgba(69, 16, 57, 0.07);
+}
+
+.eyebrow {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding-left: 24px;
+  font-size: clamp(1.18rem, 1.8vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: 0.015em;
+  background: linear-gradient(105deg, var(--rose) 0 42%, var(--orange) 58% 100%);
+  background-size: 180% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  bottom: auto;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 0;
+  background: var(--rose);
+  box-shadow: none;
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+h1 {
+  max-width: 56rem;
+  margin-bottom: 12px;
+  font-size: clamp(2.25rem, 4.8vw, 4.15rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+h2 {
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.lede {
+  margin-bottom: 26px;
+  max-width: 46rem;
+}
+
+.note-banner {
+  margin-bottom: 30px;
+  border: 0;
+  border-left: 4px solid var(--orange);
+  border-radius: 0 18px 18px 0;
+  background: rgba(255, 176, 152, 0.14);
+}
+
+.section {
+  margin-top: clamp(32px, 4vw, 46px);
+}
+
+.section-head {
+  margin-bottom: 16px;
+}
+
+.grid {
+  gap: clamp(18px, 2.5vw, 28px);
+}
+
+.tile {
+  position: relative;
+  padding: 18px 18px 26px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 150, 175, 0.3);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.tile::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  width: 54px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--orange);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.tile h2 {
+  margin-top: 10px;
+}
+
+.draft,
+.pillar,
+.day {
+  border-color: rgba(255, 150, 175, 0.24);
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 16px 36px rgba(69, 16, 57, 0.06);
+}
+
+.motif,
+.motif-inline {
+  pointer-events: none;
+}
+
+.footer-note {
+  margin-top: 38px;
+}
+
+@media (max-width: 720px) {
+  .studio-shell {
+    padding: 16px 18px 48px;
+  }
+
+  .studio-top {
+    margin-bottom: 28px;
+    padding: 13px 15px;
+  }
+
+  .eyebrow {
+    padding-left: 20px;
+    font-size: clamp(1.02rem, 5vw, 1.22rem);
+  }
+
+  .eyebrow::before {
+    width: 12px;
+    height: 12px;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 11vw, 3.15rem);
+  }
+
+  .lede {
+    margin-bottom: 22px;
+  }
+
+  .note-banner {
+    margin-bottom: 26px;
+  }
+
+  .section {
+    margin-top: 32px;
+  }
+
+  .grid {
+    gap: 18px;
+  }
+
+  .tile {
+    padding: 14px 0 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Motifs belong on their reference page, not on every Studio content block. */
+body:not(.motif-catalog) .motif,
+body:not(.motif-catalog) .motif-inline {
+  display: none;
+}
+
+body:not(.motif-catalog) .tile h2 {
+  margin-top: 0;
+}

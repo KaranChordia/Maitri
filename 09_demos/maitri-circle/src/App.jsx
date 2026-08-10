@@ -1,4 +1,6 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { getBookById } from "./content/books/index.js";
+import "./manu.css";
 import {
   ArrowRight,
   BookOpenText,
@@ -80,11 +82,14 @@ const shwetikaAssets = {
   storyActivitiesStickers: publicPath("assets/shwetika/manu/optimized/story-activities-stickers.jpg"),
 };
 
+const manuAndBadalBook = getBookById("horse");
+
 const ENABLE_ABOUT_PAGE = false;
 
 const navItems = [
   ["Home", publicPath("#top")],
   ["Companions", publicPath("characters.html")],
+  ["Library", publicPath("library.html")],
   ...(ENABLE_ABOUT_PAGE ? [["About Us", publicPath("about.html")]] : []),
 ];
 
@@ -136,11 +141,11 @@ const brandPillars = [
 const homepageLibraryBooks = [
   {
     id: "horse",
-    title: "Manu: The Horse Nobody Could Ride",
+    title: manuAndBadalBook.libraryTitle,
     character: "Manu",
     tone: "violet",
     image: shwetikaAssets.horseRace,
-    premise: "Before Manu changed history, she learned to be brave one small step at a time.",
+    premise: manuAndBadalBook.premise,
   },
   {
     id: "festival",
@@ -189,6 +194,28 @@ const homepageCompanions = [
     tone: "teal",
   },
 ];
+
+const publicLibraryBooks = homepageLibraryBooks.map((book) => ({
+  ...book,
+  previewPages:
+    book.id === "horse"
+      ? manuAndBadalBook.spreads.slice(1, 3).map((spread, index) => ({
+          page: index + 1,
+          heading: spread.heading,
+          image: spread.image.src,
+          imageAlt: spread.image.alt,
+        }))
+      : [],
+}));
+
+const publicLibraryCompanions = homepageCompanions.map(({ name, image, href, tone }) => ({
+  id: name.toLowerCase(),
+  name,
+  image,
+  href,
+  tone,
+  hasLibrary: name === "Manu",
+}));
 
 const aboutPrinciples = [
   {
@@ -1024,13 +1051,30 @@ function BrandIntroduction() {
         </p>
       </div>
       <div className="brand-pillar-grid">
-        <svg className="pillar-constellation" viewBox="0 0 1200 250" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M35 118 C160 28 266 40 340 124 S545 218 635 113 S832 12 904 119 S1080 202 1170 82" />
+        <svg
+          className="pillar-constellation pillar-constellation-wide"
+          viewBox="0 0 1000 300"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M44 76 C114 210 190 214 257 136" />
+          <path d="M302 148 C370 238 454 226 515 90" />
+          <path d="M560 92 C640 32 715 224 774 155" />
+        </svg>
+        <svg
+          className="pillar-constellation pillar-constellation-tablet"
+          viewBox="0 0 720 390"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M45 72 C130 178 280 185 367 118" />
+          <path d="M392 128 C330 214 90 185 25 226" />
+          <path d="M45 270 C135 372 280 370 367 315" />
         </svg>
         {brandPillars.map(({ motif, label, text, tone }, index) => (
           <article className={`brand-pillar-card ${tone}`} key={label}>
             <small className="pillar-index">0{index + 1}</small>
-            <span><BrandMotif name={motif} /></span>
+            <span className="pillar-motif"><BrandMotif name={motif} /></span>
             <h3>{label}</h3>
             <p>{text}</p>
           </article>
@@ -1055,7 +1099,7 @@ function WhatWeDo() {
             Whether inspired by history or imagination, every story encourages courage,
             empathy, curiosity, and resilience.
           </p>
-          <ArrowButton href={publicPath("story-universe.html")} variant="outline">
+          <ArrowButton href={publicPath("library.html")} variant="outline">
             Explore the Library
           </ArrowButton>
         </div>
@@ -1065,29 +1109,24 @@ function WhatWeDo() {
               src={generatedAssets.girlsReading}
               alt="Three girls sharing a beautifully illustrated book in a warm Maitri reading nook"
             />
-            <span aria-hidden="true"><BrandMotif name="openHeart" /></span>
           </figure>
           <div className="storybook-collection" aria-label="Three stories in the Maitri library">
             <span className="storybook-collection-kicker">Maitri Story Library</span>
             <ol className="storybook-collection-list">
-              {homepageLibraryBooks.map(({ id, title, character, tone, image, premise }, index) => (
+              {homepageLibraryBooks.map(({ id, title, character, tone, image }, index) => (
                 <li className={`storybook-volume ${tone}`} key={id}>
                   <a
-                    className="storybook-book"
-                    href={publicPath("story-universe.html")}
+                    className="storybook-cover-link"
+                    href={publicPath(`library.html?book=${id}`)}
                     aria-label={`Explore ${title} in the Story Library`}
                   >
-                    <span className="storybook-book-spine" aria-hidden="true" />
-                    <span className="storybook-book-image" aria-hidden="true">
+                    <span className="storybook-cover-art" aria-hidden="true">
                       <img src={image} alt="" />
                     </span>
-                    <span className="storybook-book-copy">
-                      <span className="storybook-book-meta">Book {index + 1} · {character}</span>
+                    <span className="storybook-cover-copy">
+                      <small>Book {index + 1} · {character}</small>
                       <strong>{title}</strong>
-                      <small>{premise}</small>
-                      <span className="storybook-book-action">Open the story <ArrowRight size={15} weight="bold" /></span>
                     </span>
-                    <span className="storybook-book-pages" aria-hidden="true" />
                   </a>
                 </li>
               ))}
@@ -1145,7 +1184,7 @@ function ExploreMaitri() {
   );
 }
 
-function Waitlist() {
+function Waitlist({ showArt = true }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -1210,19 +1249,17 @@ function Waitlist() {
   };
 
   return (
-    <section className="waitlist-section section-shell" id="waitlist">
-      <div className="waitlist-art">
-        <GeneratedArt
-          src={generatedAssets.portal}
-          className="footer-portal"
-          alt="A small illustrated Maitri story portal beside marigolds"
-          parallax={5}
-          feather
-        />
-        <span className="waitlist-brand-motif" aria-hidden="true">
-          <BrandMotif name="softSun" />
-        </span>
-      </div>
+    <section
+      className={`waitlist-section section-shell${showArt ? "" : " waitlist-section--without-art"}`}
+      id="waitlist"
+    >
+      {showArt ? (
+        <div className="waitlist-art">
+          <figure className="waitlist-companion-art" aria-hidden="true">
+            <img src={shwetikaAssets.manuDoll} alt="" loading="lazy" />
+          </figure>
+        </div>
+      ) : null}
       <div className="waitlist-copy">
         <span className="section-label violet-label">Be Among the First</span>
         <h2>Our First Collection is Almost Here.</h2>
@@ -1409,6 +1446,427 @@ function StoryPreviewSection({ character, previews, title, intro, sectionId = "b
   );
 }
 
+function LibraryPage() {
+  const requestedBook = new URLSearchParams(window.location.search).get("book");
+  const initialBook = publicLibraryBooks.some(({ id }) => id === requestedBook)
+    ? requestedBook
+    : publicLibraryBooks[0].id;
+  const [activeCompanionId, setActiveCompanionId] = useState("manu");
+  const [activeBookId, setActiveBookId] = useState(initialBook);
+  const [previewOpen, setPreviewOpen] = useState(true);
+  const [previewCycle, setPreviewCycle] = useState(0);
+  const previewPanelRef = useRef(null);
+  const activeCompanion = publicLibraryCompanions.find(({ id }) => id === activeCompanionId);
+  const activeBook = publicLibraryBooks.find(({ id }) => id === activeBookId) || publicLibraryBooks[0];
+
+  usePageMetadata(
+    "Maitri Story Library",
+    "Choose a Maitri companion and explore the confirmed story covers and preview pages in her library.",
+  );
+
+  const chooseCompanion = (companionId) => {
+    setActiveCompanionId(companionId);
+    if (companionId === "manu") {
+      setActiveBookId(publicLibraryBooks[0].id);
+      setPreviewOpen(true);
+      setPreviewCycle((cycle) => cycle + 1);
+    } else {
+      setPreviewOpen(false);
+    }
+  };
+
+  const chooseBook = (bookId) => {
+    setActiveBookId(bookId);
+    setPreviewOpen(true);
+    setPreviewCycle((cycle) => cycle + 1);
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        previewPanelRef.current?.scrollIntoView({
+          block: "start",
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        });
+      });
+    });
+  };
+
+  return (
+    <main className="maitri-page library-page">
+      <section className="library-catalog-shell section-shell" id="top">
+        <Header waitlistHref="#waitlist" />
+        <header className="library-catalog-intro">
+          <div>
+            <span className="library-catalog-eyebrow">
+              <BookOpenText size={22} weight="fill" aria-hidden="true" />
+              Maitri Story Library
+            </span>
+            <h1>Story Library</h1>
+          </div>
+          <p>
+            Select a companion to see the books already in her Library. Open a cover
+            to see the preview pages available here.
+          </p>
+        </header>
+
+        <div className="library-commerce-layout">
+          <aside className="library-companion-rail" aria-labelledby="library-companion-title">
+            <div className="library-rail-heading">
+              <span>Browse by companion</span>
+              <h2 id="library-companion-title">Choose a friend</h2>
+            </div>
+            <div className="library-companion-list" role="group" aria-label="Choose a companion">
+              {publicLibraryCompanions.map((companion) => (
+                <button
+                  className={`library-companion-row ${companion.tone}${activeCompanionId === companion.id ? " active" : ""}`}
+                  type="button"
+                  key={companion.id}
+                  aria-pressed={activeCompanionId === companion.id}
+                  onClick={() => chooseCompanion(companion.id)}
+                >
+                  <span className="library-companion-row-portrait" aria-hidden="true">
+                    <img src={companion.image} alt="" />
+                  </span>
+                  <span className="library-companion-row-copy">
+                    <strong>{companion.name}</strong>
+                  </span>
+                  {!companion.hasLibrary ? <LockKey size={16} weight="fill" aria-hidden="true" /> : null}
+                </button>
+              ))}
+            </div>
+          </aside>
+
+          <div className="library-catalog-content">
+            {activeCompanion?.hasLibrary ? (
+              <>
+                <div className="library-collection-heading">
+                  <span>Manu&apos;s Library</span>
+                  <h2 id="active-library-title">Choose a book to preview.</h2>
+                </div>
+
+                <div className="library-product-grid" aria-labelledby="active-library-title">
+                  {publicLibraryBooks.map((book) => (
+                    <article
+                      className={`library-product-card ${book.tone}${activeBookId === book.id ? " active" : ""}`}
+                      key={book.id}
+                    >
+                      <button
+                        className="library-product-cover-button"
+                        type="button"
+                        aria-label={`Preview ${book.title}`}
+                        aria-pressed={activeBookId === book.id && previewOpen}
+                        onClick={() => chooseBook(book.id)}
+                      >
+                        <span className="library-product-cover" aria-hidden="true">
+                          <img src={book.image} alt="" />
+                          <span className="library-product-cover-title">{book.title}</span>
+                        </span>
+                      </button>
+                      <div className="library-product-copy">
+                        <h3>{book.title}</h3>
+                        <p>{book.premise}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+
+              </>
+            ) : (
+              <section className="library-empty-section" aria-live="polite">
+                <div className="library-empty-portrait">
+                  <img src={activeCompanion?.image} alt={`${activeCompanion?.name}, a Maitri companion`} />
+                </div>
+                <div className="library-empty-copy">
+                  <span>{activeCompanion?.name}&apos;s Library</span>
+                  <h2>There are no confirmed books to share here yet.</h2>
+                  <p>You can still meet {activeCompanion?.name} and explore her companion page.</p>
+                  <ArrowButton href={activeCompanion?.href} variant="outline">
+                    Meet {activeCompanion?.name}
+                  </ArrowButton>
+                </div>
+              </section>
+            )}
+          </div>
+        </div>
+
+        {activeCompanion?.hasLibrary && previewOpen ? (
+          <section
+            className={`library-preview-panel ${activeBook.tone}`}
+            id="library-preview"
+            key={`${activeBook.id}-${previewCycle}`}
+            ref={previewPanelRef}
+            aria-labelledby="library-preview-title"
+          >
+            <button
+              className="library-preview-close"
+              type="button"
+              aria-label="Close book preview"
+              onClick={() => setPreviewOpen(false)}
+            >
+              <X size={20} weight="bold" aria-hidden="true" />
+            </button>
+
+            <div
+              className={`library-static-preview${activeBook.previewPages.length > 0 ? " has-pages" : " cover-only"}`}
+              aria-label={`${activeBook.title} preview`}
+            >
+              <header className="library-preview-heading">
+                <h2 id="library-preview-title">{activeBook.title}</h2>
+              </header>
+
+              <figure className="library-static-cover">
+                <img src={activeBook.image} alt={`${activeBook.title} cover artwork`} />
+              </figure>
+
+              {activeBook.previewPages.length > 0
+                ? activeBook.previewPages.slice(0, 2).map((preview, index) => (
+                    <article
+                      className={`library-static-page page-${index + 1}`}
+                      key={`${activeBook.id}-${preview.page}`}
+                    >
+                      <figure className="library-static-page-visual">
+                        <img src={preview.image} alt={preview.imageAlt} />
+                      </figure>
+                      <div className="library-static-page-copy">
+                        <span>Page {preview.page}</span>
+                        <h3>{preview.heading}</h3>
+                      </div>
+                    </article>
+                  ))
+                : null}
+            </div>
+          </section>
+        ) : null}
+      </section>
+
+      <Waitlist />
+      <Footer />
+    </main>
+  );
+}
+
+function ManuFactTrail() {
+  return (
+    <dl className="manu-fact-trail">
+      {manuQuickFacts.map(({ label, value, note }, index) => (
+        <div key={label} data-manu-chapter>
+          <span className="manu-fact-number" aria-hidden="true">0{index + 1}</span>
+          <dt>{label}</dt>
+          <dd>{value}</dd>
+          <p>{note}</p>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function ManuStoryTrail() {
+  return (
+    <section className="manu-journey-story" id="first-story" aria-labelledby="manu-story-title">
+      <div className="manu-journey-heading" data-manu-chapter>
+        <span className="manu-journey-kicker">Manu&apos;s first story</span>
+        <h2 id="manu-story-title">Book 1: The Horse Nobody Could Ride</h2>
+        <p>
+          Follow Manu from one brave question in the courtyard to a patient
+          friendship with Badal, one small brave step at a time.
+        </p>
+      </div>
+
+      <ol className="manu-story-trail" aria-label="Book 1 story moments">
+        {manuStorybookPreviews.map((preview, index) => (
+          <li key={`${preview.pages}-${preview.title}`}>
+            <article>
+              <span className="manu-story-trail-number">{String(index + 1).padStart(2, "0")}</span>
+              <span className="manu-story-trail-image" aria-hidden="true">
+                <img src={preview.image} alt="" />
+              </span>
+              <span className="manu-story-trail-copy">
+                <small>{preview.pages}</small>
+                <strong>{preview.title}</strong>
+                <em>{preview.takeaway}</em>
+              </span>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function ManuReadingTogether() {
+  const [activePrompt, setActivePrompt] = useState(0);
+  const prompts = [
+    "Pause when Manu faces a hard choice.",
+    "Ask what a kind next step could be.",
+    "Let the answer be small, honest, and their own.",
+  ];
+
+  return (
+    <section className="manu-reading-together" aria-labelledby="manu-family-title" data-manu-chapter>
+      <div className="manu-reading-copy">
+        <span className="manu-journey-kicker">For reading together</span>
+        <h2 id="manu-family-title">A story can make room for a child&apos;s own brave answer.</h2>
+        <p>
+          Manu does not have all the answers. She notices, asks, waits, and tries
+          again. That leaves space for children and the adults beside them to
+          talk, draw, wonder, or simply listen together.
+        </p>
+        <div className="manu-reading-choice" aria-live="polite">
+          <span>Try this together</span>
+          <strong>{prompts[activePrompt]}</strong>
+        </div>
+      </div>
+
+      <div className="manu-reading-path" aria-label="Choose a reading-together moment">
+        {prompts.map((prompt, index) => (
+          <button
+            className={activePrompt === index ? "active" : ""}
+            type="button"
+            aria-pressed={activePrompt === index}
+            onClick={() => setActivePrompt(index)}
+            key={prompt}
+          >
+            <span>0{index + 1}</span>
+            <strong>{prompt}</strong>
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function useManuScrollChapters() {
+  useEffect(() => {
+    const page = document.querySelector(".manu-journey-page");
+    const chapters = [...document.querySelectorAll("[data-manu-chapter]")];
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!page || !chapters.length || reducedMotion || !("IntersectionObserver" in window)) {
+      return undefined;
+    }
+
+    chapters.forEach((chapter) => chapter.setAttribute("data-scroll-state", "upcoming"));
+    page.classList.add("manu-scroll-ready");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.setAttribute("data-scroll-state", "active");
+          } else if (entry.boundingClientRect.top < 0) {
+            entry.target.setAttribute("data-scroll-state", "passed");
+          } else {
+            entry.target.setAttribute("data-scroll-state", "upcoming");
+          }
+        });
+      },
+      { rootMargin: "-12% 0px -18%", threshold: [0.12, 0.42] },
+    );
+
+    chapters.forEach((chapter) => observer.observe(chapter));
+
+    return () => {
+      observer.disconnect();
+      page.classList.remove("manu-scroll-ready");
+      chapters.forEach((chapter) => chapter.removeAttribute("data-scroll-state"));
+    };
+  }, []);
+}
+
+function ManuDetailPage() {
+  const character = companionPageContent.manu;
+  const futureCompanions = [companionPageContent.savitribai, companionPageContent.kalpana];
+
+  useManuScrollChapters();
+
+  usePageMetadata(
+    "Manu - Maitri Dolls",
+    "Meet Manu, Maitri's first brave friend, through a warm story about brave questions, patient friendship, and the small choices that help courage grow.",
+  );
+
+  return (
+    <main className="maitri-page companion-public-page manu-journey-page">
+      <section className="manu-journey-shell section-shell" id="top">
+        <Header waitlistHref="#waitlist" />
+
+        <section className="manu-journey-hero" aria-labelledby="manu-title">
+          <div className="manu-journey-hero-copy" data-manu-chapter>
+            <span className="manu-journey-kicker">Hi, I&apos;m Manu</span>
+            <h1 id="manu-title">My name is Manikarnika. You can call me Manu.</h1>
+            <p>
+              My story begins beside the Ganga in Bithoor, long before I was
+              remembered as Rani Lakshmibai of Jhansi. I love horses, brave
+              questions, and the kind of courage that grows one small step at a time.
+            </p>
+          </div>
+
+          <div className="manu-journey-hero-art" data-manu-chapter>
+            <span className="manu-hero-orbit orbit-one" aria-hidden="true" />
+            <span className="manu-hero-orbit orbit-two" aria-hidden="true" />
+            <span className="manu-hero-blob" aria-hidden="true" />
+            <img src={character.image} alt="Manu, Maitri's first story companion" />
+          </div>
+        </section>
+
+        <section className="manu-hello-trail" aria-labelledby="meet-manu-title">
+          <div className="manu-journey-heading" data-manu-chapter>
+            <span className="manu-journey-kicker">Meet Manu</span>
+            <h2 id="meet-manu-title">A few small things make a new friend feel close.</h2>
+            <p>
+              Before she was remembered as Rani Lakshmibai of Jhansi, she was
+              Manikarnika: a curious child whose world included horses, brave
+              questions, warm jalebis, and the Ganga at Bithoor.
+            </p>
+          </div>
+
+          <ManuFactTrail />
+        </section>
+
+        <ManuStoryTrail />
+        <ManuReadingTogether />
+
+        <section className="manu-future-circle" aria-labelledby="manu-circle-title" data-manu-chapter>
+          <div className="manu-future-copy">
+            <span className="manu-journey-kicker">A circle that can grow</span>
+            <h2 id="manu-circle-title">Manu is the first friend. More stories can follow.</h2>
+            <p>
+              The Maitri Circle will grow one friendship at a time, always
+              beginning with a story a child can make their own.
+            </p>
+          </div>
+
+          <div className="manu-companion-circle" aria-label="The Maitri companion circle">
+            <article className="is-first">
+              <span className="manu-circle-portrait">
+                <CharacterVisual character={character} />
+              </span>
+              <small>First friend</small>
+              <strong>Manu</strong>
+            </article>
+            {futureCompanions.map((companion) => (
+              <article key={companion.id}>
+                <span className="manu-circle-portrait">
+                  <CharacterVisual character={companion} />
+                </span>
+                <small>Future companion</small>
+                <strong>{companion.name}</strong>
+              </article>
+            ))}
+          </div>
+
+          <div className="manu-future-actions">
+            <ArrowButton href={publicPath("characters.html")} variant="outline">
+              Visit the companion circle
+            </ArrowButton>
+            <ArrowButton href="#waitlist">Join the waitlist</ArrowButton>
+          </div>
+        </section>
+      </section>
+
+      <Waitlist />
+      <Footer />
+    </main>
+  );
+}
+
 function CompanionHubPage() {
   usePageMetadata(
     "Meet Manu and the Maitri Companions",
@@ -1469,7 +1927,7 @@ function CompanionHubPage() {
           </p>
         </section>
       </section>
-      <Waitlist />
+      <Waitlist showArt={false} />
       <Footer />
     </main>
   );
@@ -1890,6 +2348,7 @@ export function App() {
     (id) => path === `/${id}` || path.endsWith(`/${id}`) || path.endsWith(`/${id}.html`),
   );
   const isStoryUniversePage = path === "/story-universe" || path.endsWith("/story-universe.html");
+  const isLibraryPage = path === "/library" || path.endsWith("/library.html");
   const isAboutPage = path === "/about" || path.endsWith("/about.html");
 
   if (isCompanionPage) {
@@ -1897,6 +2356,10 @@ export function App() {
   }
 
   if (companionRoute) {
+    if (companionRoute === "manu") {
+      return <ManuDetailPage />;
+    }
+
     return <CompanionDetailPage characterId={companionRoute} />;
   }
 
@@ -1917,6 +2380,10 @@ export function App() {
         <StoryUniversePage />
       </Suspense>
     );
+  }
+
+  if (isLibraryPage) {
+    return <LibraryPage />;
   }
 
   if (isAboutPage && ENABLE_ABOUT_PAGE) {

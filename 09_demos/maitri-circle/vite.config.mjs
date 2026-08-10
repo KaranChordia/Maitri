@@ -15,6 +15,7 @@ export default defineConfig({
         manu: resolve(__dirname, "manu.html"),
         savitribai: resolve(__dirname, "savitribai.html"),
         kalpana: resolve(__dirname, "kalpana.html"),
+        library: resolve(__dirname, "library.html"),
         storyUniverse: resolve(__dirname, "story-universe.html"),
       },
       output: {
