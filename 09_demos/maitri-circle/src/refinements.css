@@ -4619,3 +4619,91 @@ body {
     gap: 28px;
   }
 }
+
+
+/* Founder-approved homepage hero parity and image-free shared waitlist. */
+.home-page .stories-editorial-layout {
+  grid-template-columns: minmax(350px, 0.9fr) minmax(370px, 1.1fr);
+  gap: clamp(20px, 2.8vw, 74px);
+  width: min(100%, 1280px);
+  min-height: clamp(560px, 51vw, 650px);
+}
+
+.home-page .stories-editorial-copy {
+  max-width: 510px;
+}
+
+.home-page .stories-reading-experience {
+  place-items: center;
+  gap: 0;
+}
+
+.home-page .stories-reading-scene {
+  width: min(100%, 620px);
+}
+
+.home-page .stories-editorial-copy .arrow-button.primary,
+.home-page .waitlist-form .arrow-button.primary {
+  min-height: 54px;
+  border-color: #ff96af;
+  border-radius: 999px;
+  padding: 0 9px 0 28px;
+  color: #fff;
+  background: #ff96af;
+  box-shadow: var(--button-shadow);
+}
+
+:root[data-theme="dark"] .home-page .stories-editorial-copy .arrow-button.primary,
+:root[data-theme="dark"] .home-page .waitlist-form .arrow-button.primary {
+  color: #fff;
+  background: #ff96af;
+}
+
+.maitri-page > .waitlist-section--without-art {
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+  min-height: 0;
+}
+
+.maitri-page > .waitlist-section--without-art .waitlist-copy,
+.maitri-page > .waitlist-section--without-art .waitlist-form {
+  min-width: 0;
+}
+
+.maitri-page > .waitlist-section--without-art .waitlist-copy {
+  max-width: 620px;
+}
+
+@media (max-width: 980px) {
+  .home-page .stories-editorial-layout {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: 48px;
+  }
+
+  .home-page .stories-editorial-copy {
+    width: min(100%, 760px);
+  }
+
+  .home-page .stories-reading-experience {
+    width: min(100%, 860px);
+    margin: 0 auto;
+  }
+
+  .maitri-page > .waitlist-section--without-art {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 680px) {
+  .home-page .stories-editorial-layout {
+    gap: 40px;
+  }
+
+  .home-page .stories-reading-scene {
+    width: min(91vw, 355px);
+  }
+}
