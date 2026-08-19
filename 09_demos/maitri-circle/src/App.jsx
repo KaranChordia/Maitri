@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { getBookById } from "./content/books/index.js";
 import "./manu.css";
 import {
@@ -1416,16 +1416,14 @@ function StoryPreviewSection({ character, previews, title, intro, sectionId = "b
 
 function LibraryPage() {
   const requestedBook = new URLSearchParams(window.location.search).get("book");
-  const initialBook = publicLibraryBooks.some(({ id }) => id === requestedBook)
+  const initialBook = publicLibraryBooks.some(
+    ({ id, previewPages }) => id === requestedBook && previewPages.length > 0,
+  )
     ? requestedBook
-    : publicLibraryBooks[0].id;
+    : null;
   const [activeCompanionId, setActiveCompanionId] = useState("manu");
   const [activeBookId, setActiveBookId] = useState(initialBook);
-  const [previewOpen, setPreviewOpen] = useState(true);
-  const [previewCycle, setPreviewCycle] = useState(0);
-  const previewPanelRef = useRef(null);
   const activeCompanion = publicLibraryCompanions.find(({ id }) => id === activeCompanionId);
-  const activeBook = publicLibraryBooks.find(({ id }) => id === activeBookId) || publicLibraryBooks[0];
 
   usePageMetadata(
     "Maitri Story Library",
@@ -1434,27 +1432,11 @@ function LibraryPage() {
 
   const chooseCompanion = (companionId) => {
     setActiveCompanionId(companionId);
-    if (companionId === "manu") {
-      setActiveBookId(publicLibraryBooks[0].id);
-      setPreviewOpen(true);
-      setPreviewCycle((cycle) => cycle + 1);
-    } else {
-      setPreviewOpen(false);
-    }
+    setActiveBookId(null);
   };
 
   const chooseBook = (bookId) => {
-    setActiveBookId(bookId);
-    setPreviewOpen(true);
-    setPreviewCycle((cycle) => cycle + 1);
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => {
-        previewPanelRef.current?.scrollIntoView({
-          block: "start",
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-        });
-      });
-    });
+    setActiveBookId((currentBookId) => (currentBookId === bookId ? null : bookId));
   };
 
   return (
@@ -1470,8 +1452,8 @@ function LibraryPage() {
             <h1>Story Library</h1>
           </div>
           <p>
-            Select a companion to see the books already in her Library. Open a cover
-            to see the preview pages available here.
+            Choose a companion, then hover over a book cover to glimpse its pages.
+            On touch, tap the cover.
           </p>
         </header>
 
@@ -1507,33 +1489,71 @@ function LibraryPage() {
               <>
                 <div className="library-collection-heading">
                   <span>Manu&apos;s Library</span>
-                  <h2 id="active-library-title">Choose a book to preview.</h2>
+                  <h2 id="active-library-title">Hover over a cover to look inside.</h2>
                 </div>
 
                 <div className="library-product-grid" aria-labelledby="active-library-title">
-                  {publicLibraryBooks.map((book) => (
-                    <article
-                      className={`library-product-card ${book.tone}${activeBookId === book.id ? " active" : ""}`}
-                      key={book.id}
-                    >
-                      <button
-                        className="library-product-cover-button"
-                        type="button"
-                        aria-label={`Preview ${book.title}`}
-                        aria-pressed={activeBookId === book.id && previewOpen}
-                        onClick={() => chooseBook(book.id)}
+                  {publicLibraryBooks.map((book) => {
+                    const hasPreview = book.previewPages.length > 0;
+                    const isPreviewing = activeBookId === book.id;
+                    const previewLabel = book.previewPages
+                      .slice(0, 2)
+                      .map(({ heading }) => heading)
+                      .join(" and ");
+
+                    return (
+                      <article
+                        className={`library-product-card ${book.tone}${
+                          hasPreview ? " has-preview" : ""
+                        }${isPreviewing ? " previewing" : ""}`}
+                        key={book.id}
                       >
-                        <span className="library-product-cover" aria-hidden="true">
-                          <img src={book.image} alt="" />
-                          <span className="library-product-cover-title">{book.title}</span>
-                        </span>
-                      </button>
-                      <div className="library-product-copy">
-                        <h3>{book.title}</h3>
-                        <p>{book.premise}</p>
-                      </div>
-                    </article>
-                  ))}
+                        <button
+                          className="library-product-cover-button"
+                          type="button"
+                          aria-label={
+                            hasPreview
+                              ? `Preview ${previewLabel} from ${book.title}`
+                              : undefined
+                          }
+                          aria-pressed={hasPreview ? isPreviewing : undefined}
+                          disabled={!hasPreview}
+                          onClick={() => hasPreview && chooseBook(book.id)}
+                        >
+                          <span className="library-product-media" aria-hidden="true">
+                            <span className="library-product-cover">
+                              <img src={book.image} alt="" />
+                              <span className="library-product-cover-title">{book.title}</span>
+                            </span>
+
+                            {hasPreview ? (
+                              <>
+                                <span className="library-product-preview-hint" />
+                                <span className="library-product-page-stack">
+                                  {book.previewPages.slice(0, 2).map((preview) => (
+                                    <span
+                                      className="library-product-preview-page"
+                                      key={`${book.id}-${preview.page}`}
+                                    >
+                                      <img src={preview.image} alt="" />
+                                      <span className="library-product-preview-page-copy">
+                                        <small>Page {preview.page}</small>
+                                        <strong>{preview.heading}</strong>
+                                      </span>
+                                    </span>
+                                  ))}
+                                </span>
+                              </>
+                            ) : null}
+                          </span>
+                        </button>
+                        <div className="library-product-copy">
+                          <h3>{book.title}</h3>
+                          <p>{book.premise}</p>
+                        </div>
+                      </article>
+                    );
+                  })}
                 </div>
 
               </>
@@ -1555,54 +1575,6 @@ function LibraryPage() {
           </div>
         </div>
 
-        {activeCompanion?.hasLibrary && previewOpen ? (
-          <section
-            className={`library-preview-panel ${activeBook.tone}`}
-            id="library-preview"
-            key={`${activeBook.id}-${previewCycle}`}
-            ref={previewPanelRef}
-            aria-labelledby="library-preview-title"
-          >
-            <button
-              className="library-preview-close"
-              type="button"
-              aria-label="Close book preview"
-              onClick={() => setPreviewOpen(false)}
-            >
-              <X size={20} weight="bold" aria-hidden="true" />
-            </button>
-
-            <div
-              className={`library-static-preview${activeBook.previewPages.length > 0 ? " has-pages" : " cover-only"}`}
-              aria-label={`${activeBook.title} preview`}
-            >
-              <header className="library-preview-heading">
-                <h2 id="library-preview-title">{activeBook.title}</h2>
-              </header>
-
-              <figure className="library-static-cover">
-                <img src={activeBook.image} alt={`${activeBook.title} cover artwork`} />
-              </figure>
-
-              {activeBook.previewPages.length > 0
-                ? activeBook.previewPages.slice(0, 2).map((preview, index) => (
-                    <article
-                      className={`library-static-page page-${index + 1}`}
-                      key={`${activeBook.id}-${preview.page}`}
-                    >
-                      <figure className="library-static-page-visual">
-                        <img src={preview.image} alt={preview.imageAlt} />
-                      </figure>
-                      <div className="library-static-page-copy">
-                        <span>Page {preview.page}</span>
-                        <h3>{preview.heading}</h3>
-                      </div>
-                    </article>
-                  ))
-                : null}
-            </div>
-          </section>
-        ) : null}
       </section>
 
       <Waitlist />
