@@ -1099,7 +1099,7 @@ function WhatWeDo() {
             Whether inspired by history or imagination, every story encourages courage,
             empathy, curiosity, and resilience.
           </p>
-          <ArrowButton href={publicPath("library.html")} variant="outline">
+          <ArrowButton href={publicPath("library.html")}>
             Explore the Library
           </ArrowButton>
         </div>
@@ -1110,28 +1110,6 @@ function WhatWeDo() {
               alt="Three girls sharing a beautifully illustrated book in a warm Maitri reading nook"
             />
           </figure>
-          <div className="storybook-collection" aria-label="Three stories in the Maitri library">
-            <span className="storybook-collection-kicker">Maitri Story Library</span>
-            <ol className="storybook-collection-list">
-              {homepageLibraryBooks.map(({ id, title, character, tone, image }, index) => (
-                <li className={`storybook-volume ${tone}`} key={id}>
-                  <a
-                    className="storybook-cover-link"
-                    href={publicPath(`library.html?book=${id}`)}
-                    aria-label={`Explore ${title} in the Story Library`}
-                  >
-                    <span className="storybook-cover-art" aria-hidden="true">
-                      <img src={image} alt="" />
-                    </span>
-                    <span className="storybook-cover-copy">
-                      <small>Book {index + 1} · {character}</small>
-                      <strong>{title}</strong>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </div>
         </div>
       </div>
     </section>
@@ -1184,7 +1162,7 @@ function ExploreMaitri() {
   );
 }
 
-function Waitlist({ showArt = true }) {
+function Waitlist() {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -1249,17 +1227,7 @@ function Waitlist({ showArt = true }) {
   };
 
   return (
-    <section
-      className={`waitlist-section section-shell${showArt ? "" : " waitlist-section--without-art"}`}
-      id="waitlist"
-    >
-      {showArt ? (
-        <div className="waitlist-art">
-          <figure className="waitlist-companion-art" aria-hidden="true">
-            <img src={shwetikaAssets.manuDoll} alt="" loading="lazy" />
-          </figure>
-        </div>
-      ) : null}
+    <section className="waitlist-section section-shell waitlist-section--without-art" id="waitlist">
       <div className="waitlist-copy">
         <span className="section-label violet-label">Be Among the First</span>
         <h2>Our First Collection is Almost Here.</h2>
@@ -1637,7 +1605,7 @@ function LibraryPage() {
         ) : null}
       </section>
 
-      <Waitlist showArt={false} />
+      <Waitlist />
       <Footer />
     </main>
   );
@@ -1927,7 +1895,7 @@ function CompanionHubPage() {
           </p>
         </section>
       </section>
-      <Waitlist showArt={false} />
+      <Waitlist />
       <Footer />
     </main>
   );
