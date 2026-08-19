@@ -141,10 +141,10 @@ const brandPillars = [
 const homepageLibraryBooks = [
   {
     id: "horse",
-    title: manuAndBadalBook.libraryTitle,
+    title: `${manuAndBadalBook.title}: ${manuAndBadalBook.subtitle}`,
     character: "Manu",
     tone: "violet",
-    image: shwetikaAssets.horseRace,
+    image: manuAndBadalBook.cover.src,
     premise: manuAndBadalBook.premise,
   },
   {
@@ -1637,7 +1637,7 @@ function LibraryPage() {
         ) : null}
       </section>
 
-      <Waitlist />
+      <Waitlist showArt={false} />
       <Footer />
     </main>
   );
