@@ -13,6 +13,7 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         characters: resolve(__dirname, "characters.html"),
         manu: resolve(__dirname, "manu.html"),
+        nandini: resolve(__dirname, "nandini.html"),
         savitribai: resolve(__dirname, "savitribai.html"),
         kalpana: resolve(__dirname, "kalpana.html"),
         library: resolve(__dirname, "library.html"),

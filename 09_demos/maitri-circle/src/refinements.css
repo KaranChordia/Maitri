@@ -4670,21 +4670,56 @@ body {
 }
 
 .home-page .stories-editorial-copy .arrow-button.primary,
-.home-page .waitlist-form .arrow-button.primary {
+.waitlist-section .waitlist-form .arrow-button.primary {
   min-height: 54px;
-  border-color: #ff96af;
+  border-color: rgba(255, 150, 175, 0.72);
   border-radius: 999px;
   padding: 0 9px 0 28px;
   color: #fff;
-  background: #ff96af;
+  background: linear-gradient(135deg, #f36f8c, #ea617f);
   box-shadow: var(--button-shadow);
 }
 
 :root[data-theme="dark"] .home-page .stories-editorial-copy .arrow-button.primary,
-:root[data-theme="dark"] .home-page .waitlist-form .arrow-button.primary {
+:root[data-theme="dark"] .waitlist-section .waitlist-form .arrow-button.primary {
   color: #fff;
-  background: #ff96af;
+  background: linear-gradient(135deg, #f36f8c, #ea617f);
 }
+
+/* The footer-adjacent form CTA shares the lighter two-tone treatment used by
+   “Explore All Companions” and “Read the First Story”. */
+.waitlist-section .waitlist-form .arrow-button.primary {
+  border-color: rgba(255, 150, 175, 0.22);
+  color: #451039;
+  background: linear-gradient(135deg, #ff96af, #ffb098);
+}
+
+.waitlist-section .waitlist-form .arrow-button.primary .arrow-orb {
+  background: rgba(255, 255, 255, 0.62);
+  color: #451039;
+}
+
+/* Keep the longer site name fully visible and optically centered in the header. */
+.site-header .brand {
+  overflow: visible;
+}
+
+.site-header .brand .brand-wordmark {
+  align-self: center;
+  flex: 0 1 auto;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  line-height: 1;
+}
+
+@media (max-width: 720px) {
+  .site-header .brand .brand-wordmark {
+    font-size: 1.16rem;
+  }
+}
+
 
 .maitri-page > .waitlist-section--without-art {
   grid-template-columns: minmax(0, 0.86fr) minmax(0, 1fr);
@@ -4802,8 +4837,9 @@ body {
 
 @media (max-width: 720px) {
   .home-page .home-companion figure {
-    width: min(82vw, 310px);
-    height: min(92vw, 340px);
+    width: 100%;
+    height: auto;
+    aspect-ratio: 0.82;
   }
 }
 
@@ -4850,6 +4886,11 @@ body {
 .home-page .waitlist-form .arrow-button {
   justify-self: stretch;
   width: 100%;
+}
+
+/* Keep the footer-adjacent waitlist CTA in the same visual language as section buttons. */
+.waitlist-section .waitlist-form .arrow-button {
+  justify-content: space-between;
 }
 
 @media (max-width: 720px) {
@@ -4960,7 +5001,7 @@ body {
   gap: clamp(42px, 6vw, 88px);
   width: min(100%, 1240px);
   min-height: 0;
-  padding: clamp(112px, 11vw, 156px) 0 clamp(70px, 8vw, 116px);
+  padding: clamp(78px, 7.5vw, 108px) 0 clamp(58px, 6vw, 88px);
 }
 
 .companion-hub-page .companion-hub-hero {
@@ -5313,8 +5354,8 @@ body {
 
   .companion-hub-page .entry-selection {
     gap: 36px;
-    padding-top: 96px;
-    padding-bottom: 58px;
+    padding-top: 56px;
+    padding-bottom: 48px;
   }
 
   .companion-hub-page .entry-selection .companion-section-head > span {

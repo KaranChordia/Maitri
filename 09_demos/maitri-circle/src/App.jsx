@@ -14,7 +14,6 @@ import {
   Lightbulb,
   List,
   LockKey,
-  MoonStars,
   NotePencil,
   PaintBrush,
   Plant,
@@ -22,42 +21,27 @@ import {
   ShieldCheck,
   Sparkle,
   Star,
-  Sun,
   X,
 } from "@phosphor-icons/react";
 import { manuAndBadalBook } from "./content/books";
 
 const siteBase = import.meta.env.BASE_URL || "/";
 const publicPath = (path = "") => `${siteBase}${path.replace(/^\/+/, "")}`;
-const themeStorageKey = "maitri-theme";
-
-function getSavedTheme() {
-  if (typeof window === "undefined") return "light";
-
-  const saved = window.localStorage.getItem(themeStorageKey);
-  if (saved === "dark" || saved === "light") return saved;
-
-  return "light"; // Default to light mode
-}
-
-function applyTheme(theme, animate = false) {
+function applyLightTheme() {
   if (typeof document === "undefined") return;
 
   const root = document.documentElement;
-  if (animate) {
-    root.classList.add("theme-transitioning");
-    window.setTimeout(() => root.classList.remove("theme-transitioning"), 520);
-  }
-  root.dataset.theme = theme;
-  root.style.colorScheme = theme;
+  root.dataset.theme = "light";
+  root.style.colorScheme = "light";
 }
 
-applyTheme(getSavedTheme());
+applyLightTheme();
 
 const generatedAssets = {
   hero: publicPath("assets/generated/optimized/hero-scene.jpg"),
   maitriCircleHero: publicPath("assets/generated/optimized/maitri-circle-hero.jpg"),
   manuPortrait: publicPath("assets/generated/optimized/manu-portrait.jpg"),
+  nandiniCompanion: publicPath("assets/generated/optimized/nandini-companion.png"),
   savitribaiCutout: publicPath("assets/generated/optimized/savitribai-companion-cutout.png"),
   kalpanaCutout: publicPath("assets/generated/optimized/kalpana-companion-cutout.png"),
   universeMap: publicPath("assets/generated/optimized/universe-map.jpg"),
@@ -189,8 +173,17 @@ const homepageCompanions = [
     tone: "rose",
   },
   {
-    name: "Savitribai",
+    name: "Nandini",
     number: "02",
+    role: "A new friend joining the circle",
+    world: "Story world to be announced",
+    image: generatedAssets.nandiniCompanion,
+    href: publicPath("nandini.html"),
+    tone: "violet",
+  },
+  {
+    name: "Savitribai",
+    number: "03",
     role: "Learning with courage",
     world: "Pune's first classrooms",
     image: generatedAssets.savitribaiCutout,
@@ -199,7 +192,7 @@ const homepageCompanions = [
   },
   {
     name: "Kalpana",
-    number: "03",
+    number: "04",
     role: "Dreaming with persistence",
     world: "Karnal skies and space journeys",
     image: generatedAssets.kalpanaCutout,
@@ -304,6 +297,33 @@ const characterLibrary = {
     ],
   },
   
+  nandini: {
+    name: "Nandini",
+    initials: "N",
+    role: "Companion details coming soon",
+    image: generatedAssets.nandiniCompanion,
+    tone: "violet",
+    tagline: "A new friend is joining the Maitri Circle.",
+    worldPill: "Story world to be announced",
+    origin: "Details to be shared",
+    question: "What stories will Nandini invite us into?",
+    signature: "A new companion, a new point of view, and a story still taking shape.",
+    takeaway: "Every friendship begins with meeting one another.",
+    world: "Nandini's story world will be introduced after her companion details are confirmed.",
+    values: [
+      ["A new friendship", "Nandini is the next friend waiting to be discovered.", Heart, "rose"],
+      ["A story to come", "Her story world and values will be shared in a future update.", Sparkle, "amber"],
+      ["Room to wonder", "There is still more to learn about the friend behind this first glimpse.", Lightbulb, "teal"],
+    ],
+    traits: ["Curious", "Warm", "Thoughtful"],
+    meta: [
+      ["Companion status", "Details to be announced"],
+      ["Story world", "To be shared"],
+      ["Next step", "Join the Maitri Circle"],
+    ],
+    prompts: [],
+  },
+
   savitribai: {
     name: "Savitribai",
     initials: "SP",
@@ -516,7 +536,7 @@ const manuChildActivities = [
   ["Make a brave promise", "Write or draw one small promise to take beyond the story.", NotePencil, "rose"],
 ];
 
-const companionPageIds = ["manu", "savitribai", "kalpana"];
+const companionPageIds = ["manu", "nandini", "savitribai", "kalpana"];
 
 
 const savitribaiStorybookPreviews = [
@@ -755,6 +775,23 @@ const companionPageContent = {
       "Manu helps families talk about asking brave questions, trying once, being kind first, and taking one steady step when something feels hard.",
     firstBox: true,
   },
+  nandini: {
+    id: "nandini",
+    ...characterLibrary.nandini,
+    pageTitle: "Nandini: a new friend for the Maitri Circle",
+    eyebrow: "Meet Nandini",
+    intro:
+      "Nandini is the next friend joining the Maitri Circle. Her story, world, and the small brave moments she will share are still taking shape.",
+    note: "More about Nandini will be added when her companion details are ready to share.",
+    primaryAction: ["Meet the companion circle", publicPath("characters.html")],
+    secondaryAction: ["Back to companions", publicPath("characters.html")],
+    storyPreviews: [],
+    valuesTitle: "A new friend is joining the circle",
+    values: characterLibrary.nandini.values,
+    parentPanelTitle: "A story still taking shape",
+    parentPanelText:
+      "This first glimpse introduces Nandini without getting ahead of the details. Her fuller companion story will arrive after it has been carefully confirmed.",
+  },
   savitribai: {
     id: "savitribai",
     ...characterLibrary.savitribai,
@@ -858,9 +895,9 @@ function GeneratedArt({ src, className = "", alt = "", parallax = false, feather
 
 function Brand() {
   return (
-    <a className="brand" href={publicPath("#top")} aria-label="Maitri home">
+    <a className="brand" href={publicPath("#top")} aria-label="Maitri Circle home">
       <img src={brandAssets.mark} alt="" aria-hidden="true" />
-      <span className="brand-wordmark">Maitri</span>
+      <span className="brand-wordmark">Maitri Circle</span>
     </a>
   );
 }
@@ -895,36 +932,6 @@ function ArrowButton({ children, href, variant = "primary", type = "link", disab
         <ArrowRight size={18} weight="bold" />
       </span>
     </a>
-  );
-}
-
-function ThemeToggle({ className = "" }) {
-  const [theme, setTheme] = useState(getSavedTheme);
-  const isDark = theme === "dark";
-
-  useEffect(() => {
-    applyTheme(theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((current) => {
-      const nextTheme = current === "dark" ? "light" : "dark";
-      window.localStorage.setItem(themeStorageKey, nextTheme);
-      applyTheme(nextTheme, true);
-      return nextTheme;
-    });
-  };
-
-  return (
-    <button
-      className={`header-icon-button theme-toggle ${isDark ? "active" : ""} ${className}`}
-      type="button"
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      aria-pressed={isDark}
-      onClick={toggleTheme}
-    >
-      {isDark ? <MoonStars size={21} weight="duotone" /> : <Sun size={21} weight="duotone" />}
-    </button>
   );
 }
 
@@ -975,8 +982,8 @@ function Header({ waitlistHref = publicPath("#waitlist") }) {
         {SHOW_MAITRI_LOGO ? (
           <Brand />
         ) : (
-          <a className="site-wordmark" href={publicPath("#top")} aria-label="Maitri home">
-            Maitri
+          <a className="site-wordmark" href={publicPath("#top")} aria-label="Maitri Circle home">
+            Maitri Circle
           </a>
         )}
         <nav
@@ -1000,7 +1007,6 @@ function Header({ waitlistHref = publicPath("#waitlist") }) {
             <a className="waitlist-pill" href={waitlistHref}>
               Join Waitlist
             </a>
-            <ThemeToggle />
           </div>
           <button
             className="menu-button"
@@ -1941,7 +1947,7 @@ function CompanionDetailPage({ characterId }) {
   const isManu = character.id === "manu";
 
   usePageMetadata(
-    `${character.name} - Maitri Dolls`,
+    `${character.name} - Maitri Circle`,
     `${character.name} in the Maitri companion universe: ${character.tagline}`,
   );
 
@@ -2273,7 +2279,7 @@ function Footer() {
         <p className="footer-brand-line">Companions for Girls Who Dream Big.</p>
       </div>
       <div className="footer-navigation">
-        <span className="footer-eyebrow">Explore Maitri</span>
+        <span className="footer-eyebrow">Explore Maitri Circle</span>
         <nav aria-label="Footer navigation">
           {navItems.map(([label, href]) => (
             <a href={href} key={label}>
@@ -2281,7 +2287,8 @@ function Footer() {
             </a>
           ))}
           <a href={publicPath("#waitlist")}>Waitlist</a>
-          <a href={publicPath("content-studio/index.html")}>Content Studio</a>
+          <a href={publicPath("terms.html")}>Terms</a>
+          <a href={publicPath("privacy.html")}>Privacy</a>
         </nav>
       </div>
     </footer>
