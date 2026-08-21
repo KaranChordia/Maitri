@@ -216,6 +216,214 @@ body * {
   color: var(--body);
 }
 
+/* Manu & Badal: compact in-place spread viewer for the completed book package. */
+.storybook-spread-experience {
+  --spread-rose: #ff96af;
+  --spread-orange: #ffb098;
+}
+
+.storybook-spread-reader {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.storybook-spread-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 34px 42px 30px 46px / 36px 30px 44px 34px;
+  border: 1px solid rgba(69, 16, 57, 0.08);
+  background:
+    radial-gradient(circle at 86% 14%, rgba(255, 176, 152, 0.28) 0 98px, transparent 102px),
+    linear-gradient(135deg, rgba(255, 247, 237, 0.92), rgba(255, 227, 238, 0.7));
+  box-shadow: var(--glass-shadow);
+}
+
+.storybook-spread-image {
+  position: relative;
+  min-height: clamp(300px, 42vw, 560px);
+  aspect-ratio: 2.8 / 1;
+  animation: spreadFade 360ms ease both;
+}
+
+.storybook-spread-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.02) contrast(0.99);
+}
+
+.storybook-spread-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(69, 16, 57, 0.03), transparent 36%, rgba(255, 247, 237, 0.34) 68%, rgba(255, 247, 237, 0.8)),
+    radial-gradient(circle at 86% 18%, rgba(255, 150, 175, 0.16), transparent 24%);
+  pointer-events: none;
+}
+
+.storybook-spread-copy {
+  position: absolute;
+  z-index: 1;
+  right: clamp(18px, 4vw, 58px);
+  bottom: clamp(16px, 3.6vw, 48px);
+  width: min(42%, 420px);
+  color: var(--ink);
+  text-shadow: 0 1px 18px rgba(255, 255, 255, 0.8);
+}
+
+.storybook-spread-copy span {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: rgba(255, 255, 255, 0.62);
+  color: #9b3f56;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.storybook-spread-copy h4 {
+  margin: 12px 0 0;
+  color: var(--ink);
+  font-size: clamp(1.7rem, 3vw, 3rem);
+  line-height: 0.98;
+}
+
+.storybook-spread-copy p {
+  margin-top: 10px;
+  color: var(--body);
+  font-size: clamp(0.96rem, 1.25vw, 1.13rem);
+  font-weight: 760;
+  line-height: 1.5;
+}
+
+.spread-nav {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(69, 16, 57, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
+  box-shadow: 0 14px 30px rgba(69, 16, 57, 0.14);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.spread-nav:hover,
+.spread-nav:focus-visible {
+  background: rgba(255, 255, 255, 0.92);
+  outline: 2px solid rgba(255, 150, 175, 0.46);
+}
+
+.spread-nav-prev { left: 14px; }
+.spread-nav-next { right: 14px; }
+
+.storybook-spread-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.storybook-spread-controls button {
+  border: 1px solid rgba(69, 16, 57, 0.08);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--body);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.storybook-spread-controls button.active,
+.storybook-spread-controls button:hover,
+.storybook-spread-controls button:focus-visible {
+  border-color: rgba(255, 150, 175, 0.42);
+  background: linear-gradient(135deg, rgba(255, 150, 175, 0.22), rgba(255, 176, 152, 0.2));
+  color: var(--ink);
+}
+
+@keyframes spreadFade {
+  from {
+    opacity: 0.62;
+    transform: translateY(8px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 760px) {
+  .storybook-spread-image {
+    min-height: clamp(360px, 118vw, 510px);
+    aspect-ratio: 0.78 / 1;
+  }
+
+  .storybook-spread-image img {
+    object-position: 38% center;
+  }
+
+  .storybook-spread-image::after {
+    background:
+      linear-gradient(180deg, rgba(69, 16, 57, 0.02), transparent 32%, rgba(255, 247, 237, 0.9)),
+      radial-gradient(circle at 78% 22%, rgba(255, 150, 175, 0.18), transparent 28%);
+  }
+
+  .storybook-spread-copy {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    width: auto;
+  }
+
+  .storybook-spread-copy h4 {
+    font-size: clamp(1.45rem, 8vw, 2.2rem);
+  }
+
+  .storybook-spread-copy p {
+    font-size: 0.95rem;
+  }
+
+  .spread-nav {
+    top: auto;
+    bottom: 14px;
+    width: 38px;
+    height: 38px;
+    transform: none;
+  }
+
+  .spread-nav-prev { left: 14px; }
+  .spread-nav-next { right: 14px; }
+
+  .storybook-spread-controls {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding: 2px 0 8px;
+  }
+
+  .storybook-spread-controls button {
+    flex: 0 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .storybook-spread-image {
+    animation: none;
+  }
+}
+
 /* Final headline override for the legacy homepage introduction marker. */
 .home-page .brand-introduction-head .section-label {
   margin-bottom: clamp(18px, 2.2vw, 28px) !important;

@@ -35,3 +35,4 @@ Consumers should:
 - avoid duplicating book metadata in view components.
 
 The Story Library reads this registry as its canonical source for the approved cover-first preview. Keep release and availability language governed by the source metadata rather than duplicating it in view components.
+The Story Library and page layouts intentionally remain unchanged while their redesign tasks are in progress.

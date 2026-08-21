@@ -5,6 +5,8 @@ import {
   ArrowRight,
   BookOpenText,
   CalendarDots,
+  CaretLeft,
+  CaretRight,
   Crown,
   FlowerLotus,
   Gift,
@@ -23,10 +25,7 @@ import {
   Sun,
   X,
 } from "@phosphor-icons/react";
-
-const StoryUniversePage = lazy(() =>
-  import("./StoryUniverse.jsx").then((module) => ({ default: module.StoryUniversePage })),
-);
+import { manuAndBadalBook } from "./content/books";
 
 const siteBase = import.meta.env.BASE_URL || "/";
 const publicPath = (path = "") => `${siteBase}${path.replace(/^\/+/, "")}`;
@@ -81,8 +80,6 @@ const shwetikaAssets = {
   storyLetterFromManu: publicPath("assets/shwetika/manu/optimized/story-letter-from-manu.jpg"),
   storyActivitiesStickers: publicPath("assets/shwetika/manu/optimized/story-activities-stickers.jpg"),
 };
-
-const manuAndBadalBook = getBookById("horse");
 
 const ENABLE_ABOUT_PAGE = false;
 
@@ -164,6 +161,22 @@ const homepageLibraryBooks = [
     premise: "Manu makes a promise to try again even when the first answer is no.",
   },
 ];
+const manuStorybookSpreads = manuAndBadalBook.spreads.map((spreadItem) => ({
+  pages: spreadItem.kind === "cover" ? "Cover" : `Spread ${String(spreadItem.number).padStart(2, "0")}`,
+  title: spreadItem.heading,
+  image: spreadItem.image.src,
+  text: spreadItem.copyLines.join(" "),
+  takeaway:
+    spreadItem.kind === "activity"
+      ? "A gentle activity carries the story into play."
+      : "Courage can be quiet, patient, and kind.",
+  kind: spreadItem.kind,
+  reader: spreadItem.copyLines.map((line, index) => [
+    index === 0 ? "Read aloud" : `Line ${index + 1}`,
+    index === 0 ? spreadItem.heading : "Together",
+    line,
+  ]),
+}));
 
 const homepageCompanions = [
   {
@@ -557,7 +570,9 @@ const savitribaiStorybookPreviews = [
 ];
 
 
-const manuStorybookPreviews = [
+const manuStorybookPreviews = manuStorybookSpreads;
+
+const legacyManuStorybookPreviews = [
   {
     pages: "Pages 1-5",
     title: "Manu Feels Different",
@@ -862,9 +877,9 @@ function BrandMotif({ name, className = "" }) {
 }
 
 function ArrowButton({ children, href, variant = "primary", type = "link", disabled = false }) {
-  if (type === "button") {
+  if (type === "submit" || type === "button") {
     return (
-      <button className={`arrow-button ${variant}`} type="submit" disabled={disabled}>
+      <button className={`arrow-button ${variant}`} type={type} disabled={disabled}>
         <span>{children}</span>
         <span className="arrow-orb">
           <ArrowRight size={18} weight="bold" />
@@ -1017,9 +1032,9 @@ function Hero() {
             women of India. Each friend has her own story, personality, dreams, and adventures
             that inspire children to imagine boldly, live kindly, and grow with confidence.
           </p>
-          <div className="hero-actions">
+          <div className="hero-actions section-cta">
             <ArrowButton href="#friends">Explore the Companions</ArrowButton>
-            <ArrowButton href="#waitlist" variant="outline">Join the Waitlist</ArrowButton>
+            <ArrowButton href="#waitlist">Join the Waitlist</ArrowButton>
           </div>
         </div>
         <div className="hero-art" aria-label="Maitri story world illustration">
@@ -1112,6 +1127,11 @@ function WhatWeDo() {
           </figure>
         </div>
       </div>
+      <div className="section-cta">
+        <ArrowButton href={publicPath("manu.html#first-story")}>
+          Read the First Story
+        </ArrowButton>
+      </div>
     </section>
   );
 }
@@ -1123,9 +1143,6 @@ function ExploreMaitri() {
         <div>
           <span className="section-label teal-label">Meet the Companions</span>
           <h2>Every Companion Has Her Own Story.</h2>
-          <div className="hero-actions">
-            <ArrowButton href={publicPath("characters.html")}>Explore All Companions</ArrowButton>
-          </div>
         </div>
         <p>
           No two Maitri companions are alike. Some dream of becoming scientists. Some
@@ -1157,6 +1174,9 @@ function ExploreMaitri() {
             </div>
           </a>
         ))}
+      </div>
+      <div className="section-cta">
+        <ArrowButton href={publicPath("characters.html")}>Explore All Companions</ArrowButton>
       </div>
     </section>
   );
@@ -1281,7 +1301,7 @@ function Waitlist() {
             autoComplete="off"
           />
         </label>
-        <ArrowButton type="button" disabled={status === "submitting"}>
+        <ArrowButton type="submit" disabled={status === "submitting"}>
           {status === "submitting" ? "Joining…" : "Join Waitlist"}
         </ArrowButton>
         <p className={`form-status ${status}`} id="waitlist-note" aria-live="polite">
@@ -1355,11 +1375,14 @@ function StoryPreviewSection({ character, previews, title, intro, sectionId = "b
   const [activeIndex, setActiveIndex] = useState(0);
   const activePreview = previews[activeIndex] || previews[0];
   const isManuStory = character.id === "manu";
+  const canStep = previews.length > 1;
+  const showPrevious = () => setActiveIndex((index) => (index === 0 ? previews.length - 1 : index - 1));
+  const showNext = () => setActiveIndex((index) => (index + 1) % previews.length);
 
   if (!activePreview) return null;
 
   return (
-    <section className="companion-story-experience" id={sectionId}>
+    <section className={`companion-story-experience ${isManuStory ? "storybook-spread-experience" : ""}`} id={sectionId}>
       <div className="story-panel-head">
         {isManuStory ? (
           <BrandMotif name="storyBloom" className="manu-section-motif" />
@@ -1372,24 +1395,65 @@ function StoryPreviewSection({ character, previews, title, intro, sectionId = "b
           <p>{intro}</p>
         </div>
       </div>
-      <div className="storybook-preview-grid">
-        {previews.map((preview, index) => (
-          <button
-            className={activeIndex === index ? "active" : ""}
-            key={`${character.id}-${preview.pages}-${preview.title}`}
-            onClick={() => setActiveIndex(index)}
-            type="button"
-          >
-            <StoryThumb preview={preview} character={character} />
-            <span>{preview.pages}</span>
-            <h4>{preview.title}</h4>
-            <p>{preview.text}</p>
-            <strong>{preview.takeaway}</strong>
-          </button>
-        ))}
-      </div>
-      <div className="storybook-reader">
-        <div className={`storybook-reader-cover ${activePreview.image ? "" : "placeholder"}`}>
+      {isManuStory ? (
+        <div className="storybook-spread-reader" aria-live="polite">
+          <div className={`storybook-spread-frame ${activePreview.image ? "" : "placeholder"}`}>
+            {canStep && (
+              <button className="spread-nav spread-nav-prev" onClick={showPrevious} type="button" aria-label="Show previous story spread">
+                <CaretLeft size={24} weight="bold" />
+              </button>
+            )}
+            <div className="storybook-spread-image" key={activePreview.pages}>
+              {activePreview.image ? (
+                <img src={activePreview.image} alt="" />
+              ) : (
+                <CharacterVisual character={character} />
+              )}
+              <div className="storybook-spread-copy">
+                <span>{activePreview.pages}</span>
+                <h4>{activePreview.title}</h4>
+                <p>{activePreview.text}</p>
+              </div>
+            </div>
+            {canStep && (
+              <button className="spread-nav spread-nav-next" onClick={showNext} type="button" aria-label="Show next story spread">
+                <CaretRight size={24} weight="bold" />
+              </button>
+            )}
+          </div>
+          <div className="storybook-spread-controls" aria-label="Choose a Manu and Badal spread">
+            {previews.map((preview, index) => (
+              <button
+                className={activeIndex === index ? "active" : ""}
+                key={`${character.id}-${preview.pages}-${preview.title}`}
+                onClick={() => setActiveIndex(index)}
+                type="button"
+              >
+                <span>{preview.pages}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="storybook-preview-grid">
+            {previews.map((preview, index) => (
+              <button
+                className={activeIndex === index ? "active" : ""}
+                key={`${character.id}-${preview.pages}-${preview.title}`}
+                onClick={() => setActiveIndex(index)}
+                type="button"
+              >
+                <StoryThumb preview={preview} character={character} />
+                <span>{preview.pages}</span>
+                <h4>{preview.title}</h4>
+                <p>{preview.text}</p>
+                <strong>{preview.takeaway}</strong>
+              </button>
+            ))}
+          </div>
+          <div className="storybook-reader">
+            <div className={`storybook-reader-cover ${activePreview.image ? "" : "placeholder"}`}>
           {activePreview.image ? (
             <img src={activePreview.image} alt="" />
           ) : (
@@ -1397,9 +1461,9 @@ function StoryPreviewSection({ character, previews, title, intro, sectionId = "b
           )}
           <span>{activePreview.pages}</span>
           <h4>{activePreview.title}</h4>
-        </div>
-        <div className="storybook-reader-pages">
-          <span>{isManuStory ? "Read together" : character.note || "Story preview"}</span>
+            </div>
+            <div className="storybook-reader-pages">
+          <span>{character.note || "Story preview"}</span>
           <h4>{activePreview.takeaway}</h4>
           {activePreview.reader.map(([page, heading, text]) => (
             <article key={`${activePreview.title}-${page}-${heading}`}>
@@ -1408,8 +1472,10 @@ function StoryPreviewSection({ character, previews, title, intro, sectionId = "b
               <p>{text}</p>
             </article>
           ))}
-        </div>
-      </div>
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 }
@@ -1861,10 +1927,6 @@ function CompanionHubPage() {
               );
             })}
           </div>
-          <p className="companion-hub-closing">
-            Manu comes first. More friends will join with their own stories,
-            questions, and ways to make growing up feel a little more possible.
-          </p>
         </section>
       </section>
       <Waitlist />
@@ -2304,22 +2366,8 @@ export function App() {
   }
 
   if (isStoryUniversePage) {
-    return (
-      <Suspense
-        fallback={
-          <main className="maitri-page">
-            <section
-              className="section-shell"
-              style={{ minHeight: "100vh", display: "grid", placeItems: "center" }}
-            >
-              Opening Story World...
-            </section>
-          </main>
-        }
-      >
-        <StoryUniversePage />
-      </Suspense>
-    );
+    window.location.replace(publicPath("manu.html#first-story"));
+    return null;
   }
 
   if (isLibraryPage) {
