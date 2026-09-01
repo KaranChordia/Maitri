@@ -165,36 +165,24 @@ const manuStorybookSpreads = manuAndBadalBook.spreads.map((spreadItem) => ({
 const homepageCompanions = [
   {
     name: "Manu",
-    number: "01",
-    role: "Courage with kindness",
-    world: "Bithoor and the Ganga banks",
     image: shwetikaAssets.manuDoll,
     href: publicPath("manu.html"),
     tone: "rose",
   },
   {
     name: "Nandini",
-    number: "02",
-    role: "A new friend joining the circle",
-    world: "Story world to be announced",
     image: generatedAssets.nandiniCompanion,
     href: publicPath("nandini.html"),
     tone: "violet",
   },
   {
     name: "Savitribai",
-    number: "03",
-    role: "Learning with courage",
-    world: "Pune's first classrooms",
     image: generatedAssets.savitribaiCutout,
     href: publicPath("savitribai.html"),
     tone: "amber",
   },
   {
     name: "Kalpana",
-    number: "04",
-    role: "Dreaming with persistence",
-    world: "Karnal skies and space journeys",
     image: generatedAssets.kalpanaCutout,
     href: publicPath("kalpana.html"),
     tone: "teal",
@@ -897,7 +885,7 @@ function Brand() {
   return (
     <a className="brand" href={publicPath("#top")} aria-label="Maitri Circle home">
       <img src={brandAssets.mark} alt="" aria-hidden="true" />
-      <span className="brand-wordmark">Maitri Circle</span>
+      <span className="brand-wordmark">Maitri</span>
     </a>
   );
 }
@@ -983,7 +971,7 @@ function Header({ waitlistHref = publicPath("#waitlist") }) {
           <Brand />
         ) : (
           <a className="site-wordmark" href={publicPath("#top")} aria-label="Maitri Circle home">
-            Maitri Circle
+            Maitri
           </a>
         )}
         <nav
@@ -1166,17 +1154,13 @@ function ExploreMaitri() {
         >
           <path d="M72 195 C224 55 376 74 492 178 S760 292 882 150 S1061 70 1142 128" />
         </svg>
-        {homepageCompanions.map(({ name, number, role, world, image, href, tone }) => (
+        {homepageCompanions.map(({ name, image, href, tone }) => (
           <a className={`home-companion ${tone}`} href={href} key={name}>
             <figure>
               <img src={image} alt={`${name}, a Maitri companion`} />
             </figure>
             <div className="home-companion-copy">
-              <span>Maitri Companion {number}</span>
               <h3>{name}</h3>
-              <strong>{role}</strong>
-              <small>{world}</small>
-              <em>Meet {name} <ArrowRight size={16} weight="bold" /></em>
             </div>
           </a>
         ))}
@@ -1486,6 +1470,59 @@ function StoryPreviewSection({ character, previews, title, intro, sectionId = "b
   );
 }
 
+function LibraryBookCard({ book, isPreviewing = false, onPreview }) {
+  const hasPreview = book.previewPages.length > 0;
+  const previewLabel = book.previewPages
+    .slice(0, 2)
+    .map(({ heading }) => heading)
+    .join(" and ");
+
+  return (
+    <article
+      className={`library-product-card ${book.tone}${hasPreview ? " has-preview" : ""}${
+        isPreviewing ? " previewing" : ""
+      }`}
+    >
+      <button
+        className="library-product-cover-button"
+        type="button"
+        aria-label={hasPreview ? `Preview ${previewLabel} from ${book.title}` : undefined}
+        aria-pressed={hasPreview ? isPreviewing : undefined}
+        disabled={!hasPreview}
+        onClick={() => hasPreview && onPreview?.()}
+      >
+        <span className="library-product-media" aria-hidden="true">
+          <span className="library-product-cover">
+            <img src={book.image} alt="" />
+            <span className="library-product-cover-title">{book.title}</span>
+          </span>
+
+          {hasPreview ? (
+            <>
+              <span className="library-product-preview-hint" />
+              <span className="library-product-page-stack">
+                {book.previewPages.slice(0, 2).map((preview) => (
+                  <span className="library-product-preview-page" key={`${book.id}-${preview.page}`}>
+                    <img src={preview.image} alt="" />
+                    <span className="library-product-preview-page-copy">
+                      <small>Page {preview.page}</small>
+                      <strong>{preview.heading}</strong>
+                    </span>
+                  </span>
+                ))}
+              </span>
+            </>
+          ) : null}
+        </span>
+      </button>
+      <div className="library-product-copy">
+        <h3>{book.title}</h3>
+        <p>{book.premise}</p>
+      </div>
+    </article>
+  );
+}
+
 function LibraryPage() {
   const requestedBook = new URLSearchParams(window.location.search).get("book");
   const initialBook = publicLibraryBooks.some(
@@ -1566,64 +1603,15 @@ function LibraryPage() {
 
                 <div className="library-product-grid" aria-labelledby="active-library-title">
                   {publicLibraryBooks.map((book) => {
-                    const hasPreview = book.previewPages.length > 0;
                     const isPreviewing = activeBookId === book.id;
-                    const previewLabel = book.previewPages
-                      .slice(0, 2)
-                      .map(({ heading }) => heading)
-                      .join(" and ");
 
                     return (
-                      <article
-                        className={`library-product-card ${book.tone}${
-                          hasPreview ? " has-preview" : ""
-                        }${isPreviewing ? " previewing" : ""}`}
+                      <LibraryBookCard
                         key={book.id}
-                      >
-                        <button
-                          className="library-product-cover-button"
-                          type="button"
-                          aria-label={
-                            hasPreview
-                              ? `Preview ${previewLabel} from ${book.title}`
-                              : undefined
-                          }
-                          aria-pressed={hasPreview ? isPreviewing : undefined}
-                          disabled={!hasPreview}
-                          onClick={() => hasPreview && chooseBook(book.id)}
-                        >
-                          <span className="library-product-media" aria-hidden="true">
-                            <span className="library-product-cover">
-                              <img src={book.image} alt="" />
-                              <span className="library-product-cover-title">{book.title}</span>
-                            </span>
-
-                            {hasPreview ? (
-                              <>
-                                <span className="library-product-preview-hint" />
-                                <span className="library-product-page-stack">
-                                  {book.previewPages.slice(0, 2).map((preview) => (
-                                    <span
-                                      className="library-product-preview-page"
-                                      key={`${book.id}-${preview.page}`}
-                                    >
-                                      <img src={preview.image} alt="" />
-                                      <span className="library-product-preview-page-copy">
-                                        <small>Page {preview.page}</small>
-                                        <strong>{preview.heading}</strong>
-                                      </span>
-                                    </span>
-                                  ))}
-                                </span>
-                              </>
-                            ) : null}
-                          </span>
-                        </button>
-                        <div className="library-product-copy">
-                          <h3>{book.title}</h3>
-                          <p>{book.premise}</p>
-                        </div>
-                      </article>
+                        book={book}
+                        isPreviewing={isPreviewing}
+                        onPreview={() => chooseBook(book.id)}
+                      />
                     );
                   })}
                 </div>
@@ -1671,34 +1659,32 @@ function ManuFactTrail() {
 }
 
 function ManuStoryTrail() {
+  const [isPreviewing, setIsPreviewing] = useState(false);
+  const book = publicLibraryBooks.find(({ id }) => id === "horse");
+
+  if (!book) return null;
+
   return (
     <section className="manu-journey-story" id="first-story" aria-labelledby="manu-story-title">
       <div className="manu-journey-heading" data-manu-chapter>
         <span className="manu-journey-kicker">Manu&apos;s first story</span>
         <h2 id="manu-story-title">Book 1: The Horse Nobody Could Ride</h2>
         <p>
-          Follow Manu from one brave question in the courtyard to a patient
-          friendship with Badal, one small brave step at a time.
+          A small two-page glimpse is enough to begin. Explore the book in the Story
+          Library whenever you would like to look inside again.
         </p>
       </div>
 
-      <ol className="manu-story-trail" aria-label="Book 1 story moments">
-        {manuStorybookPreviews.map((preview, index) => (
-          <li key={`${preview.pages}-${preview.title}`}>
-            <article>
-              <span className="manu-story-trail-number">{String(index + 1).padStart(2, "0")}</span>
-              <span className="manu-story-trail-image" aria-hidden="true">
-                <img src={preview.image} alt="" />
-              </span>
-              <span className="manu-story-trail-copy">
-                <small>{preview.pages}</small>
-                <strong>{preview.title}</strong>
-                <em>{preview.takeaway}</em>
-              </span>
-            </article>
-          </li>
-        ))}
-      </ol>
+      <div className="manu-library-preview" data-manu-chapter>
+        <LibraryBookCard
+          book={book}
+          isPreviewing={isPreviewing}
+          onPreview={() => setIsPreviewing((current) => !current)}
+        />
+      </div>
+      <div className="manu-library-preview-action" data-manu-chapter>
+        <ArrowButton href={publicPath("library.html?book=horse")}>Explore in the Story Library</ArrowButton>
+      </div>
     </section>
   );
 }

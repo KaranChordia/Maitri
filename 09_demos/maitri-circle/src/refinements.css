@@ -4820,6 +4820,10 @@ body {
   transform: translateY(0) scale(0.86);
 }
 
+.home-page .home-companion:nth-of-type(2) figure img {
+  clip-path: ellipse(43% 50% at 50% 50%);
+}
+
 .home-page .home-companion:nth-of-type(2) figure img,
 .home-page .home-companion:nth-of-type(3) figure img {
   transform: translateY(0) scale(0.94);
@@ -5421,4 +5425,26 @@ body {
   background-color: transparent !important;
   box-shadow: none !important;
   clip-path: none !important;
+}
+
+/* Founder direction: interactive calls to action use one solid Maitri colour,
+   not a colour transition or gradient. */
+.arrow-button,
+.waitlist-pill,
+.storybook-spread-controls button.active,
+.storybook-spread-controls button:hover,
+.storybook-spread-controls button:focus-visible,
+.add-accessory-button,
+.quest-reward button,
+.character-dashboard-nav button.active,
+.character-dashboard-nav button:hover,
+.character-dashboard-nav button:focus-visible {
+  background: var(--maitri-pastel-crimson) !important;
+  background-image: none !important;
+  color: #451039;
+}
+
+.arrow-button.primary,
+.waitlist-section .waitlist-form .arrow-button.primary {
+  color: #451039;
 }
